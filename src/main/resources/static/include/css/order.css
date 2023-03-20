@@ -1,0 +1,74 @@
+.contentWrapper {
+    font-family: "Nanum Gothic";
+}
+.text_blue {
+    color: #2772cd;
+    font-weight: 600;
+}
+.list_item_info {
+    margin-top: 15px;
+}
+.info_title {
+    height: 36px;
+    line-height: 36px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #383838;
+    font-family: "Nanum Gothic";
+}
+.box_blue {
+    padding: 30px;
+    border: 1px solid #2772cd;
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+.list_img_blue {
+    display: inline-block;
+    width: 12px;
+    height: 14px;
+    background: url(../img/uni_sprites.png) no-repeat -148px -75px;
+}
+
+
+.order_user_info {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin: 0 auto;
+    vertical-align: middle;
+}
+.order_user_info th {
+    text-align: left;
+    font-weight: normal;
+    color: #ffffff;
+    background: #768393;
+    padding: 10px 10px 10px 25px;
+    border-top: 1px solid #768393;
+    border-bottom: 1px solid #dcdcdc;
+}
+.order_user_info td {
+    text-align: left;
+    padding: 10px 10px 10px 20px;
+    border-top: 1px solid #768393;
+    border-bottom: 1px solid #dcdcdc;
+}
+
+
+
+.payBtn_bg {
+    text-align: center;
+    margin: 0 auto;
+    padding: 40px 20px 40px 20px;
+}
+.buy_btn {
+    display: inline-block;
+    width: 210px;
+    color: #ffffff;
+    font-weight: 600;
+    background: #2772cd;
+    border: 1px solid #2772cd;
+    border-radius: 2px;
+    padding: 12px 40px;
+    font-family: "Nanum Gothic";
+    font-size: 14px;
+}
