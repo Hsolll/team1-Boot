@@ -31,7 +31,7 @@
 
 					<li><a href="/safe/productList">안심거래</a></li>
 					<li><a href="#">커뮤니티</a></li>
-					<li><a href="/faq/faqList">고객센터</a></li>
+					<li><a href="#">고객센터</a></li>
 
 					<li id="ml2"><a href="/safe/productList">안심거래</a></li>
 					<li id="ml3"><a href="#">커뮤니티</a></li>
@@ -71,7 +71,7 @@
 	            </div>
 	            <div id="sl4" class="sub_list">
 	                <ul class="nav">
-	                <li><a href="">FAQ</a></li>
+	                <li><a href="/faq/faqList">FAQ</a></li>
 	                <li><a href="">문의하기</a></li>
 	                </ul>
 	            </div>

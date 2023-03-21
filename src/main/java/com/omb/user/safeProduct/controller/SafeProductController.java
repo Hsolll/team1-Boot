@@ -49,6 +49,8 @@ public class SafeProductController {
 		return "user/safeProduct/safeProductDetail";
 	}
 	
+	
+	/* 주문페이지 이동 */
 	@GetMapping("/productOrder")
 	public String selectSafeProductOrder(SafeProductVO spvo, Model model) {
 
@@ -64,5 +66,12 @@ public class SafeProductController {
 		return "user/safeProduct/safeProductOrder";
 	}
 	
+	
+	/* 물품 등록페이지 이동 */
+	@GetMapping("/productInsertView")
+	public String safeProductInsertView() {
+		
+		return "user/safeProduct/safeProductInsertView";
+	}
 
 }

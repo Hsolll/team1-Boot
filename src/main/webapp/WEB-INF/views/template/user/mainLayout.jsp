@@ -24,31 +24,32 @@
         <script src="../js/html5shiv.js"></script>
         <![endif]-->
         
-        <link href="/resources/include/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="/resources/include/css/ombLayout.css">
         
         <!-- 폰트어썸 사용 링크 -->
         <script src="https://kit.fontawesome.com/64a5181ca4.js" crossorigin="anonymous"></script>
         
         <script type="text/javascript" src="/resources/include/js/jquery-3.6.2.min.js"></script>
+        <script type="text/javascript" src="/resources/include/js/subList.js"></script>
+        
     </head>
 	<body>
 		<!-- header -->
-        <tiles:insertAttribute name="header" />
+		<div class="wrapper">
+        	<tiles:insertAttribute name="header" />
             
             <!-- Begin page content -->
             <section class="contentWrapper">
                 <div class="content_wrap">
                     <br><br>
-                    <a href="#">
-                        <img src="/resources/include/img/banner.png" alt="">
-                    </a>
-                    <br><br>
+                    <a href="/"><img src="/resources/include/img/banner.png" alt=""></a><br><br>
                     <div class="main_content">
                         <p>Oh My Baby는</p>
                         유아용품 중고거래 사이트입니다.
                     </div>
                 </div>
+                
+                
             </section>
             <div id="contentWrap">
                 <a href="" style="display: block;text-align: center; margin: 40px 0;">&nbsp;</a>
@@ -59,9 +60,5 @@
                 <tiles:insertAttribute name="footer" />
             </footer>
         </div>
-        
-        <!-- Bootstrap core JavaScript
-		================================================== -->
-        <script src="/resources/dist/js/bootstrap.min.js"></script>
 	</body>
 </html>

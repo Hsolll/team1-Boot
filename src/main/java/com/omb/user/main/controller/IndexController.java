@@ -16,5 +16,5 @@ public class IndexController {
 		logger.info("메인 페이지 실행");
 		return "index";	// /WEB-INF/views/index.jsp
 	}
- 
+  
 }

@@ -5,7 +5,7 @@
 <tiles-definitions>
 
 	<definition name="intro" template="/WEB-INF/views/template/user/mainLayout.jsp">
-		<put-attribute name="title" value="나의 첫 스프링 사이트" />
+		<put-attribute name="title" value="OhMybaby" />
 		<put-attribute name="header" value="/WEB-INF/views/template/user/header.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/views/template/user/footer.jsp" />
 	</definition>
