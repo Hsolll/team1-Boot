@@ -51,8 +51,8 @@
 	            </div>
 	            <div id="sl2" class="sub_list">
 	                <ul class="nav">
-	                <li><a href="">물품보기</a></li>
-	                <li><a href="">물품등록</a></li>
+	                <li><a href="/safe/productList">물품보기</a></li>
+	                <li><a href="/safe/productInsertView">물품등록</a></li>
 	                <li><a href="">판매내역</a></li>
 	                <li><a href="">구매내역</a></li>
 	                </ul>

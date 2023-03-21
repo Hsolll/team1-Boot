@@ -101,7 +101,7 @@
                         </div>
 
                         <div class="payBtn_bg">
-                            <button id="buy_btn" class="buy_btn">결제하기</button>
+                            <button id="buy_btn" class="btn_blue">결제하기</button>
                         </div>
                     </div>
 			

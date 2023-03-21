@@ -8,7 +8,7 @@
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
-		<title>오마이베이비</title>
+		<title>OhMybaby</title>
 
         <!-- 구글폰트 사용 링크 -->
         <link href="https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Pen+Script&family=Noto+Sans+KR&family=Patrick+Hand&
@@ -23,7 +23,6 @@
 		<!--[if lt IE 9]>
         <script src="../js/html5shiv.js"></script>
         <![endif]-->
-        
         
         <link rel="stylesheet" href="/resources/include/css/ombLayout.css">
         
@@ -45,7 +44,9 @@
                     <div class="page-header">
 						<h1><tiles:getAsString name="title" /></h1>
 					</div>
+					
 	                <tiles:insertAttribute name="body" />
+	                
                 </div>
             </section>
             
@@ -59,6 +60,5 @@
                 <tiles:insertAttribute name="footer" />
             </footer>
         </div>
-        
 	</body>
 </html>
