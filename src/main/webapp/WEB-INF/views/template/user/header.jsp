@@ -30,7 +30,7 @@
 					<li><a href="#">나눔마켓</a></li>
 					<li><a href="/safe/productList">안심거래</a></li>
 					<li><a href="#">커뮤니티</a></li>
-					<li><a href="#">고객센터</a></li>
+					<li><a href="/faq/faqList">고객센터</a></li>
 				</ul>
 				<div class="menu_search">
 					<form action="#">

@@ -22,4 +22,9 @@
 		<put-attribute name="body" value="/WEB-INF/views/user/safeProduct/{1}.jsp" /> 
 	</definition>
 	
+	<definition name="user/serviceCenter/*" extends="content">
+		<put-attribute name="title" value="FAQ 목록" />
+		<put-attribute name="body" value="/WEB-INF/views/user/serviceCenter/{1}.jsp" /> 
+	</definition>
+	
 </tiles-definitions>
