@@ -16,7 +16,7 @@
 <header class="header_wrap">
 	<div class="logo_wrap">
 		<div class="logo">
-			<a href="#"> 
+			<a href="/"> 
 				<img src="/resources/include/img/logo.png" alt="OMB_LOGO">
 			</a>
 		</div>
@@ -25,12 +25,17 @@
 		<div class="menu_content">
 			<div class="omb_main">
 				<ul>
-					<li><a href="#">공지사항</a></li>
+					<li id="ml1"><a href="#">공지사항</a></li>
 					<li><a href="#">중고마켓</a></li>
 					<li><a href="#">나눔마켓</a></li>
+
 					<li><a href="/safe/productList">안심거래</a></li>
 					<li><a href="#">커뮤니티</a></li>
 					<li><a href="/faq/faqList">고객센터</a></li>
+
+					<li id="ml2"><a href="/safe/productList">안심거래</a></li>
+					<li id="ml3"><a href="#">커뮤니티</a></li>
+					<li id="ml4"><a href="#">고객센터</a></li>
 				</ul>
 				<div class="menu_search">
 					<form action="#">
@@ -41,8 +46,35 @@
 					</form>
 				</div>
 			</div>
+			<!-- 하위 메뉴 -->
 			<div class="omb_sub">
-				<!-- 하위메뉴 생성 예정 -->
+				<div id="sl1" class="sub_list">
+	                <ul class="nav">
+	                <li><a href="#">공지</a></li>
+	                <li><a href="#">이벤트</a></li>
+	                </ul>
+	            </div>
+	            <div id="sl2" class="sub_list">
+	                <ul class="nav">
+	                <li><a href="/safe/productList">물품보기</a></li>
+	                <li><a href="/safe/productInsertView">물품등록</a></li>
+	                <li><a href="">판매내역</a></li>
+	                <li><a href="">구매내역</a></li>
+	                </ul>
+	            </div>
+	            <div id="sl3" class="sub_list">
+	                <ul class="nav">
+	                <li><a href="">유아용품후기</a></li>
+	                <li><a href="">이유식레시피</a></li>
+	                <li><a href="">자유게시판</a></li>
+	                </ul>
+	            </div>
+	            <div id="sl4" class="sub_list">
+	                <ul class="nav">
+	                <li><a href="">FAQ</a></li>
+	                <li><a href="">문의하기</a></li>
+	                </ul>
+	            </div>
 			</div>
 		</div>
 	</div>
