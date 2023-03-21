@@ -24,10 +24,10 @@
 			<li><a href="#">이용안내</a></li>
 		</ul>
 		<ul class="footer_info2">
-			<li>상호:오 마이 베이비&nbsp;&nbsp;대표:김한솔&nbsp;&nbsp;개인정보보호책임자:김정희 <br>
+			<li>상호:오마이베이비&nbsp;&nbsp;대표:김한솔&nbsp;&nbsp;개인정보보호책임자:윤채묵 <br>
 				TEL:1666-1234&nbsp;&nbsp;FAX:070-1234-1234&nbsp;&nbsp;EMAIL:ohmybaby@ohmybaby.com
-				<br> 사업자등록번호:123-45-12345&nbsp;&nbsp;통신판매업신고 :제
-				2023-서울강남-00123호 <a href="#">[사업자정보확인]</a><br> 주소 : 서울특별시 강남구
+				<br> 사업자등록번호:123-45-12345&nbsp;&nbsp;통신판매업신고:제
+				2023-서울강남-00123호 <a href="#">[사업자정보확인]</a><br> 주소:서울특별시 강남구
 				역삼동 테헤란로 14길 6 남도빌딩 4층
 			</li>
 			<li class="copy">COPYRIGHTⓒ 2023 오마이베이비 ALL RIGHTS RESERVED.</li>
