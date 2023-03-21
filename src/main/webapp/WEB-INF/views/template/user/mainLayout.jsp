@@ -31,6 +31,7 @@
         <script src="https://kit.fontawesome.com/64a5181ca4.js" crossorigin="anonymous"></script>
         
         <script type="text/javascript" src="/resources/include/js/jquery-3.6.2.min.js"></script>
+        <script type="text/javascript" src="/resources/include/js/subList.js"></script>
     </head>
 	<body>
 		<!-- header -->
@@ -40,7 +41,7 @@
             <section class="contentWrapper">
                 <div class="content_wrap">
                     <br><br>
-                    <a href="#">
+                    <a href="/">
                         <img src="/resources/include/img/banner.png" alt="">
                     </a>
                     <br><br>
@@ -61,7 +62,7 @@
         </div>
         
         <!-- Bootstrap core JavaScript
-		================================================== -->
-        <script src="/resources/dist/js/bootstrap.min.js"></script>
+		==================================================
+        <script src="/resources/dist/js/bootstrap.min.js"></script> -->
 	</body>
 </html>

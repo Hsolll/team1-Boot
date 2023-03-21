@@ -24,14 +24,16 @@
         <script src="../js/html5shiv.js"></script>
         <![endif]-->
         
-        <!-- <link href="/resources/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+        
         <link rel="stylesheet" href="/resources/include/css/ombLayout.css">
         
         <!-- 폰트어썸 사용 링크 -->
         <script src="https://kit.fontawesome.com/64a5181ca4.js" crossorigin="anonymous"></script>
         
-        <!-- <script type="text/javascript" src="/resources/include/js/jquery-3.6.2.min.js"></script> -->
-    </head>
+        <script type="text/javascript" src="/resources/include/js/jquery-3.6.2.min.js"></script>
+        <script type="text/javascript" src="/resources/include/js/subList.js"></script>
+        
+    </head> 
 	<body>
 		<!-- header -->
         <div class="wrapper">
@@ -58,8 +60,5 @@
             </footer>
         </div>
         
-        <!-- Bootstrap core JavaScript
-		==================================================
-        <script src="/resources/dist/js/bootstrap.min.js"></script> -->
 	</body>
 </html>
