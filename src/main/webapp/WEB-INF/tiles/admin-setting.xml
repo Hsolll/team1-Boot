@@ -4,12 +4,14 @@
   
 <tiles-definitions>
 
-	<definition name="basic" template="/WEB-INF/views/template/admin/contentLayout.jsp">
-		<put-attribute name="title" value="관리자 페이지" />
-		<put-attribute name="header" value="/WEB-INF/views/template/admin/header.jsp" />
-		<put-attribute name="left" value="/WEB-INF/views/template/admin/left.jsp" />
-		<put-attribute name="sub" value="/WEB-INF/views/template/admin/sub.jsp" />
-		<put-attribute name="main" value="" />
-	</definition>
+		<definition name="basic" template="/WEB-INF/views/template/admin/contentLayout.jsp">
+				<put-attribute name="main" value="" />
+  		</definition>
+  		
+  		
+  		<definition name="admin/**" extends="basic">
+				<put-attribute name="main" value="/WEB-INF/views/admin/{1}.jsp" />
+				<put-attribute name="title" value="" />
+		</definition>
 	
 </tiles-definitions>

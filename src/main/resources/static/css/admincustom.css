@@ -1,0 +1,31 @@
+@charset "UTF-8";
+/* 테이블 상단 */
+.tableTop {display: flex; align-items: flex-end; margin: 20px 0 15px;}
+.tableTop .left .tit {font-size: 15px; color: #666;}
+.tableTop .right {display: flex; margin-left: auto;}
+.tableTop .right > * + * {margin-left: 10px;}
+
+select.form-control {height: 34px !important;}
+textarea.form-control {height: 400px !important; resize: none;}
+
+/* 버튼 */
+.btn {padding: 6px 16px !important; height: 34px !important;}
+
+/* 버튼 영역 */
+.btnArea {margin-top: 15px; text-align: right;}
+
+/* 테이블 */
+.rowTable {border-top: 1px solid #000; border-right: 1px solid #ccc;}
+.rowTable table {table-layout: fixed; width: 100%;}
+.rowTable th {border-left: 1px solid #ccc; background: #f4f4f4;}
+.rowTable td {border-left: 1px solid #ccc;} 
+.rowTable th, .rowTable td {padding: 15px; border-bottom: 1px solid #ccc;}
+.detailTopTable {margin-top: 20px; border: 1px solid #ccc;}
+.detailTopTable table {table-layout: fixed; width: 100%;}
+.detailTopTable tr + tr {border-top: 1px solid #ccc;}
+.detailTopTable th {padding: 15px 10px; font-weight: bold; background: #f4f4f4;}
+.detailTopTable td {padding: 15px 10px;}
+.detailContents {padding: 30px 10px; border-right: 1px solid #ccc; border-left: 1px solid #ccc; border-bottom: 1px solid #ccc; word-break: break-all;}
+
+.m-t-15 {margin-top: 15px;}
+.m-l-100 {margin-left: 100px;}

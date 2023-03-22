@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.omb.admin.member.dao.MemberDao">
+	
+	
+	<!-- 검색 쿼리문 -->
+	<sql id="memberSearch">
+		<if test="search=='u_id'">
+			<![CDATA[ u_id LIKE '%'|| #{keyword} ||'%' ]]>					
+		</if>
+		<if test="search=='u_name'">
+			<![CDATA[ u_name LIKE '%'|| #{keyword} ||'%' ]]>					
+		</if>
+		<if test="search=='u_nick'">
+			<![CDATA[ u_nick LIKE '%'|| #{keyword} ||'%' ]]>					
+		</if>
+		<if test="search=='u_grade'">
+			<![CDATA[ u_grade LIKE '%'|| #{keyword} ||'%' ]]>	
+		</if>
+	</sql>
+	
+	
+	
+	<!-- 일반유저 리스트 기본 조회 -->
+	<select id="memberList" parameterType="member" resultType="member">
+		<![CDATA[
+		SELECT
+		u_no, u_id, u_nick, u_name, u_email, u_phone, u_grade, u_status, to_char(u_created_at, 'YYYY-MM-DD') as u_created_at,
+		(select count(u_no) from tb_user where u_status = 2) as u_cnt
+		FROM (
+			SELECT /*+ INDEX_DESC(tb_user tb_user_pk) */
+				rownum as rnum, u_no, u_id, u_nick, u_name, u_email, u_phone, u_grade, u_status, u_created_at, u_cnt
+			FROM tb_user
+		WHERE]]>
+		<trim prefix="(" suffix=") AND " prefixOverrides="AND">
+			<include refid = "memberSearch"></include>
+		</trim>
+		<![CDATA[ rownum <= #{pageNum} * #{amount}
+				) memberlist
+		WHERE rnum > (#{pageNum}- 1) * #{amount}
+		]]>
+	</select>
+	
+	<select id="memberListCnt" parameterType="member" resultType="int">
+		SELECT count(*) FROM tb_user
+		<trim prefix=" where (" suffix=")">
+			<include refid="memberSearch"></include>
+		</trim>
+	</select>
+	
+	<!-- 탈퇴유저 리스트 기본 조회 -->
+	<select id="nmemberList" resultType="member">
+		SELECT u_no, u_id, u_nick, u_name, u_email, u_phone, u_grade, u_status, 
+		to_char(u_created_at, 'YYYY-MM-DD') as u_created_at
+		FROM tb_user
+		WHERE u_status = 2
+		ORDER BY u_no desc
+	</select>
+	
+	
+	<!-- 일반유저 상세페이지 조회 -->
+	<select id="memberDetail" parameterType="member" resultType="member">
+		SELECT u_no, u_name, u_id, u_nick, u_email, u_phone, u_grade, u_status, 
+			to_char(u_created_at, 'YYYY-MM-DD HH24:MI:SS') AS u_created_at 
+		FROM tb_user
+		WHERE u_no = #{u_no}
+	</select>
+</mapper>
