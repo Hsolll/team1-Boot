@@ -6,11 +6,35 @@ ul { padding: 0; margin: 0; }
 
 li { list-style: none; padding: 0; margin: 0; }
 
-a { color: #1c1c1c; text-decoration: none; background: none; padding: 0; margin: 0; }
+a { color: #1c1c1c; background: none; text-decoration: none; padding: 0; margin: 0; }
 
 input { font-size: 12px; line-height: 1.25; color: #777; vertical-align: middle; }
 
 table, input, select, textarea, a { font-size: 12px; line-height: 1.25; color: #777; }
+
+
+.pr5 { padding-right: 5px !important; }
+.pl10 { padding-left: 10px !important; }
+.mb5 { margin-bottom: 5px !important; }
+.mt10 { margin-top: 10px !important; }
+.mt30 { margin-top: 30px !important; }
+.ml15 { margin-left: 15px !important; }
+.text24 { font-size: 24px; color: #333333; }
+.text18 { font-size: 18px; color: #333333; }
+.w200 { width: 200px !important; }
+.w400 { width: 400px !important; }
+.w700 { width: 700px !important; }
+.tr { text-align: right !important; }
+
+input[type=text] {
+    outline: none;
+    resize: none;
+    height: 30px;
+    color: #666;
+    border: 1px solid #C9C9C9;
+    padding: 1px 1px 2px;
+    margin: 1px 0;
+}
 /********************************** 상단 배너 **********************************/
 .top_banner {
     width: 100%;
@@ -23,6 +47,7 @@ table, input, select, textarea, a { font-size: 12px; line-height: 1.25; color: #
 }
 .top_banner > .top_wrap > ul {
     float: right;
+    margin: 0;
 }
 .top_banner > .top_wrap > ul > li {
     display: inline-block;
@@ -78,6 +103,7 @@ table, input, select, textarea, a { font-size: 12px; line-height: 1.25; color: #
 .menu_wrap > .menu_content > .omb_main > ul {
     width: 955px;
     font-size: 0;
+    margin-bottom: 0;
     display: flex;
     justify-content: space-between;
 }
@@ -91,6 +117,7 @@ table, input, select, textarea, a { font-size: 12px; line-height: 1.25; color: #
     font-size: 17px;
     color: #333;
     line-height: 20px;
+    text-decoration: none;
 }
 
 /************************************* 메뉴 검색창 *************************************/
@@ -129,6 +156,36 @@ table, input, select, textarea, a { font-size: 12px; line-height: 1.25; color: #
 }
 
 
+/********************************* 하위 메뉴 *********************************/
+
+.sub_list {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 55px;
+    background-color: #f8f8f8;
+    border-top: 1px solid #d6d6d6;
+    z-index: 1;
+}
+
+.sub_list > ul {
+    display: flex;
+    justify-content: space-between;
+    width: 500px;
+    margin: 0 auto;
+}
+
+.sub_list > ul > li > a {
+    color: #777;
+    padding: 15px;
+    display: block;
+    font-size: 15px;
+}
+
+#sl1 > ul, #sl4 > ul { width: 300px; }
+
+
+
 /********************************* section(content) 부분 *********************************/
 .contentWrapper {
     position: relative;
@@ -140,7 +197,7 @@ table, input, select, textarea, a { font-size: 12px; line-height: 1.25; color: #
 }
 .content_wrap > .main_content {
     position: absolute;
-    top: 500px;
+    top: 450px;
     left: 50px;
     font-size: 50px;
     font-family: Arial, Helvetica, sans-serif;

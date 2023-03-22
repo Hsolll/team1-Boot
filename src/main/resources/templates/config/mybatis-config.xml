@@ -4,6 +4,10 @@
 	<typeAliases>
 	
 		<typeAlias type="com.omb.user.safeProduct.vo.SafeProductVO" alias="safeProduct" />
+		
 		<typeAlias type="com.omb.admin.member.vo.MemberVO" alias="member"/>
+		
+		<typeAlias type="com.omb.admin.vo.AdminVO" alias="admin"/>
+		<typeAlias type="com.omb.admin.serviceCenter.faq.vo.FaqVO" alias="faq"/>
 	</typeAliases>
 </configuration>

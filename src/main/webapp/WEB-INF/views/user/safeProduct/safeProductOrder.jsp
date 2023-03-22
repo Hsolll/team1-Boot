@@ -5,7 +5,7 @@
 		<link type="text/css" rel="stylesheet" href="/resources/include/css/order.css" />
 		<!-- iamport.payment.js -->
 	    <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
-	    
+	    <script src="/resources/include/js/payment.js"></script>
 		<script type="text/javascript">
 			var IMP = window.IMP; 
 	        IMP.init("imp54405822");
@@ -23,9 +23,9 @@
 	            IMP.request_pay({
 	                pg : 'html5_inicis',
 	                pay_method : 'card',
-	                merchant_uid: "57008833-33004", 
+	                merchant_uid: "57008833-33003", 
 	                name : '당근 10kg',
-	                amount : 1004,
+	                amount : 100,
 	                buyer_email : 'Iamport@chai.finance',
 	                buyer_name : '포트원 기술지원팀',
 	                buyer_tel : '010-1234-5678',
@@ -33,9 +33,13 @@
 	                buyer_postcode : '123-456'
 	            }, function (rsp) { // callback
 	                if (rsp.success) {
-	                    console.log(rsp);
+	                    
+	                	주문목록 만드는 함수 -> 함수안에서 ajax로 처리
+	                	
+	                    location.href="/safe/productBuy";
 	                } else {
 	                    console.log(rsp);
+	                    alert("결제실패");
 	                }
 	            });
 	        }
@@ -101,7 +105,7 @@
                         </div>
 
                         <div class="payBtn_bg">
-                            <button id="buy_btn" class="buy_btn">결제하기</button>
+                            <button id="buy_btn" class="btn_blue">결제하기</button>
                         </div>
                     </div>
 			

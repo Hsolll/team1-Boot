@@ -49,6 +49,8 @@ public class SafeProductController {
 		return "user/safeProduct/safeProductDetail";
 	}
 	
+	
+	/* 주문 페이지 이동 */
 	@GetMapping("/productOrder")
 	public String selectSafeProductOrder(SafeProductVO spvo, Model model) {
 
@@ -64,5 +66,30 @@ public class SafeProductController {
 		return "user/safeProduct/safeProductOrder";
 	}
 	
+	
+	/* 물품 등록 페이지 이동 */
+	@GetMapping("/productInsertView")
+	public String safeProductInsertView() {
+		
+		return "user/safeProduct/safeProductInsertView";
+	}
 
+	
+	/* 안심거래 구매목록 조회 */
+	@GetMapping("/productBuy")
+	public String safeProductBuyList() {
+		
+		// 서비스에서 주문목록 조회하는 쿼리 
+		
+		return "user/safeProduct/safeProductBuyList";
+	}
+	
+	
+	/* 안심거래 판매목록 조회 */
+	@GetMapping("/productSell")
+	public String safeProductSellList() {
+		
+		return "user/safeProduct/safeProductSellList";
+	}
+	
 }

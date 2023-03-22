@@ -8,7 +8,7 @@
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
-		<title>오마이베이비</title>
+		<title>OhMybaby</title>
 
         <!-- 구글폰트 사용 링크 -->
         <link href="https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Pen+Script&family=Noto+Sans+KR&family=Patrick+Hand&
@@ -24,14 +24,15 @@
         <script src="../js/html5shiv.js"></script>
         <![endif]-->
         
-        <!-- <link href="/resources/dist/css/bootstrap.min.css" rel="stylesheet"> -->
         <link rel="stylesheet" href="/resources/include/css/ombLayout.css">
         
         <!-- 폰트어썸 사용 링크 -->
         <script src="https://kit.fontawesome.com/64a5181ca4.js" crossorigin="anonymous"></script>
         
-        <!-- <script type="text/javascript" src="/resources/include/js/jquery-3.6.2.min.js"></script> -->
-    </head>
+        <script type="text/javascript" src="/resources/include/js/jquery-3.6.2.min.js"></script>
+        <script type="text/javascript" src="/resources/include/js/subList.js"></script>
+        
+    </head> 
 	<body>
 		<!-- header -->
         <div class="wrapper">
@@ -43,7 +44,9 @@
                     <div class="page-header">
 						<h1><tiles:getAsString name="title" /></h1>
 					</div>
+					
 	                <tiles:insertAttribute name="body" />
+	                
                 </div>
             </section>
             
@@ -57,9 +60,5 @@
                 <tiles:insertAttribute name="footer" />
             </footer>
         </div>
-        
-        <!-- Bootstrap core JavaScript
-		==================================================
-        <script src="/resources/dist/js/bootstrap.min.js"></script> -->
 	</body>
 </html>

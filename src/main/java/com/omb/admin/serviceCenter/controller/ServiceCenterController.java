@@ -1,4 +1,4 @@
-package com.omb.admin.ServiceCenter.controller;
+package com.omb.admin.serviceCenter.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
