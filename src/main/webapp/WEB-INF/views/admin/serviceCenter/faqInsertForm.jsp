@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/admin.jspf" %>
-<link href="/resources/include/dist/css/bootstrap.min.css">
+
 	<script type="text/javascript">
 			$(function(){
 				$("#addBtn").click(function(){
