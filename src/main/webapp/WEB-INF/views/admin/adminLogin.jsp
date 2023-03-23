@@ -55,7 +55,7 @@
 	<body>
 		<div class="splash-container">
 	        <div class="card ">
-	            <div class="card-header text-center"><a href="../index.html"><img class="logo-img" src="/resources/include/dist/assets/images/logo.png" alt="logo"></a><span class="splash-description">Please enter your user information.</span></div>
+	            <div class="card-header text-center"><a href="/admin/login"><img class="logo-img" src="/resources/images/logo.png" alt="logo"></a><span class="splash-description">Please enter your user information.</span></div>
 	            <div class="card-body">
 	                <form id="loginForm">
 	                    <div class="form-group">
