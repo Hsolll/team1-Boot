@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("/admin/*")
 @Slf4j
-public class ServiceCenterController {
+public class AdmServiceCenterController {
 
 	@GetMapping("serviceCenterList")
 	public String serviceCenterList() {
@@ -25,11 +25,11 @@ public class ServiceCenterController {
 		return "admin/serviceCenter/serviceCenterDetail";
 	}
 	
-	@GetMapping("serviceCenterwriteForm")
+	@GetMapping("serviceCenterWriteForm")
 	public String serviceCenterwriteForm() {
-		log.info("serviceCenterwriteForm 메서드 호출");
+		log.info("serviceCenterWriteForm 메서드 호출");
 		
-		return "admin/serviceCenter/serviceCenterwriteForm";
+		return "admin/serviceCenter/serviceCenterWriteForm";
 	}
 	
 	@GetMapping("serviceCenterupdateForm")

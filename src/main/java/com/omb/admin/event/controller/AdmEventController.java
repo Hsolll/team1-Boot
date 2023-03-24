@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("/admin/*")
 @Slf4j
-public class EventController {
+public class AdmEventController {
 
 	@GetMapping("eventList")
 	public String eventList() {
