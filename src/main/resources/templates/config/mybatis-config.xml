@@ -4,6 +4,7 @@
 	<typeAliases>
 	
 		<typeAlias type="com.omb.user.safeProduct.vo.SafeProductVO" alias="safeProduct" />
+		<typeAlias type="com.omb.user.payment.vo.PaymentVO" alias="payment" />
 		
 		<typeAlias type="com.omb.admin.member.vo.MemberVO" alias="member"/>
 		
