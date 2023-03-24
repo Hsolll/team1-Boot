@@ -54,10 +54,8 @@
 									<tr class="text-center" data-num="${safe.sp_no }">
 										<td>${ safe.sp_no }</td>
 										<td class="goDetail text-left">${ safe.sp_title }</td>
-										<td class="name">${ safe.u_id }</td>
-										<td>
-											<fmt:formatNumber value="${safe.sp_price}" groupingUsed="true"/>
-										</td>
+										<td class="name">${ safe.u_no }</td>
+										<td>${ safe.sp_price }</td>
 										<td>${ safe.sp_status }</td> 
 										<td>${ safe.sp_created_at }</td> 
 									</tr>
@@ -65,7 +63,7 @@
 							</c:when>
 							<c:otherwise>
 								<tr>
-									<td colspan="4" class="tac text-center">등록된 상품 정보가 존재하지 않습니다.</td>
+									<td colspan="4" class="tac text-center">등록된 학과 정보가 존재하지 않습니다.</td>
 								</tr>
 							</c:otherwise>
 						</c:choose>

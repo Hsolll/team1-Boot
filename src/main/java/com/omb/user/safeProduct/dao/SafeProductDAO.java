@@ -14,7 +14,5 @@ public interface SafeProductDAO {
 	public SafeProductVO selectSafeProductDetail(SafeProductVO spvo);
 	
 	public SafeProductVO login(SafeProductVO spvo);
-	
-	public int selectSafeProductPrice(SafeProductVO spvo);	// DB 저장된 상품 금액 조회
 	 
 }

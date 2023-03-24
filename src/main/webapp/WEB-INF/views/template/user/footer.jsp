@@ -12,7 +12,7 @@
 					(토, 일, 공휴일 휴무)
 				</p>
 			</li>
-			<li class="omb_cs_btn"><a href="/faq/faqList">자주하는 문의</a> <a href="/serviceCenter/serviceList">문의하기</a>
+			<li class="omb_cs_btn"><a href="#">자주하는 문의</a> <a href="#">문의하기</a>
 			</li>
 		</ul>
 	</div>

@@ -50,7 +50,7 @@ public class AdminLoginController {
 		
 		if(admin != null) {
 			model.addAttribute("adminLogin", admin);
-			url = "admin/main";
+			url = "admin/faqList";
 		} else {
 			ras.addFlashAttribute("errorMsg", "로그인 실패");
 			url = "admin/login";
