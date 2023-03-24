@@ -34,7 +34,7 @@
         <!-- ============================================================== -->
         <div class="dashboard-header">
             <nav class="navbar navbar-expand-lg bg-white fixed-top">
-                <a class="navbar-brand" href="index.html">OhMyBaby</a>
+                <a class="navbar-brand" href="/admin/main">OhMyBaby</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -50,6 +50,7 @@
                                 <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>내정보</a>
                                 <a class="dropdown-item" href="#"><i class="fas fa-cog mr-2"></i>설정</a>
                                 <a class="dropdown-item" href="#"><i class="fas fa-power-off mr-2"></i>로그아웃</a>
+                                
                             </div>
                         </li>
                     </ul>
@@ -104,7 +105,7 @@
                                 <div id="submenu-3" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/chart-c3.html">FAQ</a>
+                                            <a class="nav-link" href="/admin/faq/faqList">FAQ</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="/admin/serviceCenterList">신고내역</a>
@@ -226,11 +227,17 @@
     <!-- chart chartist js 
     <script src="/resources/vendor/charts/chartist-bundle/chartist.min.js"></script> -->
     <!-- sparkline js -->
+    <!-- chart chartist js -->
+    <!-- <script src="/resources/vendor/charts/chartist-bundle/chartist.min.js"></script>
+    sparkline js
     <script src="/resources/vendor/charts/sparkline/jquery.sparkline.js"></script>
     <!-- morris js 
+    morris js
     <script src="/resources/vendor/charts/morris-bundle/raphael.min.js"></script>
     <script src="/resources/vendor/charts/morris-bundle/morris.js"></script> -->
     <!-- chart c3 js 
+    <script src="/resources/vendor/charts/morris-bundle/morris.js"></script>
+    chart c3 js
     <script src="/resources/vendor/charts/c3charts/c3.min.js"></script>
     <script src="/resources/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
     <script src="/resources/vendor/charts/c3charts/C3chartjs.js"></script>

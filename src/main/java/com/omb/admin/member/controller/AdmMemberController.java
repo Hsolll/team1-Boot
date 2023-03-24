@@ -121,5 +121,4 @@ public class AdmMemberController {
 		}
 		return "redirect:"+url;
 	}
-		
 }

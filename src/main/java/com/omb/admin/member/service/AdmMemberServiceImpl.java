@@ -77,6 +77,6 @@ public class AdmMemberServiceImpl implements AdmMemberService {
 		result = admMemberDao.memberDelete(mvo.getU_no());
 		
 		return result;
-	}
 
+}
 }
