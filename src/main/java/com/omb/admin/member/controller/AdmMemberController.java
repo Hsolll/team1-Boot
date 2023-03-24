@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.omb.admin.member.service.MemberService;
+import com.omb.admin.member.service.AdmMemberService;
 import com.omb.admin.member.vo.MemberVO;
 import com.omb.common.vo.PageDTO;
 
@@ -21,10 +21,10 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("/admin/*")
 @Slf4j
-public class MemberController {
+public class AdmMemberController {
 
 	@Setter(onMethod_= @Autowired)
-	private MemberService memberService;
+	private AdmMemberService memberService;
 	
 	
 	@GetMapping("/memberList")

@@ -11,7 +11,7 @@ import com.omb.admin.member.vo.MemberVO;
 import lombok.Setter;
 
 @Service
-public class MemberServiceImpl implements MemberService {
+public class AdmMemberServiceImpl implements AdmMemberService {
 
 	@Setter(onMethod_= @Autowired)
 	private MemberDao memberDao;

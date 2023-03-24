@@ -45,7 +45,7 @@
 			
 			
 			$("#insertFormBtn").click(function(){
-				location.href="/admin/faqInsertForm";
+				location.href="/admin/faq/faqInsertForm";
 			});
 			
 			$(".updateBtn").click(function(){
@@ -54,7 +54,7 @@
 				
 				$("#updateForm").attr({
 					"method":"get",
-					"action":"/admin/faqUpdateForm"
+					"action":"/admin/faq/faqUpdateForm"
 				});
 				$("#updateForm").submit();
 			});
@@ -62,8 +62,9 @@
 			$(".delBtn").click(function(){
 				let f_no = $(this).parents("tr").attr("data-no");
 				$("#f_no").val(f_no);
-				
-				location.href="/admin/faqDelete?f_no="+f_no;
+				if(confirm("해당 글을 내리시겠습니까?")){
+					location.href="/admin/faq/faqDelete?f_no="+f_no;					
+				}
 			});
 			
 			$(".paginate_button a").click(function(e){
@@ -80,11 +81,16 @@
 			}
 			$("#f_search").attr({
 				"method":"get",
-				"action":"/admin/faqList"
+				"action":"/admin/faq/faqList"
 			});
 			$("#f_search").submit();
 		}
 	</script>
+	<style>
+		#insertFormBtn{
+			margin-bottom : 10px;
+		}
+	</style>
 	</head>
 	<body>
 		<div class="contentContatiner container">
@@ -93,7 +99,7 @@
 			</form>
 			
 			<div class="contentBtn text-right">
-				<input type="button" value="글쓰기" id="insertFormBtn" class="btn btn-success">
+				<input type="button" value="글쓰기" id="insertFormBtn" class="btn btn-primary">
 			</div>
 			<div id="faqList" class="table-height">
 				<table summary="FAQ 리스트" class="table table-striped">
@@ -118,8 +124,8 @@
 										<td class="text-center">${faq.f_updated_at }</td>
 										<td class="text-center">${faq.f_deleted_at }</td>	
 										<td class="text-center"> 
-											<input type="button" value="수정" class="updateBtn">
-											<input type="button" value="삭제" class="delBtn"> 
+											<input type="button" value="수정" class="btn updateBtn btn-success">
+											<input type="button" value="삭제" class="btn delBtn btn-danger"> 
 										</td>
 									</tr>
 								</c:forEach>
