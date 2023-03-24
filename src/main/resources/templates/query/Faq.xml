@@ -64,14 +64,13 @@
 	
 	<insert id="insertFaq" parameterType="faq">
 		<selectKey keyProperty="f_no" resultType="int" order="BEFORE">
-			SELECT FAQ_SEQ.NEXTVAL FROM DUAL
+			SELECT MAX(F_NO) + 1 FROM TB_ADMIN_FAQ
 		</selectKey>
 		
 		INSERT INTO
 		TB_ADMIN_FAQ(F_NO, A_NO, F_TITLE, F_CONTENT)
 		VALUES(
-		(select nvl(max(f_no), 0)+1 from tb_admin_faq), 
-		#{a_no}, #{f_title}, #{f_content})
+		#{f_no}, #{a_no}, #{f_title}, #{f_content})
 	</insert>
 	
 	<select id="selectDetail" parameterType="faq" resultType="faq">
