@@ -32,7 +32,7 @@ public class FaqController {
 		
 		int total = faqService.selectFaqCnt(vo);
 		model.addAttribute("pageMaker", new PageDTO(vo, total));
-		return "user/serviceCenter/faqList";
+		return "user/serviceCenter/faq/faqList";
 	}
 	
 	@GetMapping(value="/faqDetail")
@@ -40,7 +40,7 @@ public class FaqController {
 		log.info("faqDetail 실행");
 		FaqVO faq = faqService.selectDetail(vo);
 		model.addAttribute("detail", faq);
-		return "user/serviceCenter/faqDetail";
+		return "user/serviceCenter/faq/faqDetail";
 	}
 	
 }
