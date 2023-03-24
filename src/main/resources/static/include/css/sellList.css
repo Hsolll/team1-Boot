@@ -1,0 +1,39 @@
+.tb_sell {
+    border-top: 1px solid #6e6e6e;
+    margin: 0 auto;
+    width: 100%;
+}
+.tb_sell th {
+    text-align: center;
+    font-weight: normal;
+    color: #000000;
+    font-size: 13px;
+    line-height: 120%;
+    background: #f9f9f9;
+    padding: 10px 5px;
+    border-bottom: 1px solid #dcdcdc;
+}
+.tb_sell td {
+    text-align: center;
+    color: #555;
+    font-size: 13px;
+    padding: 10px 5px;
+    border-bottom: 1px solid #dcdcdc;
+    word-break: break-all;
+}
+.tb_sell td a {
+    color: #555;
+    font-size: 13px;
+}
+.btn_swh {
+    display: inline-block;
+    height: 23px;
+    line-height: 22px;
+    font-size: 12px;
+    color: #333333;
+    background: #faf8fb;
+    border: 1px solid #c9ccd3;
+    border-bottom: 1px solid #a8aaa9;
+    border-radius: 1px;
+    padding: 0 12px;
+}
