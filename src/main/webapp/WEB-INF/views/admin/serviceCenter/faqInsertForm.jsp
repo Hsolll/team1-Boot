@@ -12,20 +12,20 @@
 						$("#insertForm").attr({
 							"method":"post",
 							"enctype":"multipart/form-data",
-							"action":"/admin/faqInsert"
+							"action":"/admin/faq/faqInsert"
 						});
 						$("#insertForm").submit();
 					}	
 				});
 				
 				$("#cancelBtn").click(function(){
-					$("#intForm").each(function(){
+					$("#insertForm").each(function(){
 						this.reset();
 					});
 				});
 				
 				$("#listBtn").click(function(){
-					location.href="http://localhost:8080/admin/faqList"
+					location.href="http://localhost:8080/admin/faq/faqList"
 				})
 				
 			});

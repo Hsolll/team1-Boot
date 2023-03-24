@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.omb.admin.member.vo.MemberVO;
 
-public interface MemberService {
+public interface AdmMemberService {
 
 	public List<MemberVO> memberList(MemberVO mvo);
 	
