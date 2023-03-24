@@ -158,7 +158,7 @@
                                 <div id="submenu-3" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/admin/faqList">FAQ</a>
+                                            <a class="nav-link" href="/admin/faq/faqList">FAQ</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="/admin/serviceCenterList">신고내역</a>
