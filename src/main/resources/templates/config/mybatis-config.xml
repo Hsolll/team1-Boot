@@ -12,5 +12,7 @@
 		<typeAlias type="com.omb.admin.vo.AdminVO" alias="admin"/>
 		<typeAlias type="com.omb.admin.serviceCenter.faq.vo.FaqVO" alias="faq"/>
 		<typeAlias type="com.omb.user.serviceCenter.vo.ServiceCenterVO" alias="center"/>
+		<typeAlias type="com.omb.user.product.vo.ProductVO" alias="product"/>
+		<typeAlias type="com.omb.user.productReply.vo.ProductReplyVO" alias="pReply"/>
 	</typeAliases>
 </configuration>
