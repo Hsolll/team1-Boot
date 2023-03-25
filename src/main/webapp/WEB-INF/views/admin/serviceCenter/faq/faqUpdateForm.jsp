@@ -12,7 +12,7 @@
 						$("#f_updateForm").attr({
 							method:"post",
 							"enctype":"multipart/form-data",
-							action:"/admin/faqUpdate"
+							action:"/admin/faq/faqUpdate"
 						});
 						$("#f_updateForm").submit();
 					}
@@ -25,7 +25,7 @@
 				});
 				
 				$("#listBtn").click(function(){
-					location.href="/admin/faqList";
+					location.href="/admin/faq/faqList";
 				});
 				
 			});		
