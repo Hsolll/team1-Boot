@@ -59,7 +59,7 @@ public class SafeProductController {
 		// 상품 정보 조회
 		SafeProductVO detail = safeProductService.selectSafeProductDetail(spvo);
 		model.addAttribute("detail", detail);
-		log.info("상품 가격 : " + detail.getSp_price());
+		
 		// 주소 정보 조회
 		
 		

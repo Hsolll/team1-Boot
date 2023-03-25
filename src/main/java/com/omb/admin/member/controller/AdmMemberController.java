@@ -7,10 +7,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.omb.admin.member.service.AdmMemberService;
-import com.omb.admin.member.vo.MemberVO;
+import com.omb.admin.member.vo.AdmMemberVO;
 import com.omb.common.vo.PageDTO;
 
 import lombok.AllArgsConstructor;
@@ -24,17 +27,18 @@ import lombok.extern.slf4j.Slf4j;
 public class AdmMemberController {
 
 	@Setter(onMethod_= @Autowired)
-	private AdmMemberService memberService;
+	private AdmMemberService admMemberService;
 	
 	
 	@GetMapping("/memberList")
-	public String memberList(@ModelAttribute MemberVO mvo, Model model) {
+	public String memberList(@ModelAttribute AdmMemberVO mvo, Model model) {
 		log.info("memberList 메서드 확인");
+		log.info("mvo : " + mvo);
 		
-		List<MemberVO> memberList = memberService.memberList(mvo);
+		List<AdmMemberVO> memberList = admMemberService.memberList(mvo);
 		model.addAttribute("memberList", memberList);
 		
-		int total = memberService.memberListCnt(mvo);
+		int total = admMemberService.memberListCnt(mvo);
 		
 		model.addAttribute("pageMaker", new PageDTO(mvo, total));
 		
@@ -42,10 +46,10 @@ public class AdmMemberController {
 	}
 	
 	@GetMapping("/memberDetail")
-	public String memberDetail(@ModelAttribute MemberVO mvo, Model model) {
+	public String memberDetail(@ModelAttribute AdmMemberVO mvo, Model model) {
 		log.info("memberDetail 메서드 확인");
 		
-		MemberVO detail = memberService.memberDetail(mvo);
+		AdmMemberVO detail = admMemberService.memberDetail(mvo);
 		model.addAttribute("detail", detail);
 		
 		return "admin/memberMng/memberDetail";
@@ -53,24 +57,68 @@ public class AdmMemberController {
 	
 	
 	@GetMapping("/nmemberList")
-	public String nmemberList(@ModelAttribute MemberVO mvo, Model model) {
+	public String nmemberList(@ModelAttribute AdmMemberVO mvo, Model model) {
 		log.info("nmemeberList 메서드 확인");
 		
-		List<MemberVO> nmemberList = memberService.nmemberList(mvo);
+		List<AdmMemberVO> nmemberList = admMemberService.nmemberList(mvo);
 		model.addAttribute("nmemberList", nmemberList);
 		
+		int total = admMemberService.nmemberListCnt(mvo);
 		
+		model.addAttribute("pageMaker", new PageDTO(mvo, total));
 		
 		return "admin/memberMng/nmemberList";
 	}
 	
 	@GetMapping("/nmemberDetail")
-	public String nmemberDetail(@ModelAttribute MemberVO mvo, Model model) {
+	public String nmemberDetail(@ModelAttribute AdmMemberVO mvo, Model model) {
 		log.info("nmemberDetail 메서드 확인");
 		
-		MemberVO detail = memberService.memberDetail(mvo);
+		AdmMemberVO detail = admMemberService.memberDetail(mvo);
 		model.addAttribute("detail", detail);
 		
 		return "admin/memberMng/nmemberDetail";
+	}
+	
+	@PostMapping("/memberGrade")
+	public String memberGrade(int u_num, @ModelAttribute AdmMemberVO mvo, Model model) throws Exception {
+		log.info("memberGrade 메서드 확인");
+		log.info("mvo : " + mvo);
+		
+		mvo.setU_no(u_num);
+		log.info("mvo2 : " + mvo);
+		
+		int result = 0;
+		String url="";
+		
+		result = admMemberService.memberGrade(mvo);
+		
+		if(result == 1) {
+			url="/admin/memberList";
+		}else {
+			url="/admin/main";
+		}
+		return "redirect:"+url;
+	}
+	
+	@ResponseBody
+	@PostMapping("/memberDelete")
+	public String memberDelete(@RequestParam(value="checkBoxArr[]") List<String> chkbox, AdmMemberVO mvo) throws Exception {
+		log.info("memberDelete 호출 성공");
+		log.info("삭제할 회원번호: " + mvo.getU_no());
+		log.info("배열 확인:" + chkbox.get(0));
+		
+		int result = 0;
+		String url = "";
+		
+		
+		result = admMemberService.memberDelete(mvo);
+		log.info("result= " +result);
+		if(result == 1) {
+			url="/admin/nmemberList";
+		}else {
+			url="/admin/memberDetail?u_no="+mvo.getU_no();
+		}
+		return "redirect:"+url;
 	}
 }

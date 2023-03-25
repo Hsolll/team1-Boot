@@ -25,17 +25,17 @@ public class NoticeController {
 		return "admin/notice/noticeDetail";
 	}
 	
-	@GetMapping("noticewriteForm")
+	@GetMapping("noticeWriteForm")
 	public String noticewriteForm() {
-		log.info("noticewriteForm 메서드 호출");
+		log.info("noticeWriteForm 메서드 호출");
 		
-		return "admin/notice/noticewriteForm";
+		return "admin/notice/noticeWriteForm";
 	}
 	
-	@GetMapping("noticeupdateForm")
+	@GetMapping("noticeUpdateForm")
 	public String noticeupdateForm() {
-		log.info("noticewriteForm 메서드 호출");
+		log.info("noticeUpdateForm 메서드 호출");
 		
-		return "admin/notice/noticeupdateForm";
+		return "admin/notice/noticeUpdateForm";
 	}
 }

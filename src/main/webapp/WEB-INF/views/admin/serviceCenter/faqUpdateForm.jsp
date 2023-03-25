@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/admin.jspf" %>
-	
+	<script type="text/javascript" src="/resources/include/dist/js/bootstrap.min.js"></script>
+	<link href="/resources/include/dist/css/bootstrap.min.css">
 		<script>
 			$(function(){
 				$("#updateBtn").click(function(){
@@ -11,7 +12,7 @@
 						$("#f_updateForm").attr({
 							method:"post",
 							"enctype":"multipart/form-data",
-							action:"/admin/faq/faqUpdate"
+							action:"/admin/faqUpdate"
 						});
 						$("#f_updateForm").submit();
 					}
@@ -24,7 +25,7 @@
 				});
 				
 				$("#listBtn").click(function(){
-					location.href="/admin/faq/faqList";
+					location.href="/admin/faqList";
 				});
 				
 			});		

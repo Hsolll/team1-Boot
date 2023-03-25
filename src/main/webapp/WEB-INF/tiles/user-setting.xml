@@ -23,13 +23,8 @@
 	</definition>
 	
 	<definition name="user/serviceCenter/*" extends="content">
-		<put-attribute name="title" value="고객센터" />
+		<put-attribute name="title" value="FAQ 목록" />
 		<put-attribute name="body" value="/WEB-INF/views/user/serviceCenter/{1}.jsp" /> 
-	</definition>
-	
-	<definition name="user/serviceCenter/faq/*" extends="content">
-		<put-attribute name="title" value="자주하는 문의" />
-		<put-attribute name="body" value="/WEB-INF/views/user/serviceCenter/faq/{1}.jsp" /> 
 	</definition>
 	
 </tiles-definitions>
