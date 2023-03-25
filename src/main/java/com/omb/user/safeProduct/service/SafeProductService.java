@@ -6,8 +6,10 @@ import com.omb.user.safeProduct.vo.SafeProductVO;
 
 public interface SafeProductService {
 	
-public List<SafeProductVO> selectSafeProductList();
+	public List<SafeProductVO> selectSafeProductList();
 	
 	public SafeProductVO selectSafeProductDetail(SafeProductVO spvo);
+	
+	public int selectSafeProductPrice(SafeProductVO spvo);
 
 }

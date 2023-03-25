@@ -27,7 +27,7 @@ public class AdmFaqController {
 	@Setter(onMethod_ = @Autowired)
 	private AdmFaqService faqService;
 
-	@GetMapping(value = "/faqList")
+	@GetMapping(value = "/faq/faqList")
 	public String faqList(@ModelAttribute FaqVO vo, Model model) {
 		log.info("faqList 실행...");
 		List<FaqVO> faqList = faqService.selectFaq(vo);
@@ -36,29 +36,29 @@ public class AdmFaqController {
 		int total = faqService.selectFaqCnt(vo);
 		vo.setAmount(20);
 		model.addAttribute("pageMaker", new PageDTO(vo, total));
-		return "admin/serviceCenter/faqList";
+		return "admin/serviceCenter/faq/faqList";
 	}
 
-	@RequestMapping(value = "/faqInsertForm")
+	@RequestMapping(value = "/faq/faqInsertForm")
 	public String faqInsertForm() {
 		log.info("insertForm 실행...");
-		return "admin/serviceCenter/faqInsertForm";
+		return "admin/serviceCenter/faq/faqInsertForm";
 	}
 
-	@PostMapping(value = "/faqInsert")
+	@PostMapping(value = "/faq/faqInsert")
 	public String faqInsert(FaqVO vo, Model model) throws Exception {
 		String url = "";
 		int result = 0;
 		result = faqService.insertFaq(vo);
 		if (result == 1) {
-			url = "/admin/faqList";
+			url = "/admin/faq/faqList";
 		} else {
-			url = "/admin/faqInsertForm";
+			url = "/admin/faq/faqInsertForm";
 		}
 		return "redirect:" + url;
 	}
 
-	@GetMapping("/faqUpdateForm")
+	@GetMapping("/faq/faqUpdateForm")
 	public String faqUpdateForm(@ModelAttribute("adminLogin") AdminVO admin, @ModelAttribute FaqVO vo, Model model) {
 		log.info("updateForm 실행...");
 		log.info("f_no = " + vo.getF_no());
@@ -68,10 +68,10 @@ public class AdmFaqController {
 		FaqVO faqData = faqService.updateForm(vo);
 
 		model.addAttribute("faqData", faqData);
-		return "admin/serviceCenter/faqUpdateForm";
+		return "admin/serviceCenter/faq/faqUpdateForm";
 	}
 
-	@PostMapping(value = "/faqUpdate")
+	@PostMapping(value = "/faq/faqUpdate")
 	public String faqUpdate(@ModelAttribute("adminLogin") AdminVO admin, @ModelAttribute FaqVO vo) throws Exception {
 		log.info("faqUpdate 실행...");
 
@@ -80,14 +80,14 @@ public class AdmFaqController {
 		result = faqService.updateFaq(vo);
 
 		if (result == 1) {
-			url = "/admin/faqList";
+			url = "/admin/faq/faqList";
 		} else {
-			url = "/admin/faqUpdateForm";
+			url = "/admin/faq/faqUpdateForm";
 		}
 		return "redirect:" + url;
 	}
 	
-	@GetMapping(value="/faqDelete")
+	@GetMapping(value="/faq/faqDelete")
 	public String faqDelete(@ModelAttribute FaqVO vo) throws Exception {
 
 		log.info("faqDelete 실행...");
@@ -95,7 +95,7 @@ public class AdmFaqController {
 		int result = faqService.updateFaqDel(vo);
 		log.info("실행 결과 : " + result);
 
-		return "redirect:/admin/faqList";
+		return "redirect:/admin/faq/faqList";
 
 	}
 }
