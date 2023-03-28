@@ -1,16 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page trimDirectiveWhitespaces="true" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ include file="/WEB-INF/views/common/admin.jspf" %>
-<!DOCTYPE html>
-<html>
-	<haed>
-
-
-	
-	<script>
+<script>
 		$(function(){
 			let word="<c:out value='${faqVO.keyword}' />";
 			let value="";
