@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-
 import com.omb.user.member.service.MemberService;
 import com.omb.user.member.vo.MemberVO;
 
@@ -57,6 +56,7 @@ public class MemberController {
 	
 	@PostMapping("/signUp")
 	public String signUp(MemberVO mvo) {
+		
 		log.info("회원가입 완료");
 		int nickResult = memberservice.nickChk(mvo);
 		int result = memberservice.idChk(mvo);
