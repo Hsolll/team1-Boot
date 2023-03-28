@@ -1,17 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.omb.admin.statistics.dao.StatisticsDAO">
-	<select id="selectCateStatic" parameterType="statistics" resultType="map">
-		<![CDATA[
-			SELECT P_CATE, COUNT(*) AS CNT
-			FROM (
-				SELECT * FROM TB_USER_PRODUCT
-				WHERE P_CREATED_AT BETWEEN TO_DATE(#{startDate}, 'YYYY-MM-DD HH24:MI:SS')
-	    			AND (TO_DATE(#{endDate}, 'YYYY-MM-DD HH24:MI:SS')+0.99999)
-			)
-			GROUP BY P_CATE
-		]]>
-	</select>
 	
 	<select id="selectAllCategory" resultType="map">
 		<![CDATA[
@@ -53,18 +42,4 @@
 		]]>
 	</select>
 	
-	<select id="selectDate" parameterType="statistics" resultType="statistics">
-		<if test='number == 0'>
-			SELECT TO_CHAR(TRUNC(SYSDATE, 'iw'), 'YYYY-MM-DD') AS STARTDATE, 
-				TO_CHAR(TRUNC(SYSDATE, 'iw')+6, 'YYYY-MM-DD') AS ENDDATE 
-			FROM DUAL
-		</if>
-		<if test='number != 0'>
-			<![CDATA[
-				SELECT TO_CHAR(TRUNC(SYSDATE+#{number}, 'iw'), 'YYYY-MM-DD') AS STARTDATE, 
-					TO_CHAR(TRUNC(SYSDATE+#{number}, 'iw')+6, 'YYYY-MM-DD') AS ENDDATE 
-				FROM DUAL			
-			]]>
-		</if>
-	</select>
 </mapper>
