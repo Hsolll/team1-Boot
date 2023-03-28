@@ -153,7 +153,7 @@ public class PaymentController {
 		
 		
 		// 취소완료 후 주문상태 결제취소로 변경
-		int result = orderInfoService.updateOrderStatus(ovo);
+		int result = orderInfoService.updateOrderStatusCancel(ovo);
 		
 		if(result == 1) {
 			// 상태변경 성공 시 취소처리

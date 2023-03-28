@@ -32,6 +32,24 @@
 				location.href="/safe/productOrder?sp_no=" + sp_no;
 			});
 			
+			$(".confirmBtn").click(function(){
+				let o_no = $(this).parents("tr").attr("data-no");
+				
+				$.ajax({
+		    		url: "/order/complete", 
+		    		type: 'GET',
+		    		dataType: 'text',
+		    		data: o_no,
+		    		success : function(result){
+						
+						
+					},
+					error : function() {
+						
+					}
+		    	});
+			});
+			
 
 		});
 		</script>
@@ -89,7 +107,7 @@
 													<button type="button" class="gotoPaymentBtn" >결제하기</button>
 												</c:when>
 												<c:otherwise>
-													<button type="button" class="" >구매확정</button>
+													<button type="button" class="confirmBtn" >구매확정</button>
 												</c:otherwise>
 											</c:choose>
 										</td> 

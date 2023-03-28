@@ -4,9 +4,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.omb.admin.depositInfo.dao.AdmDepositInfoDAO;
 import com.omb.user.address.dao.MemberAddressDAO;
 import com.omb.user.orderInfo.dao.OrderInfoDAO;
-import com.omb.user.orderInfo.vo.OrderInfoVO;
 import com.omb.user.payment.dao.PaymentDAO;
 import com.omb.user.safeProduct.dao.SafeProductDAO;
 
@@ -33,6 +33,9 @@ class Team1ApplicationTests {
 	
 	@Setter(onMethod_ = @Autowired)
 	private OrderInfoDAO orderInfoDAO;
+	
+	@Setter(onMethod_ = @Autowired)
+	private AdmDepositInfoDAO admDepositInfoDAO;
 
 	
 	/* 
@@ -203,18 +206,31 @@ class Team1ApplicationTests {
 	} */
 	
 	
-	/* 주문상태 변경 */
+	/* 주문상태 변경
 	@Test
 	public void testUpdateOrderStatus() {
 		OrderInfoVO ovo = new OrderInfoVO();
 		
 		ovo.setO_no(1);
 		
-		int result = orderInfoDAO.updateOrderStatus(ovo);
+		int result = orderInfoDAO.updateOrderStatusCancel(ovo);
 		
 		log.info("출력된 행의 수 : " + result);
 		
 		
-	}
+	} */
+	
+	/* 입금정보 추가
+	@Test
+	public void testInsertDeposit() {
+		OrderInfoVO ovo = new OrderInfoVO();
+		
+		ovo.setO_no(1);
+		ovo.setSp_price(100);
+		
+		int result = admDepositInfoDAO.insertDepositInfo(ovo);
+		
+		log.info("출력된 행의 수 : " + result);
+	} */
 
 }

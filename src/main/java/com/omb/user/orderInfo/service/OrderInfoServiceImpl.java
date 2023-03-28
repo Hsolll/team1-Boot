@@ -49,9 +49,21 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 	}
 
 	@Override
-	public int updateOrderStatus(OrderInfoVO ovo) {
-		int result = orderInfoDAO.updateOrderStatus(ovo); 
+	public int updateOrderStatusCancel(OrderInfoVO ovo) {
+		int result = orderInfoDAO.updateOrderStatusCancel(ovo); 
 		return result;
+	}
+
+	@Override
+	public int updateOrderStatusConfirm(OrderInfoVO ovo) {
+		int result = orderInfoDAO.updateOrderStatusConfirm(ovo);
+		return result;
+	}
+
+	@Override
+	public OrderInfoVO selectOrderInfoPrice(OrderInfoVO ovo) {
+		OrderInfoVO selectPrice = orderInfoDAO.selectOrderInfoPrice(ovo);
+		return selectPrice;
 	}
 	
 	
