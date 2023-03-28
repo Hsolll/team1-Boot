@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.omb.user.product.dao.ProductDao">
+
+
+	<select id="selectProductList" resultType="product">
+  		<![CDATA[ 
+		SELECT 
+        		P_NO, U_NO, P_TITLE, P_NAME, P_PRICE, P_STATUS, P_CONTENT, P_LOCAL, TRANS_METHOD, P_CREATED_AT, P_UPDATED_AT, P_DELETED_AT, p_file, p_thumb, P_CATE, P_ADM_PER
+		FROM (
+		        SELECT /*+ INDEX_DESC(TB_USER_PRODUCT TB_USER_PRODUCT_PK) */ 
+		            rownum as rnum, p.P_NO,u.U_NO,p.P_TITLE,p.P_NAME,p.P_PRICE,p.P_STATUS,p.P_CONTENT,p.P_LOCAL,p.TRANS_METHOD,p.P_CREATED_AT,p.P_UPDATED_AT,p.P_DELETED_AT,p.p_file,p.p_thumb,p.P_CATE,p.P_ADM_PER
+		        FROM 
+		            TB_USER_PRODUCT p INNER JOIN TB_USER u ON p.U_NO = u.U_NO 
+		        WHERE 
+		            rownum <= #{pageNum} * #{amount}
+		     ) PRODUCTLIST
+		WHERE 
+		    rnum > (#{pageNum} - 1) * #{amount} AND P_ADM_PER = 1
+    	]]>
+    	 
+			
+	</select>
+	
+	<select id="selectProductDetail" parameterType="int" resultType="product">
+		
+		SELECT
+		    p.P_NO,u.U_NO,p.P_TITLE,p.P_NAME,p.P_PRICE,p.P_STATUS,p.P_CONTENT,p.P_LOCAL,p.TRANS_METHOD,p.P_CREATED_AT,p.P_UPDATED_AT,p.P_DELETED_AT,p.p_file,p.p_thumb,p.P_CATE,p.p_adm_per
+		FROM
+		    TB_USER_PRODUCT p 
+		    	INNER JOIN 
+		    		TB_USER u ON p.U_NO = u.U_NO
+		WHERE
+			p.P_NO = #{p_no}
+			
+	</select>
+	
+	<insert id="insertProduct" parameterType="product">
+	    <selectKey keyProperty="p_no" resultType="int" order="BEFORE">
+	        SELECT TB_USER_PRODUCT_SEQ.NEXTVAL FROM DUAL
+	    </selectKey>
+	    
+	    INSERT INTO TB_USER_PRODUCT
+	        (P_NO,U_NO,P_TITLE,P_NAME,P_PRICE,P_STATUS,P_CONTENT,P_LOCAL,TRANS_METHOD,p_thumb,p_file,P_CATE,p_adm_per)
+	    VALUES
+	        (#{p_no},#{u_no},#{p_title},#{p_name},#{p_price},#{p_status},#{p_content},#{p_local},#{trans_method},#{p_thumb},#{p_file},#{p_cate},#{p_adm_per})
+	</insert>
+	
+	<insert id="insertProductLike" parameterType="product">
+	    INSERT INTO TB_USER_PRODUCT_LIKE
+	        (PROD_NO,P_NO,U_NO,PROD_LIKE)
+	    VALUES
+	        (TB_USER_PRODUCT_LIKE_SEQ.NEXTVAL,#{p_no},#{u_no},#{prod_like})
+	</insert>
+	
+	<delete id="deleteProductLike" parameterType="product">
+	    DELETE 
+	    	TB_USER_PRODUCT_LIKE
+	    WHERE
+	    	P_NO = #{p_no} and U_NO = #{u_no}
+	
+	</delete>
+	
+	<select id="productListCnt" parameterType="product" resultType="int">
+		SELECT 
+		    count(*) 
+		FROM 
+		    TB_USER_PRODUCT
+		WHERE 
+		    P_ADM_PER = 1
+		
+	</select>
+	
+	<select id="productCateListCnt" parameterType="product" resultType="int">
+		SELECT 
+		    count(*) 
+		FROM 
+		    TB_USER_PRODUCT
+		WHERE 
+		    p_cate = #{p_cate} AND P_ADM_PER = 1
+	</select>
+	
+	<select id="category" parameterType="product" resultType="product">
+		<![CDATA[ 
+		SELECT 
+		        rnum,P_NO,U_NO,P_TITLE,P_NAME,P_PRICE,P_STATUS,P_CONTENT,P_LOCAL,TRANS_METHOD,P_CREATED_AT,
+		        P_UPDATED_AT,P_DELETED_AT ,p_file,p_thumb,P_CATE,p_adm_per
+		FROM (
+		        SELECT /*+ INDEX_DESC(TB_USER_PRODUCT TB_USER_PRODUCT_PK) */ 
+		            rownum as rnum, p.P_NO,u.U_NO,p.P_TITLE,p.P_NAME,p.P_PRICE,p.P_STATUS,
+		            p.P_CONTENT,p.P_LOCAL,p.TRANS_METHOD,p.P_CREATED_AT,
+		            p.P_UPDATED_AT,p.P_DELETED_AT ,p.p_file,p.p_thumb,p.P_CATE,p.p_adm_per
+		        FROM    
+		            TB_USER_PRODUCT p INNER JOIN TB_USER u ON p.U_NO = u.U_NO 
+		        WHERE 
+		            rownum <= #{pageNum} * #{amount}
+		     ) PRODUCTLIST
+		WHERE 
+		    rnum > (#{pageNum} - 1) * #{amount} AND P_ADM_PER = 1 AND P_CATE = #{p_cate}
+]]>
+	</select>
+	
+	<select id="selectLocal" parameterType="product" resultType="product">
+		<![CDATA[ 
+		SELECT 
+        		P_NO, U_NO, P_TITLE, P_NAME, P_PRICE, P_STATUS, P_CONTENT, P_LOCAL, TRANS_METHOD, P_CREATED_AT, P_UPDATED_AT, P_DELETED_AT, p_file, p_thumb, P_CATE, P_ADM_PER
+		FROM (
+		        SELECT /*+ INDEX_DESC(TB_USER_PRODUCT TB_USER_PRODUCT_PK) */ 
+		            rownum as rnum, p.P_NO,u.U_NO,p.P_TITLE,p.P_NAME,p.P_PRICE,p.P_STATUS,p.P_CONTENT,p.P_LOCAL,p.TRANS_METHOD,p.P_CREATED_AT,p.P_UPDATED_AT,p.P_DELETED_AT,p.p_file,p.p_thumb,p.P_CATE,p.P_ADM_PER
+		        FROM 
+		            TB_USER_PRODUCT p INNER JOIN TB_USER u ON p.U_NO = u.U_NO 
+		        WHERE 
+		            rownum <= #{pageNum} * #{amount}
+		     ) PRODUCTLIST
+		WHERE 
+		    rnum > (#{pageNum} - 1) * #{amount} AND P_ADM_PER = 1 AND P_LOCAL = #{p_local}
+    	]]>
+	
+	</select>
+	
+	<select id="productLocalListCnt" parameterType="product" resultType="int">
+		SELECT 
+		    count(*) 
+		FROM 
+		    TB_USER_PRODUCT
+		WHERE 
+		    p_local = #{p_local} AND P_ADM_PER = 1
+	</select>
+
+
+	<select id="selectQueuedList" resultType="product" parameterType="product">
+  		<![CDATA[ 
+		SELECT 
+        		P_NO, U_NO, P_TITLE, P_NAME, P_PRICE, P_IMG, P_CONTENT, P_CREATED_AT, 
+        		P_UPDATED_AT, P_DELETED_AT, P_FILE, P_THUMB, P_CATE, P_ADM_PER
+		FROM (
+		        SELECT  
+		            rownum as rnum, p.P_NO, u.U_NO, p.P_TITLE, p.P_NAME, p.P_PRICE,
+		            p.P_IMG, p.P_CONTENT, p.P_LOCAL, p.TRANS_METHOD, p.P_CREATED_AT,
+		            p.P_UPDATED_AT, p.P_DELETED_AT, p.p_file, p.p_thumb, p.P_CATE, p.P_ADM_PER
+		        FROM 
+		            TB_USER_PRODUCT p INNER JOIN TB_USER u ON p.U_NO = u.U_NO 
+		        WHERE 
+		            rownum <= #{pageNum} * #{amount}
+		     ) PRODUCTLIST
+		WHERE 
+		    rnum > (#{pageNum} - 1) * #{amount} AND P_ADM_PER = 0
+    	]]>
+	</select>
+	
+	<update id="updateAdmRecognize" parameterType="product">
+		UPDATE TB_USER_PRODUCT
+		SET P_ADM_PER = 1
+		WHERE P_NO = #{p_no}
+	</update>
+	
+	<update id="updateAdmReject" parameterType="product">
+		UPDATE TB_USER_PRODUCT
+		SET P_ADM_PER = 2
+		WHERE P_NO = #{p_no}
+	</update>
+	
+	<select id="selectRejectedList" resultType="product" parameterType="product">
+  		<![CDATA[ 
+		SELECT 
+        		P_NO, U_NO, P_TITLE, P_NAME, P_PRICE, P_IMG, P_CONTENT, P_CREATED_AT, 
+        		P_UPDATED_AT, P_DELETED_AT, P_FILE, P_THUMB, P_CATE, P_ADM_PER
+		FROM (
+		        SELECT  
+		            rownum as rnum, p.P_NO, u.U_NO, p.P_TITLE, p.P_NAME, p.P_PRICE,
+		            p.P_IMG, p.P_CONTENT, p.P_LOCAL, p.TRANS_METHOD, p.P_CREATED_AT,
+		            p.P_UPDATED_AT, p.P_DELETED_AT, p.p_file, p.p_thumb, p.P_CATE, p.P_ADM_PER
+		        FROM 
+		            TB_USER_PRODUCT p INNER JOIN TB_USER u ON p.U_NO = u.U_NO 
+		        WHERE 
+		            rownum <= #{pageNum} * #{amount}
+		     ) PRODUCTLIST
+		WHERE 
+		    rnum > (#{pageNum} - 1) * #{amount} AND P_ADM_PER = 2
+    	]]>
+	</select>
+
+</mapper>
