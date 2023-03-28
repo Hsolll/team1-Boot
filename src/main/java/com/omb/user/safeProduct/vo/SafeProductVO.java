@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class SafeProductVO {
 
 	private int sp_no;
-	private String u_no;
+	private int u_no;
 	private int p_no;
 	private String sp_title;
 	private String sp_name;

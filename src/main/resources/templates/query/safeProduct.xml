@@ -21,6 +21,7 @@
 		ORDER BY SP_NO
 	</select>
 	
+	
 	<select id="selectSafeProductDetail" parameterType="safeProduct" resultType="safeProduct">
 		SELECT 
 			SP_NO, SP_TITLE, SP_NAME, U_ID, U_NAME, SP_PRICE, SP_CONTENT, SP_CREATED_AT
@@ -30,11 +31,16 @@
 		WHERE SP_NO = #{sp_no}
 	</select>
 	
+	
 	<select id="selectSafeProductPrice" parameterType="safeProduct" resultType="int">
 		SELECT SP_PRICE FROM TB_USER_SAFE_PRODUCT
 		WHERE SP_NO = #{sp_no}
 	</select>
 	
+	
+	<update id="updateSafeProductStatus" parameterType="safeProduct">
+		UPDATE TB_USER_SAFE_PRODUCT SET SP_STATUS = '판매완료' where SP_NO = #{sp_no}
+	</update>
 	
 
 </mapper>

@@ -5,8 +5,10 @@
 	
 		<typeAlias type="com.omb.user.safeProduct.vo.SafeProductVO" alias="safeProduct" />
 		<typeAlias type="com.omb.user.payment.vo.PaymentVO" alias="payment" />
+		<typeAlias type="com.omb.user.orderInfo.vo.OrderInfoVO" alias="orderinfo" />
 		
 		<typeAlias type="com.omb.user.member.vo.MemberVO" alias="member"/>
+		<typeAlias type="com.omb.user.address.vo.MemberAddressVO" alias="address"/>
 		
 		<typeAlias type="com.omb.admin.vo.AdminVO" alias="admin"/>
 		<typeAlias type="com.omb.admin.serviceCenter.faq.vo.FaqVO" alias="faq"/>
