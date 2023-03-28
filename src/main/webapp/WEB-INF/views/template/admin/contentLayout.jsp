@@ -133,7 +133,7 @@
                                 <div id="submenu-5" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/general-table.html">승인관리</a>
+                                            <a class="nav-link" href="/admin/product/queuedList">승인관리</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="pages/data-tables.html">중고상품</a>
