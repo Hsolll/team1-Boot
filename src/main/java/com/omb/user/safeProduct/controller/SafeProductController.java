@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.omb.user.address.service.MemberAddressService;
@@ -89,14 +90,16 @@ public class SafeProductController {
 		return "user/safeProduct/safeProductInsertView";
 	}
 
-	
-	/* 안심거래 구매목록 조회 */
-	@GetMapping("/productBuy")
-	public String safeProductBuyList() {
+
+	/* 상품 등록처리 */
+	@PostMapping("/productInsert")
+	public String insertSafeProduct(HttpSession session, SafeProductVO svo) {
 		
-		// 서비스에서 주문목록 조회하는 쿼리 
+		String path = "";
 		
-		return "user/safeProduct/safeProductBuyList";
+		
+		
+		return "redirect:" + path;
 	}
 	
 	
