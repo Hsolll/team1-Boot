@@ -19,6 +19,10 @@ public interface OrderInfoDAO {
 	
 	public PaymentVO selectPaymentId(OrderInfoVO ovo);	// 주문번호로 결제id 가져오기
 	
-	public int updateOrderStatus(OrderInfoVO ovo);	// 결제취소 후 주문상태 변경 메서드
+	public OrderInfoVO selectOrderInfoPrice(OrderInfoVO ovo);	// 주문번호로 결제금액 가져오기
+	
+	public int updateOrderStatusCancel(OrderInfoVO ovo);	// 결제취소 후 주문상태 변경 메서드
+	
+	public int updateOrderStatusConfirm(OrderInfoVO ovo);	// 구매확정 후 주문상태 변경 메서드
 	
 }

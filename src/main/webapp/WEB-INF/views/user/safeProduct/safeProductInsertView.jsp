@@ -29,11 +29,13 @@
 	                    <tbody>
 	                        <tr>
 	                            <th>이름/아이디</th>
-	                            <td>홍길동/user01</td>
+	                            <td>${memberLogin.u_name}/${memberLogin.u_id}</td>
 	                        </tr>
 	                        <tr>
 	                            <th>연락처</th>
-	                            <td>010-1234-1234</td>
+	                            <td>
+	                            	${fn:substring(memberLogin.u_phone,0,3)}-${fn:substring(memberLogin.u_phone,3,7)}-${fn:substring(memberLogin.u_phone,7,11)}
+	                            </td>
 	                        </tr>
 	                        <tr>
 	                            <th>계좌번호</th>

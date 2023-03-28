@@ -54,8 +54,21 @@
 	</select>
 	
 	
-	<update id="updateOrderStatus" parameterType="orderinfo">
+	<update id="updateOrderStatusCancel" parameterType="orderinfo">
 		UPDATE TB_USER_ORDER SET O_STATUS = '결제취소' WHERE O_NO = #{o_no}
 	</update>
+	
+	<update id="updateOrderStatusConfirm" parameterType="orderinfo">
+		UPDATE TB_USER_ORDER SET O_STATUS = '거래완료' WHERE O_NO = #{o_no}
+	</update>
+	
+	<select id="selectOrderInfoPrice" parameterType="orderInfo">
+		SELECT 
+		    PRICE
+		FROM TB_USER_PAYMENT A
+		INNER JOIN TB_USER_ORDER B
+		    ON A.PAY_NO = B.PAY_NO
+		WHERE O_NO = #{o_no}
+	</select>
 	
 </mapper>
