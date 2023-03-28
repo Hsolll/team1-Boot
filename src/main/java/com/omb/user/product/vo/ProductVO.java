@@ -2,14 +2,14 @@ package com.omb.user.product.vo;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.omb.common2.vo.CommonVO2;
+import com.omb.common.vo.CommonVO;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class ProductVO extends CommonVO2{
+public class ProductVO extends CommonVO{
 	private int p_no            =0;            
     private int u_no	        =0;
     private String p_title		="";         

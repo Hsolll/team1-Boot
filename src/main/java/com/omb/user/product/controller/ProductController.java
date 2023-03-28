@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.omb.common2.vo.PageDTO2;
+import com.omb.common.vo.PageDTO;
 import com.omb.user.member.vo.MemberVO;
 import com.omb.user.product.service.ProductService;
 import com.omb.user.product.vo.ProductVO;
@@ -70,7 +70,7 @@ public class ProductController {
 		int total = productService.productListCnt(pvo);
 		log.info("total :"+total);
 		
-		model.addAttribute("pageMaker", new PageDTO2(pvo, total));
+		model.addAttribute("pageMaker", new PageDTO(pvo, total));
 		log.info("model.pageMaker :"+model.getAttribute("pageMaker"));
 		log.info("pageNum :" + pvo.getPageNum());
 		
@@ -110,7 +110,7 @@ public class ProductController {
 		int total = productService.productCateListCnt(pvo);
 		log.info("total :"+total);
 		
-		model.addAttribute("pageMaker", new PageDTO2(pvo, total));
+		model.addAttribute("pageMaker", new PageDTO(pvo, total));
 		log.info("model.pageMaker :"+model.getAttribute("pageMaker"));
 		log.info("pageNum :" + pvo.getPageNum());
 		
@@ -243,7 +243,7 @@ public class ProductController {
 		  int total = productService.productLcoalListCnt(pvo);
 		  log.info("total :"+total);
 		  
-		  model.addAttribute("pageMaker", new PageDTO2(pvo, total));
+		  model.addAttribute("pageMaker", new PageDTO(pvo, total));
 		  log.info("model.pageMaker :"+model.getAttribute("pageMaker"));
 		  log.info("pageNum :" + pvo.getPageNum());
 		  
