@@ -39,7 +39,7 @@
 			<div class="omb_main">
 				<ul>
 					<li id="ml1"><a href="#">공지사항</a></li>
-					<li><a href="#">중고마켓</a></li>
+					<li><a href="/product/productList">중고마켓</a></li>
 					<li><a href="#">나눔마켓</a></li>
 					<li id="ml2"><a href="/safe/productList">안심거래</a></li>
 					<li id="ml3"><a href="#">커뮤니티</a></li>
