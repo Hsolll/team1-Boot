@@ -78,7 +78,7 @@ public class AdmProductController {
 		
 		int total = admProductService.productListCnt(vo);
 		vo.setAmount(15);
-		model.addAttribute("pageMaker2", new PageDTO(vo, total));
+		model.addAttribute("pageMaker", new PageDTO(vo, total));
 		return "admin/product/rejectedList";
 	}
 	

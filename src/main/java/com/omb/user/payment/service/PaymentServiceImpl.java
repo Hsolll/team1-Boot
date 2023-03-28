@@ -81,7 +81,6 @@ public class PaymentServiceImpl implements PaymentService {
 		// 응답 객체 key 값 중 "response"을 찾아 String 타입 response에 담는다.
 		String response = gson.fromJson(br.readLine(), Map.class).get("response").toString();
 		
-		System.out.println(response);
 		
 		// 얻어온 응답 객체 key 값 중 "access_token"을 찾아 token 변수에 담는다.
 		String token = gson.fromJson(response, Map.class).get("access_token").toString();
@@ -175,7 +174,55 @@ public class PaymentServiceImpl implements PaymentService {
 		
 		return result;
 	}
+	
+	
+	// 회원 취소 요청 시API 요청으로 결제취소 처리하기
+	@Override
+	public void paymentCancle(String access_token, String imp_uid) throws IOException {
+		
+		System.out.println("결제 취소 요청");
+		System.out.println("-------------전달받은 데이터-------------");
+		System.out.println("토큰 : " + access_token);
+		System.out.println("결제번호 : " + imp_uid);
+		
+		HttpsURLConnection conn = null;
+		URL url = new URL("https://api.iamport.kr/payments/cancel");
+ 
+		conn = (HttpsURLConnection) url.openConnection();
+ 
+		conn.setRequestMethod("POST");
+ 
+		conn.setRequestProperty("Content-type", "application/json");
+		conn.setRequestProperty("Accept", "application/json");
+		conn.setRequestProperty("Authorization", access_token);
+ 
+		conn.setDoOutput(true);
+		
+		JsonObject json = new JsonObject();
+ 
+		json.addProperty("imp_uid", imp_uid);
+ 
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+ 
+		bw.write(json.toString());
+		bw.flush();
+		bw.close();
+				
+		conn.disconnect();
+		
+	}
 
+
+	// 결제id를 매개변수로 받아 결제번호를 조회하는 메서드
+	@Override
+	public PaymentVO selectPaymentNo(PaymentVO pvo) {
+		PaymentVO pvoNo = null;
+		
+		pvoNo = paymentDAO.selectPaymentNo(pvo);
+		
+		return pvoNo;
+	}
+	
 
 	@Override
 	public int insertPaymentInfo(PaymentVO pvo) {
@@ -186,9 +233,7 @@ public class PaymentServiceImpl implements PaymentService {
 		return inserResult;
 	}
 
-	
-	
-	
+
 
 	
 }

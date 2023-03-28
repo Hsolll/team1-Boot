@@ -33,9 +33,18 @@
     border-bottom: 1px solid #dcdcdc;
     font-family: "Nanum Gothic";
 }
-#item_detail {
+#sp_content {
     outline: none;
     resize: none;
     padding: 2px;
     border: 1px solid #C9C9C9;
+}
+
+.pwdRadio > input[type=radio] {
+	margin: 0px !important;
+	
+}
+.pwdRadio > label {
+	margin-bottom: 0 !important;
+	
 }
