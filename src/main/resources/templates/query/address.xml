@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.omb.user.address.dao.MemberAddressDAO">
+
+	<select id="memberAddressInfo" parameterType="int" resultType="address">
+		SELECT 
+			ADD_NO, U_NO, ZIP, ADDRESS, SUB_ADDRESS, ('(' || ZIP || ') ' || ADDRESS || ' ' || SUB_ADDRESS) AS FULL_ADDRESS
+		FROM TB_USER_ADDRESS_INFO 
+		WHERE U_NO = #{u_no} AND ADD_STATUS = '기본배송지'
+	</select>
+	
+	
+	<insert id="insertMemberAddress" parameterType="address">
+		INSERT INTO TB_USER_ADDRESS_INFO (ADD_NO, U_NO, ZIP, ADDRESS, SUB_ADDRESS, ADD_STATUS)
+		VALUES (TB_USER_ADDRESS_INFO_SEQ.NEXTVAL, #{u_no}, #{zip}, #{address}, #{sub_address}, #{add_status})
+		
+	</insert>
+
+</mapper>

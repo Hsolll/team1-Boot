@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.omb.user.productReply.dao.ProductReplyDao">
+	
+	
+	<insert id="replyInsert" parameterType="pReply">
+		INSERT INTO TB_USER_PRODUCT_REPLY
+    		(P_NO, U_NO, PR_NO, PR_CONTENT)
+		VALUES
+    		(#{p_no}, #{u_no}, TB_USER_PRODUCT_REPLY_SEQ.NEXTVAL,#{pr_content})
+	</insert>
+	
+<!-- 		SELECT r.PR_NO, r.PR_CONTENT, p.P_NO, u.U_NO, u.U_NICK -->
+<!-- 		FROM TB_USER_PRODUCT_REPLY r -->
+<!-- 		INNER JOIN TB_USER_PRODUCT p ON r.P_NO = p.P_NO -->
+<!-- 		INNER JOIN TB_USER u ON r.U_NO = u.U_NO; -->
+		
+	<select id="replySelect" parameterType="pReply" resultType="pReply">
+			SELECT 
+				u.U_NO, u.U_NICK, p.P_NO, r.PR_NO, r.PR_CONTENT, r.PR_CREATED_AT
+			FROM 
+				TB_USER_PRODUCT_REPLY r 
+			INNER JOIN TB_USER u ON r.U_NO = u.U_NO 
+			INNER JOIN TB_USER_PRODUCT p ON r.P_NO = p.P_NO 
+			
+			WHERE p.P_NO = #{p_no}
+	</select>
+
+</mapper>

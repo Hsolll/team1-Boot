@@ -52,6 +52,17 @@ public class SafeProductServiceImpl implements SafeProductService {
 		
 		return price;
 	}
+
+	@Override
+	public int updateSafeProductStatus(SafeProductVO spvo) {
+		
+		int result = 0;
+		
+		result = safeProductDAO.updateSafeProductStatus(spvo);	// 변경 성공 시 1 리턴
+		
+		return result;
+	}
+	
 	
 	
 

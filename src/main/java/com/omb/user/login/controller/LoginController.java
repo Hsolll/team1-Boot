@@ -66,6 +66,7 @@ public class LoginController {
 		String url="";
 		if(memberLogin !=null) {
 			session.setAttribute("memberLogin", memberLogin);
+			log.info("memberLogin :"+memberLogin);
 			url ="/";						
 		}else {	
 			ras.addFlashAttribute("errorMsg","로그인 실패");
