@@ -6,13 +6,13 @@
 		<meta charset="utf-8">
     	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<title>관리자 로그인</title>
-		<link rel="stylesheet" href="/resources/include/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/resources/vendor/bootstrap/css/bootstrap.min.css">
     <link href="/resources/include/dist/assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="/resources/include/css/style.css">
+    <link rel="stylesheet" href="/resources/libs/css/style.css">
     <link rel="stylesheet" href="/resources/include/dist/assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
     <script type="text/javascript" src="/resources/include/js/jquery-3.6.2.min.js"></script>
     <script src="/resources/include/dist/js/main-js.js"></script>
-    <script src="/resources/include/dist/js/bootstrap.bundle.js"></script>
+    <script src="/resources/vendor/bootstrap/js/bootstrap.bundle.js"></script>
     <script type="text/javascript" src="/resources/include/js/common.js"></script>
 		<style>
 		    html,
@@ -55,7 +55,7 @@
 	<body>
 		<div class="splash-container">
 	        <div class="card ">
-	            <div class="card-header text-center"><a href="../index.html"><img class="logo-img" src="/resources/include/dist/assets/images/logo.png" alt="logo"></a><span class="splash-description">Please enter your user information.</span></div>
+	            <div class="card-header text-center"><a href="/admin/login"><img class="logo-img" src="/resources/images/logo.png" alt="logo"></a><span class="splash-description">Please enter your user information.</span></div>
 	            <div class="card-body">
 	                <form id="loginForm">
 	                    <div class="form-group">
