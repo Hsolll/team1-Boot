@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.omb.admin.member.dao.MemberDao">
+<mapper namespace="com.omb.admin.member.dao.AdmMemberDao">
 	
 	
 	<!-- 검색 쿼리문 -->
@@ -25,8 +25,44 @@
 	<select id="memberList" parameterType="member" resultType="member">
 		<![CDATA[
 		SELECT
-		u_no, u_id, u_nick, u_name, u_email, u_phone, u_grade, u_status, to_char(u_created_at, 'YYYY-MM-DD') as u_created_at,
-		(select count(u_no) from tb_user where u_status = 2) as u_cnt
+		u_no, u_id, u_nick, u_name, u_email, u_phone, u_grade, u_status, to_char(u_created_at, 'YYYY-MM-DD') as u_created_at
+		FROM (
+			SELECT /*+ INDEX_DESC(tb_user tb_user_pk) */
+				rownum as rnum, u_no, u_id, u_nick, u_name, u_email, u_phone, u_grade, u_status, u_created_at, u_cnt
+			FROM tb_user
+		WHERE]]>
+		<trim prefix="(" suffix=") AND " prefixOverrides="AND">
+			<include refid = "memberSearch"></include>
+		</trim>
+		<![CDATA[ rownum <= #{pageNum} * #{amount}
+				) memberlist
+		WHERE rnum > (#{pageNum}- 1) * #{amount}
+		and u_status = 'USING']]>
+		
+	</select>
+	
+	
+	<!-- 유저 수 조회 -->
+	<select id="memberListCnt" parameterType="member" resultType="int">
+		SELECT count(*) FROM tb_user
+		<trim prefix=" where (" suffix=")">
+			<include refid="memberSearch"></include>
+		</trim>
+	</select>
+	
+	<!-- 탈퇴유저 수 조회 -->
+	<select id="nmemberListCnt" parameterType="member" resultType="int">
+		SELECT count(*) FROM tb_user
+		<trim prefix=" where (" suffix=")">
+			<include refid="memberSearch"></include>
+		</trim>
+	</select>
+	
+	<!-- 탈퇴유저 리스트 기본 조회 -->
+	<select id="nmemberList" resultType="member">
+		<![CDATA[
+		SELECT
+		u_no, u_id, u_nick, u_name, u_email, u_phone, u_grade, u_status, to_char(u_created_at, 'YYYY-MM-DD') as u_created_at
 		FROM (
 			SELECT /*+ INDEX_DESC(tb_user tb_user_pk) */
 				rownum as rnum, u_no, u_id, u_nick, u_name, u_email, u_phone, u_grade, u_status, u_created_at, u_cnt
@@ -39,22 +75,7 @@
 				) memberlist
 		WHERE rnum > (#{pageNum}- 1) * #{amount}
 		]]>
-	</select>
-	
-	<select id="memberListCnt" parameterType="member" resultType="int">
-		SELECT count(*) FROM tb_user
-		<trim prefix=" where (" suffix=")">
-			<include refid="memberSearch"></include>
-		</trim>
-	</select>
-	
-	<!-- 탈퇴유저 리스트 기본 조회 -->
-	<select id="nmemberList" resultType="member">
-		SELECT u_no, u_id, u_nick, u_name, u_email, u_phone, u_grade, u_status, 
-		to_char(u_created_at, 'YYYY-MM-DD') as u_created_at
-		FROM tb_user
-		WHERE u_status = 2
-		ORDER BY u_no desc
+		and u_status = 'NUSING'
 	</select>
 	
 	
@@ -65,4 +86,16 @@
 		FROM tb_user
 		WHERE u_no = #{u_no}
 	</select>
+	
+	<!-- 회원등급 업데이트 -->
+	<update id="memberGrade" parameterType="member">
+		UPDATE tb_user SET u_grade = #{u_grade}
+		WHERE u_no = #{u_no}
+	</update>
+	
+	<!-- 유저 삭제 -->
+	<delete id="memberDelete" parameterType="member">
+		DELETE FROM tb_user WHERE u_no = #{u_no}
+	</delete>
+	
 </mapper>

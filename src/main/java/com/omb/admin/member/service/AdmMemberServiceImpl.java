@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.omb.admin.member.dao.MemberDao;
-import com.omb.admin.member.vo.MemberVO;
+import com.omb.admin.member.dao.AdmMemberDao;
+import com.omb.admin.member.vo.AdmMemberVO;
 
 import lombok.Setter;
 
@@ -14,42 +14,69 @@ import lombok.Setter;
 public class AdmMemberServiceImpl implements AdmMemberService {
 
 	@Setter(onMethod_= @Autowired)
-	private MemberDao memberDao;
+	private AdmMemberDao admMemberDao;
 	
+	
+	// 멤버 리스트 구현
 	@Override
-	public List<MemberVO> memberList(MemberVO mvo) {
-		List<MemberVO> list = null;
-		list = memberDao.memberList(mvo);
+	public List<AdmMemberVO> memberList(AdmMemberVO mvo) {
+		List<AdmMemberVO> list = null;
+		list = admMemberDao.memberList(mvo);
 		return list;
 	}
 
+	// 탈퇴멤버 리스트 구현
 	@Override
-	public List<MemberVO> nmemberList(MemberVO mvo) {
-		List<MemberVO> list = null;
-		list = memberDao.nmemberList(mvo);
+	public List<AdmMemberVO> nmemberList(AdmMemberVO mvo) {
+		List<AdmMemberVO> list = null;
+		list = admMemberDao.nmemberList(mvo);
 		return list;
 	}
 	
 	
 	// 전체 레코드 수 구현
 	@Override
-	public int memberListCnt(MemberVO mvo) {
-		return memberDao.memberListCnt(mvo);
+	public int memberListCnt(AdmMemberVO mvo) {
+		return admMemberDao.memberListCnt(mvo);
 	}
 
 	@Override
-	public int nmemberListCnt(MemberVO mvo) {
-		return memberDao.nmemberListCnt(mvo);
+	public int nmemberListCnt(AdmMemberVO mvo) {
+		return admMemberDao.nmemberListCnt(mvo);
 	}
 
+	
+	
+	// 상세페이지 구현
 	@Override
-	public MemberVO memberDetail(MemberVO mvo) {
+	public AdmMemberVO memberDetail(AdmMemberVO mvo) {
 		
-		MemberVO detail = null;
+		AdmMemberVO detail = null;
 		
-		detail = memberDao.memberDetail(mvo);
+		detail = admMemberDao.memberDetail(mvo);
 		
 		return detail;
 	}
 
+	@Override
+	public int memberGrade(AdmMemberVO mvo) throws Exception{
+		int result = 0;
+		System.out.println("mvo : " + mvo);
+		
+		result = admMemberDao.memberGrade(mvo);
+		
+		System.out.println("result : " + result);
+		return result;
+	}
+
+	// 멤버 삭제
+	@Override
+	public int memberDelete(AdmMemberVO mvo) throws Exception{
+		int result = 0;
+		
+		result = admMemberDao.memberDelete(mvo.getU_no());
+		
+		return result;
+
+}
 }
