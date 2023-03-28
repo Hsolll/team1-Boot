@@ -9,17 +9,13 @@
 		<ul>
 			<!-- <li><a href="/member/signUp">회원가입</a></li> -->
 			<li><c:if test="${not empty memberLogin }">
-          		${memberLogin.u_name }님 반갑습니다.
-          		<a href="/logout" class="btn btn-primary btn-sm active" role="button">로그아웃</a>
+          		${memberLogin.u_name }님 반갑습니다
+          		<a href="/logout">로그아웃</a>
           		<a href="/member/mypage">마이페이지</a>
           	</c:if>
           	<c:if test="${empty memberLogin }">
-          		<!-- <script type="text/javascript">
-          			location.href="/member/login";
-          		</script> -->
-          		<a href="/member/signUp">회원가입</a>
-          		<a href="/login" class="btn btn-primary btn-sm active" role="button">로그인</a>
-          		<li><a href="/login">마이페이지</a></li>
+          		<a href="/login">로그인</a>
+          		<a href="/member/signUpAgree">회원가입</a>
           	</c:if></li>
 			<!-- <li><a href="/member/login">로그인</a></li> -->
 			<!-- <li><a href="/login">마이페이지</a></li> -->

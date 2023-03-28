@@ -18,10 +18,19 @@ public class MemberVO {
 	private String u_status;  //회원상태
 	private String u_created_at; //회원가입일
 	private String u_update_at;  //회원수정일
-	private int mail_auth;
-	private String mail_key;
+	
+	
 	
 	private String zip; // 우편번호
 	private String address; // 주소
 	private String sub_address; // 상세주소
+	
+	private long n_number;	
+	private String n_age;
+	private String n_birthday;
+	private String n_email;
+	private String n_gender;
+	private String n_id;
+	private String n_name;
+	private String n_nickName;
 }
