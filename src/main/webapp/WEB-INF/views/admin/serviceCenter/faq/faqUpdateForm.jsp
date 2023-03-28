@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/admin.jspf" %>
-	
+	<script type="text/javascript" src="/resources/include/dist/js/bootstrap.min.js"></script>
+	<link href="/resources/include/dist/css/bootstrap.min.css">
 		<script>
 			$(function(){
 				$("#updateBtn").click(function(){

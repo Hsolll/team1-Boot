@@ -63,7 +63,8 @@ class Team1ApplicationTests {
 		
 		log.info("price : " + price);
 	} */
-
+	
+	
 	/* 
 	@Test
 	public void testInsertPaymentInfo() {
@@ -215,4 +216,5 @@ class Team1ApplicationTests {
 		
 		
 	}
+
 }

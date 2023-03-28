@@ -9,38 +9,33 @@
   		</definition>
   		
   		
-  		<definition name="admin/adminMain" extends="basic">
-				<put-attribute name="main" value="/WEB-INF/views/admin/adminMain.jsp" />
-				<put-attribute name="title" value="관리자 메인 페이지" />
-		</definition>
-		
-		<definition name="admin/memberMng/*" extends="basic">
+  		<definition name="admin/memberMng/*" extends="basic">
 				<put-attribute name="main" value="/WEB-INF/views/admin/memberMng/{1}.jsp" />
-				<put-attribute name="title" value=""/>
+				<put-attribute name="title" value="" />
 		</definition>
-		<definition name="admin/notice/*" extends="basic">
+  		<definition name="admin/notice/*" extends="basic">
 				<put-attribute name="main" value="/WEB-INF/views/admin/notice/{1}.jsp" />
-				<put-attribute name="title" value=""/>
+				<put-attribute name="title" value="" />
 		</definition>
-		<definition name="admin/product/*" extends="basic">
+  		<definition name="admin/product/*" extends="basic">
 				<put-attribute name="main" value="/WEB-INF/views/admin/product/{1}.jsp" />
-				<put-attribute name="title" value="상품관리"/>
+				<put-attribute name="title" value="" />
 		</definition>
-		<definition name="admin/review/*" extends="basic">
+  		<definition name="admin/review/*" extends="basic">
 				<put-attribute name="main" value="/WEB-INF/views/admin/review/{1}.jsp" />
-				<put-attribute name="title" value=""/>
+				<put-attribute name="title" value="" />
 		</definition>
-		<definition name="admin/serviceCenter/*" extends="basic">
+  		<definition name="admin/serviceCenter/*" extends="basic">
 				<put-attribute name="main" value="/WEB-INF/views/admin/serviceCenter/{1}.jsp" />
-				<put-attribute name="title" value=""/>
+				<put-attribute name="title" value="" />
 		</definition>
-		<definition name="admin/sharing/*" extends="basic">
+  		<definition name="admin/sharing/*" extends="basic">
 				<put-attribute name="main" value="/WEB-INF/views/admin/sharing/{1}.jsp" />
-				<put-attribute name="title" value=""/>
+				<put-attribute name="title" value="" />
 		</definition>
-		<definition name="admin/statistics/*" extends="basic">
+  		<definition name="admin/statistics/*" extends="basic">
 				<put-attribute name="main" value="/WEB-INF/views/admin/statistics/{1}.jsp" />
-				<put-attribute name="title" value="통계 페이지"/>
+				<put-attribute name="title" value="" />
 		</definition>
 	
 </tiles-definitions>

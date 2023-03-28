@@ -1,14 +1,20 @@
 
 $(function() {
 	
+
 	$(".content_wrap .page-header h1").html("주문/결제");
 	
 	let u_no = $("input[name='u_no']").val();
 	
+
 	var IMP = window.IMP;
 	IMP.init("imp54405822");
 
+
+	$(".content_wrap .page-header h1").html("주문/결제");
+
 	$("#buy_btn").click(function() {	// 결제하기 버튼 클릭 시 결제처리 함수 호출
+
 		if($("input[name='address2']").val() == ""){
 			alert("상세주소를 입력해주세요.");
 			return;
@@ -46,8 +52,10 @@ $(function() {
 				payment();
 			}
 		}
+
 	});
 });
+
 
 
 function payment(){
@@ -68,22 +76,26 @@ function payment(){
 }
 
 
+
 /* 결제 처리 함수 API */
-function requestPay(data) {
+function requestPay() {
 	IMP.request_pay({
 		pg: 'html5_inicis',
 		pay_method: 'card',
-		merchant_uid: data.orderNum,
-		name: data.name,
-		amount: data.price,
-		buyer_email: data.email,
-		buyer_name: data.buyer_name,
-		buyer_tel: data.tel,
-		buyer_addr: data.address,
-		buyer_postcode: data.zip
+		merchant_uid: createOrderNum(),
+		name: '당근 10kg',
+		amount: 100,
+		buyer_email: 'Iamport@chai.finance',
+		buyer_name: '포트원 기술지원팀',
+		buyer_tel: '010-1234-5678',
+		buyer_addr: '서울특별시 강남구 삼성동',
+		buyer_postcode: '123-456'
 	}, function(rsp) { // callback
 		if (rsp.success) {	// 결제 성공 시
-			console.log("결제를 성공했습니다.");
+	                    
+	        // 주문목록 만드는 함수 -> 함수안에서 ajax로 처리
+
+			location.href = "/safe/productBuy";	// 구매목록으로 이동
 			
 			console.log(rsp);
 			

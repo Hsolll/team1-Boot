@@ -44,7 +44,7 @@ public class AdminLoginController {
 	}
 	
 	@PostMapping("/login")
-	public String loginProcess(AdminVO login, Model model, RedirectAttributes ras) {
+	public String loginProcess(@ModelAttribute AdminVO login, Model model, RedirectAttributes ras) {
 		String url="";
 		AdminVO admin = adminLoginService.selectLoginProcess(login);
 		

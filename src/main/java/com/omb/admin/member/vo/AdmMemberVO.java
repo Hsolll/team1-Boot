@@ -1,14 +1,14 @@
 package com.omb.admin.member.vo;
 
 import com.omb.common.vo.CommonVO;
-import com.omb.admin.member.vo.MemberVO;
+import com.omb.admin.member.vo.AdmMemberVO;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class MemberVO extends CommonVO{
+public class AdmMemberVO extends CommonVO{
 
 	private int u_no =0;
 	private String u_id ="";

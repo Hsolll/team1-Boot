@@ -25,11 +25,11 @@ public class AdmServiceCenterController {
 		return "admin/serviceCenter/serviceCenterDetail";
 	}
 	
-	@GetMapping("serviceCenterwriteForm")
+	@GetMapping("serviceCenterWriteForm")
 	public String serviceCenterwriteForm() {
-		log.info("serviceCenterwriteForm 메서드 호출");
+		log.info("serviceCenterWriteForm 메서드 호출");
 		
-		return "admin/serviceCenter/serviceCenterwriteForm";
+		return "admin/serviceCenter/serviceCenterWriteForm";
 	}
 	
 	@GetMapping("serviceCenterupdateForm")

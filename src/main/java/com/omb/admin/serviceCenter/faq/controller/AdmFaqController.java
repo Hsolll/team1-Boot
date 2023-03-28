@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.omb.admin.serviceCenter.faq.service.AdmFaqService;
 import com.omb.admin.serviceCenter.faq.vo.FaqVO;
@@ -20,7 +19,6 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
-@SessionAttributes("adminLogin") 
 @RequestMapping(value = "/admin/*")
 @Slf4j
 public class AdmFaqController {
@@ -38,13 +36,13 @@ public class AdmFaqController {
 		int total = faqService.selectFaqCnt(vo);
 		vo.setAmount(20);
 		model.addAttribute("pageMaker", new PageDTO(vo, total));
-		return "admin/serviceCenter/faqList";
+		return "admin/serviceCenter/faq/faqList";
 	}
 
 	@RequestMapping(value = "/faq/faqInsertForm")
 	public String faqInsertForm() {
 		log.info("insertForm 실행...");
-		return "admin/serviceCenter/faqInsertForm";
+		return "admin/serviceCenter/faq/faqInsertForm";
 	}
 
 	@PostMapping(value = "/faq/faqInsert")
@@ -70,7 +68,7 @@ public class AdmFaqController {
 		FaqVO faqData = faqService.updateForm(vo);
 
 		model.addAttribute("faqData", faqData);
-		return "admin/serviceCenter/faqUpdateForm";
+		return "admin/serviceCenter/faq/faqUpdateForm";
 	}
 
 	@PostMapping(value = "/faq/faqUpdate")
