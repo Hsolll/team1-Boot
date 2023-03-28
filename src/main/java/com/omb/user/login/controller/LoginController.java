@@ -58,8 +58,9 @@ public class LoginController {
 
 	@PostMapping("/login")
 	public String login(HttpSession session, MemberVO mvo, RedirectAttributes ras) {
-
+		log.info("전달받은 로그인정보 : " + mvo);
 		MemberVO memberLogin = memberLoginService.memberLogin(mvo);
+		log.info("로그인정보 : " + memberLogin);
 		String url = "";
 		if (memberLogin != null) {
 			session.setAttribute("memberLogin", memberLogin);
