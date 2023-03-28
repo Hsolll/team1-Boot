@@ -67,7 +67,7 @@ public class LoginController {
 		} else {
 			ras.addFlashAttribute("errorMsg", "아이디와 비밀번호를 확인해주세요");
 			log.info("memberLogin :"+memberLogin);
-			url ="/";						
+			url = "/login";						
 		}
 		return "redirect:" + url;
 	}
