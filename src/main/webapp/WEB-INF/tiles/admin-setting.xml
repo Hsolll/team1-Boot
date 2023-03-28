@@ -9,6 +9,10 @@
   		</definition>
   		
   		
+  		<definition name="admin/main/*" extends="basic">
+				<put-attribute name="main" value="/WEB-INF/views/admin/main/{1}.jsp" />
+				<put-attribute name="title" value="" />
+		</definition>
   		<definition name="admin/memberMng/*" extends="basic">
 				<put-attribute name="main" value="/WEB-INF/views/admin/memberMng/{1}.jsp" />
 				<put-attribute name="title" value="" />
@@ -19,7 +23,7 @@
 		</definition>
   		<definition name="admin/product/*" extends="basic">
 				<put-attribute name="main" value="/WEB-INF/views/admin/product/{1}.jsp" />
-				<put-attribute name="title" value="" />
+				<put-attribute name="title" value="상품관리" />
 		</definition>
   		<definition name="admin/review/*" extends="basic">
 				<put-attribute name="main" value="/WEB-INF/views/admin/review/{1}.jsp" />
@@ -29,13 +33,17 @@
 				<put-attribute name="main" value="/WEB-INF/views/admin/serviceCenter/{1}.jsp" />
 				<put-attribute name="title" value="" />
 		</definition>
+  		<definition name="admin/serviceCenter/faq/*" extends="basic">
+				<put-attribute name="main" value="/WEB-INF/views/admin/serviceCenter/faq/{1}.jsp" />
+				<put-attribute name="title" value="FAQ 관리" />
+		</definition>
   		<definition name="admin/sharing/*" extends="basic">
 				<put-attribute name="main" value="/WEB-INF/views/admin/sharing/{1}.jsp" />
 				<put-attribute name="title" value="" />
 		</definition>
   		<definition name="admin/statistics/*" extends="basic">
 				<put-attribute name="main" value="/WEB-INF/views/admin/statistics/{1}.jsp" />
-				<put-attribute name="title" value="" />
+				<put-attribute name="title" value="통계 관리" />
 		</definition>
 	
 </tiles-definitions>
