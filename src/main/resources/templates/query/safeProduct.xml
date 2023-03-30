@@ -42,5 +42,26 @@
 		UPDATE TB_USER_SAFE_PRODUCT SET SP_STATUS = '판매완료' where SP_NO = #{sp_no}
 	</update>
 	
+	<insert id="insertSafeProduct" parameterType="safeProduct">
+		INSERT INTO TB_USER_SAFE_PRODUCT
+			(SP_NO, U_NO, P_NO, SP_TITLE, SP_NAME, SP_PRICE, SP_CONTENT
+				<if test="sp_pwd != ''">
+				, SP_PWD
+				</if>
+			)
+		VALUES
+			(TB_USER_SAFE_PRODUCT_SEQ.NEXTVAL, #{u_no}, #{p_no}, #{sp_title}, #{sp_name}, #{sp_price}, #{sp_content}
+				<if test="sp_pwd != ''">
+				, #{sp_pwd}
+				</if>
+			)
+	</insert>
+	
+	<select id="selectProductList" parameterType="member" resultType="product">
+		SELECT
+		    P_NO, P_NAME
+		FROM TB_USER_PRODUCT
+		WHERE U_NO = #{u_no}
+	</select>
 
 </mapper>

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.omb.user.address.service.MemberAddressService;
 import com.omb.user.address.vo.MemberAddressVO;
 import com.omb.user.member.vo.MemberVO;
+import com.omb.user.product.vo.ProductVO;
 import com.omb.user.safeProduct.service.SafeProductService;
 import com.omb.user.safeProduct.vo.SafeProductVO;
 
@@ -85,7 +86,13 @@ public class SafeProductController {
 	
 	/* 물품 등록 페이지 이동 */
 	@GetMapping("/productInsertView")
-	public String safeProductInsertView() {
+	public String safeProductInsertView(HttpSession session, Model model) {
+		
+		MemberVO mvo = (MemberVO)session.getAttribute("memberLogin");
+		
+		List<ProductVO> list = safeProductService.selectProductList(mvo);
+		
+		model.addAttribute("productList", list);
 		
 		return "user/safeProduct/safeProductInsertView";
 	}
