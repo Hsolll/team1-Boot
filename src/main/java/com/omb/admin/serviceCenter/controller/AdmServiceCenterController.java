@@ -25,7 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/admin/*")
 @Slf4j
 public class AdmServiceCenterController {
-
+	// akdldkdkd
 	@Setter(onMethod_=@Autowired)
 	private AdmServiceCenterService admserviceCenter;
 	
