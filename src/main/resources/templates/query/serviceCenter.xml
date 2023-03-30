@@ -83,4 +83,5 @@
 	<delete id="deleteService" parameterType="center">
 		DELETE FROM tb_user_service WHERE sc_no = #{sc_no}
 	</delete>
+
 </mapper>

@@ -34,7 +34,7 @@ public class AdminLoginController {
 	public String adminMain() {
 		log.info("관리자 메인 화면 호출...");
 		
-		return "admin/adminMain";
+		return "admin/main/adminMain";
 	}
 	
 	@GetMapping("/login")
@@ -44,18 +44,18 @@ public class AdminLoginController {
 	}
 	
 	@PostMapping("/login")
-	public String loginProcess(AdminVO login, Model model, RedirectAttributes ras) {
+	public String loginProcess(@ModelAttribute AdminVO login, Model model, RedirectAttributes ras) {
 		String url="";
 		AdminVO admin = adminLoginService.selectLoginProcess(login);
 		
 		if(admin != null) {
 			model.addAttribute("adminLogin", admin);
-			url = "admin/main";
+			url = "/admin/main";
 		} else {
 			ras.addFlashAttribute("errorMsg", "로그인 실패");
-			url = "admin/login";
+			url = "/admin/login";
 		}
-		return "redirect:/"+url;
+		return "redirect:"+url;
 	}
 	
 	@RequestMapping("/logout")

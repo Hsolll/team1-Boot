@@ -61,7 +61,7 @@
 	<!-- 공지사항 등록 -->
 	<insert id="noticeInsert" parameterType="admnotice">
 		INSERT INTO tb_admin_notice(an_no, a_no, an_title, an_content, an_category, an_created_at, an_thumbnail, an_file)
-		VALUES(tb_admin_notice_seq.nextval, 3, #{an_title}, #{an_content}, #{an_category}, sysdate, #{an_thumbnail}, #{an_file})
+		VALUES(tb_admin_notice_seq.nextval, 1, #{an_title}, #{an_content}, #{an_category}, sysdate, #{an_thumbnail}, #{an_file})
 	</insert>
 	
 	<!-- 조회수 -->

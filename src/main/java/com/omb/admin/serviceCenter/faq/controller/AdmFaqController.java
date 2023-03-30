@@ -38,13 +38,13 @@ public class AdmFaqController {
 		int total = faqService.selectFaqCnt(vo);
 		vo.setAmount(20);
 		model.addAttribute("pageMaker", new PageDTO(vo, total));
-		return "admin/serviceCenter/faqList";
+		return "admin/serviceCenter/faq/faqList";
 	}
 
 	@RequestMapping(value = "/faq/faqInsertForm")
 	public String faqInsertForm() {
 		log.info("insertForm 실행...");
-		return "admin/serviceCenter/faqInsertForm";
+		return "admin/serviceCenter/faq/faqInsertForm";
 	}
 
 	@PostMapping(value = "/faq/faqInsert")
@@ -70,7 +70,7 @@ public class AdmFaqController {
 		FaqVO faqData = faqService.updateForm(vo);
 
 		model.addAttribute("faqData", faqData);
-		return "admin/serviceCenter/faqUpdateForm";
+		return "admin/serviceCenter/faq/faqUpdateForm";
 	}
 
 	@PostMapping(value = "/faq/faqUpdate")

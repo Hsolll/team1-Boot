@@ -68,7 +68,7 @@
 			}
 			$("#f_search").attr({
 				"method":"get",
-				"action":"/admin/faqList"
+				"action":"/faq/faqList"
 			});
 			$("#f_search").submit();
 		}
