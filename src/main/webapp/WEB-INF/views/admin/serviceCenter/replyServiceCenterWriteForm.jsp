@@ -29,7 +29,7 @@
    			<%-- 댓글 입력 화면 --%>
 	
 		 <form id="replyForm" name="replyForm">
-		 	<input type="hidden" id="sc_no" name="sc_no" value="${serviceDetail.sc_no}">
+		 	<input type="hidden" id="sc_no" name=sc_no value="${serviceDetail.sc_no}">
 			  <div class="panel panel-default rowTable">
 			  	<table class="table">
 			  		<colgroup>

@@ -4,7 +4,7 @@
 	
 	<insert id="admServiceInsert" parameterType="admservice">
 		INSERT INTO TB_ADMIN_SERVICE_CENTER(as_no, sc_no, a_no, as_title, as_content, as_created_at)
-		VALUES(tb_admin_service_center_seq.nextval,#{sc_no}, 5 ,#{as_title}, #{as_content}, sysdate)
+		VALUES(tb_admin_service_center_seq.nextval,#{sc_no}, 1 ,#{as_title}, #{as_content}, sysdate)
 	</insert>
 	
 	
@@ -14,7 +14,7 @@
         FROM TB_ADMIN_SERVICE_CENTER A
         RIGHT JOIN TB_ADMIN B
         ON A.A_NO = B.A_NO
-        WHERE AS_DELETED_AT IS NOT NULL
+        WHERE AS_DELETED_AT IS NULL
 	</select>
 	 
 	<select id="replyServiceDetail" parameterType="admservice" resultType="admservice">

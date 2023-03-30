@@ -82,12 +82,14 @@ public class AdmServiceCenterController {
 		 
 		
 		AdmServiceCenterVO admServiceList = admserviceCenter.replyServiceDetail(avo);
+		
 		model.addAttribute("replyDetail", admServiceList);
+		
 		return "admin/serviceCenter/replyServiceCenterDetail";
 	}
 	
 	@GetMapping(value="/replyWriteForm")
-	public String admReplyWriteForm(@ModelAttribute ServiceCenterVO uservo,Model model) {
+	public String admReplyWriteForm(@ModelAttribute ServiceCenterVO uservo, AdmServiceCenterVO admvo ,Model model) {
 		log.info("replyWriteForm 실행");
 		ServiceCenterVO detail = serviceCenterService.selectServiceDetail(uservo);
 		model.addAttribute("serviceDetail", detail);
@@ -136,6 +138,8 @@ public class AdmServiceCenterController {
 	@GetMapping(value="/replyUpdateForm")
 	public String admReplyUpdateForm(@ModelAttribute AdmServiceCenterVO svo, Model model) {
 		log.info("serviceCenterUpdateForm 호출 성공");
+
+		log.info("전달받은 글번호 : " + svo);
 		
 		AdmServiceCenterVO updateForm = admserviceCenter.replyServiceDetail(svo);
 		
@@ -147,11 +151,14 @@ public class AdmServiceCenterController {
 	@PostMapping(value="/admReplyUpdate")
 	public String admReplyUpdate(@ModelAttribute AdmServiceCenterVO svo) throws Exception{
 		log.info("admReplyUpdate 호출 성공");
+
+		log.info("전달받은 수정내용 : " + svo);
 		
 		int result = 0;
 		String url = "";
 		
 		result = admserviceCenter.admReplyUpdate(svo);
+		log.info("수정 실행 결과 : " + result);
 		
 		if(result == 1) {
 			url="/admin/replyDetail?as_no="+svo.getAs_no();
