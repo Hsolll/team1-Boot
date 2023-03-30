@@ -8,9 +8,11 @@
 		
 		<typeAlias type="com.omb.admin.member.vo.AdmMemberVO" alias="admmember"/>
 		<typeAlias type="com.omb.user.member.vo.MemberVO" alias="member"/>
+		<typeAlias type="com.omb.admin.serviceCenter.vo.AdmServiceCenterVO" alias="admservice"/>
 		
 		<typeAlias type="com.omb.admin.vo.AdminVO" alias="admin"/>
 		<typeAlias type="com.omb.admin.serviceCenter.faq.vo.FaqVO" alias="faq"/>
 		<typeAlias type="com.omb.user.serviceCenter.vo.ServiceCenterVO" alias="center"/>
+		<typeAlias type="com.omb.admin.notice.vo.AdmNoticeVO" alias="admnotice"/>
 	</typeAliases>
 </configuration>

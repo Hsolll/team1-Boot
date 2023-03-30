@@ -44,7 +44,7 @@
 						</tr>
 						<tr>
 							<th scope="row">이메일</th>
-							<td></td>
+							<td>${detail.u_email}</td>
 							<th scope="row">핸드폰번호</th>
 							<td>${detail.u_phone}</td>
 						</tr>

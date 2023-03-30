@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.omb.admin.serviceCenter.faq.service.AdmFaqService;
 import com.omb.admin.serviceCenter.faq.vo.FaqVO;
@@ -19,6 +20,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
+@SessionAttributes("adminLogin") 
 @RequestMapping(value = "/admin/*")
 @Slf4j
 public class AdmFaqController {
@@ -27,7 +29,7 @@ public class AdmFaqController {
 	@Setter(onMethod_ = @Autowired)
 	private AdmFaqService faqService;
 
-	@GetMapping(value = "/faqList")
+	@GetMapping(value = "/faq/faqList")
 	public String faqList(@ModelAttribute FaqVO vo, Model model) {
 		log.info("faqList 실행...");
 		List<FaqVO> faqList = faqService.selectFaq(vo);
@@ -39,26 +41,26 @@ public class AdmFaqController {
 		return "admin/serviceCenter/faqList";
 	}
 
-	@RequestMapping(value = "/faqInsertForm")
+	@RequestMapping(value = "/faq/faqInsertForm")
 	public String faqInsertForm() {
 		log.info("insertForm 실행...");
 		return "admin/serviceCenter/faqInsertForm";
 	}
 
-	@PostMapping(value = "/faqInsert")
+	@PostMapping(value = "/faq/faqInsert")
 	public String faqInsert(FaqVO vo, Model model) throws Exception {
 		String url = "";
 		int result = 0;
 		result = faqService.insertFaq(vo);
 		if (result == 1) {
-			url = "/admin/faqList";
+			url = "/admin/faq/faqList";
 		} else {
-			url = "/admin/faqInsertForm";
+			url = "/admin/faq/faqInsertForm";
 		}
 		return "redirect:" + url;
 	}
 
-	@GetMapping("/faqUpdateForm")
+	@GetMapping("/faq/faqUpdateForm")
 	public String faqUpdateForm(@ModelAttribute("adminLogin") AdminVO admin, @ModelAttribute FaqVO vo, Model model) {
 		log.info("updateForm 실행...");
 		log.info("f_no = " + vo.getF_no());
@@ -71,7 +73,7 @@ public class AdmFaqController {
 		return "admin/serviceCenter/faqUpdateForm";
 	}
 
-	@PostMapping(value = "/faqUpdate")
+	@PostMapping(value = "/faq/faqUpdate")
 	public String faqUpdate(@ModelAttribute("adminLogin") AdminVO admin, @ModelAttribute FaqVO vo) throws Exception {
 		log.info("faqUpdate 실행...");
 
@@ -80,14 +82,14 @@ public class AdmFaqController {
 		result = faqService.updateFaq(vo);
 
 		if (result == 1) {
-			url = "/admin/faqList";
+			url = "/admin/faq/faqList";
 		} else {
-			url = "/admin/faqUpdateForm";
+			url = "/admin/faq/faqUpdateForm";
 		}
 		return "redirect:" + url;
 	}
 	
-	@GetMapping(value="/faqDelete")
+	@GetMapping(value="/faq/faqDelete")
 	public String faqDelete(@ModelAttribute FaqVO vo) throws Exception {
 
 		log.info("faqDelete 실행...");
@@ -95,7 +97,7 @@ public class AdmFaqController {
 		int result = faqService.updateFaqDel(vo);
 		log.info("실행 결과 : " + result);
 
-		return "redirect:/admin/faqList";
+		return "redirect:/admin/faq/faqList";
 
 	}
 }

@@ -22,4 +22,5 @@ public interface AdmMemberDao {
 	public int memberGrade(AdmMemberVO mvo);
 	
 	public int memberDelete(int u_no); /* member 삭제 */
+	
 }

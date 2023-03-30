@@ -1,19 +1,23 @@
 package com.omb.admin.serviceCenter.vo;
 
+
+import com.omb.common.vo.CommonVO;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class AdmServiceCenterVO {
-
-	private int as_no 				=0;		//답변번호
-	private int sc_no 				=0;		//문의글번호
-	private int a_no 				=0;		//관리자번호
-	private String as_title 		="";	//제목
-	private String as_content 		="";	//내용
-	private String as_created_at 	="";	//작성일
-	private String as_updated_at 	="";	//작성업뎃일
-	private String as_deleted_at 	="";	//작성삭제일
-	
+public class AdmServiceCenterVO extends CommonVO{
+	private int as_no;
+	private int sc_no;
+	private int a_no;
+	private String a_name;
+	private String as_title;
+	private String as_content;
+	private String as_pwd;
+	private String as_created_at;
+	private String as_updated_at;
+	private String as_deleted_at;
+	private int rCount;
 }
