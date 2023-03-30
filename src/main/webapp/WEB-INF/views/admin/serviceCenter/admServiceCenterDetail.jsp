@@ -26,8 +26,8 @@
 				$("#delButton").click(function(){
 					if(confirm("해당 문의를 삭제하시겠습니까?")){
 						$("#update").attr({
-							"method":"get",
-							"action":"/serviceCenter/serviceDelete"
+							"method":"post",
+							"action":"/admin/serviceCenterDelete"
 						});
 						$("#update").submit();						
 					}
@@ -42,7 +42,7 @@
 	<%-- =================== 상세페이지 시작  ================= --%>
 			<div class="container">
 				<form id="update" name="update">
-				<input type="hidden" id="sc_no" name="sc_no" value="${serviceDetail.sc_no}" />
+					<input type="hidden" id="sc_no" name="sc_no" value="${serviceDetail.sc_no}" />
 				<div class="detailTopTable">
 				<table>
 					<colgroup>
@@ -80,6 +80,7 @@
 				
 				<div class="btnArea">
 					<button id="replyBtn"type="button" class="btn btn-dark">답글달기</button>
+					<button id="delButton"type="button" class="btn btn-dark">삭제하기</button>
 					<button id="listBtn" type="button" class="btn btn-dark">목록으로</button>
 				</div>
 				
