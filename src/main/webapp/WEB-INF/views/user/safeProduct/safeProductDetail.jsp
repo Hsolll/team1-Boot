@@ -44,7 +44,10 @@
                         <h3 class="sp_title">${ detail.sp_title }</h3>
                         <div class="sp_price_area">
                             <p class="price">판매가
-                                <span class="sp_price">${detail.sp_price}</span>
+
+                                <span class="sp_price">
+                                	<fmt:formatNumber value="${detail.sp_price}" groupingUsed="true"/>
+                                </span>
                                 원
                             </p>
                         </div>

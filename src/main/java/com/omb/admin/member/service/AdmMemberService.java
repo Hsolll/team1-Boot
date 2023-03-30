@@ -19,4 +19,5 @@ public interface AdmMemberService {
 	public int memberGrade(AdmMemberVO mvo) throws Exception;
 	
 	public int memberDelete(AdmMemberVO mvo) throws Exception; /* member 삭제 */
+	
 }

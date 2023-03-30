@@ -1,11 +1,7 @@
 
 $(function() {
-	
 
-	$(".content_wrap .page-header h1").html("주문/결제");
-	
-	
-	
+	$(".content_wrap .page-header h1").html("주문/결제");	
 
 	var IMP = window.IMP;
 	IMP.init("imp54405822");
@@ -55,30 +51,32 @@ $(function() {
 		}
 
 	});
+
 });
 
 
-
+/* 결제 시 전달할 값을 미리  */
 function payment(){
-	let data = {
-		orderNum : createOrderNum(),
-		name : $("#sp_name").text(),
-		price : $("#sp_price").text().replace(',', ''),
-		email : $("#u_email").text(),
-		buyer_name : $("input[name='receiver']").val(),
-		tel : $("input[name='receiver_tel']").val(),
-		address : $("input[name='address1']").val() + ", " + $("input[name='address2']").val(),
-		zip : $("input[name='zip']").val()
-	}
-	console.log("data : " + data);
-	console.log(data.orderNum);
-	
-	requestPay(data);
+   let data = {
+      orderNum : createOrderNum(),
+      name : $("#sp_name").text(),
+      price : $("#sp_price").text().replace(',', ''),
+      email : $("#u_email").text(),
+      buyer_name : $("input[name='receiver']").val(),
+      tel : $("input[name='receiver_tel']").val(),
+      address : $("input[name='address1']").val() + ", " + $("input[name='address2']").val(),
+      zip : $("input[name='zip']").val()
+   }
+   console.log("data : " + data);
+   console.log(data.orderNum);
+   
+   requestPay(data);
 }
 
 
 
 /* 결제 처리 함수 API */
+
 function requestPay(data) {
 	IMP.request_pay({
 		pg: 'html5_inicis',
@@ -140,45 +138,45 @@ function requestPay(data) {
 			location.href="/safe/productOrder?sp_no=" + sp_no;
 		}
 	});
+
 }
 
 
 /* 주문번호 생성 함수 - YYYYMMDD + 랜덤숫자 6자리 */
 function createOrderNum() {
-	const date = new Date();
-	const year = date.getFullYear();
-	const month = String(date.getMonth() + 1).padStart(2, "0");
-	const day = String(date.getDate()).padStart(2, "0");
+   const date = new Date();
+   const year = date.getFullYear();
+   const month = String(date.getMonth() + 1).padStart(2, "0");
+   const day = String(date.getDate()).padStart(2, "0");
 
-	let orderNum = year + month + day + "-";
-	for (let i = 0; i < 8; i++) {
-		orderNum += Math.floor(Math.random() * 8);
-	}
-	return orderNum;
+   let orderNum = year + month + day + "-";
+   for (let i = 0; i < 8; i++) {
+      orderNum += Math.floor(Math.random() * 8);
+   }
+   return orderNum;
 }
 
 
 
 /*// 결제 성공 시 
 function paymentComplete(data) {
-	
-	 $.ajax({
-		url: "/payment/complete",
+   
+    $.ajax({
+      url: "/payment/complete",
         method: "POST",
         data: data,
-	})
-	.done(function(result) {
+   })
+   .done(function(result) {
         swal({
-			text: result,
-			closeOnClickOutside : false
-		})
-		.then(function(){
-			location.replace("/safe/productBuy");
-		})
-	}) // done 
+         text: result,
+         closeOnClickOutside : false
+      })
+      .then(function(){
+         location.replace("/safe/productBuy");
+      })
+   }) // done 
     .fail(function() {
-		alert("에러");
-		location.replace("/");
-	}) 
+      alert("에러");
+      location.replace("/");
+   }) 
 }*/
-

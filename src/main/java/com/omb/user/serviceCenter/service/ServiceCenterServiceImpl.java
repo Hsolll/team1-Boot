@@ -72,7 +72,13 @@ public class ServiceCenterServiceImpl implements ServiceCenterService {
 		result = serviceDao.updateServiceDel(vo);
 		return result;
 	}
-	
-	
+
+
+	@Override
+	public int deleteService(ServiceCenterVO scno) throws Exception {
+		int result =0;
+		result = serviceDao.deleteService(scno.getSc_no());
+		return result;
+		}
 
 }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.omb.admin.serviceCenter.faq.service.AdmFaqService;
 import com.omb.admin.serviceCenter.faq.vo.FaqVO;
@@ -19,6 +20,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
+@SessionAttributes("adminLogin") 
 @RequestMapping(value = "/admin/*")
 @Slf4j
 public class AdmFaqController {

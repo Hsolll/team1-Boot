@@ -13,4 +13,6 @@ public interface ServiceCenterService {
 	public ServiceCenterVO updateForm(ServiceCenterVO vo);
 	public int updateService(ServiceCenterVO vo) throws Exception;
 	public int updateServiceDel(ServiceCenterVO vo) throws Exception;
+	public int deleteService(ServiceCenterVO scno) throws Exception;
+
 }

@@ -32,6 +32,7 @@
 	</select>
 	
 	
+	
 	<select id="selectSafeProductPrice" parameterType="safeProduct" resultType="int">
 		SELECT SP_PRICE FROM TB_USER_SAFE_PRODUCT
 		WHERE SP_NO = #{sp_no}

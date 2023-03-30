@@ -9,7 +9,8 @@
 <html>
 	<head>
 		<title>memberList</title>
-		
+		<script src="/resources/include/js/common.js"></script>
+		<script src="/resources/vendor/jquery/jquery-3.3.1.min.js"></script>
 		<script type="text/javascript">
 			$(function(){
 				
@@ -21,12 +22,10 @@
  					$("#search").val("<c:out value='${memberVO.search}' />");
 				
 					if($("#search").val()!='u_nick'){
-						//:contains()는 특정 텍스트를 포함한 요소반환 	
 						if($("#search").val()=='u_id') value = "#list tr td.goDetail";
 						else if($("#search").val()=='u_name') value="#list tr td.name";
 						else if($("#search").val()=='u_grade') value="#list tr td.grade";
 						console.log($(value+":contains('"+word+"')").html());
-						//$("#list tr td.goDetail:contains('노력')").html() => <span class='required'>노력</span>에 대한 명언
 				    	$(value+":contains('"+word+"')").each(function () {
 							let regex = new RegExp(word,'gi');
 							$(this).html($(this).html().replace(regex,"<span class='required'>"+word+"</span>"));
@@ -164,13 +163,15 @@
 		
 		<%--================== 전체 회원수 시작 ===================  --%>
 		<div class="tableTop">
-			<p>회원수 : </p>
+			<p>회원수:</p>
 		</div>
 		<%--================== 전체 회원수 종료 ===================  --%>
 		
 		<%-- =================== 리스트 시작  ================= --%>
 			<div id="memberList" class="table-responsive">
 				<form id="checkBox" name="checkBox">
+				
+				</form>
 					<table summary="일반회원 리스트" class="table table-striped" >
 						<thead>
 							<tr>
@@ -198,10 +199,10 @@
 											${member.u_id}
 											</td>
 											<td class="text-center">${member.u_nick}</td>
-											<td class="name text-center">${member.u_name}</td>
+											<td class="text-center">${member.u_name}</td>
 											<td class="text-center">${member.u_phone}</td>
 											<td class="text-center">${member.u_created_at}</td>
-											<td class="grade text-center">${member.u_grade}</td>
+											<td class="text-center">${member.u_grade}</td>
 											<td class="text-center">${member.u_status}</td>
 											<td><button type="button" class="gradeBtn btn btn-dark m-l-10" data-toggle="modal" data-target="#exampleModalCenter">등급수정</button></td>
 										</tr>
@@ -215,7 +216,6 @@
 							</c:choose>
 						</tbody> 
 					</table>
-				</form>
 			</div>
 			<%-- =================== 리스트 종료  ================= --%>
 			

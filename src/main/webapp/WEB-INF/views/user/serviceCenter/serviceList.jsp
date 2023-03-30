@@ -119,7 +119,7 @@
 						<tr>
 							<th data-value="sc_no" class="order text-center col-md-1">번호</th>
 							<th class="text-center col-md-4">제목</th>
-							<th data-value="sc_created_at" class="text-center col-md-1">작성자</th>
+							<th data-value="u_name" class="text-center col-md-1">작성자</th>
 							<th data-value="sc_created_at" class="text-center col-md-2">작성일</th>
 							<th data-value="sc_readcnt" class="text-center col-md-1">조회수</th>
 						</tr>

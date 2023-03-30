@@ -79,4 +79,9 @@
 		SET SC_DELETED_AT = SYSDATE
 		WHERE SC_NO = #{sc_no}
 	</update>
+	
+	<delete id="deleteService" parameterType="center">
+		DELETE FROM tb_user_service WHERE sc_no = #{sc_no}
+	</delete>
+
 </mapper>
