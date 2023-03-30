@@ -62,6 +62,16 @@
 			$("#detailForm").submit();
 		});
 		
+		$(".replyDetail").click(function(){
+			let as_no = $(this).parents("tr").attr("data-num");
+			$("#as_no").val(as_no);
+			$("#replyDetailForm").attr({
+				"method":"get",
+				"action":"/serviceCenter/servicePwdConfirm"
+			});
+			$("#replyDetailForm").submit();
+		});
+		
 		
 		$("#writeBtn").click(function(){
 			if(msg!=""){
@@ -95,6 +105,9 @@
 		
 			<form id="detailForm">
 				<input type="hidden" id="sc_no" name="sc_no">
+			</form>
+			<form id="replyDetailForm">
+				<input type="hidden" id="as_no" name="as_no" />
 			</form>
 			
 			<div id="serviceSearch" class="text-right">
@@ -135,6 +148,25 @@
 										<td class="text-center">${service.sc_created_at }</td>
 										<td class="text-center">${service.sc_readcnt }</td>
 									</tr>
+									<c:choose>
+										<c:when test="${not empty admServiceList}">
+											<c:forEach var="admservice" items="${admServiceList}" varStatus="status">
+												<c:set var="as" value="${admservice.sc_no}" />
+												<c:set var="sc" value="${service.sc_no}" />
+												<fmt:parseNumber var="asno" type="number" value="${as}"/>
+												<fmt:parseNumber var="scno" type="number" value="${sc}"/>
+												<c:if test="${asno eq scno }">
+													<tr data-num='${admservice.as_no}'>
+														<td class="text-center"></td>
+														<td class="replyDetail text-left">${admservice.as_title}</td>
+														<td class="text-center">${admservice.a_name}</td>
+														<td class="text-center">${admservice.as_created_at}</td>
+														<td></td>
+													</tr>
+												</c:if>
+											</c:forEach>
+										</c:when>
+									</c:choose>
 								</c:forEach>
 							</c:when>
 							<c:otherwise>
