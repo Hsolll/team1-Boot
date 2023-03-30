@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.omb.user.payment.dao.PaymentDAO">
+	
+	<select id="selectPaymentNo" parameterType="payment" resultType="payment">
+		SELECT PAY_NO
+		FROM TB_USER_PAYMENT
+		WHERE PAY_ID = #{pay_id}
+	</select>
+
+
+	<insert id="insertPaymentInfo" parameterType="payment">
+		INSERT INTO TB_USER_PAYMENT (PAY_NO, U_NO, SP_NO, PAY_ID, PRICE)
+		VALUES (TB_USER_PAYMENT_SEQ.NEXTVAL, #{u_no}, #{sp_no}, #{pay_id}, #{price})
+	</insert>
+
+</mapper>

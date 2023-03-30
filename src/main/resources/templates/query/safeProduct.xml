@@ -3,19 +3,44 @@
 
 <mapper namespace="com.omb.user.safeProduct.dao.SafeProductDAO">
 
+	<!-- <select id="selectSafeProductList" resultType="safeProduct">
+		SELECT 
+			SP_NO, SP_TITLE, TO_CHAR(SP_PRICE, 'FM999,999,999,999') AS SP_PRICE, U_NO, TO_CHAR(SP_CREATED_AT, 'YYYY-MM-DD') as SP_CREATED_AT
+		FROM TB_USER_SAFE_PRODUCT
+	</select> -->
+	
 	<select id="selectSafeProductList" resultType="safeProduct">
 		SELECT 
-			SP_NO, SP_TITLE, SP_PRICE, U_NO, TO_CHAR(SP_CREATED_AT, 'YYYY-MM-DD') as SP_CREATED_AT
-		FROM TB_USER_SAFE_PRODUCT
+		    SP_NO, A.U_NO, U_ID, U_NAME, P_NO, 
+		    (SELECT P_NAME FROM TB_USER_PRODUCT C WHERE C.P_NO = A.P_NO) AS P_NAME, 
+		    SP_TITLE, SP_NAME, SP_PRICE, 
+		    SP_CONTENT, TO_CHAR(SP_CREATED_AT, 'YYYY-MM-DD') AS SP_CREATED_AT, SP_PWD, SP_STATUS
+		FROM TB_USER_SAFE_PRODUCT A
+		INNER JOIN TB_USER B
+		    ON A.U_NO = B.U_NO
+		ORDER BY SP_NO
 	</select>
+	
 	
 	<select id="selectSafeProductDetail" parameterType="safeProduct" resultType="safeProduct">
 		SELECT 
-			SP_NO, SP_TITLE, SP_PRICE, U_NO, SP_CONTENT, TO_CHAR(SP_CREATED_AT, 'YYYY-MM-DD HH24:MI:SS') as SP_CREATED_AT
-		FROM TB_USER_SAFE_PRODUCT
+			SP_NO, SP_TITLE, SP_NAME, U_ID, U_NAME, SP_PRICE, SP_CONTENT, SP_CREATED_AT
+		FROM TB_USER_SAFE_PRODUCT A
+		INNER JOIN TB_USER B
+		    ON A.U_NO = B.U_NO
 		WHERE SP_NO = #{sp_no}
 	</select>
 	
+	
+	<select id="selectSafeProductPrice" parameterType="safeProduct" resultType="int">
+		SELECT SP_PRICE FROM TB_USER_SAFE_PRODUCT
+		WHERE SP_NO = #{sp_no}
+	</select>
+	
+	
+	<update id="updateSafeProductStatus" parameterType="safeProduct">
+		UPDATE TB_USER_SAFE_PRODUCT SET SP_STATUS = '판매완료' where SP_NO = #{sp_no}
+	</update>
 	
 
 </mapper>

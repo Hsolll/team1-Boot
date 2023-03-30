@@ -7,9 +7,18 @@
 <div class="top_banner">
 	<div class="top_wrap">
 		<ul>
-			<li><a href="">회원가입</a></li>
-			<li><a href="">로그인</a></li>
-			<li><a href="">마이페이지</a></li>
+			<!-- <li><a href="/member/signUp">회원가입</a></li> -->
+			<li><c:if test="${not empty memberLogin }">
+          		${memberLogin.u_name }님 반갑습니다
+          		<a href="/logout">로그아웃</a>
+          		<a href="/member/mypage">마이페이지</a>
+          	</c:if>
+          	<c:if test="${empty memberLogin }">
+          		<a href="/login">로그인</a>
+          		<a href="/member/signUpAgree">회원가입</a>
+          	</c:if></li>
+			<!-- <li><a href="/member/login">로그인</a></li> -->
+			<!-- <li><a href="/login">마이페이지</a></li> -->
 		</ul>
 	</div>
 </div>
@@ -26,13 +35,8 @@
 			<div class="omb_main">
 				<ul>
 					<li id="ml1"><a href="#">공지사항</a></li>
-					<li><a href="#">중고마켓</a></li>
+					<li><a href="/product/productList">중고마켓</a></li>
 					<li><a href="#">나눔마켓</a></li>
-
-					<li><a href="/safe/productList">안심거래</a></li>
-					<li><a href="#">커뮤니티</a></li>
-					<li><a href="#">고객센터</a></li>
-
 					<li id="ml2"><a href="/safe/productList">안심거래</a></li>
 					<li id="ml3"><a href="#">커뮤니티</a></li>
 					<li id="ml4"><a href="/faq/faqList">고객센터</a></li>
@@ -58,8 +62,9 @@
 	                <ul class="nav">
 	                <li><a href="/safe/productList">물품보기</a></li>
 	                <li><a href="/safe/productInsertView">물품등록</a></li>
+	                <li><a href="/order/buyList">구매내역</a></li>
 	                <li><a href="/safe/productSell">판매내역</a></li>
-	                <li><a href="/safe/productBuy">구매내역</a></li>
+	                <li><a href="/order/sellList">판매완료내역</a></li>
 	                </ul>
 	            </div>
 	            <div id="sl3" class="sub_list">
@@ -72,7 +77,7 @@
 	            <div id="sl4" class="sub_list">
 	                <ul class="nav">
 	                <li><a href="/faq/faqList">FAQ</a></li>
-	                <li><a href="">문의하기</a></li>
+	                <li><a href="/serviceCenter/serviceList">문의하기</a></li>
 	                </ul>
 	            </div>
 			</div>
