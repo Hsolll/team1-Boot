@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.omb.user.member.vo.MemberVO;
+import com.omb.user.product.vo.ProductVO;
 import com.omb.user.safeProduct.dao.SafeProductDAO;
 import com.omb.user.safeProduct.vo.SafeProductVO;
 
@@ -61,6 +63,14 @@ public class SafeProductServiceImpl implements SafeProductService {
 		result = safeProductDAO.updateSafeProductStatus(spvo);	// 변경 성공 시 1 리턴
 		
 		return result;
+	}
+
+	@Override
+	public List<ProductVO> selectProductList(MemberVO mvo) {
+
+		List<ProductVO> pvoList = safeProductDAO.selectProductList(mvo);
+		
+		return pvoList;
 	}
 	
 	

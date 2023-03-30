@@ -20,6 +20,14 @@
 			
 			$("input:radio[id='no']").is(":checked")
 			
+			/* option 선택 시 이벤트 */
+			$("#selectBox").change(function(){
+				console.log($(this).val()); //value값 가져오기
+				console.log($("#selectBox option:selected").text()); //text값 가져오기
+				let sp_name = $("#selectBox option:selected").text();
+				$("#sp_name").val(sp_name);
+			});
+			
 			
 			$("#insertBtn").click(function(){
 				let u_no = $("#u_id").parents("tr").attr("data-no");
@@ -104,8 +112,20 @@
 	                        	<tr>
 	                                <th>상품 선택</th>
 	                                <td>
-	                                    <select>
-	                                    	<option></option>
+	                                    <select id="selectBox">
+	                                    	<option>상품을 선택해주세요</option>
+	                                    	<c:choose>
+												<c:when test="${ not empty productList }">
+													<c:forEach var="productList" items="${ productList }" varStatus="status">
+														<option data-no="${productList.p_no}" value="${productList.p_name}">${productList.p_name}</option>
+													</c:forEach>
+												</c:when>
+												<c:otherwise>
+													<tr>
+														<td colspan="4" class="tac text-center">등록된 상품 정보가 존재하지 않습니다.</td>
+													</tr>
+												</c:otherwise>
+											</c:choose>
 	                                    </select>
 	                                </td>
 	                            </tr>
@@ -118,7 +138,7 @@
 	                            <tr>
 	                                <th>상품명</th>
 	                                <td>
-	                                    <input type="text" name="sp_name" id="sp_name" class="w400" maxlength="50" />
+	                                    <input type="text" name="sp_name" id="sp_name" class="w400" maxlength="50" readonly="readonly"/>
 	                                </td>
 	                            </tr>
 	                            <tr>

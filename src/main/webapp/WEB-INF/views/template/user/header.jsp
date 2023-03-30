@@ -60,8 +60,8 @@
 	            </div>
 	            <div id="sl2" class="sub_list">
 	                <ul class="nav">
-	                <li><a href="/safe/productList">물품보기</a></li>
-	                <li><a href="/safe/productInsertView">물품등록</a></li>
+	                <li><a href="/safe/productList">상품보기</a></li>
+	                <li><a href="/safe/productInsertView">상품등록</a></li>
 	                <li><a href="/order/buyList">구매내역</a></li>
 	                <li><a href="/safe/productSell">판매내역</a></li>
 	                <li><a href="/order/sellList">판매완료내역</a></li>

@@ -15,6 +15,10 @@
 					});
 					$("#f_data").submit();
 				});
+				
+			
+				
+				
 			});
 		</script>
 	</head>
@@ -28,7 +32,7 @@
 			<%-- ================= 상세 정보 보여주기 시작 ================= --%>
             <div class="location">
                 <span class="location_right">
-                    <a href="" class="list_btn">
+                    <a href="/safe/productList" class="list_btn">
                         <span class="list_icon"></span>
                         목록으로 가기
                     </a>
@@ -40,6 +44,7 @@
                         <h3 class="sp_title">${ detail.sp_title }</h3>
                         <div class="sp_price_area">
                             <p class="price">판매가
+
                                 <span class="sp_price">
                                 	<fmt:formatNumber value="${detail.sp_price}" groupingUsed="true"/>
                                 </span>

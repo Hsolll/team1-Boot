@@ -9,6 +9,10 @@ import com.omb.user.payment.vo.PaymentVO;
 import com.omb.admin.depositInfo.dao.AdmDepositInfoDAO;
 import com.omb.user.address.dao.MemberAddressDAO;
 import com.omb.user.orderInfo.dao.OrderInfoDAO;
+
+import com.omb.user.orderInfo.vo.OrderInfoVO;
+import com.omb.user.payment.dao.PaymentDAO;
+
 import com.omb.user.safeProduct.dao.SafeProductDAO;
 
 import lombok.Setter;
@@ -55,7 +59,7 @@ class Team1ApplicationTests {
 		price = safeProductDAO.selectSafeProductPrice(safevo);
 		
 		log.info("price : " + price);
-=======
+
 
 	@Setter(onMethod_ = @Autowired)
 	private MemberAddressDAO memberAddressDAO;
@@ -155,24 +159,26 @@ class Team1ApplicationTests {
 	} */
 	
 	
-	/* 주문내역 추가 쿼리문 테스트
+	/* 주문내역 추가 쿼리문 테스트 */
 	@Test
 	public void testInsertOrderInfo() {
 		
-		PaymentVO pvo = new PaymentVO();
+		OrderInfoVO ovo = new OrderInfoVO();
 		
-		pvo.setO_id("12341234-12341234");
-		pvo.setPay_no(5);
-		pvo.setU_no(1);
-		pvo.setSp_no(1);
-		pvo.setO_address("경기 광명");
+		ovo.setO_id("12341234-12341234");
+		ovo.setPay_no(5);
+		ovo.setU_no(1);
+		ovo.setSp_no(1);
+		ovo.setReceiver("김한솔");
+		ovo.setReceiver_tel("010-1234-1234");
+		ovo.setO_address("(12345)경기 광명");
 		
 		int result = 0;
-		result = orderInfoDAO.insertOrderInfo(pvo);
+		result = orderInfoDAO.insertOrderInfo(ovo);
 		
 		log.info("입력된 행의 수 :  " + result);
 		
-	} */
+	}
 	
 	
 	/* 주문내역 추가에 필요한 결제번호 조회 쿼리문 테스트 
@@ -260,7 +266,7 @@ class Team1ApplicationTests {
 		int result = admDepositInfoDAO.insertDepositInfo(ovo);
 		
 		log.info("출력된 행의 수 : " + result);
->>>>>>> refs/remotes/origin/muk
+
 	} */
 
 	
