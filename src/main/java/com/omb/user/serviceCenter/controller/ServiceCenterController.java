@@ -43,7 +43,7 @@ public class ServiceCenterController {
 		
 		List<ServiceCenterVO> serviceList = serviceCenter.selectServiceList(vo);
 		model.addAttribute("serviceList", serviceList);
-	
+
 		int total = serviceCenter.selectServiceCnt(vo);
 		vo.setAmount(10);
 		model.addAttribute("pageMaker", new PageDTO(vo, total));

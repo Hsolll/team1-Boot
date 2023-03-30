@@ -19,7 +19,8 @@ public class MemberVO {
 	private String u_created_at; //회원가입일
 	private String u_update_at;  //회원수정일
 	
-	
+	private int mail_auth;
+	private String mail_key;
 	
 	private String zip; // 우편번호
 	private String address; // 주소

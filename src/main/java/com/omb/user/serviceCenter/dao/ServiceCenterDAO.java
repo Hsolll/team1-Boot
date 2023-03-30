@@ -17,4 +17,6 @@ public interface ServiceCenterDAO {
 	public int updateService(ServiceCenterVO vo);
 	public int updateServiceDel(ServiceCenterVO vo);
 	public int updateReadCnt(ServiceCenterVO vo);
+	public int deleteService(int scno);
+
 }

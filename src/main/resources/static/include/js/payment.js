@@ -1,185 +1,184 @@
 
 $(function() {
-	
+   
 
-	$(".content_wrap .page-header h1").html("주문/결제");
-	
-	let u_no = $("input[name='u_no']").val();
-	
+   $(".content_wrap .page-header h1").html("주문/결제");
+   
+   let u_no = $("input[name='u_no']").val();
+   
 
-	var IMP = window.IMP;
-	IMP.init("imp54405822");
+   var IMP = window.IMP;
+   IMP.init("imp54405822");
 
 
-	$(".content_wrap .page-header h1").html("주문/결제");
+   $(".content_wrap .page-header h1").html("주문/결제");
 
-	$("#buy_btn").click(function() {	// 결제하기 버튼 클릭 시 결제처리 함수 호출
+   $("#buy_btn").click(function() {   // 결제하기 버튼 클릭 시 결제처리 함수 호출
 
-		if($("input[name='address2']").val() == ""){
-			alert("상세주소를 입력해주세요.");
-			return;
-		} else {
-			// 배송지 정보를 신규로 작성한 경우 주소 테이블에 정보 추가
-			if($("input:radio[id='new']").is(":checked")){	// 배송지 정보를 새로입력 선택 시
-				let add_status = "신규배송지";
-				$.ajax({
-		    		url: "/address/insert", 
-		    		type: 'POST',
-		    		dataType: 'text',
-		    		data: {
-						u_no : u_no,
-			    		zip : rsp.imp_uid,
-			    		address : rsp.merchant_uid,
-			    		sub_address : rsp.buyer_name,
-			    		add_status : add_status
-		    		},
-		    		success : function(result){
-						
-						if(result == "배송지 등록 성공"){
-							console.log(reulst);
-							payment();
-						} else{
-							alert(result);
-							//location.href="/safe/productOrder?sp_no=" + sp_no;
-						}
-					},
-					error : function() {
-						alert("결제 실패");
-						//location.href="/safe/productDetail?sp_no=" + sp_no;
-					}
-		    	});
-			} else{
-				payment();
-			}
-		}
+      if($("input[name='address2']").val() == ""){
+         alert("상세주소를 입력해주세요.");
+         return;
+      } else {
+         // 배송지 정보를 신규로 작성한 경우 주소 테이블에 정보 추가
+         if($("input:radio[id='new']").is(":checked")){   // 배송지 정보를 새로입력 선택 시
+            let add_status = "신규배송지";
+            $.ajax({
+                url: "/address/insert", 
+                type: 'POST',
+                dataType: 'text',
+                data: {
+                  u_no : u_no,
+                   zip : rsp.imp_uid,
+                   address : rsp.merchant_uid,
+                   sub_address : rsp.buyer_name,
+                   add_status : add_status
+                },
+                success : function(result){
+                  
+                  if(result == "배송지 등록 성공"){
+                     console.log(reulst);
+                     payment();
+                  } else{
+                     alert(result);
+                     //location.href="/safe/productOrder?sp_no=" + sp_no;
+                  }
+               },
+               error : function() {
+                  alert("결제 실패");
+                  //location.href="/safe/productDetail?sp_no=" + sp_no;
+               }
+             });
+         } else{
+            payment();
+         }
+      }
 
-	});
+   });
 });
 
 
 
 function payment(){
-	let data = {
-		orderNum : createOrderNum(),
-		name : $("#sp_name").text(),
-		price : $("#sp_price").text().replace(',', ''),
-		email : $("#u_email").text(),
-		buyer_name : $("input[name='receiver']").val(),
-		tel : $("input[name='receiver_tel']").val(),
-		address : $("input[name='address1']").val() + ", " + $("input[name='address2']").val(),
-		zip : $("input[name='zip']").val()
-	}
-	console.log("data : " + data);
-	console.log(data.orderNum);
-	
-	requestPay(data);
+   let data = {
+      orderNum : createOrderNum(),
+      name : $("#sp_name").text(),
+      price : $("#sp_price").text().replace(',', ''),
+      email : $("#u_email").text(),
+      buyer_name : $("input[name='receiver']").val(),
+      tel : $("input[name='receiver_tel']").val(),
+      address : $("input[name='address1']").val() + ", " + $("input[name='address2']").val(),
+      zip : $("input[name='zip']").val()
+   }
+   console.log("data : " + data);
+   console.log(data.orderNum);
+   
+   requestPay(data);
 }
 
 
 
 /* 결제 처리 함수 API */
 function requestPay() {
-	IMP.request_pay({
-		pg: 'html5_inicis',
-		pay_method: 'card',
-		merchant_uid: createOrderNum(),
-		name: '당근 10kg',
-		amount: 100,
-		buyer_email: 'Iamport@chai.finance',
-		buyer_name: '포트원 기술지원팀',
-		buyer_tel: '010-1234-5678',
-		buyer_addr: '서울특별시 강남구 삼성동',
-		buyer_postcode: '123-456'
-	}, function(rsp) { // callback
-		if (rsp.success) {	// 결제 성공 시
-	                    
-	        // 주문목록 만드는 함수 -> 함수안에서 ajax로 처리
+   IMP.request_pay({
+      pg: 'html5_inicis',
+      pay_method: 'card',
+      merchant_uid: createOrderNum(),
+      name: '당근 10kg',
+      amount: 100,
+      buyer_email: 'Iamport@chai.finance',
+      buyer_name: '포트원 기술지원팀',
+      buyer_tel: '010-1234-5678',
+      buyer_addr: '서울특별시 강남구 삼성동',
+      buyer_postcode: '123-456'
+   }, function(rsp) { // callback
+      if (rsp.success) {   // 결제 성공 시
+                       
+           // 주문목록 만드는 함수 -> 함수안에서 ajax로 처리
 
-			location.href = "/safe/productBuy";	// 구매목록으로 이동
-			
-			console.log(rsp);
-			
-			let sp_no = $("input[name='sp_no']").val();
-			console.log("sp_no : " + sp_no);
-			
-			console.log("u_no : " + u_no);
-			
-	    	//서버에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
-	    	$.ajax({
-	    		url: "/payments/complete", 
-	    		type: 'POST',
-	    		dataType: 'text',
-	    		data: {
-					sp_no : sp_no,	// 상품번호
-					u_no : u_no,	// 회원번호
-		    		pay_id : rsp.imp_uid,	// 결제번호
-		    		o_id : rsp.merchant_uid,	// 주문번호
-		    		receiver : rsp.buyer_name,	// 수령인 이름
-		    		receiver_tel : rsp.buyer_tel,	// 수령인 연락처
-		    		o_address : rsp.buyer_addr + " (" + rsp.buyer_postcode + ")",	// 배송지 주소
-		    		price : rsp.paid_amount
-		    		//기타 필요한 데이터가 있으면 추가 전달
-	    		},
-	    		success : function(result){
-					
-					if(result == "결제 성공"){
-						alert(result);
-						//location.href="/safe/productBuy";
-					
-					} else{
-						alert(result);
-						//location.href="/safe/productDetail?sp_no=" + sp_no;
-					}
-				},
-				error : function() {
-					alert("결제 실패");
-					//location.href="/safe/productDetail?sp_no=" + sp_no;
-				}
-	    	});
-		} else {			// 결제 실패 시
-			console.log(rsp);
-			alert("결제에 실패했습니다.");
-		}
-	});
+         location.href = "/safe/productBuy";   // 구매목록으로 이동
+         
+         console.log(rsp);
+         
+         let sp_no = $("input[name='sp_no']").val();
+         console.log("sp_no : " + sp_no);
+         
+         console.log("u_no : " + u_no);
+         
+          //서버에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+          $.ajax({
+             url: "/payments/complete", 
+             type: 'POST',
+             dataType: 'text',
+             data: {
+               sp_no : sp_no,   // 상품번호
+               u_no : u_no,   // 회원번호
+                pay_id : rsp.imp_uid,   // 결제번호
+                o_id : rsp.merchant_uid,   // 주문번호
+                receiver : rsp.buyer_name,   // 수령인 이름
+                receiver_tel : rsp.buyer_tel,   // 수령인 연락처
+                o_address : rsp.buyer_addr + " (" + rsp.buyer_postcode + ")",   // 배송지 주소
+                price : rsp.paid_amount
+                //기타 필요한 데이터가 있으면 추가 전달
+             },
+             success : function(result){
+               
+               if(result == "결제 성공"){
+                  alert(result);
+                  //location.href="/safe/productBuy";
+               
+               } else{
+                  alert(result);
+                  //location.href="/safe/productDetail?sp_no=" + sp_no;
+               }
+            },
+            error : function() {
+               alert("결제 실패");
+               //location.href="/safe/productDetail?sp_no=" + sp_no;
+            }
+          });
+      } else {         // 결제 실패 시
+         console.log(rsp);
+         alert("결제에 실패했습니다.");
+      }
+   });
 }
 
 
 /* 주문번호 생성 함수 - YYYYMMDD + 랜덤숫자 6자리 */
 function createOrderNum() {
-	const date = new Date();
-	const year = date.getFullYear();
-	const month = String(date.getMonth() + 1).padStart(2, "0");
-	const day = String(date.getDate()).padStart(2, "0");
+   const date = new Date();
+   const year = date.getFullYear();
+   const month = String(date.getMonth() + 1).padStart(2, "0");
+   const day = String(date.getDate()).padStart(2, "0");
 
-	let orderNum = year + month + day + "-";
-	for (let i = 0; i < 8; i++) {
-		orderNum += Math.floor(Math.random() * 8);
-	}
-	return orderNum;
+   let orderNum = year + month + day + "-";
+   for (let i = 0; i < 8; i++) {
+      orderNum += Math.floor(Math.random() * 8);
+   }
+   return orderNum;
 }
 
 
 
 /*// 결제 성공 시 
 function paymentComplete(data) {
-	
-	 $.ajax({
-		url: "/payment/complete",
+   
+    $.ajax({
+      url: "/payment/complete",
         method: "POST",
         data: data,
-	})
-	.done(function(result) {
+   })
+   .done(function(result) {
         swal({
-			text: result,
-			closeOnClickOutside : false
-		})
-		.then(function(){
-			location.replace("/safe/productBuy");
-		})
-	}) // done 
+         text: result,
+         closeOnClickOutside : false
+      })
+      .then(function(){
+         location.replace("/safe/productBuy");
+      })
+   }) // done 
     .fail(function() {
-		alert("에러");
-		location.replace("/");
-	}) 
+      alert("에러");
+      location.replace("/");
+   }) 
 }*/
-
