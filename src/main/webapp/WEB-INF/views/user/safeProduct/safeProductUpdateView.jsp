@@ -8,7 +8,7 @@
 
 		<script type="text/javascript">
 		$(function(){
-			$(".content_wrap .page-header h1").html("상품등록");
+			$(".content_wrap .page-header h1").html("상품수정");
 			
 			/* 전화번호 자동 입력 */
 			let u_phone1 = "${fn:substring(memberLogin.u_phone,0,3)}";
@@ -19,15 +19,23 @@
 			$("#sp_phone3").val(u_phone3);
 			
 			
+			/* 기본정보 입력창에 노출 */
+			let sp_title = "${detail.sp_title}";
+			let sp_name = "${detail.sp_name}";
+			let sp_price = "${detail.sp_price}";
+			let sp_content = "${detail.sp_content}";
+			
+			console.log("sp_title : " + sp_title);
+			console.log("sp_name : " + sp_name);
+			console.log("sp_price : " + sp_price);
+			console.log("sp_content : " + sp_content);
+			
+			$("#sp_title").val(sp_title);
+			$("#sp_name").val(sp_name);
+			$("#sp_price").val(sp_price);
+			$("#sp_content").val(sp_content);
 			
 			
-			/* option 선택 시 이벤트 */
-			$("#selectBox").change(function(){
-				console.log($(this).val()); //value값 가져오기
-				console.log($("#selectBox option:selected").text()); //text값 가져오기
-				let sp_name = $("#selectBox option:selected").text();
-				$("#sp_name").val(sp_name);
-			});
 			
 			/* 가격입력창 숫자만 입력 */
 			$('input[onlyNumber]').on('keyup', function () {
@@ -37,17 +45,18 @@
 			});
 			
 			
-			/* 입력버튼 클릭 시 */
-			$("#insertBtn").click(function(){
+			/* 수정버튼 클릭 시 */
+			$("#updateBtn").click(function(){
 				let u_no = $("#u_id").parents("tr").attr("data-no");
 				console.log("u_no = " + u_no);
-				let p_no = $("#selectBox option:selected").attr("data-no");
-				console.log("p_no : " + p_no);
+				
+				let sp_no = $("#sp_title").parents("td").attr("data-num");
+				console.log("sp_no = " + sp_no);
 				
 				$("#u_no").val(u_no);
-				$("#p_no").val(p_no);
+				$("#sp_no").val(sp_no);
 				console.log("u_no : " + $("#u_no").val());
-				console.log("p_no : " + $("#p_no").val());
+				console.log("sp_no : " + $("#sp_no").val());
 				console.log("sp_title : " + $("#sp_title").val());
 				console.log("sp_name : " + $("#sp_name").val());
 				console.log("sp_price : " + $("#sp_price").val());
@@ -72,12 +81,12 @@
 						return;
 					}
 					
-					$("#insertForm").attr({
+					$("#updateForm").attr({
 						"method":"post",
 						"enctype":"multipart/form-data", // enctype 속성의 기본 값은 "application/x-www-form-urlcencoded". POST방식 폼 전송에 기본 값으로 사용
-						"action":"/safe/productInsert"
+						"action":"/safe/productUpdate"
 					});
-					$("#insertForm").submit();
+					$("#updateForm").submit();
 				}
 				
 			});
@@ -129,51 +138,31 @@
 	            
 	            <div class="list_item_info mt30">
 	                <h3 class="info_title">상품정보</h3>
-	                <form id="insertForm">
+	                <form id="updateForm">
 	                	<input type="hidden" name="u_no" id="u_no" />
-	                	<input type="hidden" name="p_no" id="p_no" />
+	                	<input type="hidden" name="sp_no" id="sp_no" />
 	                    <table class="order_product_info">
 	                        <colgroup>
 	                            <col style="width: 150px;">
 	                            <col>
 	                        </colgroup>
 	                        <tbody>
-	                        	<tr>
-	                                <th>상품 선택</th>
-	                                <td>
-	                                    <select id="selectBox">
-	                                    	<option>상품을 선택해주세요</option>
-	                                    	<c:choose>
-												<c:when test="${ not empty productList }">
-													<c:forEach var="productList" items="${ productList }" varStatus="status">
-														<option data-no="${productList.p_no}" value="${productList.p_name}">${productList.p_name}</option>
-													</c:forEach>
-												</c:when>
-												<c:otherwise>
-													<tr>
-														<td colspan="4" class="tac text-center">등록된 상품 정보가 존재하지 않습니다.</td>
-													</tr>
-												</c:otherwise>
-											</c:choose>
-	                                    </select>
-	                                </td>
-	                            </tr>
 	                            <tr>
 	                                <th>제목</th>
-	                                <td>
+	                                <td data-num="${detail.sp_no}">
 	                                    <input type="text" name="sp_title" id="sp_title" class="w400" maxlength="50" />
 	                                </td>
 	                            </tr>
 	                            <tr>
 	                                <th>상품명</th>
 	                                <td>
-	                                    <input type="text" name="sp_name" id="sp_name" class="w400" placeholder="상품을 선택해주세요." maxlength="50" readonly="readonly"/>
+	                                    <input type="text" name="sp_name" id="sp_name" class="w400" maxlength="50" readonly="readonly"/>
 	                                </td>
 	                            </tr>
 	                            <tr>
 	                                <th>가격</th>
 	                                <td>
-	                                    <input type="text" onlyNumber name="sp_price" id="sp_price" class="w200 tr pr5" placeholder="0" maxlength="8" /> 원
+	                                    <input type="text" onlyNumber name="sp_price" id="sp_price" class="w200 tr pr5" maxlength="8" /> 원
 	                                </td>
 	                            </tr>
 	                            <tr>
@@ -205,7 +194,7 @@
 	            </div>
 	
 	            <div class="payBtn_bg">
-	                <button type="button" id="insertBtn" class="btn_blue">등록하기</button>
+	                <button type="button" id="updateBtn" class="btn_blue">수정하기</button>
 	            </div>
 	        </div>
 			<%-- ================= 입력 정보 보여주기 끝 ================= --%>

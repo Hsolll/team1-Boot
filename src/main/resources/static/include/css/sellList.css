@@ -7,7 +7,7 @@
     text-align: center;
     font-weight: normal;
     color: #000000;
-    font-size: 13px;
+    font-size: 15px;
     line-height: 120%;
     background: #f9f9f9;
     padding: 10px 5px;
@@ -16,7 +16,7 @@
 .tb_sell td {
     text-align: center;
     color: #555;
-    font-size: 13px;
+    font-size: 15px;
     padding: 10px 5px;
     border-bottom: 1px solid #dcdcdc;
     word-break: break-all;
@@ -36,4 +36,8 @@
     border-bottom: 1px solid #a8aaa9;
     border-radius: 1px;
     padding: 0 12px;
+}
+
+#tableList > thead,tbody {
+	font-size: 16px;
 }

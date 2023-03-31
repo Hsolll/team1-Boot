@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.omb.user.orderInfo.service.OrderInfoService;
 import com.omb.user.orderInfo.vo.OrderInfoVO;
@@ -138,7 +139,7 @@ public class PaymentController {
    
    
    @GetMapping("/cancel")
-   public String paymentCancel(OrderInfoVO ovo, Model model) throws IOException {
+   public String paymentCancel(OrderInfoVO ovo, Model model, RedirectAttributes ras) throws IOException {
       
       log.info("전달받은 주문번호 : " + ovo.getO_no());
       
@@ -150,15 +151,14 @@ public class PaymentController {
       
       String token = paymentService.getToken();   // 결제 취소를 위해 토큰 발급
       
-      
-      
-      // 취소완료 후 주문상태 결제취소로 변경
+      // 주문상태 결제취소로 변경
       int result = orderInfoService.updateOrderStatusCancel(ovo);
       
       if(result == 1) {
          // 상태변경 성공 시 취소처리
          paymentService.paymentCancle(token, pay_id);
          log.info("결제취소 완료");
+         ras.addFlashAttribute("msg", "결제가 취소되었습니다.");
          path = "/order/buyList";
       } else {
          log.info("주문상태 변경 실패");

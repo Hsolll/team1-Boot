@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/common.jspf" %>
+
+		<link rel="stylesheet" href="/resources/include/css/sellList.css">
 		
 		<script type="text/javascript">
 			$(function(){
@@ -35,7 +37,7 @@
 			
 			<%-- ===================== 리스트 시작 ===================== --%>
 			<div id="safeProduct" class="table-height">
-				<table summary="안심상품 리스트" class="table table-striped">
+				<table summary="안심상품 리스트" class="table table-striped" id="tableList">
 					<thead>
 						<tr class="text-center">
 							<th data-value="sp_no" class="order text-center col-md-1">번호</th>

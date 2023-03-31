@@ -65,6 +65,27 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 		OrderInfoVO selectPrice = orderInfoDAO.selectOrderInfoPrice(ovo);
 		return selectPrice;
 	}
+
+	@Override
+	public int updateOrderStatusSend(OrderInfoVO ovo) {
+		int result = 0;
+		result = orderInfoDAO.updateOrderStatusSend(ovo);
+		return result;
+	}
+
+	@Override
+	public int updateCompleteSafe(OrderInfoVO ovo) {
+		int result = 0;
+		result = orderInfoDAO.updateCompleteSafe(ovo);
+		return result;
+	}
+
+	@Override
+	public int updateCompleteProduct(OrderInfoVO ovo) {
+		int result = 0;
+		result = orderInfoDAO.updateCompleteProduct(ovo);
+		return result;
+	}
 	
 	
 	

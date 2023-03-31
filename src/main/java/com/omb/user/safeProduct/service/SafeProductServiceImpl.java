@@ -72,6 +72,58 @@ public class SafeProductServiceImpl implements SafeProductService {
 		
 		return pvoList;
 	}
+
+	@Override
+	public int insertSafeProduct(SafeProductVO spvo) {
+		int result = 0;
+		
+		result = safeProductDAO.insertSafeProduct(spvo);
+		
+		return result;
+	}
+	
+	
+	@Override
+	public int updateProductStatus(SafeProductVO spvo) {
+		int result = 0;
+		
+		result = safeProductDAO.updateProductStatus(spvo);
+		
+		return result;
+	}
+
+	@Override
+	public List<SafeProductVO> selectSafeProductListSell(MemberVO mvo) {
+		
+		List<SafeProductVO> sellList = safeProductDAO.selectSafeProductListSell(mvo);
+	
+		return sellList;
+	}
+
+	@Override
+	public int updateSafeProduct(SafeProductVO spvo) {
+		int result = 0;
+		result = safeProductDAO.updateSafeProduct(spvo);
+		return result;
+	}
+
+	@Override
+	public int deleteSafeProduct(SafeProductVO spvo) {
+		int result = 0;
+		result = safeProductDAO.deleteSafeProduct(spvo);
+		return result;
+	}
+
+	@Override
+	public int updateProductStatusReturn(SafeProductVO spvo) {
+		int result = 0;
+		result = safeProductDAO.updateProductStatusReturn(spvo);
+		return result;
+	}
+
+	
+	
+	
 	
 	
 

@@ -117,6 +117,7 @@ function requestPay(data) {
 		    		//기타 필요한 데이터가 있으면 추가 전달
 	    		},
 	    		success : function(result){
+					let sp_no = $("input[name='sp_no']").val();
 					
 					if(result == "결제 성공"){
 						alert(result);
@@ -133,6 +134,7 @@ function requestPay(data) {
 				}
 	    	});
 		} else {			// 결제 실패 시
+			let sp_no = $("input[name='sp_no']").val();
 			console.log(rsp);
 			alert("결제에 실패했습니다.");
 			location.href="/safe/productOrder?sp_no=" + sp_no;

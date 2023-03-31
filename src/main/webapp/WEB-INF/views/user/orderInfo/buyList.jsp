@@ -4,60 +4,80 @@
 		
         <link rel="stylesheet" href="/resources/include/css/sellList.css" />
 		<script type="text/javascript">
-		$(function(){
-			$(".content_wrap .page-header h1").html("구매 목록");
-			
-			if("${changeFail}" != ""){
-				let comment = "${changeFail}";
-				alert(comment);
-			}
-			
-			
-			$(".paymentCancelBtn").click(function(){
+			$(function(){
+				$(".content_wrap .page-header h1").html("구매 목록");
 				
-				let o_no = $(this).parents("tr").attr("data-no");
-				console.log("o_no = " + o_no);
-				$("#o_no").val(o_no);
-				$("#cancelForm").attr({
-					"method":"get",
-					"action":"/payments/cancel"
+				if("${changeFail}" != ""){
+					let comment = "${changeFail}";
+					alert(comment);
+				}
+				
+				
+				$(".paymentCancelBtn").click(function(){
+					
+					let o_no = $(this).parents("tr").attr("data-no");
+					console.log("o_no = " + o_no);
+					$("#o_no").val(o_no);
+					$("#f_data").attr({
+						"method":"get",
+						"action":"/payments/cancel"
+					});
+					$("#f_data").submit();
 				});
-				$("#cancelForm").submit();
-			});
-			
-			$(".gotoPaymentBtn").click(function(){
-				let sp_no = $(this).parents("tr").attr("data-sp");
-				console.log("sp_no = " + sp_no);
 				
-				location.href="/safe/productOrder?sp_no=" + sp_no;
-			});
-			
-			$(".confirmBtn").click(function(){
-				let o_no = $(this).parents("tr").attr("data-no");
 				
-				$.ajax({
-		    		url: "/order/complete", 
-		    		type: 'GET',
-		    		dataType: 'text',
-		    		data: o_no,
-		    		success : function(result){
-						
-						
-					},
-					error : function() {
-						
-					}
-		    	});
+				$(".gotoPaymentBtn").click(function(){
+					let sp_no = $(this).parents("tr").attr("data-sp");
+					console.log("sp_no = " + sp_no);
+					
+					location.href="/safe/productOrder?sp_no=" + sp_no;
+				});
+				
+				
+				$(".confirmBtn").click(function(){
+					let o_no = $(this).parents("tr").attr("data-no");
+					console.log("o_no = " + o_no);
+					
+					$.ajax({
+			    		url: "/order/confirm", 
+			    		type: 'GET',
+			    		dataType: 'text',
+			    		data: {"o_no" : o_no},
+			    		success : function(result){
+							if(result == "처리성공"){
+								console.log(result);
+								
+								$("#o_no").val(o_no);
+								$("#f_data").attr({
+									"method":"get",
+									"action":"/order/complete"
+								});
+								$("#f_data").submit();
+								
+							}else{
+								alert(result);
+							}
+						},
+						error : function() {
+							
+						}
+					});
+				});
+				
+				
 			});
-			
-
-		});
 		</script>
 	</head>
 	<body>
+		<c:if test="${!empty msg}">
+			<script>
+				alert("${msg}");
+				<c:remove var="msg"/>
+			</script>
+		</c:if>
 		<div class="container">
 			
-			<form name="cancelForm" id="cancelForm">
+			<form name="f_data" id="f_data">
 				<input type="hidden" name="o_no" id="o_no" />
 			</form>
 		
@@ -101,13 +121,16 @@
 										<td>
 											<c:choose>
 												<c:when test="${buyList.o_status eq '결제완료'}">
-													<button type="button" class="paymentCancelBtn" >결제취소</button>
+													<button type="button" class="btn_swh paymentCancelBtn" >결제취소</button>
 												</c:when>
 												<c:when test="${buyList.o_status eq '결제취소'}">
-													<button type="button" class="gotoPaymentBtn" >결제하기</button>
+													<button type="button" class="btn_swh gotoPaymentBtn" >재결제</button>
+												</c:when>
+												<c:when test="${buyList.o_status eq '거래완료'}">
+													<span style="font-size: 14px;"> 거래완료 </span>
 												</c:when>
 												<c:otherwise>
-													<button type="button" class="confirmBtn" >구매확정</button>
+													<button type="button" class="btn_swh confirmBtn" >구매확정</button>
 												</c:otherwise>
 											</c:choose>
 										</td> 

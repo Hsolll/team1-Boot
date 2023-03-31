@@ -23,7 +23,7 @@
 		INNER JOIN TB_USER_SAFE_PRODUCT C
 		    ON A.SP_NO = C.SP_NO
 		WHERE A.U_NO = #{u_no}
-		ORDER BY O_NO
+		ORDER BY O_NO DESC
 	</select>
 	
 	
@@ -40,7 +40,7 @@
 		INNER JOIN TB_USER_SAFE_PRODUCT C
 		    ON A.SP_NO = C.SP_NO
 		WHERE C.U_NO = #{u_no}
-		ORDER BY O_NO
+		ORDER BY O_NO DESC
 	</select>
 	
 	
@@ -62,13 +62,36 @@
 		UPDATE TB_USER_ORDER SET O_STATUS = '거래완료' WHERE O_NO = #{o_no}
 	</update>
 	
-	<select id="selectOrderInfoPrice" parameterType="orderInfo">
+	<select id="selectOrderInfoPrice" parameterType="orderInfo" resultType="orderInfo">
 		SELECT 
-		    PRICE
+		    PRICE AS SP_PRICE
 		FROM TB_USER_PAYMENT A
 		INNER JOIN TB_USER_ORDER B
 		    ON A.PAY_NO = B.PAY_NO
 		WHERE O_NO = #{o_no}
 	</select>
+	
+	<update id="updateOrderStatusSend" parameterType="orderInfo">
+		UPDATE TB_USER_ORDER SET O_STATUS = '배송중' WHERE O_NO = #{o_no}
+	</update>
+	
+	
+	<!-- 거래완료 시 상품 판매상태 변경 -->
+	<!-- 안심상품 -->
+	<update id="updateCompleteSafe" parameterType="orderInfo">
+		UPDATE TB_USER_SAFE_PRODUCT
+		SET SP_STATUS = '판매중'
+		WHERE SP_NO = (SELECT SP_NO FROM TB_USER_ORDER WHERE O_NO = #{o_no})
+	</update>
+	
+	<!-- 중고상품 -->
+	<update id="updateCompleteProduct" parameterType="orderInfo">
+		UPDATE TB_USER_PRODUCT
+		SET P_STATUS = '판매완료'
+		WHERE P_NO = (SELECT P_NO
+		            FROM TB_USER_SAFE_PRODUCT
+		            WHERE SP_NO = (SELECT SP_NO FROM TB_USER_ORDER WHERE O_NO = #{o_no}))
+	</update>
+	
 	
 </mapper>

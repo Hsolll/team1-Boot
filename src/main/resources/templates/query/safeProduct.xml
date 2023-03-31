@@ -18,7 +18,7 @@
 		FROM TB_USER_SAFE_PRODUCT A
 		INNER JOIN TB_USER B
 		    ON A.U_NO = B.U_NO
-		ORDER BY SP_NO
+		ORDER BY SP_NO DESC
 	</select>
 	
 	
@@ -39,10 +39,13 @@
 	</select>
 	
 	
+	<!-- 결제 완료시 상품 판매상태 변경 (판매중 -> 판매완료) -->
 	<update id="updateSafeProductStatus" parameterType="safeProduct">
 		UPDATE TB_USER_SAFE_PRODUCT SET SP_STATUS = '판매완료' where SP_NO = #{sp_no}
 	</update>
 	
+	
+	<!-- 안심상품 등록 쿼리문 -->
 	<insert id="insertSafeProduct" parameterType="safeProduct">
 		INSERT INTO TB_USER_SAFE_PRODUCT
 			(SP_NO, U_NO, P_NO, SP_TITLE, SP_NAME, SP_PRICE, SP_CONTENT
@@ -58,11 +61,61 @@
 			)
 	</insert>
 	
+	<!-- 안심상품 등록 시 중고상품 판매상태 변경 (판매중 -> 거래진행중) -->
+	<update id="updateProductStatus" parameterType="safeProduct">
+		UPDATE TB_USER_PRODUCT SET P_STATUS = '거래진행중' where P_NO = #{p_no}
+	</update>
+	
+	
+	<!-- 안심상품 등록 시 필요한 중고상품 리스트 조회 -->
 	<select id="selectProductList" parameterType="member" resultType="product">
 		SELECT
 		    P_NO, P_NAME
 		FROM TB_USER_PRODUCT
 		WHERE U_NO = #{u_no}
 	</select>
+	
+	
+	<!-- 회원 판매등록 상품 조회 -->
+	<select id="selectSafeProductListSell" parameterType="member" resultType="safeProduct">
+		SELECT 
+	    	SP_NO, A.U_NO, U_ID, U_NAME, P_NO, 
+		    (SELECT P_NAME FROM TB_USER_PRODUCT C WHERE C.P_NO = A.P_NO) AS P_NAME, 
+		    SP_TITLE, SP_NAME, SP_PRICE, 
+		    SP_CONTENT, TO_CHAR(SP_CREATED_AT, 'YYYY-MM-DD') AS SP_CREATED_AT, SP_PWD, SP_STATUS
+		FROM TB_USER_SAFE_PRODUCT A
+		INNER JOIN TB_USER B
+		    ON A.U_NO = B.U_NO
+		WHERE A.U_NO = #{u_no}
+		ORDER BY SP_NO
+	</select>
+	
+	
+	<!-- 안심상품 수정 쿼리문 -->
+	<update id="updateSafeProduct" parameterType="safeProduct">
+		UPDATE TB_USER_SAFE_PRODUCT 
+		SET SP_TITLE = #{sp_title}, SP_PRICE = #{sp_price}, SP_CONTENT = #{sp_content}
+		<if test="sp_pwd != ''">
+			, SP_PWD = #{sp_pwd}
+		</if>
+		, SP_UPDATED_AT = SYSDATE
+		WHERE SP_NO = #{sp_no}
+	</update>
+
+
+	<!-- 안심상품 삭제 쿼리문 -->
+	<delete id="deleteSafeProduct" parameterType="safeProduct">
+		DELETE FROM TB_USER_SAFE_PRODUCT WHERE SP_NO = #{sp_no}
+	</delete>
+	
+	<!-- 안심상품 삭제 시 중고상품 판매상태 변경 (거래진행중 -> 판매중) -->
+	<update id="updateProductStatusReturn" parameterType="safeProduct">
+		UPDATE TB_USER_PRODUCT SET P_STATUS = '판매중' 
+		WHERE P_NO IN (SELECT P_NO 
+		                FROM TB_USER_SAFE_PRODUCT
+		                WHERE SP_NO = #{sp_no});
+	</update>
+	
+	
 
 </mapper>

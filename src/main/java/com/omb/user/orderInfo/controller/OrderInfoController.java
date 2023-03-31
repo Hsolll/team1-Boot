@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.omb.admin.depositInfo.service.AdmDepositInfoService;
 import com.omb.user.member.vo.MemberVO;
@@ -65,31 +67,81 @@ public class OrderInfoController {
 		return "user/orderInfo/sellCompleteList";
 	}
 	
+	/* 상품 발송 시 주문상태 배송중으로 변경 */
+	@GetMapping("/send")
+	public String updateOrderStatusSend(OrderInfoVO ovo, RedirectAttributes ras) {
+		log.info("전달받은 주문번호 : " + ovo.getO_no()); 
+		String path = "";
+		int result = 0;
+		
+		result = orderInfoService.updateOrderStatusSend(ovo);
+		
+		if(result == 1) {
+			log.info("주문상태 변경 완료");
+			ras.addFlashAttribute("msg", "발송완료 처리되었습니다.");
+			path = "/order/sellList";
+		} else {
+			log.info("주문상태 변경 실패");
+			ras.addFlashAttribute("msg", "발송처리를 실패했습니다. 다시 시도해주세요.");
+			path = "/order/sellList";
+		}
+		
+		return "redirect:" + path;
+	}
+	
 	
 	/* 구매확정 상태변경 */
+	@ResponseBody
 	@GetMapping("/confirm")
 	public String updateOrderStatusConfirm(HttpSession session, OrderInfoVO ovo) {
-		String path = "";
+		
+		log.info("전달받은 주문번호 : " + ovo);
+		String comment = "";
 		int result = 0;
 		
 		result = orderInfoService.updateOrderStatusConfirm(ovo);
 		
 		if(result == 1) {	// 상태변경 성공 시 입금정보 추가
-			
+			log.info("주문상태 : 거래완료");
 			// 주문상품 금액 조회
 			OrderInfoVO price = orderInfoService.selectOrderInfoPrice(ovo);
 			ovo.setSp_price(price.getSp_price());
+			log.info("금액 조회 후 ovo : " + ovo);
 			
 			int depositResult =  admDepositInfoService.insertDepositInfo(ovo);
 			if(depositResult == 1) {
 				log.info("입금정보 추가 성공");
-				path = "/order/buyList";
+				comment = "처리성공";
 			}
 			
 		} else {
+			log.info("거래상태 변경 실패");
+			comment = "다시 시도해주세요.";
+		}
+		return comment;
+	}
+	
+	
+	@GetMapping("/complete")
+	public String complete(OrderInfoVO ovo, RedirectAttributes ras) {
+		log.info("complete 메서드 호출");
+		log.info("complete 전달받은 주문번호 : " + ovo);
+		
+		String path = "";
+		int resultSafe = 0;
+		int resultProduct = 0;
+		
+		resultSafe = orderInfoService.updateCompleteSafe(ovo);
+		resultProduct = orderInfoService.updateCompleteProduct(ovo);
+		
+		if(resultSafe == 1 && resultProduct == 1) {
+			log.info("상품 판매상태 변경 완료");
+			ras.addFlashAttribute("msg", "구매확정 되었습니다.");
+			path = "/order/buyList";
+		} else {
+			ras.addFlashAttribute("msg", "다시 시도해주세요.");
 			path = "/order/buyList";
 		}
-		
 		
 		return "redirect:" + path;
 	}

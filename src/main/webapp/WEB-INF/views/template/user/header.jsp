@@ -64,7 +64,7 @@
 	                <li><a href="/safe/productInsertView">상품등록</a></li>
 	                <li><a href="/order/buyList">구매내역</a></li>
 	                <li><a href="/safe/productSell">판매내역</a></li>
-	                <li><a href="/order/sellList">판매완료내역</a></li>
+	                <li><a href="/order/sellList">판매자 주문내역</a></li>
 	                </ul>
 	            </div>
 	            <div id="sl3" class="sub_list">
