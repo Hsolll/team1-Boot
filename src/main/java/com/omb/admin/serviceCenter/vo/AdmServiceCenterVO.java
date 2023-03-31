@@ -20,4 +20,6 @@ public class AdmServiceCenterVO extends CommonVO{
 	private String as_updated_at;
 	private String as_deleted_at;
 	private int rCount;
+	
+	private String sc_pwd;
 }

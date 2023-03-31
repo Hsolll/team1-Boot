@@ -22,4 +22,5 @@ public class AdmNoticeVO extends CommonVO{
 	private int an_cnt =0; // 조회수
 	
 	private MultipartFile file;
+	private String a_name ="";
 }

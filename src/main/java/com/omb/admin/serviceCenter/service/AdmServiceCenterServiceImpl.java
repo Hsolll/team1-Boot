@@ -65,6 +65,13 @@ public class AdmServiceCenterServiceImpl implements AdmServiceCenterService {
 		return result;
 	}
 
+	@Override
+	public int admselectPwdChk(AdmServiceCenterVO svo) {
+		int result = 0;
+		result = admserviceDao.admselectPwdChk(svo);
+		return result;
+	}
+
 	
 	
 

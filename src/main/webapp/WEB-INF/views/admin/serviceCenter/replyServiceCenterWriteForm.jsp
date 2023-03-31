@@ -30,6 +30,7 @@
 	
 		 <form id="replyForm" name="replyForm">
 		 	<input type="hidden" id="sc_no" name=sc_no value="${serviceDetail.sc_no}">
+		 	<input type="hidden" id="sc_pwd" name=sc_pwd value="${serviceDetail.sc_pwd}">
 			  <div class="panel panel-default rowTable">
 			  	<table class="table">
 			  		<colgroup>

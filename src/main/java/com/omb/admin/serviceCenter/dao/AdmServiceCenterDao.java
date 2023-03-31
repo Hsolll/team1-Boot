@@ -15,4 +15,5 @@ public interface AdmServiceCenterDao {
 	public AdmServiceCenterVO replyServiceDetail(AdmServiceCenterVO svo);
 	public int admServiceCenterDelete(int svo);
 	public int admReplyUpdate(AdmServiceCenterVO svo);
+	public int admselectPwdChk(AdmServiceCenterVO svo);
 }

@@ -34,7 +34,7 @@
 		<div class="menu_content">
 			<div class="omb_main">
 				<ul>
-					<li id="ml1"><a href="#">공지사항</a></li>
+					<li id="ml1"><a href="/notice/noticeList">공지사항</a></li>
 					<li><a href="/product/productList">중고마켓</a></li>
 					<li><a href="#">나눔마켓</a></li>
 					<li id="ml2"><a href="/safe/productList">안심거래</a></li>
@@ -54,8 +54,8 @@
 			<div class="omb_sub">
 				<div id="sl1" class="sub_list">
 	                <ul class="nav">
-	                <li><a href="#">공지사항</a></li>
-	                <li><a href="#">이벤트</a></li>
+	                <li><a href="/notice/noticeList">공지사항</a></li>
+	                <li><a href="/notice/eventList">이벤트</a></li>
 	                </ul>
 	            </div>
 	            <div id="sl2" class="sub_list">
