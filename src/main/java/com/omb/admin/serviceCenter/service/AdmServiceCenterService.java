@@ -14,5 +14,6 @@ public interface AdmServiceCenterService {
 	public int admServiceCenterDelete(AdmServiceCenterVO svo) throws Exception;
 	public AdmServiceCenterVO admReplyUpdateForm(AdmServiceCenterVO svo);
 	public int admReplyUpdate(AdmServiceCenterVO svo) throws Exception;
+	public int admselectPwdChk(AdmServiceCenterVO svo);
 	
 }

@@ -21,10 +21,11 @@
 					$("#keyword").val("<c:out value='${memberVO.keyword}' />");
  					$("#search").val("<c:out value='${memberVO.search}' />");
 				
-					if($("#search").val()!='u_nick'){
+					if($("#search").val()!='u_phone'){
 						if($("#search").val()=='u_id') value = "#list tr td.goDetail";
 						else if($("#search").val()=='u_name') value="#list tr td.name";
 						else if($("#search").val()=='u_grade') value="#list tr td.grade";
+						else if($("#search").val()=='u_nick') value="#list tr td.nick";
 						console.log($(value+":contains('"+word+"')").html());
 				    	$(value+":contains('"+word+"')").each(function () {
 							let regex = new RegExp(word,'gi');
@@ -198,11 +199,11 @@
 											<td class="goDetail text-center">
 											${member.u_id}
 											</td>
-											<td class="text-center">${member.u_nick}</td>
-											<td class="text-center">${member.u_name}</td>
+											<td class="nick text-center">${member.u_nick}</td>
+											<td class="name text-center">${member.u_name}</td>
 											<td class="text-center">${member.u_phone}</td>
 											<td class="text-center">${member.u_created_at}</td>
-											<td class="text-center">${member.u_grade}</td>
+											<td class="grade text-center">${member.u_grade}</td>
 											<td class="text-center">${member.u_status}</td>
 											<td><button type="button" class="gradeBtn btn btn-dark m-l-10" data-toggle="modal" data-target="#exampleModalCenter">등급수정</button></td>
 										</tr>

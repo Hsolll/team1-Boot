@@ -21,11 +21,13 @@
 		<![CDATA[
 		SELECT 
 		AN_NO, A_NO, AN_TITLE, AN_CONTENT, AN_CATEGORY, TO_CHAR(AN_CREATED_AT, 'YYYY-MM-DD') AS AN_CREATED_AT, 
-		AN_CNT, AN_THUMBNAIL, AN_FILE
+		AN_CNT, AN_THUMBNAIL, AN_FILE, A_NAME
 		FROM (
 			SELECT /*+ INDEX_DESC(tb_admin_notice tb_admin_notice_pk) */
-				rownum as rnum, an_no, a_no, an_title, an_content, an_category, an_created_at, an_cnt, an_thumbnail, an_file
-			FROM tb_admin_notice
+				rownum as rnum, an_no, A.a_no as a_no, B.a_name, an_title, an_content, an_category, an_created_at, an_cnt, an_thumbnail, an_file
+			FROM tb_admin_notice A
+			INNER JOIN tb_admin B
+			ON A.a_no = B.a_no
 		WHERE ]]>
 		<trim prefix="(" suffix=") AND " prefixOverrides="AND">
 			<include refid = "noticeSearch"></include>
@@ -42,11 +44,13 @@
 		<![CDATA[
 		SELECT 
 		AN_NO, A_NO, AN_TITLE, AN_CONTENT, AN_CATEGORY, TO_CHAR(AN_CREATED_AT, 'YYYY-MM-DD') AS AN_CREATED_AT, 
-		AN_CNT, AN_THUMBNAIL, AN_FILE
+		AN_CNT, AN_THUMBNAIL, AN_FILE, A_NAME
 		FROM (
 			SELECT /*+ INDEX_DESC(tb_admin_notice tb_admin_notice_pk) */
-				rownum as rnum, an_no, a_no, an_title, an_content, an_category, an_created_at, an_cnt, an_thumbnail, an_file
-			FROM tb_admin_notice
+				rownum as rnum, an_no, A.a_no as a_no, B.a_name, an_title, an_content, an_category, an_created_at, an_cnt, an_thumbnail, an_file
+			FROM tb_admin_notice A
+			INNER JOIN tb_admin B
+			ON A.a_no = B.a_no
 		WHERE ]]>
 		<trim prefix="(" suffix=") AND " prefixOverrides="AND">
 			<include refid = "noticeSearch"></include>
@@ -77,8 +81,10 @@
 	<select id="noticeDetail" parameterType="admnotice" resultType="admnotice">
 		/* Notice - noticeDetail */
 		SELECT
-			an_no, a_no, an_title, an_content, TO_CHAR(an_created_at, 'YYYY-MM-DD HH24:MI:SS') AS an_created_at, an_cnt, an_thumbnail, an_file
-		FROM tb_admin_notice
+			an_no, A.a_no, B.a_name, an_title, an_content, TO_CHAR(an_created_at, 'YYYY-MM-DD HH24:MI:SS') AS an_created_at, an_cnt, an_thumbnail, an_file
+		FROM tb_admin_notice A
+        INNER JOIN tb_admin B
+        ON A.a_no = B.a_no
 		WHERE an_no = #{an_no}
 	</select>
 	

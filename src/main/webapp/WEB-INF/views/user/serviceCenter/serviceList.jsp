@@ -65,9 +65,10 @@
 		$(".replyDetail").click(function(){
 			let as_no = $(this).parents("tr").attr("data-num");
 			$("#as_no").val(as_no);
+			
 			$("#replyDetailForm").attr({
 				"method":"get",
-				"action":"/serviceCenter/servicePwdConfirm"
+				"action":"/admin/servicePwdConfirm"
 			});
 			$("#replyDetailForm").submit();
 		});

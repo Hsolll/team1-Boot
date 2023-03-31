@@ -9,9 +9,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.omb.admin.serviceCenter.service.AdmServiceCenterService;
 import com.omb.admin.serviceCenter.vo.AdmServiceCenterVO;
+import com.omb.admin.vo.AdminVO;
 import com.omb.common.vo.PageDTO;
 import com.omb.user.serviceCenter.service.ServiceCenterService;
 import com.omb.user.serviceCenter.vo.ServiceCenterVO;
@@ -53,6 +56,7 @@ public class AdmServiceCenterController {
 	@PostMapping(value="/serviceCneterInsert")
 	public String admServiceInsert(AdmServiceCenterVO svo) throws Exception{
 		log.info("serviceCenterInsert 실행");
+		log.info("전달받은 내용 : " + svo);
 		String url="";
 		int result = 0;
 		result = admserviceCenter.admServiceInsert(svo);
@@ -88,11 +92,24 @@ public class AdmServiceCenterController {
 		return "admin/serviceCenter/replyServiceCenterDetail";
 	}
 	
+	@GetMapping(value="/replyDetailUser")
+	public String replyServiceDetailUser(@ModelAttribute AdmServiceCenterVO avo, Model model) {
+		log.info("replyDetail 실행");
+		 
+		
+		AdmServiceCenterVO admServiceList = admserviceCenter.replyServiceDetail(avo);
+		
+		model.addAttribute("replyDetail", admServiceList);
+		
+		return "user/serviceCenter/replyServiceCenterDetail";
+	}
+	
 	@GetMapping(value="/replyWriteForm")
 	public String admReplyWriteForm(@ModelAttribute ServiceCenterVO uservo, AdmServiceCenterVO admvo ,Model model) {
 		log.info("replyWriteForm 실행");
 		ServiceCenterVO detail = serviceCenterService.selectServiceDetail(uservo);
 		model.addAttribute("serviceDetail", detail);
+		log.info("머머머 = " + detail);
 		
 		return "admin/serviceCenter/replyServiceCenterWriteForm";
 	}
@@ -145,7 +162,7 @@ public class AdmServiceCenterController {
 		
 		model.addAttribute("updateForm", updateForm);
 		
-		return "/admin/serviceCenter/replyUpdateForm";
+		return "admin/serviceCenter/replyUpdateForm";
 	}
 	
 	@PostMapping(value="/admReplyUpdate")
@@ -166,6 +183,34 @@ public class AdmServiceCenterController {
 			url="/admin/replyUpdateForm?as_no="+svo.getAs_no();
 		}
 		return "redirect:"+url;
+	}
+	
+	
+	@GetMapping("/servicePwdConfirm")
+	public String servicePwdConfirm(@ModelAttribute AdmServiceCenterVO avo, Model model) {
+		
+		log.info("전달받은 글번호 : " + avo);
+		
+		AdmServiceCenterVO detail = admserviceCenter.replyServiceDetail(avo);
+		
+		model.addAttribute("data", detail);
+		
+		return "user/serviceCenter/admPwdConfirm";
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="/servicepwdChk", method=RequestMethod.POST, produces="text/plain; charset=UTF-8")
+	public String servicePwdChk(@ModelAttribute AdmServiceCenterVO vo, Model model) {
+		String value = "";
+		int result = admserviceCenter.admselectPwdChk(vo);
+		
+		if(result == 1) {
+			value="성공";
+		} else {
+			value="실패";
+		}
+		return value;
 	}
 	
 }

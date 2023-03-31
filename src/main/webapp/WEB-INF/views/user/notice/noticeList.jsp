@@ -1,18 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page trimDirectiveWhitespaces="true" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<!DOCTYPE html>
-<html>
-	<head>
-		<script src="/resources/include/js/common.js"></script>
-		<script src="/resources/vendor/jquery/jquery-3.3.1.min.js"></script>
-		<title>noticeList</title>
-		
+<%@ include file="/WEB-INF/views/common/common.jspf" %>
+<script src="/resources/include/js/common.js"></script>
 		<script type="text/javascript">
 	$(function(){	
 			/* 검색 후 검색 대상과 검색 단어 출력 */
+			$(".content_wrap .page-header h1").html("공지사항");
+			
+			let msg = "<c:if test='${empty memberLogin}'>회원만 이용할 수 있습니다.</c:if>";
 			let word="<c:out value='${noticeVO.keyword}' />";  // 보여주기 태그
 			let value="";
 			if(word!=""){ 
@@ -25,7 +20,7 @@
 					console.log($(value+":contains('"+word+"')").html());
 			    	$(value+":contains('"+word+"')").each(function () {
 						let regex = new RegExp(word,'gi');
-						$(this).html($(this).html().replace(regex,"<span class='required'>"+word+"</span>"));
+						$(this).html($(this).html().replace(regex,"<span>"+word+"</span>"));
 			    	});
 				}
 			}
@@ -56,11 +51,6 @@
 				goPage();
 			});
 			
-			/* 글쓰기 버튼 클릭 시 처리 이벤트 */		
-			$("#insertFormBtn").click(function(){
-				location.href = "/admin/noticeWriteForm"; 
-			});
-			
 			
 			/* 제목 클릭시 상세 페이지 이동을 위한 처리 이벤트 */		
 			$(".goDetail").click(function(){
@@ -70,7 +60,7 @@
 				// 상세 페이지로 이동하기 위해 form 추가 (id : detailForm) 
 				$("#detailForm").attr({
 					"method":"get",
-					"action":"/admin/noticeDetail"
+					"action":"/notice/noticeDetail"
 				});
 				$("#detailForm").submit(); 
 			});
@@ -92,7 +82,7 @@
 		
 			$("#f_search").attr({
 				"method":"get",
-				"action":"/admin/noticeList"
+				"action":"/notice/noticeList"
 			});
 			$("#f_search").submit();
 		}
@@ -101,7 +91,7 @@
 
 <body>
 <%-- ============== container 시작 ====================  --%>
-<div class="container"> 
+<div class="contentContainer container"> 
 	<form id="detailForm">
 		<input type="hidden" id="an_no" name="an_no" />
 	</form>
@@ -120,14 +110,13 @@
 				</select>
 				<input type="text" name="keyword" id="keyword" value="검색어를 입력하세요" class="form-control m-l-10" />
 				<button type="button" id="searchData" class="btn">검색</button>
-				<button type="button" id="insertFormBtn" class="btn btn-dark m-l-100">글쓰기</button>
 			</div>
 		</form>
 	</div>
 <%--================== 검색기능 종료 ===================  --%>
 
 <%-- =================== 리스트 시작  ================= --%>
-		<div id="noticeList" class="table-responsive">
+	<div id="noticeList" class="table-responsive">
 		<table summary="공지사항 리스트" class="table table-striped m-t-15" >
 			<thead>
 				<tr>
@@ -137,7 +126,6 @@
 					<th class="text-center col-md-2">제목</th>
 					<th class="text-center col-md-3">등록일</th>
 					<th data-value="an_cnt" class="order text-center col-md-1">조회수</th>
-					<th class="text-center col-md-3">이미지</th>
 				</tr>
 			</thead>
 	 		<tbody id="list" class="table-striped" >
@@ -151,17 +139,9 @@
 								${notice.an_category}
 								</td>
 								<td class="text-center">${notice.a_name}</td>
-								<td class="goDetail text-center">${notice.an_title}</td>
+								<td class="goDetail text-center" style="cursor:pointer;">${notice.an_title}</td>
 								<td class="text-center">${notice.an_created_at}</td>
 								<td class="text-center">${notice.an_cnt}</td>
-								<td>
-									<c:if test="${not empty notice.an_thumbnail}">
-										<img src="/uploadStorage/notice/thumbnail/${notice.an_thumbnail}"/>
-									</c:if>
-									<c:if test="${empty notice.an_thumbnail}">
-										<img src="/resources/images/common/icon.png" />
-									</c:if>
-								</td>
 							</tr>
 						</c:forEach>
 					</c:when>

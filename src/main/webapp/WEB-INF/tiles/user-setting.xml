@@ -55,6 +55,10 @@
 		<put-attribute name="title" value="문의하기" />
 		<put-attribute name="body" value="/WEB-INF/views/user/serviceCenter/{1}.jsp" /> 
 	</definition>
+	<definition name="user/notice/*" extends="content">
+		<put-attribute name="title" value="공지사항" />
+		<put-attribute name="body" value="/WEB-INF/views/user/notice/{1}.jsp" /> 
+	</definition>
 	
 	
 </tiles-definitions>

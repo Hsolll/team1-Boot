@@ -3,8 +3,8 @@
 <mapper namespace="com.omb.admin.serviceCenter.dao.AdmServiceCenterDao">
 	
 	<insert id="admServiceInsert" parameterType="admservice">
-		INSERT INTO TB_ADMIN_SERVICE_CENTER(as_no, sc_no, a_no, as_title, as_content, as_created_at)
-		VALUES(tb_admin_service_center_seq.nextval,#{sc_no}, 1 ,#{as_title}, #{as_content}, sysdate)
+		INSERT INTO TB_ADMIN_SERVICE_CENTER (AS_NO, SC_NO, A_NO, AS_TITLE, AS_CONTENT, AS_PWD)
+		VALUES (TB_ADMIN_SERVICE_CENTER_SEQ.NEXTVAL, #{sc_no}, 1, #{as_title}, #{as_content}, #{sc_pwd})
 	</insert>
 	
 	
@@ -18,7 +18,7 @@
 	</select>
 	 
 	<select id="replyServiceDetail" parameterType="admservice" resultType="admservice">
-		SELECT A.AS_NO, A.AS_TITLE, B.A_NAME, A.AS_CONTENT,
+		SELECT A.AS_NO, A.AS_TITLE, B.A_NAME, A.AS_CONTENT, A.AS_PWD,
         TO_CHAR(A.AS_CREATED_AT, 'YYYY-MM-DD') AS AS_CREATED_AT
         FROM TB_ADMIN_SERVICE_CENTER A
         RIGHT JOIN TB_ADMIN B
@@ -36,4 +36,11 @@
 	<delete id="admServiceCenterDelete" parameterType="admservice">
 		DELETE FROM tb_admin_service_center WHERE as_no = #{as_no}
 	</delete>
+	
+	<!-- 비밀번호 체크 -->
+	<select id="admselectPwdChk" parameterType="admservice" resultType="int">
+		SELECT NVL((SELECT 1 FROM TB_ADMIN_SERVICE_CENTER
+			WHERE AS_NO = #{as_no} AND AS_PWD = #{as_pwd}), 0) AS STATE
+		FROM DUAL
+	</select>
 </mapper>
