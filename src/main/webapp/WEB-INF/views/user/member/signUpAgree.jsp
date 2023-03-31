@@ -11,7 +11,7 @@
 		<link rel="shortcut icon" href="/resources/image/icon.png" />
 		<link rel="apple-touch-icon" href="/resources/image/icon.png" />
 		<link type="text/css" rel="stylesheet" href="/resources/include/css/agree.css" />
-	
+	<link type="text/css" rel="stylesheet" href="/resources/include/css/signUp.css" />
 		<!--[if lt IE 9]>
 		<script src="/resources/js/html5shiv.js"></script>
 		<![endif]-->
@@ -30,8 +30,8 @@
 			$("#next").click(function(){
 				if($("#agree").is(":checked") == true && $("#agree2").is(":checked") == true && $("#agree3").is(":checked") == true && $("#agree4").is(":checked") == true ){
 					$("#signUpAgree").attr({
-    					"method" :"get",
-    					"action" : "/member/signUp"
+    					"method" :"post",
+    					"action" : "/member/signUpForm"
     				})
     				$("#signUpAgree").submit();
 				
@@ -63,10 +63,16 @@
 		<div id="container">
         <div class="join_wrap">
             <div id="join_container" role="main">
+            
                 <div class="join_header">                  
                 </div>
+                <div class="find_main">
+                    <ul class="tab" role="tablist">
+                        <li id="tabPrvt" role="presentation" ><a href="/login" id="tab1" role="tab" onclick="toggleTab('tabPrvt');" aria-controls="tabPrvt" data-log-actionid-area="tab" data-log-actionid-label="tab" aria-selected="false">로그인</a></li>
+                        <li id="tabBsns" role="presentation" class="on"><a href="/member/signUpAgree" id="tab2" role="tab" onclick="toggleTab('tabBsns');" aria-controls="tabBsns" data-log-actionid-area="tab" data-log-actionid-label="tab" aria-selected="true">회원가입</a></li>
+                    </ul> 
                 <div id="complet2" class="join_content individual">
-                    <p class="txt_info">회원/전자금융서비스 이용약관과 개인정보 수집 및 이용에 동의를 하셔야 회원가입이 가능합니다.</p>
+                    <p class="txt_info"><em style="color:#0b83e6;">회원/전자금융서비스 이용약관과 개인정보 수집 및 이용에 동의를 하셔야 회원가입이 가능합니다.</em></p>
                     <p class="form tm_all">
                         <input type="checkbox" name="" id="agree_all" class="chk_all big agree" onclick='selectAll(this)'>
                         <label for="agree_all">전체동의(선택제외)</label>
@@ -126,6 +132,7 @@
             </div> 
             <!--// join_container -->
         </div>
+    </div>
     </div>
     </form>
 	</body>

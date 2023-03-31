@@ -83,7 +83,7 @@
                         <li>가입 시 입력한 <em>이메일</em>로 인증번호가 전송됩니다.</li>
                     </ul>
                     <fieldset class="form_box">
-                        <legend>비밀번호 찾기 폼</legend>
+                        <legend></legend>
                         <ul class="join_write">
                             <li>
                                 <label for="etprsMemNm" class="lable_hide">이름</label><input type="text" name="u_name" id="u_name" class="inp" placeholder="이름" maxlength="100" />

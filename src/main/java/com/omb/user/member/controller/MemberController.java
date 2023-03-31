@@ -1,5 +1,6 @@
 package com.omb.user.member.controller;
 
+import java.util.List;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
@@ -18,8 +19,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.omb.common.vo.PageDTO;
 import com.omb.user.member.service.MemberService;
 import com.omb.user.member.vo.MemberVO;
+import com.omb.user.product.service.ProductService;
+import com.omb.user.product.vo.ProductVO;
 
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +36,9 @@ public class MemberController {
 	
 	@Setter(onMethod_=@Autowired)
 	private MemberService memberservice;
+	
+	@Setter(onMethod_=@Autowired)
+	private ProductService productService;
 	
 	@Autowired
     private JavaMailSender mailSender;
@@ -47,7 +54,7 @@ public class MemberController {
 		 return "user/member/signUpAgree";
 	 }
 	
-	@GetMapping("/signUp")
+	@PostMapping("/signUpForm")
 	public String signUpForm() {
 		log.info("회원가입 화면 호출");
 		
@@ -89,7 +96,7 @@ public class MemberController {
 
 	
 	
-	@GetMapping("/updateForm")
+	@PostMapping("/updateForm")
 	public String updateForm(@ModelAttribute MemberVO mvo, Model model) {
 		log.info("회원수정 호출"+  mvo.getU_id());
 		
@@ -98,6 +105,8 @@ public class MemberController {
 		
 		return "user/member/memberUpdateForm";
 	}
+	
+	
 	
 		
 	
@@ -113,7 +122,7 @@ public class MemberController {
 		return "redirect:/member/mypage";
 	}
 	
-	@GetMapping("/deleteForm")
+	@PostMapping("/deleteForm")
 	public String deleteForm(MemberVO mvo) {
 		log.info("회원탈퇴 호출");
 		return "user/member/memberDeleteForm";
@@ -160,7 +169,7 @@ public class MemberController {
 	}
 	
 	
-	@GetMapping("/pwdUpdateForm")
+	@PostMapping("/pwdUpdateForm")
 	public String pwdUpdateForm(MemberVO mvo) {
 		log.info("회원비밀번호수정 호출");
 		return "user/member/memberPwdUpdate";
@@ -422,6 +431,39 @@ public class MemberController {
 		 }
 	 }
 	 
-    
+    @GetMapping("/sellList")
+    public String sellListForm(HttpSession session, @ModelAttribute ProductVO pvo, Model model) {
+    	MemberVO member = (MemberVO)session.getAttribute("memberLogin");
+	    log.info("selectProductList() 메서드 실행성공");
+	    
+	    // 모델 객체에 데이터 전달
+	    model.addAttribute("member", member);
+	    
+	    log.info("member :"+member);
+		
+		List<ProductVO> productList =  productService.selectProductList(pvo);
+		
+		log.info("productList :"+productList);
+		log.info("pvo :"+pvo);
+		
+		
+		model.addAttribute("productList", productList);
+		log.info("model.productList :"+model.getAttribute("productList"));
+		
+		int total = productService.productListCnt(pvo);
+		log.info("total :"+total);
+		
+		model.addAttribute("pageMaker", new PageDTO(pvo, total));
+		log.info("model.pageMaker :"+model.getAttribute("pageMaker"));
+		log.info("pageNum :" + pvo.getPageNum());
+		
+		int count = total - (pvo.getPageNum()-1) * pvo.getAmount();
+		log.info("count :"+count);
+		
+		model.addAttribute("count", count);
+		log.info("model.count :"+model.getAttribute("count"));
+    	
+    	return "user/myPage/myPageSellList";
+    }
    
 }

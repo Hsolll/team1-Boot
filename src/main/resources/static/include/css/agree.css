@@ -278,7 +278,6 @@ button.btn_bg.l1 {
 .join_wrap {
     padding: 65px 0 200px 0;
     min-height: 380px;
-    background: #f1f1f1;
     margin-bottom: -20px;
 }
 
@@ -372,7 +371,7 @@ ul, ol, li, dl, dt, dd {
 
 #join_container #complet2 .tm_all {
     margin: 0 20px;
-    padding: 1px 0 15px;
+    padding: 15px 0 15px;
     border-bottom: 1px solid #E8E8E8;
 }
 

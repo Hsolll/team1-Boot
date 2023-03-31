@@ -142,7 +142,7 @@
                         <li>8~16자의 영문 대소문자, 숫자, 특수문자를 입력해주세요</li>
                     </ul>
                     <fieldset class="form_box">
-                        <legend>비밀번호 찾기 폼</legend>
+                        <legend></legend>
                         <ul class="join_write">
                             <li>
                                 <label for="etprsMemNm" class="lable_hide">이메일</label><input type="text" name="u_email" id="u_email" class="inp" value="${u_email }" readonly="readonly" />

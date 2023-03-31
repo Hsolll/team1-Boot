@@ -499,3 +499,96 @@ button.btn_bg.l1 {
     padding: 10px;
     font-size: 15px;
 }
+
+.mytmall_subArea_v2 {
+  
+    position: relative;
+    z-index: 100;
+    width: 120px;
+    margin:100px 30px;   
+}
+
+.myinfo_wrap_v4 {
+    width: 163px;
+    padding-top: 14px;
+    padding: 16px 0 12px;
+    border: 1px solid #ccc; 
+}
+
+.myinfo_wrap_v4 .my_profile_box {
+    width: 58px;
+    height: 58px;
+    margin: 0 auto;
+    border: solid 1px rgba(0, 0, 0, 0.05);
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.myinfo_wrap_v4 .my_profile_box {
+    width: 58px;
+    height: 58px;
+    margin: 0 auto;
+    border: solid 1px rgba(0, 0, 0, 0.05);
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.mytmall_menu {
+    border: 1px solid #cdcdcd;
+    border-top: none;
+    width: 162x;
+    
+}
+.skip, .hide, .sr-only {
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    margin: -1px;
+    width: 1px;
+    height: 1px;
+}
+
+.mytmall_menu dl.first, .mytmall_menu .mytmall_sub_menu.first {
+    border: none;
+}
+
+.mytmall_menu dl, .mytmall_menu .mytmall_sub_menu {
+    border-top: 1px solid #e4e4e4;
+    padding: 10px 0 4px 20px;
+}
+
+.mytmall_menu dl dt, .mytmall_menu dl h3, .mytmall_menu .mytmall_sub_menu dt, .mytmall_menu .mytmall_sub_menu h3 {
+    padding-bottom: 12px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-size: 100%;
+}
+
+body, h1, h2, h3, h4, h5, h6, p, ul, ol, dl, dd, form, fieldset, pre, figure, blockquote, input, button, textarea {
+    padding: 0;
+    margin: 0;
+}
+
+.mytmall_menu dl dd, .mytmall_menu dl li, .mytmall_menu .mytmall_sub_menu dd, .mytmall_menu .mytmall_sub_menu li {
+    padding: 0 0 3px 1px;
+}
+
+.mytmall_menu dl dd a, .mytmall_menu dl li a, .mytmall_menu .mytmall_sub_menu dd a, .mytmall_menu .mytmall_sub_menu li a {
+    display: inline-block;
+    font-size: 11px;
+    color: #666;
+    vertical-align: middle;
+    line-height: 15px;
+}
+
+a {
+    color: #4d4d4d;
+    text-decoration: none;
+}
+
+#wrapBody {
+    zoom: 1;
+    width: 100% !important;
+    min-width: 1280px !important;
+}

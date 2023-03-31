@@ -21,6 +21,7 @@
 		<link rel="stylesheet" type="text/css" href="/resources/dist/css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="/resources/dist/css/bootstrap-theme.css" />
 		<link type="text/css" rel="stylesheet" href="/resources/include/css/comfirmPw.css" />
+		<link type="text/css" rel="stylesheet" href="/resources/include/css/myPageSub.css" />
 		
 		<script type="text/javascript" src="/resources/include/js/jquery-3.6.2.min.js"></script>
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>
@@ -64,7 +65,19 @@
    				chk5= false;
    			 }else{
    				 $('#pwdCheck').html('비밀번호 일치').css('color','green');
-   		
+   				$.ajax({
+ 					url : "/member/pwdChk",
+ 					type : "post",
+ 					dataType : "json",
+ 					data : {"u_pwd" : $("#u_pwd").val() , "u_no" : $("#u_no").val()},
+ 					success : function(data){
+ 						if(data == 1){
+ 							chk4=true;	     				
+ 						}else if(data == 0){
+ 							chk4 =false;
+ 						}
+ 					}
+ 				})
    			 }
     		})
     		
@@ -72,29 +85,14 @@
     		$("#btn").click(function(){
     			if(!chkData("#u_pwd","비밀번호를")) return;
     			else if(!chkData("#u_rpwd","비밀번호 확인을")) return;
-    			else{
-    			$.ajax({
- 					url : "/member/pwdChk",
- 					type : "post",
- 					dataType : "json",
- 					data : {"u_pwd" : $("#u_pwd").val() , "u_no" : $("#u_no").val()},
- 					success : function(data){
- 						if(data == 1){
- 							chk4=true;
-	     				
- 						}else if(data == 0){
- 							alert("입력하신 비밀번호를 확인해주세요");
- 							chk4 =false;
- 						}
- 					}
- 				})
-    			}
- 				if(chk4){
+    			else if(chk4){
  					$("#PwdCheck").attr({
-	     					"method" :"get",
+	     					"method" :"post",
 	     					"action" : "/member/pwdUpdateForm"
 	     				})
 	     				$("#PwdCheck").submit(); 
+ 				}else if(!chk4){
+ 					alert("입력하신 비밀번호를 확인해주세요");
  				}
      		})
 		})
@@ -106,7 +104,55 @@
 		<input type="hidden" name="u_no" id="u_no" value="${memberLogin.u_no }" />
 		<input type="hidden" name="u_name" value="${memberLogin.u_name }" />
 		<input type="hidden" name="u_id" id="u_id" value="${update.u_id }" />
-            <div id="ux-container" class="page-confirm-password">
+           
+            <div class="mytmall_wrap_v2">
+    
+                    <!-- 마이페이지 탭 -->
+      
+       
+                    <!-- 마이페이지 서브메뉴 영역 -->
+                    <div class="mytmall_subArea_v2"> 
+    <!-- 나의정보 -->
+    <div class="myinfo_wrap_v4" id="leftMemberGradeInfoArea">
+    
+    <div class="mytmall_menu">
+        
+        <div class="mytmall_sub_menu" style="border-top: 0px;">
+            <h3>나의 쇼핑 관리</h3>
+            <ul>
+                
+                <li><a>좋아요(찜) 내역</a></li>
+                <li><a>구매 내역</a></li>
+                <li><a>판매 내역</a></li>
+                
+                
+            </ul>
+        </div>
+        
+        <div class="mytmall_sub_menu">
+            <h3>커뮤니티 목록</h3>
+            <ul>
+                <li><a>작성글 확인</a></li>
+                <li><a>신고 내역</a></li>
+                <li><a>이벤트</a></li>       
+            </ul>
+        </div>
+        <div class="mytmall_sub_menu">
+            <h3>회원 관리</h3>
+            <ul data-log-actionid-area="my_shopping_knowledge" data-log-actionid-label="menu" data-is-ab-send="1">
+                <li><a href="/member/pwdChkForm">회원수정</a></li>
+                <li><a href="/member/pwdChkForm2">비밀번호 수정</a></li>
+                <li><a>주소 관리</a></li>
+                <li><a href="/member/pwdChkForm3">회원탈퇴</a></li>
+                
+            </ul>
+        </div>
+     
+        </div>
+        </div>
+        </div>
+    </div> 
+    <div id="ux-container" class="page-confirm-password" style="margin-top: -450px;">
             <div class="header">
                 <h1 class="title" style="text-align: center;">비밀번호 입력</h1>
                 <p class="direction">

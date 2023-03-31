@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.omb.user.member.dao.MemberDAO;
 import com.omb.user.member.vo.MemberVO;
+import com.omb.user.product.dao.ProductDao;
 
 import lombok.Setter;
 
@@ -14,7 +15,8 @@ public class MemberServiceImpl implements MemberService {
 	@Setter(onMethod_=@Autowired)
 	private MemberDAO memberdao;
 	
-	
+	@Setter(onMethod_=@Autowired)
+	private ProductDao productDao;
 
 	@Override
 	public void signUp(MemberVO mvo)  {

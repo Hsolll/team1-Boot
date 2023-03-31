@@ -3,7 +3,7 @@
     z-index: 1;
     padding-bottom: 28px;
     margin-bottom: 41px;
-    
+    border-bottom: 1px solid #333;
 }
     .member_header .tit {
     font-size: 26px;
@@ -75,6 +75,7 @@ a {
 .find_main .tab {
     padding-bottom: 40px;
     zoom: 1;
+    display:inline-flex;
 }
 
 .find_main .tab li {
@@ -165,31 +166,11 @@ legend {
     position: absolute;
     margin-left: -20px;
 }
-legend {
-    display: block;
-    width: 100%;
-    padding: 0;
-    margin-bottom: 20px;
-    font-size: 21px;
-    line-height: inherit;
-    color: #333;
-    border: 0;
-  
-}
 
 body, h1, h2, h3, h4, h5, h6, p, ul, ol, dl, dd, form, fieldset, pre, figure, blockquote, input, button, textarea {
     padding: 0;
     margin: 0;
 }
-/* ul {
-    display: block;
-    list-style-type: disc;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    padding-inline-start: 40px;
-} */
 
 .join_write > li {
     position: relative;
@@ -205,7 +186,8 @@ body, h1, h2, h3, h4, h5, h6, p, ul, ol, dl, dd, form, fieldset, pre, figure, bl
     *width: 394px;
     *height: 44px;
     line-height: 40px;
-    border: 1px solid #C9C9C9;
+    margin-bottom: 10px;
+        border: 1px solid #C9C9C9;
 }
 
 .join_write > li:after {
@@ -290,3 +272,36 @@ body, h1, h2, h3, h4, h5, h6, p, ul, ol, dl, dd, form, fieldset, pre, figure, bl
     width: 380px;
     margin: 25px auto;
 }
+.find_main .signcheck{
+    width: 320px;
+    height: 46px;
+    line-height: 40px;
+    margin-bottom: 10px;
+}
+
+.btn-red.disabled, .btn-gray.disabled, .btn-purple.disabled, .btn-gpurple.disabled, .btn-red.disabled:active, .btn-gray.disabled:active, .btn-purple.disabled:active, .btn-gpurple.disabled:active {
+    border-color: #dcdbe0;
+    background: #dcdbe0;
+    color: #9a9a9a;
+    cursor: default;
+}
+
+
+button:disabled {
+  background: #dcdbe0;
+  color :#9a9a9a;
+  cursor: default;
+ }
+.signbutton{
+    float: right;
+    padding: 14px;
+    background: #baac9a;
+    border: #baac9a;
+    border-radius: 4px;
+    color:#fff;
+    cursor: pointer;
+    
+}
+
+input:read-only
+ {background-color: #dcdbe0;}

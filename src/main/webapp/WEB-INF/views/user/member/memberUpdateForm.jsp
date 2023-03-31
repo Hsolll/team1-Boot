@@ -13,6 +13,8 @@
 	
 		<link rel="shortcut icon" href="/resources/images/common/icon.png" />
 		<link rel="apple-touch-icon" href="/resources/images/common/icon.png" />
+		<link type="text/css" rel="stylesheet" href="/resources/include/css/memberUpdateForm.css" />
+		<link type="text/css" rel="stylesheet" href="/resources/include/css/myPageSub.css" />
 	
 		<!--[if lt IE 9]>
 		<script src="/resources/js/html5shiv.js"></script>
@@ -33,23 +35,19 @@
 		let getNickChk = RegExp(/^[a-zA-Zㄱ-힣0-9]{2,10}$/);
 		let getPwdChk = RegExp(/^(?=.*[A-Z]|[a-z])(?=.*\d)(?=.*[~!@#$%^&*()+|=])[A-Za-z\d~!@#$%^&*()+|=]{8,16}$/);
 		let getEmailChk = RegExp(/^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/);
-		let getPhoneChk = RegExp(/^\d{3}-\d{3,4}-\d{4}$/);
+		let getPhoneChk = RegExp(/^01([0|1|6|7|8|9])([0-9]{3,4})([0-9]{4})$/);
 		
 		let chk1 =false ,chk2 =false, chk3=false, chk4=false, chk5=false,chk6=false, chk7=false , chk8=false;
-
-			
-		
-		
-		
+	
 		$('#u_nick').keyup(function(){
 			if(getNickChk.test($(this).val())){
-				$('#nickCheck').html('사용가능합니다 중복확인 해주세요.').css('color','green');
+				//$('#nickCheck').html('사용가능합니다 중복확인 해주세요.').css('color','green');
 				$('#btn2').attr("disabled", false);
 				$("#btn2").attr("value","N");
 				//$('#btn2').show();
 				//chk2 =true;
 			}else{
-				$('#nickCheck').html('2~10 자의 영문 소문자,대문자, 한글, 숫자를 입력해주세요').css('color','red').show();
+				//$('#nickCheck').html('2~10 자의 영문 소문자,대문자, 한글, 숫자를 입력해주세요').css('color','red').show();
 				//$('#btn2').hide();
 				$('#btn2').attr("disabled", true);
     			$("#btn2").attr("value","N");
@@ -57,7 +55,7 @@
 			}
 			
 			if($(this).val() === ''){
-				$('#nickCheck').html('');
+				//$('#nickCheck').html('');
 				$('#btn2').attr("disabled", true);
 				$("#btn2").attr("value","N");
 				chk2 =true;
@@ -70,13 +68,13 @@
 		
 		$('#u_email').keyup(function(){
 			if(getEmailChk.test($(this).val())){
-				$('#emailCheck').html('사용가능합니다. 중복확인 해주세요.').css('color','green');
+				//$('#emailCheck').html('사용가능합니다. 중복확인 해주세요.').css('color','green');
 				$("#btn5").attr("value","N");
 				$('#btn5').attr("disabled", false);
 				$('#btn4').attr("disabled", true);
 				chk6=false;
 			}else{
-				$('#emailCheck').html('올바른 이메일을 입력해주세요').css('color','red');
+				//$('#emailCheck').html('올바른 이메일을 입력해주세요').css('color','red');
 				$('#btn5').attr("disabled", true);
 				$('#btn4').attr("disabled", true);
 				$("#btn5").attr("value","N");
@@ -94,19 +92,19 @@
 		
 		$('#u_phone').keyup(function(){
 			if(getPhoneChk.test($(this).val())){
-				$('#phoneCheck').html('사용가능합니다').css('color','green');
+				//$('#phoneCheck').html('사용가능합니다').css('color','green');
 				$("#btn6").attr("value","N");
 				$('#btn6').attr("disabled", false);
 				//chk7 =true;
 			}else{
-				$('#phoneCheck').html('올바른 휴대폰번호를 입력해주세요.(-를 포함하여 입력해주세요)').css('color','red')
+				//$('#phoneCheck').html('올바른 휴대폰번호를 입력해주세요.(-를 포함하여 입력해주세요)').css('color','red')
 				chk7 =true;
 				$("#btn6").attr("value","N");
 				$('#btn6').attr("disabled", true);
 			}
 			
 			if($(this).val() === ''){
-				$('#phoneCheck').html('');
+				//$('#phoneCheck').html('');
 				$("#btn6").attr("value","N");
 				$('#btn6').attr("disabled", true);
 				chk7 =true;
@@ -128,7 +126,7 @@
     		        chk8=true;
     		    } 
     		    if($(this).val() === ''){
-    				$('#emailCodeCheck').html('');
+    				//$('#emailCodeCheck').html('');
     				chk8=true;
     			
     			}
@@ -303,27 +301,115 @@
 		</script>
 	</head>
 	<body>
-	<form id="update">
-	<input type="hidden" name="u_no" value="${memberLogin.u_no }" />
-	<input type="hidden" name="u_id" value="${memberLogin.u_id }" />
-		닉네임<input type="text" id="u_nick" name="u_nick" value="${ update.u_nick}" /> <button id="btn2" type="button" value="Y" disabled="disabled">중복확인</button><br>
-		<span id="nickCheck"></span><br />
-		이메일<input type="email" id="u_email" name="u_email" value="${ update.u_email}" /> <button type="button" id="btn5" value="Y" disabled="disabled">중복확인</button><br /><span id="emailCheck"></span><br />
-		인증번호<input type="text" id="u_emailCheck" name="u_emailCheck" /> <button type="button" id="btn4" value="Y" disabled="disabled">메일인증</button> <br />
-		<span id="emailCodeCheck"></span><br />
-		휴대폰번호<input type="tel" id="u_phone" name="u_phone" value="${ update.u_phone}" /><button type="button" id="btn6" value="Y" disabled="disabled">중복확인</button> <br />
-		<span id="phoneCheck"></span><br />
-		주소<br />
-		<input class="zip" name="zip" readonly="readonly" value="${ update.zip}" /> <button id="btn3" type="button">주소 찾기</button> <br />
- 
-		<input class="address" name="address" readonly="readonly" value="${ update.address}" /> <br />
- 
-		<input class="sub_address" name="sub_address" readonly="readonly" value="${ update.sub_address}" /> <br />
-		<br />
-		
-		
-		
-		<button type="button" id="btn" value="회원수정">회원수정</button>
-		</form>
+		<form id="update">
+			<input type="hidden" name="u_no" value="${memberLogin.u_no }" />
+			<input type="hidden" name="u_id" value="${memberLogin.u_id }" />
+			
+           <!--  <div class="member_wrap" style="margin: -500px 0 50px;"> -->
+           <div class="member_wrap">
+                <header class="member_header">                 
+                </header>
+                <div class="mytmall_wrap_v2" style="width: 300px;">
+    
+                    <!-- 마이페이지 탭 -->
+      
+       
+                    <!-- 마이페이지 서브메뉴 영역 -->
+                    <div class="mytmall_subArea_v2"> 
+    <!-- 나의정보 -->
+    <div class="myinfo_wrap_v4" id="leftMemberGradeInfoArea">
+    
+    <div class="mytmall_menu">
+        
+        <div class="mytmall_sub_menu" style="border-top: 0px;">
+            <h3>나의 쇼핑 관리</h3>
+            <ul>
+                
+                <li><a>좋아요(찜) 내역</a></li>
+                <li><a>구매 내역</a></li>
+                <li><a>판매 내역</a></li>
+                
+                
+            </ul>
+        </div>
+        
+        <div class="mytmall_sub_menu">
+            <h3>커뮤니티 목록</h3>
+            <ul>
+                <li><a>작성글 확인</a></li>
+                <li><a>신고 내역</a></li>
+                <li><a>이벤트</a></li>       
+            </ul>
+        </div>
+        <div class="mytmall_sub_menu">
+            <h3>회원 관리</h3>
+            <ul data-log-actionid-area="my_shopping_knowledge" data-log-actionid-label="menu" data-is-ab-send="1">
+                <li><a href="/member/pwdChkForm">회원수정</a></li>
+                <li><a href="/member/pwdChkForm2">비밀번호 수정</a></li>
+                <li><a>주소 관리</a></li>
+                <li><a href="/member/pwdChkForm3">회원탈퇴</a></li>
+                
+            </ul>
+        </div>
+     
+        </div>
+        </div>
+        </div>
+    </div> 
+                                          
+                   <section id="sectionBsns" style="margin: -430px auto; width: 500px;">
+                    <div class="find_main">
+                    <ul class="tab" role="tablist" style="display: inline-flex;">
+                        <li id="tabPrvt" role="presentation" class="on"><a id="tab1" role="tab" onclick="toggleTab('tabPrvt');" aria-controls="tabPrvt" data-log-actionid-area="tab" data-log-actionid-label="tab" aria-selected="false">회원수정</a></li>
+                        <li id="tabBsns" role="presentation"><a href="/member/pwdChkForm2" id="tab2" role="tab" onclick="toggleTab('tabBsns');" aria-controls="tabBsns" data-log-actionid-area="tab" data-log-actionid-label="tab" aria-selected="true">비밀번호수정</a></li>
+                    </ul>  
+                        <fieldset class="form_box" style="margin: 0px auto 0;">
+                            <legend>회원수정 폼</legend>
+                            <div class="join_write">
+                            <ul>
+                                <li>
+                                    닉네임<br />
+                                    <input type="text" name="u_nick" id="u_nick" class="signcheck" placeholder="닉네임" maxlength="100" value="${ update.u_nick}" />
+                                    <button type="button" id="btn2" class="signbutton" style="float:right" disabled="disabled" value="Y" >중복확인</button>
+                                    <span id="nickCheck"><em style="color: #0b83e6">2~10 자의 영문 소문자,대문자, 한글, 숫자 조합</em></span> <br />
+                                </li>
+                                <li>
+                                    이메일<br />
+                                    <input type="text" name="u_email" id="u_email" class="signcheck" placeholder="이메일" maxlength="100" value="${ update.u_email}" />
+                                    <button type="button" id="btn5" class="signbutton" style="float:right" disabled="disabled" value="Y" >중복확인</button>
+                                </li>
+                                <li>
+                                    인증번호<br />
+                                    <input type="text" name="u_emailCheck" id="u_emailCheck" class="signcheck" placeholder="인증번호" maxlength="100" />
+                                    <button type="button" id="btn4" class="signbutton" style="float:right" disabled="disabled" value="Y" >인증받기</button><br />
+                                    <span id="emailCodeCheck"></span> 
+                                </li>
+                                <li>
+                                    휴대폰번호<br />
+                                    <input type="text" name="u_phone" id="u_phone" class="signcheck" placeholder="휴대폰번호" maxlength="100" value="${ update.u_phone}" />
+                                    <button type="button" id="btn6" class="signbutton" style="float:right" disabled="disabled" value="Y" >중복확인</button><br />
+                                    <span id="phoneCheck"><em style="color: #0b83e6">-를 제외하고 입력해주세요.</em></span> 
+                                </li>
+                                <li>
+                                    주소<br /><button type="button" id="btn3" class="signbutton" style="float:right">주소검색</button>
+                                    <input type="text" name="zip" id="zip" class="signcheck" placeholder="우편번호" maxlength="100" readonly="readonly" value="${ update.zip}" />
+                                </li>
+                                <li><input type="text" name="address" id="address" class="inp" placeholder="주소" maxlength="100" style="margin-bottom: 10px" readonly="readonly" value="${ update.address}" /></li>
+                                <li><input type="text" name="sub_address" id="sub_address" class="inp" placeholder="상세주소" maxlength="100" style="margin-bottom: 10px" value="${ update.sub_address}" /></li>                               
+                            </ul>
+                            <button type="button" id="btn" class="btn_Atype btn_a" style="border-radius: 4px;"><span>회원수정</span></button>
+                            <div class="c-util c-infotip">
+                                <div class="c-util__item" style="margin: 5px;">                 
+                            </div> 
+                            </div>
+                            </div>
+                        </fieldset>
+                        </div>
+                    </section>
+                    <div id="contentWrap">
+                	<a href="" style="display: block;text-align: center;margin: 220px 0;">&nbsp;</a>
+            </div>
+                </div>
+            </form>
 	</body>
 </html>

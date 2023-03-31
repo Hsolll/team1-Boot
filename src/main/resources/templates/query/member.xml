@@ -7,8 +7,8 @@
 	<selectKey keyProperty="u_no" resultType="int" order="BEFORE">
 		select tb_user_seq.nextval from dual
 	</selectKey>
-		insert into tb_user(u_no , u_id , u_nick , u_name , u_pwd , u_email , u_phone)
-		values(#{u_no} , #{u_id} , #{u_nick} , #{u_name} , #{u_pwd} ,#{u_email} ,#{u_phone})
+		insert into tb_user(u_no , u_id , u_nick , u_name , u_pwd , u_email , u_phone , u_grade)
+		values(#{u_no} , #{u_id} , #{u_nick} , #{u_name} , #{u_pwd} ,#{u_email} ,#{u_phone} , '1')
 	</insert>
 	
 	<!-- 회원가입 주소-->
@@ -114,4 +114,24 @@
 	set u_pwd = #{u_pwd}
 	where u_email = #{u_email}
 	</update>
+	
+	<!-- 마이페이지 판매내역 조회 -->
+	<select id="selectProductList" resultType="product">
+  		<![CDATA[ 
+		SELECT 
+        		P_NO, U_NO, P_TITLE, P_NAME, P_PRICE, P_STATUS, P_CONTENT, P_LOCAL, TRANS_METHOD, P_CREATED_AT, P_UPDATED_AT, P_DELETED_AT, p_file, p_thumb, P_CATE, P_ADM_PER
+		FROM (
+		        SELECT /*+ INDEX_DESC(TB_USER_PRODUCT TB_USER_PRODUCT_PK) */ 
+		            rownum as rnum, p.P_NO,u.U_NO,p.P_TITLE,p.P_NAME,p.P_PRICE,p.P_STATUS,p.P_CONTENT,p.P_LOCAL,p.TRANS_METHOD,p.P_CREATED_AT,p.P_UPDATED_AT,p.P_DELETED_AT,p.p_file,p.p_thumb,p.P_CATE,p.P_ADM_PER
+		        FROM 
+		            TB_USER_PRODUCT p INNER JOIN TB_USER u ON p.U_NO = u.U_NO 
+		        WHERE 
+		            rownum <= #{pageNum} * #{amount}
+		     ) PRODUCTLIST
+		WHERE 
+		    rnum > (#{pageNum} - 1) * #{amount} AND P_ADM_PER = 1 and p_no={p_no} and u_no={u_no}
+    	]]>
+    	 
+			
+	</select>
 </mapper>

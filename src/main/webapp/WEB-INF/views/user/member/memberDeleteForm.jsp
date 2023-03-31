@@ -11,6 +11,7 @@
 		<link rel="shortcut icon" href="/resources/image/icon.png" />
 		<link rel="apple-touch-icon" href="/resources/image/icon.png" />
 		<link type="text/css" rel="stylesheet" href="/resources/include/css/delete.css" />
+		<!-- <link type="text/css" rel="stylesheet" href="/resources/include/css/myPageSub.css" /> -->
 	
 		<!--[if lt IE 9]>
 		<script src="/resources/js/html5shiv.js"></script>
@@ -26,7 +27,7 @@
 				
 				$("#btn").click(function(){
 					alert("회원탈퇴 되었습니다. 이용해주셔서 감사합니다.");
-								$("#u_status").attr('value','NUSING');
+								$("#u_status").attr('value','N');
 								$("#memberDelete").attr({
 			    					"method" :"post",
 			    					"action" : "/member/memberDelete"
@@ -40,16 +41,61 @@
 	<form id="memberDelete">
 	<input type="hidden" name="u_no" value="${memberLogin.u_no }" />
 	<input type="hidden" id="u_status" name="u_status" value="${memberLogin.u_status }" />
+	 <!-- 마이페이지 탭 -->
+      
+       
+                    <!-- 마이페이지 서브메뉴 영역 -->
+                    <div class="mytmall_subArea_v2"> 
+    <!-- 나의정보 -->
+    <div class="myinfo_wrap_v4" id="leftMemberGradeInfoArea" style="border:0;">
+    
+    <div class="mytmall_menu">
+        
+        <div class="mytmall_sub_menu">
+            <h3>나의 쇼핑 관리</h3>
+            <ul>
+                
+                <li><a>좋아요(찜) 내역</a></li>
+                <li><a>구매 내역</a></li>
+                <li><a>판매 내역</a></li>
+                
+                
+            </ul>
+        </div>
+        
+        <div class="mytmall_sub_menu">
+            <h3>커뮤니티 목록</h3>
+            <ul>
+                <li><a>작성글 확인</a></li>
+                <li><a>신고 내역</a></li>
+                <li><a>이벤트</a></li>       
+            </ul>
+        </div>
+        <div class="mytmall_sub_menu">
+            <h3>회원 관리</h3>
+            <ul data-log-actionid-area="my_shopping_knowledge" data-log-actionid-label="menu" data-is-ab-send="1">
+                <li><a href="/member/pwdChkForm">회원수정</a></li>
+                <li><a href="/member/pwdChkForm2">비밀번호 수정</a></li>
+                <li><a>주소 관리</a></li>
+                <li><a href="/member/pwdChkForm3">회원탈퇴</a></li>
+                
+            </ul>
+        </div>
+     
+        </div>
+        </div>
+        </div>
+    
             <div id="container">
-            <div class="join_wrap">
-                <div id="join_container" role="main">
+            <div class="join_wrap" style="margin: -500px 200px 50px;">
+                <div id="join_container" role="main" style="margin: 0 200px;">
                     <div class="join_header">
-                        <h1>회원탈퇴</h1>                  
+                        <h1 style="font-size: 30px;">회원탈퇴</h1>                  
                     </div>
                     <div id="complet2" class="join_content individual">
-                        <h1 style="margin-bottom: 30px">OhMyBaby를 탈퇴하신다니 아쉬워요.</h1>
+                        <h1 style="margin-bottom: 30px; font-size: 30px">OhMyBaby를 탈퇴하신다니 아쉬워요.</h1>
                         <p> 
-                            탈퇴하시려는 이유를 작성해 주세요. 더 나은 서비스를 위해 개선하겠습니다.
+                            <em style="color: #0b83e6">탈퇴하시려는 이유를 작성해 주세요. 더 나은 서비스를 위해 개선하겠습니다.</em>
                         </p>
                         <div class="form tm_required">
                             <ul>
@@ -85,7 +131,7 @@
                         </div>
                     </div>
         
-                    <p class="txt">＊그동안 OhMyBaby를 이용해주셔서 감사합니다. *</p>
+                    <p class="txt"><em style="color: #0b83e6">＊그동안 OhMyBaby를 이용해주셔서 감사합니다. *</em></p>
         
                     <div class="btn_zone agree">
                         <button type="button" id="btn" class="bg_area btn_bg l1 md" style="border-radius:10px; border:0px;"><span>회원탈퇴</span></button>
