@@ -83,6 +83,7 @@ public class MemberController {
 		
 		MemberVO mypage = memberservice.myPage(mvo);
 		model.addAttribute("mypage" ,mypage);
+		
 		return "user/myPage/myPageIndex";
 	}
 	

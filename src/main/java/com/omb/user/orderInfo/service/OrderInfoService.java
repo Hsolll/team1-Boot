@@ -21,5 +21,12 @@ public interface OrderInfoService {
 	public int updateOrderStatusCancel(OrderInfoVO ovo);	// 결제취소 후 주문상태 변경 메서드
 	
 	public int updateOrderStatusConfirm(OrderInfoVO ovo);	// 구매확정 후 주문상태 변경 메서드
+	
+	public int updateOrderStatusSend(OrderInfoVO ovo);		// 발송완료 후 주문상태 변경 메서드 (배송중)
+	
+	// 거래완료 후 판매상태 변경
+	public int updateCompleteSafe(OrderInfoVO ovo);		// 구매확정 후 안심상품 판매상태 변경
+	
+	public int updateCompleteProduct(OrderInfoVO ovo);		// 구매확정 후 안심상품 판매상태 변경
 
 }

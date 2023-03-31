@@ -4,15 +4,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.omb.user.payment.dao.PaymentDAO;
-import com.omb.user.payment.vo.PaymentVO;
-import com.omb.admin.depositInfo.dao.AdmDepositInfoDAO;
-import com.omb.user.address.dao.MemberAddressDAO;
 import com.omb.user.orderInfo.dao.OrderInfoDAO;
-
 import com.omb.user.orderInfo.vo.OrderInfoVO;
 import com.omb.user.payment.dao.PaymentDAO;
-
 import com.omb.user.safeProduct.dao.SafeProductDAO;
 
 import lombok.Setter;
@@ -31,6 +25,9 @@ class Team1ApplicationTests {
 	
 	@Setter(onMethod_ = @Autowired)
 	private PaymentDAO paymentDAO;
+	
+	@Setter(onMethod_ = @Autowired)
+	private OrderInfoDAO orderInfoDAO;
 	
 	/* 
 	@Test
@@ -159,7 +156,7 @@ class Team1ApplicationTests {
 	} */
 	
 	
-	/* 주문내역 추가 쿼리문 테스트 */
+	/* 주문내역 추가 쿼리문 테스트
 	@Test
 	public void testInsertOrderInfo() {
 		
@@ -178,7 +175,7 @@ class Team1ApplicationTests {
 		
 		log.info("입력된 행의 수 :  " + result);
 		
-	}
+	} */
 	
 	
 	/* 주문내역 추가에 필요한 결제번호 조회 쿼리문 테스트 
@@ -270,6 +267,7 @@ class Team1ApplicationTests {
 	} */
 
 	
+	/* 결제정보 추가
 	@Test
 	public void testInsertPaymentInfo() {
 		
@@ -286,5 +284,61 @@ class Team1ApplicationTests {
 		result = paymentDAO.insertPaymentInfo(pvo);
 		
 		log.info("result : " + result);
+	} */
+	
+	/* 안심상품 등록 테스트
+	@Test
+	public void testInsertSafeProduct() {
+		
+		SafeProductVO svo = new SafeProductVO();
+		
+		svo.setU_no(1);
+		svo.setP_no(1);
+		svo.setSp_title("테스트 제목");
+		svo.setSp_name("아기옷");
+		svo.setSp_content("테스트 내용");
+		svo.setSp_pwd("1234");
+		
+		log.info("svo : " + svo);
+		
+		int result = 0;
+		
+		result = safeProductDAO.insertSafeProduct(svo);
+		
+		log.info("입력된 행의 수 : " + result);
+	} */
+	
+	/* 안심상품 수정 테스트
+	@Test
+	public void testUpdateSafeProduct() {
+		
+		SafeProductVO svo = new SafeProductVO();
+		
+		svo.setSp_no(8);
+		svo.setSp_title("테스트 제목");
+		svo.setSp_price(1000);
+		svo.setSp_content("테스트 내용");
+		svo.setSp_pwd("1234");
+		
+		log.info("svo : " + svo);
+		
+		int result = 0;
+		
+		result = safeProductDAO.updateSafeProduct(svo);
+		
+		log.info("입력된 행의 수 : " + result);
+	} */
+	
+	@Test
+	public void testUpdateComplete() {
+		OrderInfoVO ovo = new OrderInfoVO();
+		
+		ovo.setO_no(15);
+		int result = 0;
+		result = orderInfoDAO.updateCompleteSafe(ovo);
+		
+		log.info("출려된 행의 수 : " + result);
+		
 	}
+	
 }

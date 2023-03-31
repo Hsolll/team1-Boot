@@ -207,6 +207,17 @@ public class PaymentServiceImpl implements PaymentService {
       bw.write(json.toString());
       bw.flush();
       bw.close();
+      
+      BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
+      
+      Gson gson = new Gson();
+ 
+      // 응답 객체 key 값 중 "response"을 찾아 String 타입 response에 담는다.
+      String response = gson.fromJson(br.readLine(), Map.class).get("response").toString();
+      
+      System.out.println("취소처리 후 응답객체 : " + response);
+      
+      br.close();
             
       conn.disconnect();
       
