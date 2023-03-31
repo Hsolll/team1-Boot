@@ -17,7 +17,8 @@
 		
 		<link rel="stylesheet" type="text/css" href="/resources/dist/css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="/resources/dist/css/bootstrap-theme.css" />
-		
+		<link type="text/css" rel="stylesheet" href="/resources/include/css/signUp.css" />
+			
 		<script type="text/javascript" src="/resources/include/js/jquery-3.6.2.min.js"></script>
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>
 		<script type="text/javascript" src="/resources/include/dist/js/bootstrap.min.js"></script>
@@ -29,7 +30,7 @@
     		let getNickChk = RegExp(/^[a-zA-Zㄱ-힣0-9]{2,10}$/);
     		let getPwdChk = RegExp(/^(?=.*[A-Z]|[a-z])(?=.*\d)(?=.*[~!@#$%^&*()+|=])[A-Za-z\d~!@#$%^&*()+|=]{8,16}$/);
     		let getEmailChk = RegExp(/^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/);
-    		let getPhoneChk = RegExp(/^\d{3}-\d{3,4}-\d{4}$/);
+    		let getPhoneChk = RegExp(/^01([0|1|6|7|8|9])([0-9]{3,4})([0-9]{4})$/);
     		
     		let chk1 =false ,chk2 =false, chk3=false, chk4=false, chk5=false,chk6=false, chk7=false, chk8=false;
     		var code = ""; 
@@ -37,14 +38,14 @@
     		
     		$('#u_id').keyup(function(){
     			if(getIdChk.test($(this).val())){
-    				$('#idCheck').html('사용가능합니다 중복확인 해주세요.').css('color','green').show();
+    				//$('#idCheck').html('사용가능합니다 중복확인 해주세요.').css('color','green').show();
     				$('#btn1').attr("disabled", false);
     				$("#btn1").attr("value","N");
     				
     				//$('#btn1').show();
     				//chk1 =true;
     			}else{
-    				$('#idCheck').html('5~16 자의 영문 소문자, 숫자를 입력해주세요').css('color','red').show();
+    				//$('#idCheck').html('5~16 자의 영문 소문자, 숫자를 입력해주세요').css('color','red').show();
     				//$('#btn1').hide();
     				$('#btn1').attr("disabled", true);
     				$("#btn1").attr("value","N");
@@ -53,7 +54,7 @@
     			}
     			
     			if($(this).val() === ''){
-    				$('#idCheck').html('');
+    				//$('#idCheck').html('');
     				$('#btn1').attr("disabled", true);
     				$("#btn1").attr("value","N");
     				chk1 =false;
@@ -63,13 +64,13 @@
     		
     		$('#u_nick').keyup(function(){
     			if(getNickChk.test($(this).val())){
-    				$('#nickCheck').html('사용가능합니다 중복확인 해주세요.').css('color','green').show();
+    				//$('#nickCheck').html('사용가능합니다 중복확인 해주세요.').css('color','green').show();
     				$('#btn2').attr("disabled", false);
     				$("#btn2").attr("value","N");
     				//$('#btn2').show();
     				//chk2 =true;
     			}else{
-    				$('#nickCheck').html('2~10 자의 영문 소문자,대문자, 한글, 숫자를 입력해주세요').css('color','red').show();
+    				//$('#nickCheck').html('2~10 자의 영문 소문자,대문자, 한글, 숫자를 입력해주세요').css('color','red').show();
     				//$('#btn2').hide();
     				$('#btn2').attr("disabled", true);
     				$("#btn2").attr("value","N");
@@ -77,7 +78,7 @@
     			}
     			
     			if($(this).val() === ''){
-    				$('#nickCheck').html('');
+    				//$('#nickCheck').html('');
     				$('#btn2').attr("disabled", true);
     				$("#btn2").attr("value","N");
     				chk2 =false;
@@ -86,70 +87,52 @@
     		
     		$('#u_name').keyup(function(){
     			if(getNameChk.test($(this).val())){
-    				$('#nameCheck').html('사용가능합니다.').css('color','green').show();
+    				//$('#nameCheck').html('사용가능합니다.').css('color','green').show();
     				chk3 =true;
     				
     			}else{
-    				$('#nameCheck').html('2~5 자의 한글을 입력해주세요').css('color','red').show();
+    				//$('#nameCheck').html('2~5 자의 한글을 입력해주세요').css('color','red').show();
     				chk3 =false;
     				
     			}
     			
     			if($(this).val() === ''){
-    				$('#nameCheck').html('');
+    				//$('#nameCheck').html('');
     				chk3 =false;
     			}
     		})
     		
-    		$('#u_pwd').keyup(function(){
+    		$('#u_pwd').keyup(function(){  			
+    			if(getPwdChk.test($(this).val())){
+    				chk4=true , chk5=true;
+    				console.log(chk4,chk5);
+    			}else{
+    				console.log(chk4,chk5);
+    				chk4= false;
+    			}
+    		})  		
+    		$('#u_rpwd').keyup(function(){
     			
     			if(getPwdChk.test($(this).val())){
-    				$('#pwdCheck').html('사용가능합니다.').css('color','green');
-    				
-    			}else{
-    				$('#pwdCheck').html('8~16자의 영문 대소문자, 숫자, 특수문자를 입력해주세요').css('color','red');
-    				chk4= false;
+    				chk4,chk5=true;
+    				console.log(chk4,chk5);
     			}
-    			
-    			if($(this).val() === ''){
-    				$('#pwdCheck').html('');
-    				chk4= false;
+      			 else{
+    				console.log(chk4,chk5);
+    				chk5=false;
     			}
-    			
-    			 /* if($("#u_pwd").val()!==$("#u_rpwd").val() && $("#u_pwd").val()!==''){
-    				 $('#pwdCheck').html('비밀번호 불일치');
-    			 }else{
-    				 $('#pwdCheck').html('비밀번호 일치');
-    			 } */
-    		})
-    		
-    		$('#u_rpwd').keyup(function(){
-    			getPwdChk.test($(this));
-    			
-    			if($(this).val() === ''){
-    				$('#pwdCheck').html('');
-    				chk5= false;
-    			}
-    			
-    			if($("#u_pwd").val()!==$("#u_rpwd").val() && $("#u_pwd").val()!==''){
-   				 $('#pwdCheck').html('비밀번호 불일치').css('color','red');
-   				chk5= false;
-   			 }else{
-   				 $('#pwdCheck').html('비밀번호 일치').css('color','green');
-   				chk4 = true ,chk5= true;
-   			 }
-    		})
+    		}) 
     		
     		$('#u_email').keyup(function(){
     			if(getEmailChk.test($(this).val())){
-    				$('#emailCheck').html('사용가능합니다. 중복확인 해주세요.').css('color','green');
+    				//$('#emailCheck').html('사용가능합니다. 중복확인 해주세요.').css('color','green');
     				$("#btn5").attr("value","N");
     				$('#btn5').attr("disabled", false);
     				$('#btn4').attr("disabled", true);
     				
     				//chk6 =true;
     			}else{
-    				$('#emailCheck').html('올바른 이메일을 입력해주세요').css('color','red');
+    				//$('#emailCheck').html('올바른 이메일을 입력해주세요').css('color','red');
     				$('#btn5').attr("disabled", true);
     				$('#btn4').attr("disabled", true);
     				$("#btn5").attr("value","N");
@@ -167,19 +150,19 @@
     		
     		$('#u_phone').keyup(function(){
     			if(getPhoneChk.test($(this).val())){
-    				$('#phoneCheck').html('사용가능합니다').css('color','green');
+    				//$('#phoneCheck').html('사용가능합니다').css('color','green');
     				$("#btn6").attr("value","N");
     				$('#btn6').attr("disabled", false);
     				//chk7 =true;
     			}else{
-    				$('#phoneCheck').html('올바른 휴대폰번호를 입력해주세요.(-를 포함하여 입력해주세요)').css('color','red')
+    				//$('#phoneCheck').html('올바른 휴대폰번호를 입력해주세요.(-를 포함하여 입력해주세요)').css('color','red')
     				chk7 =false;
     				$("#btn6").attr("value","N");
     				$('#btn6').attr("disabled", true);
     			}
     			
     			if($(this).val() === ''){
-    				$('#phoneCheck').html('');
+    				//$('#phoneCheck').html('');
     				$("#btn6").attr("value","N");
     				$('#btn6').attr("disabled", true);
     				chk7 =false;
@@ -264,14 +247,14 @@
     	                	 addr += ' ';
     	                }
     	 
-    	                $(".zip").val(data.zonecode);
+    	                $("#zip").val(data.zonecode);
     	              
-    	                $(".address").val(addr);
+    	                $("#address").val(addr);
     	              
     	                // 커서를 상세주소 필드로 이동한다.
     	                // 상세주소 입력란 disabled 속성 변경 및 커서를 상세주소 필드로 이동한다.
-    	                $(".sub_address").attr("readonly",false);
-    	                 $(".sub_address").focus();
+    	                $("#sub_address").attr("readonly",false);
+    	                 $("#sub_address").focus();
     		 
     		        }
     		    }).open();  
@@ -349,10 +332,12 @@
     		    if(inputCode == code){                            // 일치할 경우
     		        checkResult.html("인증번호가 일치합니다.").css('color','green');
     		        checkResult.attr("class", "correct");
+    		        $("#btn4").attr("value","Y");
     		        chk8=true;
     		    } else {                                            // 일치하지 않을 경우
     		        checkResult.html("인증번호를 다시 확인해주세요.").css('color','red');;
     		        checkResult.attr("class", "incorrect");
+    		        $("#btn4").attr("value","N");
     		        chk8=false;
     		    } 
     		    if($(this).val() === ''){
@@ -364,14 +349,16 @@
     		});
     		
     		 $("#btn").click(function(){		
-    			if($("#btn1").val()==="Y" && $("#btn2").val()==="Y" && $("#btn5").val()==="Y" && $("#btn6").val()==="Y" && chk1 && chk2 && chk3 && chk4 && chk5 && chk6 && chk7&& chk8){
-    				alert("회원가입이 완료되었습니다.");
-    				$("#signUp").attr({
-    					"method" :"post",
-    					"action" : "/member/signUp"
-    				})
-    				$("#signUp").submit(); 				
-    			}else if($("#btn1").val()==="N"){
+    			if(!chkData("#u_name","이름을")) return;
+    			else if(!chkData("#u_id","아이디를")) return;
+    			else if(!chkData("#u_nick","닉네임를")) return;
+    			else if(!chkData("#u_pwd","비밀번호를")) return;
+    			else if(!chkData("#u_rpwd","비밀번호 확인을")) return;
+    			else if(!chkData("#u_rpwd","비밀번호 확인을")) return;
+    			else if(!chkData("#u_phone","휴대폰 번호를")) return;
+    			else if(!chkData("#u_email","이메일을")) return;
+   			
+    			else if($("#btn1").val()==="N"){
         			alert("아이디 중복확인해주세요");
         		}
     			else if($("#btn2").val()==="N"){
@@ -386,57 +373,104 @@
     			else if($("#btn6").val()==="N"){
         			alert("휴대폰번호 중복확인해주세요");
         		}
+    			else if($("#u_pwd").val()!==$("#u_rpwd").val()){
+      				 alert("비밀번호가 일치하지 않습니다.");
+        				chk5= false;
+       			}else if($("#btn1").val()==="Y" && $("#btn2").val()==="Y" && $("#btn5").val()==="Y" && $("#btn6").val()==="Y" && chk1 && chk2 && chk3 && chk4 && chk5 && chk6 && chk7&& chk8){
+    				alert("회원가입이 완료되었습니다.");
+    				$("#signUp").attr({
+    					"method" :"post",
+    					"action" : "/member/signUp"
+    				})
+    				$("#signUp").submit(); 
+       			}
     			else{
     				alert("양식을 확인해주세요");
     				console.log(chk1,chk2,chk3,chk4,chk5,chk6,chk7);
-    			}
-    			   			
-    			if(!chkData("#u_name","이름을")) return;
-    			else if(!chkData("#u_id","아이디를")) return;
-    			else if(!chkData("#u_nick","닉네임를")) return;
-    			else if(!chkData("#u_pwd","비밀번호를")) return;
-    			else if(!chkData("#u_rpwd","비밀번호 확인을")) return;
-    			else if(!chkData("#u_phone","휴대폰 번호를")) return;
-    			else if(!chkData("#u_email","이메일을")) return;
-    			
-    			
-    			
-    				
-    		}) 
-    		
-    		
-    		
-    		
+    			}   				
+    		}) 	
     	})
 		</script>
 	</head>
 	<body>
-	<form id="signUp">
-		이름<input type="text" id="u_name" name="u_name" /> <br />
-		<span id="nameCheck"></span><br />
-		아이디<input type="text" id="u_id" name="u_id" /><button id="btn1" type="button" value="N" disabled="disabled">중복확인</button><br>
-		<span id="idCheck"></span><br />
-		닉네임<input type="text" id="u_nick" name="u_nick" /> <button id="btn2" type="button" value="N" disabled="disabled">중복확인</button><br>
-		<span id="nickCheck"></span><br />
-		비밀번호<input type="password" id="u_pwd" name="u_pwd" /> <br />
-		
-		비밀번호확인<input type="password" id="u_rpwd" name="u_rpwd" /> <br />
-		<span id="pwdCheck"></span><br />
-		이메일<input type="email" id="u_email" name="u_email" /> <button type="button" id="btn5" value="N" disabled="disabled">중복확인</button><br /><span id="emailCheck"></span><br />
-		인증번호<input type="text" id="u_emailCheck" name="u_emailCheck" /> <button type="button" id="btn4" value="N" disabled="disabled">메일인증</button> <br />
-		<span id="emailCodeCheck"></span><br />
-		휴대폰번호<input type="tel" id="u_phone" name="u_phone" /><button type="button" id="btn6" value="N" disabled="disabled">중복확인</button> <br />
-		<span id="phoneCheck"></span><br />
-		주소<br />
-		<input class="zip" name="zip" readonly="readonly" /> <button id="btn3" type="button">주소 찾기</button> <br />
- 
-		<input class="address" name="address" readonly="readonly" /> <br />
- 
-		<input class="sub_address" name="sub_address" readonly="readonly" /> <br />
-		<br />
-		
-		
-		<button type="button" id="btn" value="회원가입">회원가입</button>
-		</form>
+		<form id="signUp">
+            <div class="member_wrap">
+                <header class="member_header">                 
+                </header>
+                <div class="find_main">
+                    <ul class="tab" role="tablist">
+                        <li id="tabPrvt" role="presentation" ><a href="/login" id="tab1" role="tab" onclick="toggleTab('tabPrvt');" aria-controls="tabPrvt" data-log-actionid-area="tab" data-log-actionid-label="tab" aria-selected="false">로그인</a></li>
+                        <li id="tabBsns" role="presentation" class="on"><a href="/member/signUpAgree" id="tab2" role="tab" onclick="toggleTab('tabBsns');" aria-controls="tabBsns" data-log-actionid-area="tab" data-log-actionid-label="tab" aria-selected="true">회원가입</a></li>
+                    </ul>                            
+                    <section id="sectionBsns" style="display: block;">
+                        <ul class="seller_guide">
+                            <li><em>*는 필수항목입니다.</em></li>
+                        </ul>
+                        <fieldset class="form_box">
+                            <legend>회원가입 폼</legend>
+                            <div class="join_write">
+                            <ul>
+                                <li>
+                                    이름<em style="color:red">*</em>
+                                    <input type="text" name="u_name" id="u_name" class="inp" placeholder="아이디" maxlength="100" style="margin-bottom: 10px" /><br />
+                                    <span id="nameCheck"></span>
+                                </li>
+                                <li>
+                                    아이디<em style="color:red">*</em><br />
+                                    <input type="text" name="u_id" id="u_id" class="signcheck btn-purple.disabled" placeholder="아이디" maxlength="100" />
+                                    <button type="button" id="btn1" class="signbutton" style="float:right" disabled="disabled" value="N" >중복확인</button><br />
+                                    <span id="idCheck"><em style="color: #0b83e6">5~16 자의 영문 대문자,소문자,숫자 조합</em></span>
+                                </li>
+                                <li>
+                                    닉네임<em style="color:red">*</em><br />
+                                    <input type="text" name="u_nick" id="u_nick" class="signcheck" placeholder="닉네임" maxlength="100" />
+                                    <button type="button" id="btn2" class="signbutton" style="float:right" disabled="disabled" value="N" >중복확인</button>
+                                    <span id="nickCheck"><em style="color: #0b83e6">2~10 자의 영문 소문자,대문자, 한글, 숫자 조합</em></span> <br />
+                                </li>
+                                <li>
+                                    비밀번호<em style="color:red">*</em>
+                                    <input type="password" name="u_pwd" id="u_pwd" class="inp" placeholder="비밀번호" maxlength="100" /><br />
+                                    <span id="pwdCheck"><em style="color: #0b83e6">8~16자의 영문 대소문자, 숫자, 특수문자를 1가지 이상 반드시 포함하여 조합</em></span>
+                                </li>
+                                <li>
+                                    비밀번호 확인<em style="color:red">*</em>
+                                    <input type="password" name="u_rpwd" id="u_rpwd" class="inp" placeholder="비밀번호 확인" maxlength="100" />
+                                </li>
+                                <li>
+                                    이메일<em style="color:red">*</em><br />
+                                    <input type="text" name="u_email" id="u_email" class="signcheck" placeholder="이메일" maxlength="100" />
+                                    <button type="button" id="btn5" class="signbutton" style="float:right" disabled="disabled" value="N" >중복확인</button>
+                                </li>
+                                <li>
+                                    인증번호<em style="color:red">*</em><br />
+                                    <input type="text" name="u_emailCheck" id="u_emailCheck" class="signcheck" placeholder="인증번호" maxlength="100" />
+                                    <button type="button" id="btn4" class="signbutton" style="float:right" disabled="disabled" value="N" >인증받기</button><br />
+                                    <span id="emailCodeCheck"></span> 
+                                </li>
+                                <li>
+                                    휴대폰번호<em style="color:red">*</em><br />
+                                    <input type="text" name="u_phone" id="u_phone" class="signcheck" placeholder="휴대폰번호" maxlength="100" />
+                                    <button type="button" id="btn6" class="signbutton" style="float:right" disabled="disabled" value="N" >중복확인</button><br />
+                                    <span id="phoneCheck"><em style="color: #0b83e6">-를 제외하고 입력해주세요.</em></span> 
+                                </li>
+                                <li>
+                                     주소<br />
+                                    <input type="text" name="zip" id="zip" class="signcheck" placeholder="우편번호" maxlength="100" /><button type="button" id="btn3" class="signbutton" style="float:right">주소검색</button>
+                                </li>
+                                <li><input type="text" name="address" id="address" class="inp" placeholder="주소" maxlength="100" style="margin-bottom: 10px" /></li>
+                                <li><input type="text" name="sub_address" id="sub_address" class="inp" placeholder="상세주소" maxlength="100" style="margin-bottom: 10px" /></li>
+                                
+                            </ul>
+                            <button type="button" id="btn" class="btn_Atype btn_a" style="border-radius: 4px;"><span>회원가입</span></button>
+                            <div class="c-util c-infotip">
+                                <div class="c-util__item" style="margin: 5px;">                 
+                            </div> 
+                            </div>
+                            </div>
+                        </fieldset>
+                    </section>
+                </div>
+            </div>
+            </form>
 	</body>
 </html>

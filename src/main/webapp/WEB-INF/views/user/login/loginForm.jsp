@@ -58,7 +58,7 @@
                         <li><em>아이디, 비밀번호</em> 를 입력해주세요.</li>
                     </ul>
                     <fieldset class="form_box">
-                        <legend>로그인 폼</legend>
+                        <legend></legend>
                         <ul class="join_write">
                             <li>
                                 <label for="etprsMemNm" class="lable_hide">아이디</label><input type="text" name="u_id" id="u_id" class="inp" placeholder="아이디" maxlength="100" />

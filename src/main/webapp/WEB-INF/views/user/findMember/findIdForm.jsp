@@ -65,7 +65,7 @@
                         <li>가입 시 입력한 <em>이름, 이메일</em>로 아이디를 찾을 수 있습니다.</li>
                     </ul>
                     <fieldset class="form_box">
-                        <legend>아이디 찾기 폼</legend>
+                        <legend></legend>
                         <ul class="join_write">
                             <li>
                                 <label for="etprsMemNm" class="lable_hide">이름</label><input type="text" name="u_name" id="u_name" class="inp" placeholder="이름" maxlength="100" />
