@@ -57,6 +57,13 @@
 		</trim>
 	</select>
 	
+	<!-- 회원 전체 수 조회 -->
+	<select id="admMemberCount" resultType="int">
+		SELECT count(*) AS u_cnt
+		FROM TB_USER
+		WHERE U_STATUS = 'USING'
+	</select>
+	
 	<!-- 탈퇴유저 리스트 기본 조회 -->
 	<select id="nmemberList" resultType="admmember">
 		<![CDATA[
@@ -80,10 +87,12 @@
 	
 	<!-- 상세페이지 조회 -->
 	<select id="memberDetail" parameterType="admmember" resultType="admmember">
-		select u_no ,u_id , u_name, u_email , u_phone, u_nick, u_grade, u_status ,
+		select A.u_no ,u_id , u_name, u_email , u_phone, u_nick, u_grade, u_status, ('(' || ZIP || ') ' || ADDRESS || ' ' || SUB_ADDRESS) AS ADDRESS,
 		to_char(u_created_at, 'YYYY-MM-DD') as u_created_at
-		from tb_user
-    	where u_no = #{u_no}
+		from tb_user A
+		join tb_user_address_info B
+			on A.u_no = B.u_no
+    	where A.u_no = #{u_no} AND add_status = '기본배송지'
 	</select>
 	
 	<!-- 회원등급 업데이트 -->

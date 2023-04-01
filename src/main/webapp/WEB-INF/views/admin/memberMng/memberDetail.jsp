@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		
+		<script src="/resources/vendor/jquery/jquery-3.3.1.min.js"></script>
 		<title>memberDetail</title>
 		
 		<script type="text/javascript">
@@ -50,7 +50,7 @@
 						</tr>
 						<tr>
 							<th scope="row">주소</th>
-							<td colspan="3"></td>
+							<td colspan="3">${detail.address}</td>
 						</tr>
 						<tr>
 							<th scope="row">회원등급</th>

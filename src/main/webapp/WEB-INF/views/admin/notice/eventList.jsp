@@ -92,7 +92,7 @@
 		
 			$("#f_search").attr({
 				"method":"get",
-				"action":"/admin/noticeList"
+				"action":"/admin/eventList"
 			});
 			$("#f_search").submit();
 		}

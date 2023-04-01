@@ -50,7 +50,7 @@ public class NoticeController {
 			int total = admNoticeService.noticeListCnt(nvo);
 			model.addAttribute("pageMaker", new PageDTO(nvo, total));
 			
-			return "user/notice/noticeList";
+			return "user/notice/eventList";
 		}
 		
 		// 상세보기
