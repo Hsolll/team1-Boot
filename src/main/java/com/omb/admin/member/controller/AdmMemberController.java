@@ -29,12 +29,17 @@ public class AdmMemberController {
 	
 	
 	@GetMapping("/memberList")
-	public String memberList(@ModelAttribute AdmMemberVO mvo, Model model) {
+	public String memberList(@ModelAttribute AdmMemberVO mvo, Integer vo ,Model model) {
 		log.info("memberList 메서드 확인");
 		log.info("mvo : " + mvo);
+		log.info("카운트 테스트 ="+mvo);
 		
 		List<AdmMemberVO> memberList = admMemberService.memberList(mvo);
 		model.addAttribute("memberList", memberList);
+		
+		Integer count = admMemberService.admMemberCount(vo);
+		log.info("카운트 테스트 =" + count);
+		model.addAttribute("memberCount", count);
 		
 		
 		int total = admMemberService.memberListCnt(mvo);

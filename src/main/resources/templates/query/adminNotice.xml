@@ -9,8 +9,14 @@
 		<if test="search=='an_title'">
 			<![CDATA[ an_title LIKE '%'|| #{keyword} ||'%' ]]>					
 		</if>
-		<if test="search=='an_content'">
-			<![CDATA[ an_content LIKE '%'|| #{keyword} ||'%' ]]>					
+	</sql>
+	
+	<sql id="eventSearch">
+		<if test="search=='an_no'">
+			<![CDATA[ an_no LIKE '%'|| #{keyword} ||'%' ]]>					
+		</if>
+		<if test="search=='an_title'">
+			<![CDATA[ an_title LIKE '%'|| #{keyword} ||'%' ]]>					
 		</if>
 	</sql>
 	
@@ -53,7 +59,7 @@
 			ON A.a_no = B.a_no
 		WHERE ]]>
 		<trim prefix="(" suffix=") AND " prefixOverrides="AND">
-			<include refid = "noticeSearch"></include>
+			<include refid = "eventSearch"></include>
 		</trim>
 		<![CDATA[ rownum <= #{pageNum} * #{amount}
 				) noticelist

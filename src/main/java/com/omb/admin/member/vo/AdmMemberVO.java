@@ -22,6 +22,5 @@ public class AdmMemberVO extends CommonVO{
 	private String u_created_at ="";
 	private String u_updated_at ="";
 
-	private int u_cnt =0;
-	
+	private String address;
 }
