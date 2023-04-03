@@ -22,4 +22,6 @@ public interface AdmMemberDao {
 	public int memberGrade(AdmMemberVO mvo);
 	
 	public int memberDelete(int u_no); /* member 삭제 */
+	
+	public Integer admMemberCount(Integer mvo); /* 회원 전체 수 */
 }

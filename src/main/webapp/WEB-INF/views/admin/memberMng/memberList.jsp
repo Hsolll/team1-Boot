@@ -5,11 +5,13 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 <%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<title>memberList</title>
-		
+		<script src="/resources/include/js/common.js"></script>
+		<script src="/resources/vendor/jquery/jquery-3.3.1.min.js"></script>
 		<script type="text/javascript">
 			$(function(){
 				
@@ -20,13 +22,12 @@
 					$("#keyword").val("<c:out value='${memberVO.keyword}' />");
  					$("#search").val("<c:out value='${memberVO.search}' />");
 				
-					if($("#search").val()!='u_nick'){
-						//:contains()는 특정 텍스트를 포함한 요소반환 	
-						if($("#search").val()=='u_id') value = "#list tr td.goDetail";
-						else if($("#search").val()=='u_name') value="#list tr td.name";
-						else if($("#search").val()=='u_grade') value="#list tr td.grade";
+					if($("#search").val()!='u_phone'){
+						if($("#search").val()=='u_id') value = "#list tr td .goDetail";
+						else if($("#search").val()=='u_name') value="#list tr td .name";
+						else if($("#search").val()=='u_grade') value="#list tr td .grade";
+						else if($("#search").val()=='u_nick') value="#list tr td .nick";
 						console.log($(value+":contains('"+word+"')").html());
-						//$("#list tr td.goDetail:contains('노력')").html() => <span class='required'>노력</span>에 대한 명언
 				    	$(value+":contains('"+word+"')").each(function () {
 							let regex = new RegExp(word,'gi');
 							$(this).html($(this).html().replace(regex,"<span class='required'>"+word+"</span>"));
@@ -156,7 +157,7 @@
 						</select>
 						<input type="text" name="keyword" id="keyword" value="검색어를 입력하세요" class="form-control m-l-10" />
 						<button type="button" id="searchData" class="btn">검색</button>
-						<button type="button" id="smsSend" class="btn btn-dark m-l-100" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">메일전송</button>
+						<button type="button" style="margin: 0px 50px 0 100px;" id="smsSend" class="btn btn-dark m-l-100" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">메일전송</button>
 					</div>
 				</form>
 			</div>
@@ -164,26 +165,40 @@
 		
 		<%--================== 전체 회원수 시작 ===================  --%>
 		<div class="tableTop">
-			<p>회원수 : </p>
+			<p>총 회원수: ${memberCount}</p>
 		</div>
 		<%--================== 전체 회원수 종료 ===================  --%>
 		
 		<%-- =================== 리스트 시작  ================= --%>
 			<div id="memberList" class="table-responsive">
 				<form id="checkBox" name="checkBox">
+				
+				</form>
 					<table summary="일반회원 리스트" class="table table-striped" >
+						<colgroup>
+		                    <col style="width: 5%">
+		                    <col style="width: 7%">
+		                    <col>
+		                    <col style="width: 10%">
+		                    <col style="width: 10%">
+		                    <col style="width: 12%">
+		                    <col style="width: 13%">
+		                    <col style="width: 10%">
+		                    <col style="width: 10%">
+		                    <col style="width: 12%">
+		                </colgroup>
 						<thead>
-							<tr>
-								<th><input type="checkbox" id="cbx_chkAll"></th>
-								<th data-value="u_no" class="order text-center col-md-1" >회원번호</th>
-								<th class="text-center col-md-1">아이디</th>
-								<th class="text-center col-md-1">닉네임</th>
-								<th class="text-center col-md-1">이름</th>
-								<th class="text-center col-md-1">핸드폰번호</th>
-								<th data-value="u_created_at" class="order text-center col-md-2">회원가입일</th>
-								<th class="text-center col-md-3">회원등급(일반:1/경고:2/블랙:3)</th>
-								<th class="text-center col-md-2">회원상태(일반:1/탈퇴:2)</th>
-								<th class="text-hide">버튼영역</th>
+							<tr class="text-center">
+								<th style="line-height: 2.4;"><input type="checkbox" id="cbx_chkAll"></th>
+								<th scope="col" data-value="u_no" class="order" style="line-height: 2.4;">회원번호</th>
+								<th scope="col" style="line-height: 2.4;">아이디</th>
+								<th scope="col" style="line-height: 2.4;">닉네임</th>
+								<th scope="col" style="line-height: 2.4;">이름</th>
+								<th scope="col" style="line-height: 2.4;">핸드폰번호</th>
+								<th scope="col" data-value="u_created_at" class="order" style="line-height: 2.4;">회원가입일</th>
+								<th scope="col">회원등급<br/><span style="font-size: 13px">(일반:1/경고:2/블랙:3)</span></th>
+								<th scope="col">회원상태<br/><span style="font-size: 13px">(일반:1/탈퇴:2)</span></th>
+								<th scope="col" style="line-height: 2.4;">등급수정</th>
 							</tr>
 						</thead>
 				 		<tbody id="list" class="table-striped" >
@@ -197,7 +212,7 @@
 											<td class="goDetail text-center">
 											${member.u_id}
 											</td>
-											<td class="text-center">${member.u_nick}</td>
+											<td class="nick text-center">${member.u_nick}</td>
 											<td class="name text-center">${member.u_name}</td>
 											<td class="text-center">${member.u_phone}</td>
 											<td class="text-center">${member.u_created_at}</td>
@@ -215,7 +230,6 @@
 							</c:choose>
 						</tbody> 
 					</table>
-				</form>
 			</div>
 			<%-- =================== 리스트 종료  ================= --%>
 			

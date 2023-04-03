@@ -19,8 +19,6 @@
     <link rel="stylesheet" href="/resources/vendor/fonts/flag-icon-css/flag-icon.min.css">
     <link rel="stylesheet" href="/resources/css/admincustom.css">
     <link rel="stylesheet" href="/resources/css/admincommon.css">
-    <script src="/resources/include/js/common.js"></script>
-	<script src="/resources/vendor/jquery/jquery-3.3.1.min.js"></script>
     <title>관리자 페이지</title>
 </head>
 
@@ -47,9 +45,9 @@
                                     <h5 class="mb-0 text-white nav-user-name">ohmybaby 관리자 </h5>
                                     <span class="status"></span><span class="ml-2">manager</span>
                                 </div>
-                                <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>Account</a>
-                                <a class="dropdown-item" href="#"><i class="fas fa-cog mr-2"></i>Setting</a>
-                                <a class="dropdown-item" href="/admin/logout"><i class="fas fa-power-off mr-2"></i>Logout</a>
+                                <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>내정보</a>
+                                <a class="dropdown-item" href="#"><i class="fas fa-cog mr-2"></i>설정</a>
+                                <a class="dropdown-item" href="#"><i class="fas fa-power-off mr-2"></i>로그아웃</a>
                             </div>
                         </li>
                     </ul>

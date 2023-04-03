@@ -27,7 +27,8 @@ public class ProductVO extends CommonVO{
     private String p_cate		="";
     private int p_adm_per		=0;
     private int p_free			=0;
-    
+    private String p_buyid="";
+    private String u_id;
     private MultipartFile file;
     private String p_thumb		="";  
     private String p_file		="";  

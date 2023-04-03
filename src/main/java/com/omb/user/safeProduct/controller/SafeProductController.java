@@ -5,15 +5,19 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.omb.common.vo.PageDTO;
 import com.omb.user.address.service.MemberAddressService;
 import com.omb.user.address.vo.MemberAddressVO;
 import com.omb.user.member.vo.MemberVO;
+import com.omb.user.product.vo.ProductVO;
 import com.omb.user.safeProduct.service.SafeProductService;
 import com.omb.user.safeProduct.vo.SafeProductVO;
 
@@ -34,17 +38,23 @@ public class SafeProductController {
 	
 	/* 안심거래 상품목록 조회 */
 	@GetMapping("/productList")
-	public String selectSafeProductList(Model model) {
+	public String selectSafeProductList(SafeProductVO spvo, Model model) {
 		
 		log.info("selectSafeProductList 호출 성공");
-		
+
+		spvo.setAmount(20);
 		// 전체 레코드 조회
-		List<SafeProductVO> safeProduct = safeProductService.selectSafeProductList();
+		List<SafeProductVO> safeProduct = safeProductService.selectSafeProductList(spvo);
 		model.addAttribute("safeProduct", safeProduct);
 		
 		log.info("safeProduct : " + safeProduct);
 		
 		
+		// 전체 레코드 수 구현 
+		int total = safeProductService.safeProductListCnt(spvo); 
+		//페이징 처리
+		model.addAttribute("pageMaker", new PageDTO(spvo, total));
+		 
 		return "user/safeProduct/safeProductList";	// /WEB-INF/views/safeProduct/safeProductList.jsp
 	}
 	
@@ -85,7 +95,13 @@ public class SafeProductController {
 	
 	/* 물품 등록 페이지 이동 */
 	@GetMapping("/productInsertView")
-	public String safeProductInsertView() {
+	public String safeProductInsertView(HttpSession session, Model model) {
+		
+		MemberVO mvo = (MemberVO)session.getAttribute("memberLogin");
+		
+		List<ProductVO> list = safeProductService.selectProductList(mvo);
+		
+		model.addAttribute("productList", list);
 		
 		return "user/safeProduct/safeProductInsertView";
 	}
@@ -93,21 +109,117 @@ public class SafeProductController {
 
 	/* 상품 등록처리 */
 	@PostMapping("/productInsert")
-	public String insertSafeProduct(HttpSession session, SafeProductVO svo) {
+	public String insertSafeProduct(HttpSession session, SafeProductVO svo, RedirectAttributes ras) {
 		
+		log.info("svo : " + svo);
+		
+		int result = 0;
 		String path = "";
 		
+		result = safeProductService.insertSafeProduct(svo);
 		
+		if(result == 1) {
+			log.info("상품등록 성공");
+			
+			// 상품 등록 시 중고상품 판매상태 변경 (판매중 -> 거래진행중)
+			int updateResult = safeProductService.updateProductStatus(svo);
+			if(updateResult == 1) {
+				log.info("중고상품 상태변경 완료");
+				ras.addFlashAttribute("msg", "상품을 등록하였습니다.");
+				path = "/safe/productList";
+			}
+			
+		} else {
+			log.info("상품등록 실패");
+			ras.addFlashAttribute("msg", "상품 등록 실패");
+			path = "/safe/productInsertView";
+		}
 		
 		return "redirect:" + path;
 	}
 	
 	
+	
 	/* 안심거래 판매목록 조회 */
 	@GetMapping("/productSell")
-	public String safeProductSellList() {
+	public String safeProductSellList(HttpSession session, Model model) {
+		
+		MemberVO mvo = (MemberVO)session.getAttribute("memberLogin");
+		
+		List<SafeProductVO> sellList = safeProductService.selectSafeProductListSell(mvo);
+		
+		model.addAttribute("sellList", sellList);
 		
 		return "user/safeProduct/safeProductSellList";
+	}
+	
+	/* 판매등록상품 수정폼으로 이동 */
+	@GetMapping("/productUpdateView")
+	public String safeProductUpdateView(SafeProductVO spvo, Model model) {
+		
+		SafeProductVO detail = safeProductService.selectSafeProductDetail(spvo);
+		
+		log.info("조회된 상품 정보 : " + detail);
+		
+		model.addAttribute("detail", detail);
+		
+		return "user/safeProduct/safeProductUpdateView";
+	}
+	
+	
+	@PostMapping(value="/productUpdate", produces = MediaType.TEXT_PLAIN_VALUE)
+	public String safeProductUpdate(SafeProductVO spvo, Model model, RedirectAttributes ras) {
+		
+		log.info("수정요청 값 : " + spvo);
+		
+		String path = "";
+		int result = 0;
+		result = safeProductService.updateSafeProduct(spvo);
+		
+		if(result == 1) {
+			log.info("수정 성공");
+			ras.addFlashAttribute("msg", "상품이 수정되었습니다.");
+			path = "/safe/productSell";
+		} else {
+			log.info("수정 실패");
+			ras.addFlashAttribute("msg", "상품 수정 실패");
+			path = "/safe/productUpdateView";
+		}
+		
+		
+		return "redirect:" + path;
+	}
+	
+	/* 상품 삭제 */
+	@GetMapping("/productDelete")
+	public String safeProductDelete(SafeProductVO spvo, RedirectAttributes ras) {
+		
+		log.info("삭제할 상품번호 : " + spvo.getSp_no());
+		
+		String path = "";
+		int result = 0;
+		
+		// 안심상품 삭제 시 중고상품 판매상태 변경 (거래진행중 -> 판매중)
+		int updateResult = safeProductService.updateProductStatusReturn(spvo);
+		
+		if(updateResult == 1) {
+			log.info("중고상품 상태변경 완료");
+			
+			// 상태변경 후 삭제처리
+			result = safeProductService.deleteSafeProduct(spvo);
+			
+			if(result == 1) {
+				log.info("안심상품 삭제 성공");
+				ras.addFlashAttribute("msg", "상품이 삭제되었습니다.");
+				path = "/safe/productSell";
+			}
+		} else {
+			log.info("중고상품 상태변경 실패");
+			ras.addFlashAttribute("msg", "다시 시도해주세요.");
+			path = "/safe/productSell";
+		}
+		
+		return "redirect:" + path;
 	}
 	
 }

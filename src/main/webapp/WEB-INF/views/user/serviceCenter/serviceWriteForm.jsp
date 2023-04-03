@@ -56,7 +56,7 @@
 					</tr>
 					<tr>
 						<td>내용</td>
-						<td class="text-left"><textarea id="sc_content" name="sc_content" style="width: 500px; height: 250px;"></textarea></td>
+						<td class="text-left"><textarea id="sc_content" name="sc_content" style="width: 500px; height: 250px; resize: none"></textarea></td>
 					</tr>
 					<tr>
 						<td>문의글 비밀번호</td>

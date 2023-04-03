@@ -20,15 +20,14 @@
 	</sql>
 	
 	
-	
 	<!-- 일반유저 리스트 기본 조회 -->
-	<select id="memberList" parameterType="member" resultType="member">
+	<select id="memberList" parameterType="admmember" resultType="admmember">
 		<![CDATA[
 		SELECT
 		u_no, u_id, u_nick, u_name, u_email, u_phone, u_grade, u_status, to_char(u_created_at, 'YYYY-MM-DD') as u_created_at
 		FROM (
 			SELECT /*+ INDEX_DESC(tb_user tb_user_pk) */
-				rownum as rnum, u_no, u_id, u_nick, u_name, u_email, u_phone, u_grade, u_status, u_created_at, u_cnt
+				rownum as rnum, u_no, u_id, u_nick, u_name, u_email, u_phone, u_grade, u_status, u_created_at
 			FROM tb_user
 		WHERE]]>
 		<trim prefix="(" suffix=") AND " prefixOverrides="AND">
@@ -37,13 +36,13 @@
 		<![CDATA[ rownum <= #{pageNum} * #{amount}
 				) memberlist
 		WHERE rnum > (#{pageNum}- 1) * #{amount}
-		and u_status = 'USING']]>
-		
+		]]>
+		and u_status = 'USING'
 	</select>
 	
 	
 	<!-- 유저 수 조회 -->
-	<select id="memberListCnt" parameterType="member" resultType="int">
+	<select id="memberListCnt" parameterType="admmember" resultType="int">
 		SELECT count(*) FROM tb_user
 		<trim prefix=" where (" suffix=")">
 			<include refid="memberSearch"></include>
@@ -51,21 +50,28 @@
 	</select>
 	
 	<!-- 탈퇴유저 수 조회 -->
-	<select id="nmemberListCnt" parameterType="member" resultType="int">
+	<select id="nmemberListCnt" parameterType="admmember" resultType="int">
 		SELECT count(*) FROM tb_user
 		<trim prefix=" where (" suffix=")">
 			<include refid="memberSearch"></include>
 		</trim>
 	</select>
 	
+	<!-- 회원 전체 수 조회 -->
+	<select id="admMemberCount" resultType="int">
+		SELECT count(*) AS u_cnt
+		FROM TB_USER
+		WHERE U_STATUS = 'USING'
+	</select>
+	
 	<!-- 탈퇴유저 리스트 기본 조회 -->
-	<select id="nmemberList" resultType="member">
+	<select id="nmemberList" resultType="admmember">
 		<![CDATA[
 		SELECT
 		u_no, u_id, u_nick, u_name, u_email, u_phone, u_grade, u_status, to_char(u_created_at, 'YYYY-MM-DD') as u_created_at
 		FROM (
 			SELECT /*+ INDEX_DESC(tb_user tb_user_pk) */
-				rownum as rnum, u_no, u_id, u_nick, u_name, u_email, u_phone, u_grade, u_status, u_created_at, u_cnt
+				rownum as rnum, u_no, u_id, u_nick, u_name, u_email, u_phone, u_grade, u_status, u_created_at
 			FROM tb_user
 		WHERE]]>
 		<trim prefix="(" suffix=") AND " prefixOverrides="AND">
@@ -79,22 +85,24 @@
 	</select>
 	
 	
-	<!-- 일반유저 상세페이지 조회 -->
-	<select id="memberDetail" parameterType="member" resultType="member">
-		SELECT u_no, u_name, u_id, u_nick, u_email, u_phone, u_grade, u_status, 
-			to_char(u_created_at, 'YYYY-MM-DD HH24:MI:SS') AS u_created_at 
-		FROM tb_user
-		WHERE u_no = #{u_no}
+	<!-- 상세페이지 조회 -->
+	<select id="memberDetail" parameterType="admmember" resultType="admmember">
+		select A.u_no ,u_id , u_name, u_email , u_phone, u_nick, u_grade, u_status, ('(' || ZIP || ') ' || ADDRESS || ' ' || SUB_ADDRESS) AS ADDRESS,
+		to_char(u_created_at, 'YYYY-MM-DD') as u_created_at
+		from tb_user A
+		join tb_user_address_info B
+			on A.u_no = B.u_no
+    	where A.u_no = #{u_no} AND add_status = '기본배송지'
 	</select>
 	
 	<!-- 회원등급 업데이트 -->
-	<update id="memberGrade" parameterType="member">
+	<update id="memberGrade" parameterType="admmember">
 		UPDATE tb_user SET u_grade = #{u_grade}
 		WHERE u_no = #{u_no}
 	</update>
 	
 	<!-- 유저 삭제 -->
-	<delete id="memberDelete" parameterType="member">
+	<delete id="memberDelete" parameterType="admmember">
 		DELETE FROM tb_user WHERE u_no = #{u_no}
 	</delete>
 	
