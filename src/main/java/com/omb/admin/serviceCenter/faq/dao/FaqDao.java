@@ -15,4 +15,5 @@ public interface FaqDao {
 	public int updateFaq(FaqVO faq) throws Exception;
 	public int updateFaqDel(FaqVO faq) throws Exception;
 	public List<FaqVO> selectUserFaq(FaqVO faq);
+	public int updateReadCnt(FaqVO faq);
 }

@@ -2,6 +2,8 @@ package com.omb.admin.serviceCenter.faq.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.omb.admin.serviceCenter.faq.service.AdmFaqService;
 import com.omb.admin.serviceCenter.faq.vo.FaqVO;
@@ -28,13 +31,14 @@ public class AdmFaqController {
 	private AdmFaqService faqService;
 
 	@GetMapping(value = "/faq/faqList")
-	public String faqList(@ModelAttribute FaqVO vo, Model model) {
+	public String faqList(@ModelAttribute AdminVO admin,@ModelAttribute FaqVO vo, Model model) {
 		log.info("faqList 실행...");
+		admin = (AdminVO)model.getAttribute("adminLogin");
 		List<FaqVO> faqList = faqService.selectFaq(vo);
 		model.addAttribute("faqList", faqList);
 
 		int total = faqService.selectFaqCnt(vo);
-		vo.setAmount(20);
+		vo.setAmount(10);
 		model.addAttribute("pageMaker", new PageDTO(vo, total));
 		return "admin/serviceCenter/faq/faqList";
 	}

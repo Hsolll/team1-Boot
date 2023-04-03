@@ -31,6 +31,7 @@ public class FaqController {
 		model.addAttribute("faqList", faqList);
 		
 		int total = faqService.selectFaqCnt(vo);
+		vo.setAmount(10);
 		model.addAttribute("pageMaker", new PageDTO(vo, total));
 		return "user/serviceCenter/faq/faqList";
 	}

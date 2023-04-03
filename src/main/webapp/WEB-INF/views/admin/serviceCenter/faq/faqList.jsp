@@ -1,8 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/admin.jspf" %>
+
 <script>
 		$(function(){
+			let admin = "<c:out value='${adminLogin.a_no }'/>";
+			if(admin == ""){
+				alert("잘못된 접근입니다.");
+				location.href="/admin/login";
+			}
 			let word="<c:out value='${faqVO.keyword}' />";
 			let value="";
 			if(word!= ""){
@@ -92,6 +98,7 @@
 	</style>
 	</head>
 	<body>
+		<c:if test='${not empty adminLogin }'>
 		<div class="contentContatiner container">
 			<form id="updateForm">
 				<input type="hidden" id="f_no" name="f_no">
@@ -105,11 +112,11 @@
 					<thead>
 						<tr>
 							<th data-value="f_no" class="order text-center col-md-1">글 번호</th>
-							<th class="text-center col-md-4">글 제목</th>
-							<th data-value="f_created_at" class="text-center col-md-1">작성일</th>
-							<th data-value="f_updated_at" class="text-center col-md-1">수정일</th>
-							<th data-value="f_deleted_at" class="text-center col-md-1">삭제일</th>
-							<th class="text-center col-md-3">수정/삭제</th>
+							<th class="text-center col-md-3">글 제목</th>
+							<th data-value="f_created_at" class="text-center col-md-2">작성일</th>
+							<th data-value="f_updated_at" class="text-center col-md-2">수정일</th>
+							<th data-value="f_deleted_at" class="text-center col-md-2">삭제일</th>
+							<th class="text-center col-md-2">수정/삭제</th>
 						</tr>
 					</thead>
 					<tbody id="list" class="table-striped">
@@ -130,7 +137,7 @@
 								</c:forEach>
 							</c:when>
 							<c:otherwise>
-								<td colspan="4" class="tac text-center">등록된 게시물이 존재하지 않습니다.</td>
+								<td colspan="6" class="tac text-center">등록된 게시물이 존재하지 않습니다.</td>
 							</c:otherwise>
 						</c:choose>
 					</tbody>
@@ -149,7 +156,7 @@
 					<!-- 바로가기 번호 출력 -->
 					<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
 						<li class="paginate_button ${pageMaker.cvo.pageNum == num ? 'active':''}">
-							<a href='${num }'>${num }</a>
+							<a href='${num }'>${num } </a>
 						</li>
 					</c:forEach>
 					
@@ -179,5 +186,6 @@
 				</form>
 			</div>
 		</div>
+		</c:if>
 	</body>
 </html>
