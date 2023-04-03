@@ -13,7 +13,7 @@
 	
 		<link rel="shortcut icon" href="/resources/images/common/icon.png" />
 		<link rel="apple-touch-icon" href="/resources/images/common/icon.png" />
-		<link type="text/css" rel="stylesheet" href="/resources/include/css/findMember.css" />
+		<link type="text/css" rel="stylesheet" href="/resources/include/css/Member.css" />
 		
 		<!--[if lt IE 9]>
 		<script src="/resources/js/html5shiv.js"></script>
@@ -44,16 +44,14 @@
             </header>
 		<div class="find_main">
                 <ul class="tab" role="tablist">
-                    <li id="tabPrvt" role="presentation"  class="on"><a href="#tabPrvt" id="tab1" role="tab" onclick="toggleTab('tabPrvt');" aria-controls="tabPrvt" data-log-actionid-area="tab" data-log-actionid-label="tab" data-log-body="{&quot;btn_name&quot;:&quot;개인회원&quot;}" aria-selected="false">아이디 찾기</a></li>
-                    <li id="tabBsns" role="presentation"><a href="#tabBsns" id="tab2" role="tab" onclick="toggleTab('tabBsns');" aria-controls="tabBsns" data-log-actionid-area="tab" data-log-actionid-label="tab" data-log-body="{&quot;btn_name&quot;:&quot;사업자회원&quot;}" aria-selected="true">비밀번호 찾기</a></li>
+                    <li class="on"><a href="/member/findId" id="tab1">아이디 찾기</a></li>
+                    <li><a href="/member/findPw" id="tab2">비밀번호 찾기</a></li>
                 </ul>
                 
                           
-                <section role="tabpanel" id="tabcontent1" aria-labelledby="tab1" class="find_result find_result_id">
+                <section class="find_result find_result_id">
                     <p class="txt_desc">아이디 찾기 결과입니다.</p>
                     <ul class="id_list">
-
-                                  
                                     <li class="tid_box">
                                         <div class="id_info_box">
                                           
@@ -61,56 +59,41 @@
                                         </div>
                                     </li>               
                     </ul>
-     
                     <div class="btn_box">
-                        <button type="button" id="btn1" class="btn_Atype btn_a" data-log-actionid-area="login" data-log-actionid-label="btn">
+                        <button type="button" id="btn1" class="btn_Atype btn_a">
                             <span>확인</span>
-                        </button>
-                       
-      
+                        </button> 
                     </div>
                 </section>
             </div>
             </div>
-		</c:if> 
-		
+		</c:if> 		
 		<c:if test="${check == 0 }">
 		<div class="member_wrap">
-            <header class="member_header">
-                
+            <header class="member_header">      
             </header>
 		<div class="find_main">
-                <ul class="tab" role="tablist">
-                    <li id="tabPrvt" role="presentation"  class="on"><a href="/member/findId" id="tab1" role="tab" onclick="toggleTab('tabPrvt');" aria-controls="tabPrvt" data-log-actionid-area="tab" data-log-actionid-label="tab" data-log-body="{&quot;btn_name&quot;:&quot;개인회원&quot;}" aria-selected="false">아이디 찾기</a></li>
-                    <li id="tabBsns" role="presentation"><a href="/member/findPw" id="tab2" role="tab" onclick="toggleTab('tabBsns');" aria-controls="tabBsns" data-log-actionid-area="tab" data-log-actionid-label="tab" data-log-body="{&quot;btn_name&quot;:&quot;사업자회원&quot;}" aria-selected="true">비밀번호 찾기</a></li>
-                </ul>
-                
-                          
-                <section role="tabpanel" id="tabcontent1" aria-labelledby="tab1" class="find_result find_result_id">
+                 <ul class="tab" role="tablist">
+                    <li class="on"><a href="/member/findId" id="tab1">아이디 찾기</a></li>
+                    <li><a href="/member/findPw" id="tab2">비밀번호 찾기</a></li>
+                </ul>           
+                <section class="find_result find_result_id">
                     <p class="txt_desc">아이디 찾기 결과입니다.</p>
-                    <ul class="id_list">
-
-                                  
+                    <ul class="id_list">       
                                     <li class="tid_box">
-                                        <div class="id_info_box">
-                                            
+                                        <div class="id_info_box">  
                                             <p class="id_auto_msg">찾으시는 아이디는 <em style="color:#0b83e6;">${u_id}</em> 입니다.</p>
                                         </div>
                                     </li>               
-                    </ul>
-     
+                    </ul> 
                     <div class="btn_box">
-                        <button type="button" id="btn" class="btn_Atype btn_a" data-log-actionid-area="login" data-log-actionid-label="btn">
+                        <button type="button" id="btn" class="btn_Atype btn_a">
                             <span>로그인하기</span>
                         </button>
-                
-      
                     </div>
                 </section>
             </div>
        </div>
-		</c:if>
-		
-		 
+		</c:if>	 
 	</body>
 </html>

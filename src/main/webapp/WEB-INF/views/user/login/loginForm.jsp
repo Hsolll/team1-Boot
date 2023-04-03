@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/common.jspf" %>
-<link type="text/css" rel="stylesheet" href="/resources/include/css/findMember.css" />
+<!-- <link type="text/css" rel="stylesheet" href="/resources/include/css/findMember.css" /> -->
+<link type="text/css" rel="stylesheet" href="/resources/include/css/Member.css" />
 <script src="/resources/include/js/common.js"></script>
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>
 		<script type="text/javascript" src="/resources/include/dist/js/bootstrap.min.js"></script>
@@ -49,22 +50,22 @@
             </header>
             <div class="find_main">
                 <ul class="tab" role="tablist">
-                    <li id="tabPrvt" role="presentation"  class="on"><a href="/login" id="tab1" role="tab" onclick="toggleTab('tabPrvt');" aria-controls="tabPrvt" data-log-actionid-area="tab" data-log-actionid-label="tab" aria-selected="false">로그인</a></li>
-                    <li id="tabBsns" role="presentation"><a href="/member/signUpAgree" id="tab2" role="tab" onclick="toggleTab('tabBsns');" aria-controls="tabBsns" data-log-actionid-area="tab" data-log-actionid-label="tab" aria-selected="true">회원가입</a></li>
+                    <li class="on"><a href="/login" id="tab1">로그인</a></li>
+                    <li><a href="/member/signUpAgree" id="tab2">회원가입</a></li>
                 </ul>
                           
-                <section id="sectionBsns" style="display: block;">
-                    <ul class="seller_guide">
-                        <li><em>아이디, 비밀번호</em> 를 입력해주세요.</li>
+                <section style="display: block;">
+                    <ul class="guide">
+                        <li><em>* 아이디, 비밀번호</em> 를 입력해주세요.</li>
                     </ul>
                     <fieldset class="form_box">
                         <legend></legend>
                         <ul class="join_write">
                             <li>
-                                <label for="etprsMemNm" class="lable_hide">아이디</label><input type="text" name="u_id" id="u_id" class="inp" placeholder="아이디" maxlength="100" />
+                                <label for="id" class="lable_hide">아이디</label><input type="text" name="u_id" id="u_id" class="inp" placeholder="아이디" maxlength="100" />
                             </li>
                             <li>
-                                <label for="etprsMemIdntyNo" class="lable_hide">비밀번호</label><input type="password" name="u_pwd" id="u_pwd" class="inp" placeholder="비밀번호" maxlength="25" />
+                                <label for="pw" class="lable_hide">비밀번호</label><input type="password" name="u_pwd" id="u_pwd" class="inp" placeholder="비밀번호" maxlength="25" />
                             </li>
                         </ul>
                         <button type="button" id="btn" class="btn_Atype btn_a" style="border-radius: 4px;"><span>로그인</span></button>
@@ -73,12 +74,10 @@
                             <div class="c-util__item" style="margin: 5px;">
                                 
         
-                                <div id="divAutoLoginTooltip" class="c-tooltip-wrap">
-                                       
-                                </div>
+                               
                             <div class="c-util__item">
-                                <a href="/member/findId" class="c-util__link" data-log-actionid-label="id_find">아이디찾기</a>
-                                <a href="/member/findPw" class="c-util__link" data-log-actionid-label="password_find">비밀번호찾기</a>
+                                <a href="/member/findId" class="c-util__link">아이디찾기</a>
+                                <a href="/member/findPw" class="c-util__link">비밀번호찾기</a>
                             </div>
                         </div> 
 						</div>

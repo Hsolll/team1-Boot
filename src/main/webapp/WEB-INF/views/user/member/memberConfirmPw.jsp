@@ -14,7 +14,6 @@
 		<link rel="shortcut icon" href="/resources/images/common/icon.png" />
 		<link rel="apple-touch-icon" href="/resources/images/common/icon.png" />
 		<link type="text/css" rel="stylesheet" href="/resources/include/css/comfirmPw.css" />
-		<link type="text/css" rel="stylesheet" href="/resources/include/css/myPageSub.css" />
 	
 		<!--[if lt IE 9]>
 		<script src="/resources/js/html5shiv.js"></script>
@@ -104,60 +103,14 @@
 		<input type="hidden" name="u_no" id="u_no" value="${memberLogin.u_no }" />
 		<input type="hidden" name="u_name" value="${memberLogin.u_name }" />
 		<input type="hidden" name="u_id" id="u_id" value="${update.u_id }" />
-		 <div class="mytmall_wrap_v2">
-    
-                    <!-- 마이페이지 탭 -->
-      
-       
-                    <!-- 마이페이지 서브메뉴 영역 -->
-                    <div class="mytmall_subArea_v2"> 
-    <!-- 나의정보 -->
-    <div class="myinfo_wrap_v4" id="leftMemberGradeInfoArea">
-    
-    <div class="mytmall_menu">
-        
-        <div class="mytmall_sub_menu" style="border-top: 0px;">
-            <h3>나의 쇼핑 관리</h3>
-            <ul>
-                
-                <li><a>좋아요(찜) 내역</a></li>
-                <li><a>구매 내역</a></li>
-                <li><a>판매 내역</a></li>
-                
-                
-            </ul>
-        </div>
-        
-        <div class="mytmall_sub_menu">
-            <h3>커뮤니티 목록</h3>
-            <ul>
-                <li><a>작성글 확인</a></li>
-                <li><a>신고 내역</a></li>
-                <li><a>이벤트</a></li>       
-            </ul>
-        </div>
-        <div class="mytmall_sub_menu">
-            <h3>회원 관리</h3>
-            <ul data-log-actionid-area="my_shopping_knowledge" data-log-actionid-label="menu" data-is-ab-send="1">
-                <li><a href="/member/pwdChkForm">회원수정</a></li>
-                <li><a href="/member/pwdChkForm2">비밀번호 수정</a></li>
-                <li><a>주소 관리</a></li>
-                <li><a href="/member/pwdChkForm3">회원탈퇴</a></li>
-                
-            </ul>
-        </div>
-     
-        </div>
-        </div>
-        </div>
-    </div> 
-            <div id="ux-container" class="page-confirm-password" style="margin-top: -450px;">
+		
+		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" style="margin:0;">
+            <div id="ux-container" class="page-confirm-password">
             
             <div class="header">
                 <!-- <h1 class="title" style="text-align: center; margin:-530px;">비밀번호 입력</h1> -->
                 <h1 class="title" style="text-align: center;">비밀번호 입력</h1>
                 <p class="direction">
-               <!--  <p class="direction" style="margin:530px 0;"> -->
                     
                         ${memberLogin.u_name} ( <em style="color:#0b83e6;">${memberLogin.u_id}</em> ) 님,<br>
                                     
@@ -176,6 +129,7 @@
                         <input type="button" id="btn" class="btn btn-purple btn-wide" value="확인" data-click-id="comm_web_confirmpw_ko_confirm" style="background:#baac9a; color:#fff; cursor: pointer; text-align: center;">
                     </div>           		
             </div>
+  </div>
   </div>
    </form>	
 	</body>

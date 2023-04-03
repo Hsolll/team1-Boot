@@ -13,7 +13,8 @@
 	
 		<link rel="shortcut icon" href="/resources/images/common/icon.png" />
 		<link rel="apple-touch-icon" href="/resources/images/common/icon.png" />
-		<link type="text/css" rel="stylesheet" href="/resources/include/css/findMember.css" />
+		<!-- <link type="text/css" rel="stylesheet" href="/resources/include/css/findMember.css" /> -->
+		<link type="text/css" rel="stylesheet" href="/resources/include/css/Member.css" />
 	
 		<!--[if lt IE 9]>
 		<script src="/resources/js/html5shiv.js"></script>
@@ -72,27 +73,27 @@
                 
             </header>
             <div class="find_main">
-                <ul class="tab" role="tablist">
-                    <li id="tabPrvt" role="presentation"><a href="/member/findId" id="tab1" role="tab" onclick="toggleTab('tabPrvt');" aria-controls="tabPrvt" data-log-actionid-area="tab" data-log-actionid-label="tab" data-log-body="{&quot;btn_name&quot;:&quot;개인회원&quot;}" aria-selected="false">아이디 찾기</a></li>
-                    <li id="tabBsns" role="presentation" class="on"><a href="/member/findPw" id="tab2" role="tab" onclick="toggleTab('tabBsns');" aria-controls="tabBsns" data-log-actionid-area="tab" data-log-actionid-label="tab" data-log-body="{&quot;btn_name&quot;:&quot;사업자회원&quot;}" aria-selected="true">비밀번호 찾기</a></li>
+                <ul class="tab">
+                    <li><a href="/member/findId">아이디 찾기</a></li>
+                    <li class="on"><a href="/member/findPw">비밀번호 찾기</a></li>
                 </ul>
                           
-                <section id="sectionBsns" style="display: block;">
-                    <ul class="seller_guide">
-                        <li>가입 시 입력한 <em>이름, 아이디. 이메일</em>로 비밀번호를 찾을 수 있습니다.</li>
-                        <li>가입 시 입력한 <em>이메일</em>로 인증번호가 전송됩니다.</li>
+                <section style="display: block;">
+                    <ul class="guide">
+                        <li>* 가입 시 입력한 <em>이름, 아이디. 이메일</em>로 비밀번호를 찾을 수 있습니다.</li>
+                        <li>* 가입 시 입력한 <em>이메일</em>로 인증번호가 전송됩니다.</li>
                     </ul>
                     <fieldset class="form_box">
                         <legend></legend>
                         <ul class="join_write">
                             <li>
-                                <label for="etprsMemNm" class="lable_hide">이름</label><input type="text" name="u_name" id="u_name" class="inp" placeholder="이름" maxlength="100" />
+                                <label for="name" class="lable_hide">이름</label><input type="text" name="u_name" id="u_name" class="inp" placeholder="이름" maxlength="100" />
                             </li>
                             <li>
-                                <label for="etprsMemIdntyNo" class="lable_hide">아이디</label><input type="text" name="u_id" id="u_id" class="inp" placeholder="아이디" maxlength="25" /> 
+                                <label for="id" class="lable_hide">아이디</label><input type="text" name="u_id" id="u_id" class="inp" placeholder="아이디" maxlength="25" /> 
                             </li>
                             <li>
-                                <label for="etprsMemIdntyNo" class="lable_hide">이메일</label><input type="text" name="u_email" id="u_email" class="inp" placeholder="이메일" maxlength="25" />
+                                <label for="email" class="lable_hide">이메일</label><input type="text" name="u_email" id="u_email" class="inp" placeholder="이메일" maxlength="25" />
                             </li>
                            
                         </ul>

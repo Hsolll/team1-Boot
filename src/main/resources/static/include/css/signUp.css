@@ -3,7 +3,6 @@
     z-index: 1;
     padding-bottom: 28px;
     margin-bottom: 41px;
-    border-bottom: 1px solid #333;
 }
     .member_header .tit {
     font-size: 26px;
@@ -38,24 +37,6 @@ h1 {
     font-weight: bold;
 }
 
-.sp_login.logo_11st_s {
-    width: 64px;
-    height: 28px;
-    margin-right: 10px;
-    vertical-align: bottom;
-    width: 64px;
-    height: 28px;
-    background-image: url(/img/svg/logo/11st.svg);
-    background-size: 64px 28px;
-}
-
-.sp_login {
-    background-image: url(/img/member/sp_login.png);
-    background-repeat: no-repeat;
-    display: inline-block;
-    overflow: hidden;
-    line-height: 200px;
-}
 
 a {
     color: #4d4d4d;
@@ -121,12 +102,12 @@ li {
     overflow: hidden;
 }
 
-.find_main .seller_guide {
+.find_main .guide {
     margin-bottom: 12px;
     padding: 0 26px;
 }
 
-.find_main .seller_guide li {
+.find_main .guide li {
     position: relative;
     padding-left: 9px;
     font-size: 13px;

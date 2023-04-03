@@ -14,7 +14,6 @@
 		<link rel="shortcut icon" href="/resources/images/common/icon.png" />
 		<link rel="apple-touch-icon" href="/resources/images/common/icon.png" />
 		<link type="text/css" rel="stylesheet" href="/resources/include/css/memberUpdateForm.css" />
-		<link type="text/css" rel="stylesheet" href="/resources/include/css/myPageSub.css" />
 	
 		<!--[if lt IE 9]>
 		<script src="/resources/js/html5shiv.js"></script>
@@ -305,59 +304,9 @@
 			<input type="hidden" name="u_no" value="${memberLogin.u_no }" />
 			<input type="hidden" name="u_id" value="${memberLogin.u_id }" />
 			
-           <!--  <div class="member_wrap" style="margin: -500px 0 50px;"> -->
-           <div class="member_wrap">
-                <header class="member_header">                 
-                </header>
-                <div class="mytmall_wrap_v2" style="width: 300px;">
-    
-                    <!-- 마이페이지 탭 -->
-      
-       
-                    <!-- 마이페이지 서브메뉴 영역 -->
-                    <div class="mytmall_subArea_v2"> 
-    <!-- 나의정보 -->
-    <div class="myinfo_wrap_v4" id="leftMemberGradeInfoArea">
-    
-    <div class="mytmall_menu">
-        
-        <div class="mytmall_sub_menu" style="border-top: 0px;">
-            <h3>나의 쇼핑 관리</h3>
-            <ul>
-                
-                <li><a>좋아요(찜) 내역</a></li>
-                <li><a>구매 내역</a></li>
-                <li><a>판매 내역</a></li>
-                
-                
-            </ul>
-        </div>
-        
-        <div class="mytmall_sub_menu">
-            <h3>커뮤니티 목록</h3>
-            <ul>
-                <li><a>작성글 확인</a></li>
-                <li><a>신고 내역</a></li>
-                <li><a>이벤트</a></li>       
-            </ul>
-        </div>
-        <div class="mytmall_sub_menu">
-            <h3>회원 관리</h3>
-            <ul data-log-actionid-area="my_shopping_knowledge" data-log-actionid-label="menu" data-is-ab-send="1">
-                <li><a href="/member/pwdChkForm">회원수정</a></li>
-                <li><a href="/member/pwdChkForm2">비밀번호 수정</a></li>
-                <li><a>주소 관리</a></li>
-                <li><a href="/member/pwdChkForm3">회원탈퇴</a></li>
-                
-            </ul>
-        </div>
-     
-        </div>
-        </div>
-        </div>
-    </div> 
+           
                                           
-                   <section id="sectionBsns" style="margin: -430px auto; width: 500px;">
+                   <section id="sectionBsns">
                     <div class="find_main">
                     <ul class="tab" role="tablist" style="display: inline-flex;">
                         <li id="tabPrvt" role="presentation" class="on"><a id="tab1" role="tab" onclick="toggleTab('tabPrvt');" aria-controls="tabPrvt" data-log-actionid-area="tab" data-log-actionid-label="tab" aria-selected="false">회원수정</a></li>
@@ -392,9 +341,9 @@
                                 </li>
                                 <li>
                                     주소<br /><button type="button" id="btn3" class="signbutton" style="float:right">주소검색</button>
-                                    <input type="text" name="zip" id="zip" class="signcheck" placeholder="우편번호" maxlength="100" readonly="readonly" value="${ update.zip}" />
+                                    <input type="text" name="zip" id="zip" class="signcheck" placeholder="우편번호" maxlength="100" value="${ update.zip}" />
                                 </li>
-                                <li><input type="text" name="address" id="address" class="inp" placeholder="주소" maxlength="100" style="margin-bottom: 10px" readonly="readonly" value="${ update.address}" /></li>
+                                <li><input type="text" name="address" id="address" class="inp" placeholder="주소" maxlength="100" style="margin-bottom: 10px" value="${ update.address}" /></li>
                                 <li><input type="text" name="sub_address" id="sub_address" class="inp" placeholder="상세주소" maxlength="100" style="margin-bottom: 10px" value="${ update.sub_address}" /></li>                               
                             </ul>
                             <button type="button" id="btn" class="btn_Atype btn_a" style="border-radius: 4px;"><span>회원수정</span></button>
@@ -408,7 +357,7 @@
                     </section>
                     <div id="contentWrap">
                 	<a href="" style="display: block;text-align: center;margin: 220px 0;">&nbsp;</a>
-            </div>
+
                 </div>
             </form>
 	</body>

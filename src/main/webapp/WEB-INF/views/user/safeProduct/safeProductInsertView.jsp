@@ -61,7 +61,7 @@
 				
 				// 입력값 체크
 				if(!chkData("#sp_title", "제목을")) return;
-				else if(!selectData("#sp_name", "상품을")) return;
+				//else if(!selectData("#sp_name", "상품을")) return;
 				else if(!chkData("#sp_price", "가격을")) return;
 				else if(!chkData("#sp_price", "가격을")) return;
 				else if(!chkData("#sp_content", "내용을")) return;
