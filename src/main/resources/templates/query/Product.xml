@@ -3,29 +3,43 @@
 <mapper namespace="com.omb.user.product.dao.ProductDao">
 
 
+
+	<sql id="productSearch">
+		<if test="search=='all'">
+			<![CDATA[ p_title LIKE '%'|| #{keyword}||'%']]>OR<![CDATA[ p_content LIKE '%'|| #{keyword}||'%']]>
+		</if>
+		<if test="search=='p_title'">
+			<![CDATA[ p_title LIKE '%'|| #{keyword}||'%']]>
+		</if>
+		<if test="search=='p_content'">
+			<![CDATA[ p_content LIKE '%'|| #{keyword}||'%']]>
+		</if>
+	</sql>
+
 	<select id="selectProductList" resultType="product">
   		<![CDATA[ 
-		SELECT 
-        		P_NO, U_NO, P_TITLE, P_NAME, P_PRICE, P_STATUS, P_CONTENT, P_LOCAL, TRANS_METHOD, P_CREATED_AT, P_UPDATED_AT, P_DELETED_AT, p_file, p_thumb, P_CATE, P_ADM_PER
-		FROM (
-		        SELECT /*+ INDEX_DESC(TB_USER_PRODUCT TB_USER_PRODUCT_PK) */ 
-		            rownum as rnum, p.P_NO,u.U_NO,p.P_TITLE,p.P_NAME,p.P_PRICE,p.P_STATUS,p.P_CONTENT,p.P_LOCAL,p.TRANS_METHOD,p.P_CREATED_AT,p.P_UPDATED_AT,p.P_DELETED_AT,p.p_file,p.p_thumb,p.P_CATE,p.P_ADM_PER
-		        FROM 
-		            TB_USER_PRODUCT p INNER JOIN TB_USER u ON p.U_NO = u.U_NO 
-		        WHERE 
-		            rownum <= #{pageNum} * #{amount}
-		     ) PRODUCTLIST
-		WHERE 
-		    rnum > (#{pageNum} - 1) * #{amount} AND P_ADM_PER = 1
+ 		SELECT  
+         		P_NO, U_NO, P_TITLE, P_NAME, P_PRICE, P_STATUS, P_CONTENT, P_LOCAL, TRANS_METHOD, P_CREATED_AT, P_UPDATED_AT, P_DELETED_AT, p_file, p_thumb, P_CATE, P_ADM_PER 
+ 		FROM ( 
+ 		        SELECT /*+ INDEX_DESC(TB_USER_PRODUCT TB_USER_PRODUCT_PK) */ 
+ 		            rownum as rnum, p.P_NO,u.U_NO,p.P_TITLE,p.P_NAME,p.P_PRICE,p.P_STATUS,p.P_CONTENT,p.P_LOCAL,p.TRANS_METHOD,p.P_CREATED_AT,p.P_UPDATED_AT,p.P_DELETED_AT,p.p_file,p.p_thumb,p.P_CATE,p.P_ADM_PER 
+ 		        FROM  
+ 		            TB_USER_PRODUCT p INNER JOIN TB_USER u ON p.U_NO = u.U_NO  
+ 		        WHERE]]> 
+            	<trim prefix="(" suffix=") AND " prefixOverrides="AND">
+            		<include refid="productSearch"></include>
+            	</trim> 
+            <![CDATA[rownum <= #{pageNum} * #{amount}
+ 		     ) PRODUCTLIST 
+		WHERE  
+		    rnum > (#{pageNum} - 1) * #{amount} AND P_ADM_PER = 1 
     	]]>
-    	 
-			
 	</select>
 	
 	<select id="selectProductDetail" parameterType="int" resultType="product">
 		
 		SELECT
-		    p.P_NO,u.U_NO,p.P_TITLE,p.P_NAME,p.P_PRICE,p.P_STATUS,p.P_CONTENT,p.P_LOCAL,p.TRANS_METHOD,p.P_CREATED_AT,p.P_UPDATED_AT,p.P_DELETED_AT,p.p_file,p.p_thumb,p.P_CATE,p.p_adm_per
+		    p.P_NO,u.U_NO,u.U_NICK,p.P_TITLE,p.P_NAME,p.P_PRICE,p.P_STATUS,p.P_CONTENT,p.P_LOCAL,p.TRANS_METHOD,p.P_CREATED_AT,p.P_UPDATED_AT,p.P_DELETED_AT,p.p_file,p.p_thumb,p.P_CATE,p.p_adm_per
 		FROM
 		    TB_USER_PRODUCT p 
 		    	INNER JOIN 
@@ -106,7 +120,7 @@
 		        FROM    
 		            TB_USER_PRODUCT p INNER JOIN TB_USER u ON p.U_NO = u.U_NO 
 		        WHERE 
-		            rownum <= #{pageNum} * #{amount}
+		            rownum <= #{pageNum} * #{amount} AND P_CATE=#{p_cate}
 		     ) PRODUCTLIST
 		WHERE 
 		    rnum > (#{pageNum} - 1) * #{amount} AND P_ADM_PER = 1 AND P_CATE = #{p_cate}
@@ -123,7 +137,7 @@
 		        FROM 
 		            TB_USER_PRODUCT p INNER JOIN TB_USER u ON p.U_NO = u.U_NO 
 		        WHERE 
-		            rownum <= #{pageNum} * #{amount}
+		            rownum <= #{pageNum} * #{amount} AND p.P_LOCAL = #{p_local}
 		     ) PRODUCTLIST
 		WHERE 
 		    rnum > (#{pageNum} - 1) * #{amount} AND P_ADM_PER = 1 AND P_LOCAL = #{p_local}
@@ -132,12 +146,92 @@
 	</select>
 	
 	<select id="productLocalListCnt" parameterType="product" resultType="int">
-		SELECT 
+		SELECT    
 		    count(*) 
 		FROM 
 		    TB_USER_PRODUCT
 		WHERE 
 		    p_local = #{p_local} AND P_ADM_PER = 1
+	</select>
+	
+	<select id="myWrite" parameterType="product" resultType="product">
+		<![CDATA[ 
+		SELECT 
+        		P_NO, U_NO, P_TITLE, P_NAME, P_PRICE, P_STATUS, P_CONTENT, P_LOCAL, TRANS_METHOD, P_CREATED_AT, P_UPDATED_AT, P_DELETED_AT, p_file, p_thumb, P_CATE, P_ADM_PER
+		FROM (
+		        SELECT /*+ INDEX_DESC(TB_USER_PRODUCT TB_USER_PRODUCT_PK) */ 
+		            rownum as rnum, p.P_NO,u.U_NO,p.P_TITLE,p.P_NAME,p.P_PRICE,p.P_STATUS,p.P_CONTENT,p.P_LOCAL,p.TRANS_METHOD,p.P_CREATED_AT,p.P_UPDATED_AT,p.P_DELETED_AT,p.p_file,p.p_thumb,p.P_CATE,p.P_ADM_PER
+		        FROM 
+		            TB_USER_PRODUCT p INNER JOIN TB_USER u ON p.U_NO = u.U_NO 
+		        WHERE 
+		            rownum <= #{pageNum} * #{amount} AND u.U_NO = #{u_no}
+		     ) PRODUCTLIST
+		WHERE 
+		    rnum > (#{pageNum} - 1) * #{amount} AND U_NO = #{u_no}
+    	]]>
+		
+	</select>
+	
+	<select id="WriteListCnt" parameterType="product" resultType="int">
+		SELECT 
+		    count(*) 
+		FROM 
+		    TB_USER_PRODUCT
+		WHERE 
+		    U_NO = #{u_no}
+	</select>
+	
+	<select id="updateForm" parameterType="product" resultType="product">
+		SELECT 
+		    * 
+		FROM 
+		    TB_USER_PRODUCT
+		WHERE 
+		    U_NO = #{u_no} AND P_NO =#{p_no}
+		
+	</select>
+	
+	<update id="update" parameterType="product">
+		UPDATE TB_USER_PRODUCT
+		SET
+			P_TITLE =#{p_title},
+			P_NAME =#{p_name},
+			P_PRICE =#{p_price},
+			P_STATUS =#{p_status},
+			P_CONTENT =#{p_content},
+			P_LOCAL =#{p_local},
+			TRANS_METHOD =#{trans_method},
+			p_thumb =#{p_thumb},
+			p_file =#{p_file},
+			P_CATE =#{p_cate}
+		WHERE
+			U_NO =#{u_no} AND P_NO = #{p_no}
+	    AND EXISTS (
+	        SELECT 1
+	        FROM TB_USER_PRODUCT
+	        WHERE U_NO = #{u_no} AND P_NO = #{p_no}
+	        HAVING COUNT(*) = 1
+	    )
+	</update>
+
+
+	<delete id="delete" parameterType="product">
+		DELETE 
+		FROM 
+			TB_USER_PRODUCT
+		WHERE 
+			P_NO = #{p_no} AND U_NO = #{u_no} 
+	</delete>
+	
+	<select id="sel" parameterType="product" resultType="product">
+		SELECT
+		    p.P_NO,u.U_NO,p.P_TITLE,p.P_NAME,p.P_PRICE,p.P_STATUS,p.P_CONTENT,p.P_LOCAL,p.TRANS_METHOD,p.P_CREATED_AT,p.P_UPDATED_AT,p.P_DELETED_AT,p.p_file,p.p_thumb,p.P_CATE,p.p_adm_per
+		FROM
+		    TB_USER_PRODUCT p 
+		    	INNER JOIN 
+		    		TB_USER u ON p.U_NO = u.U_NO
+		WHERE
+			p.P_NO = #{p_no} AND u.U_NO = #{u_no}
 	</select>
 
 
@@ -212,6 +306,7 @@
 		    
     	]]>
     	</select>
+
 
 	<!-- 마이페이지 구매내역 조회 -->
 	<select id="selectProductBuyList" parameterType="member" resultType="product">

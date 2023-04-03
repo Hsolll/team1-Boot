@@ -69,4 +69,9 @@
 	</definition>
 	
 	
+	<definition name="user/product/*" extends="content">
+		<put-attribute name="title" value="중고마켓" />
+		<put-attribute name="body" value="/WEB-INF/views/user/product/{1}.jsp" /> 
+	</definition>
+	
 </tiles-definitions>

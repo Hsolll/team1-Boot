@@ -11,7 +11,9 @@ import com.omb.user.productReply.service.ProductReplyService;
 import com.omb.user.productReply.vo.ProductReplyVO;
 
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RequestMapping(value={"/productReply/*","/product/*"})
 @Controller
 public class ProductReplyController {
@@ -21,7 +23,7 @@ public class ProductReplyController {
 	private ProductReplyService productReplyService;
 	
 	@GetMapping(value="productReplyInsert")
-	public String replyInsert( ProductReplyVO prvo) {
+	public String replyInsert(ProductReplyVO prvo) {
 		
 		
 		
@@ -35,5 +37,22 @@ public class ProductReplyController {
 		return url;
 	}
 	
+	@GetMapping(value="delete")
+	public String delete(ProductReplyVO prvo) {
+		
+		
+		log.info("prvo :"+prvo);
+		
+		int result = productReplyService.delete(prvo);
+		
+		log.info("result :"+result);
+		String url ="";
+		if (result == 1) {
+			url = "redirect:/product/productDetail?p_no="+prvo.getP_no();
+		}else {
+			url = "user/product/productError";
+		}
+		return url;
+	}
 	
 }

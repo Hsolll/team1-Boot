@@ -13,5 +13,7 @@ public interface ProductReplyDao {
 	public int insertProductLike(ProductReplyVO prvo);
 
 	public List<ProductReplyVO> replySelect(ProductReplyVO prvo);
+	
+	public int delete(ProductReplyVO prov);
 
 }

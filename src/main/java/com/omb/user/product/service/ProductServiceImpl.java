@@ -18,6 +18,8 @@ import lombok.extern.slf4j.Slf4j;
 @Service("ProductService")
 public class ProductServiceImpl implements ProductService {
 	
+	
+
 	@Setter(onMethod_ = @Autowired )
 	private ProductDao productDao;
 
@@ -91,6 +93,57 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public int productLcoalListCnt(ProductVO pvo) {
 		return productDao.productLocalListCnt(pvo);
+	}
+
+	@Override
+	public List<ProductVO> myWrite(ProductVO pvo) {
+		List<ProductVO> wvo = productDao.myWrite(pvo);
+		return wvo;
+	}
+
+	@Override
+	public int WriteListCnt(ProductVO pvo) {
+		return productDao.WriteListCnt(pvo);
+		
+	}
+
+	@Override
+	public ProductVO updateForm(ProductVO pvo) {
+		ProductVO list = productDao.updateForm(pvo);
+		return list;
+	}
+
+	@Override
+	public int update(ProductVO pvo) throws Exception {
+		
+		if(pvo.getFile().getSize() > 0) {
+			String fileName = FileUploadUtil.fileUpload(pvo.getFile(),"product");//board_1658205347977_
+			pvo.setP_file(fileName);
+			
+			log.info("파일 이름: "+pvo.getP_file());
+			
+			String thumbName = FileUploadUtil.makeThumbnail(fileName);
+			pvo.setP_thumb(thumbName);
+			
+			log.info("썸네일 이름: "+pvo.getP_thumb());
+		}
+		int result = productDao.update(pvo);
+		return result;
+	}
+	@Override
+	public int delete(ProductVO pvo) throws Exception{
+		int result = 0;
+		log.info("pvo :"+pvo);
+		log.info("getP_file :"+pvo.getP_file());
+		ProductVO ppvo = productDao.sel(pvo);
+		
+		log.info("getP_file :"+ppvo.getP_file());
+		if(!ppvo.getP_file().isEmpty()) { // b_file 필드의 값이 null 거나 "" 아니면(이미지 파일이 존재하면)
+			FileUploadUtil.fileDelete(ppvo.getP_file());
+			FileUploadUtil.fileDelete(ppvo.getP_thumb());
+		}
+		result = productDao.delete(pvo);
+		return result;
 	}
 
 	
