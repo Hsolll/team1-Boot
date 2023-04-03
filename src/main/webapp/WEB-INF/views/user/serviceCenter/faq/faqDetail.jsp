@@ -8,37 +8,53 @@
 			});
 		});
 	</script>
+	<style>
+		.thBgGray th {text-align: center !important; background: #f1f1f1 !important;}
+	</style>
 	</head>
 	<body>
+	
+	
 		<div class="contentContainer container">
-			
-			<div class="contentTB test-center">
-				<table class="table table-bordered">
-					<tbody>
-						<tr>
-							<td class="col-md-3">작성자</td>
-							<td class="col-md-3 text-center">관리자  (조회수 : ${detail.f_readcnt })</td>
-							<td class="col-md-3">등록일</td>
-							<c:if test='${empty detail.f_updated_at }'>
-								<td class="col-md-3 text-center">${detail.f_created_at }</td>
-							</c:if>
-							<c:if test='${not empty detail.f_updated_at }'>
-								<td class="col-md-3 text-center">${detail.f_updated_at }</td>								
-							</c:if>
-						</tr>
-						<tr>
-							<td class="col-md-4">제목</td>
-							<td colspan="3" class="col-md-8 text-left">${detail.f_title }</td>
-						</tr>
-						<tr class="table-tr-height">
-							<td colspan="4" class="col-md-4">${detail.f_content }</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			
-			<div class="btnArea col-md-4 text-right">
-				<button type="button" id="listBtn" class="btn btn_success">목록</button>
+			<div class="text-center">
+				<div class="form-container">
+					<div class="detailContainer">
+						<table class="table table-bordered thBgGray">
+							<colgroup>
+								<col style="width: 14%;">
+								<col>
+								<col style="width: 14%;">
+								<col>
+							</colgroup>	
+							<tbody>
+								<tr>
+									<th>글번호</th>
+									<td class="text-left">${detail.f_no}</td>
+									<th>등록일</th>
+									<c:if test='${empty detail.f_updated_at }'>
+										<td class="col-md-3 text-left">${detail.f_created_at }</td>
+									</c:if>
+									<c:if test='${not empty detail.f_updated_at }'>
+										<td class="col-md-3 text-left">${detail.f_updated_at }</td>								
+									</c:if>
+								</tr>
+								<tr>
+									<th>제목</th>
+									<td class="text-left">${detail.f_title}</td>
+									<th>작성자</th>
+									<td class="text-left">관리자   (조회수 : ${detail.f_readcnt })</td>
+								</tr>
+								<tr class="table-tr-height">
+									<th style="vertical-align: middle;">내용</th>
+									<td colspan="3" class="text-left" style="overflow-x: auto; height: 280px; word-break: break-all;">${detail.f_content }</td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="btnArea text-right">
+							<button type="button" class="btn btn-dark" id="listBtn">목록으로</button>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</body>

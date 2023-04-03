@@ -74,15 +74,12 @@
 				let an_no =  $(this).parents("tr").attr("data-num");	
 				$("#an_no").val(an_no);
 				console.log("글번호 : "+an_no);
-				if(msg!=""){
-					alert("로그인을 진행해주세요.");
-				}else{ 
+				
 				$("#detailForm").attr({
 					"method":"get",
 					"action":"/admin/noticeDetail"
 				});
 					$("#detailForm").submit();
-				}
 			});
 			
 			$(".page-item a").click(function(e){
