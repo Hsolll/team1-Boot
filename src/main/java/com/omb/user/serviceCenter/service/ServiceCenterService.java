@@ -2,6 +2,7 @@ package com.omb.user.serviceCenter.service;
 
 import java.util.List;
 
+
 import com.omb.user.serviceCenter.vo.ServiceCenterVO;
 
 public interface ServiceCenterService {
@@ -14,6 +15,8 @@ public interface ServiceCenterService {
 	public int updateService(ServiceCenterVO vo) throws Exception;
 	public int updateServiceDel(ServiceCenterVO vo) throws Exception;
 	public int deleteService(ServiceCenterVO scno) throws Exception;
+	
+	public List<ServiceCenterVO> selectServiceMyPageList(ServiceCenterVO vo);
 	
 
 }

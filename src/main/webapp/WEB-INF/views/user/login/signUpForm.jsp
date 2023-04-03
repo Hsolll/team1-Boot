@@ -398,13 +398,13 @@
                 <header class="member_header">                 
                 </header>
                 <div class="find_main">
-                    <ul class="tab" role="tablist">
-                        <li id="tabPrvt" role="presentation" ><a href="/login" id="tab1" role="tab" onclick="toggleTab('tabPrvt');" aria-controls="tabPrvt" data-log-actionid-area="tab" data-log-actionid-label="tab" aria-selected="false">로그인</a></li>
-                        <li id="tabBsns" role="presentation" class="on"><a href="/member/signUpAgree" id="tab2" role="tab" onclick="toggleTab('tabBsns');" aria-controls="tabBsns" data-log-actionid-area="tab" data-log-actionid-label="tab" aria-selected="true">회원가입</a></li>
-                    </ul>                            
-                    <section id="sectionBsns" style="display: block;">
-                        <ul class="seller_guide">
-                            <li><em>*는 필수항목입니다.</em></li>
+                    <ul class="tab">
+                    	<li><a href="/login" id="tab1">로그인</a></li>
+                    	<li class="on"><a href="/member/signUpAgree" id="tab2">회원가입</a></li>
+                	</ul>                           
+                    <section style="display: block;">
+                        <ul class="guide">
+                            <li><em style="color:red;"> * </em>는 필수항목입니다.</li>
                         </ul>
                         <fieldset class="form_box">
                             <legend>회원가입 폼</legend>

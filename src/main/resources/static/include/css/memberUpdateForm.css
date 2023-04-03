@@ -164,6 +164,7 @@ legend {
     line-height: 0;
     position: absolute;
     margin-left: -20px;
+    border: 0 !important;
 }
 
 body, h1, h2, h3, h4, h5, h6, p, ul, ol, dl, dd, form, fieldset, pre, figure, blockquote, input, button, textarea {

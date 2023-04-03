@@ -81,4 +81,13 @@ public class ServiceCenterServiceImpl implements ServiceCenterService {
 		return result;
 		}
 
+	@Override
+	public List<ServiceCenterVO> selectServiceMyPageList(ServiceCenterVO vo) {
+		List<ServiceCenterVO> serviceMyPageList = null;
+		serviceMyPageList = serviceDao.selectServiceMyPageList(vo);
+		return serviceMyPageList;
+	}
+
+	
+
 }

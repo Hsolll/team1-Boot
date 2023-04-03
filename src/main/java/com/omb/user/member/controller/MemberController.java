@@ -19,11 +19,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.omb.admin.serviceCenter.service.AdmServiceCenterService;
+import com.omb.admin.serviceCenter.vo.AdmServiceCenterVO;
 import com.omb.common.vo.PageDTO;
 import com.omb.user.member.service.MemberService;
 import com.omb.user.member.vo.MemberVO;
 import com.omb.user.product.service.ProductService;
 import com.omb.user.product.vo.ProductVO;
+import com.omb.user.serviceCenter.service.ServiceCenterService;
+import com.omb.user.serviceCenter.vo.ServiceCenterVO;
 
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -40,6 +44,12 @@ public class MemberController {
 	@Setter(onMethod_=@Autowired)
 	private ProductService productService;
 	
+	@Setter(onMethod_=@Autowired)
+	private ServiceCenterService serviceCenter;
+	
+	@Setter(onMethod_=@Autowired)
+	private AdmServiceCenterService admserviceCenter;
+	
 	@Autowired
     private JavaMailSender mailSender;
 	
@@ -51,14 +61,14 @@ public class MemberController {
 	@GetMapping("/signUpAgree")
 	 public String signUpAgree() {
 		 log.info("약관 동의 호출");
-		 return "user/member/signUpAgree";
+		 return "user/login/signUpAgree";
 	 }
 	
 	@PostMapping("/signUpForm")
 	public String signUpForm() {
 		log.info("회원가입 화면 호출");
 		
-		return "user/member/signUpForm";
+		return "user/login/signUpForm";
 	}
 	
 	@PostMapping("/signUp")
@@ -71,7 +81,7 @@ public class MemberController {
 		int phoneResult = memberservice.phoneChk(mvo);
 		
 		if(result == 1 && nickResult == 1 && emailResult ==1 && phoneResult == 1) {
-			return "member/signUp";
+			return "redirect:/member/signUpForm";
 		}else {
 			memberservice.signUp(mvo);
 			memberservice.addressInsert(mvo);
@@ -84,7 +94,7 @@ public class MemberController {
 	
 	
 	
-	@GetMapping("/mypage")
+	/*@GetMapping("/mypage")
 	public String myPage(@ModelAttribute MemberVO mvo, Model model) {
 		log.info("마이페이지 호출 성공");
 		
@@ -92,7 +102,7 @@ public class MemberController {
 		model.addAttribute("mypage" ,mypage);
 		
 		return "user/myPage/myPageIndex";
-	}
+	}*/
 	
 
 	
@@ -432,24 +442,24 @@ public class MemberController {
 		 }
 	 }
 	 
-    @GetMapping("/sellList")
-    public String sellListForm(HttpSession session, @ModelAttribute ProductVO pvo, Model model) {
+    /*@GetMapping("/sellList")
+    public String sellListForm(HttpSession session, @ModelAttribute ProductVO pvo, Model model,@ModelAttribute MemberVO mvo) {
     	MemberVO member = (MemberVO)session.getAttribute("memberLogin");
-	    log.info("selectProductList() 메서드 실행성공");
+	    log.info("판매내역 호출 성공");
 	    
 	    // 모델 객체에 데이터 전달
 	    model.addAttribute("member", member);
 	    
 	    log.info("member :"+member);
 		
-		List<ProductVO> productList =  productService.selectProductList(pvo);
+		List<ProductVO> productSellList =  productService.selectProductSellList(mvo);
 		
-		log.info("productList :"+productList);
+		log.info("productSellList :"+productSellList);
 		log.info("pvo :"+pvo);
 		
 		
-		model.addAttribute("productList", productList);
-		log.info("model.productList :"+model.getAttribute("productList"));
+		model.addAttribute("productSellList", productSellList);
+		log.info("model.productSellList :"+model.getAttribute("productSellList"));
 		
 		int total = productService.productListCnt(pvo);
 		log.info("total :"+total);
@@ -465,6 +475,151 @@ public class MemberController {
 		log.info("model.count :"+model.getAttribute("count"));
     	
     	return "user/myPage/myPageSellList";
-    }
-   
+    } */
+	 
+	 @GetMapping("/sellList")
+	    public String sellListForm(HttpSession session,  Model model) {
+	    	MemberVO mvo = (MemberVO)session.getAttribute("memberLogin");
+		    log.info("마이페이지 판매내역 호출 성공");
+		    
+		    // 모델 객체에 데이터 전달
+		   
+			mvo.setAmount(5);
+			List<ProductVO> productSellList =  productService.selectProductSellList(mvo);
+			
+			if(productSellList.size() > 0){
+			ProductVO pvo = productSellList.get(0);
+			pvo.setAmount(5);
+			
+			model.addAttribute("productSellList", productSellList);
+			
+			int total = productService.productMyPageListCnt(pvo);
+			log.info("total :"+total);
+			
+			model.addAttribute("pageMaker", new PageDTO(pvo, total));
+			}
+	    	
+	    	return "user/myPage/myPageSellList";
+	    } 
+    
+    @GetMapping("/buyList")
+    public String buyListForm(HttpSession session, Model model) {
+    	MemberVO mvo = (MemberVO)session.getAttribute("memberLogin");
+	    log.info("마이페이지 구매내역 호출 성공");
+	    
+	    // 모델 객체에 데이터 전달
+	   
+		mvo.setAmount(5);
+		List<ProductVO> productBuyList =  productService.selectProductBuyList(mvo);
+		
+		if(productBuyList.size() > 0){
+		ProductVO pvo = productBuyList.get(0);
+		pvo.setAmount(5);
+		
+		model.addAttribute("productBuyList", productBuyList);
+		
+		int total = productService.productListCnt(pvo);
+		log.info("total :"+total);
+		
+		model.addAttribute("pageMaker", new PageDTO(pvo, total));
+		
+		}
+    	
+    	return "user/myPage/myPageBuyList";
+    } 
+    
+    @GetMapping("/likeList")
+    public String likeListForm(HttpSession session, Model model) {
+    	MemberVO mvo = (MemberVO)session.getAttribute("memberLogin");
+	    log.info("마이페이지 좋아요(찜) 호출 성공");
+	    
+	    // 모델 객체에 데이터 전달
+	   
+		mvo.setAmount(5);
+		List<ProductVO> productLikeList =  productService.selectProductLikeList(mvo);
+		
+		if(productLikeList.size() > 0){
+		ProductVO pvo = productLikeList.get(0);
+		pvo.setAmount(5);
+		
+		model.addAttribute("productLikeList", productLikeList);
+		
+		int total = productService.productListCnt(pvo);
+		log.info("total :"+total);
+		
+		model.addAttribute("pageMaker", new PageDTO(pvo, total));
+		
+		}
+    	
+    	return "user/myPage/myPageLike";
+    } 
+    
+    @PostMapping("/productStatus")
+	public String productStatus(ProductVO pvo) {
+		
+		log.info("판매완료");
+		
+		productService.productStatus(pvo);
+		
+		
+		return "redirect:/member/sellList";
+	}
+    
+    @GetMapping(value="/myPageServiceList")
+	public String serviceList(HttpSession session, @ModelAttribute MemberVO user, @ModelAttribute ServiceCenterVO vo, AdmServiceCenterVO svo, Model model) {
+    	log.info("serviceList() 실행...");
+    	
+    	user = (MemberVO)session.getAttribute("memberLogin");
+    	vo.setU_no(user.getU_no());
+		
+		List<ServiceCenterVO> serviceMyPageList = serviceCenter.selectServiceMyPageList(vo);
+		model.addAttribute("serviceMyPageList", serviceMyPageList);
+		
+		List<AdmServiceCenterVO> admServiceList = admserviceCenter.admReplyList();
+		model.addAttribute("admServiceList", admServiceList);
+		log.info("답글 확인 : " + admServiceList);
+
+		int total = serviceCenter.selectServiceCnt(vo);
+		vo.setAmount(10);
+		model.addAttribute("pageMaker", new PageDTO(vo, total));
+		
+		return "user/myPage/myPageServiceList";
+	}
+    
+    @GetMapping("/mypage")
+	public String myPage(HttpSession session, Model model) {
+    	MemberVO mvo = (MemberVO)session.getAttribute("memberLogin");
+	    log.info("마이페이지 좋아요(찜) 호출 성공");
+	    
+	    // 모델 객체에 데이터 전달
+	   
+		mvo.setAmount(3);
+		List<ProductVO> productLikeList =  productService.selectProductLikeList(mvo);
+		
+		if(productLikeList.size() > 0){
+		ProductVO pvo = productLikeList.get(0);
+		pvo.setAmount(3);
+		
+		model.addAttribute("productLikeList", productLikeList);
+		}
+		mvo.setAmount(3);
+		List<ProductVO> productBuyList =  productService.selectProductBuyList(mvo);
+		
+		if(productBuyList.size() > 0){
+		ProductVO pvo2 = productBuyList.get(0);
+		pvo2.setAmount(3);
+		
+		model.addAttribute("productBuyList", productBuyList);
+		}
+		mvo.setAmount(3);
+		List<ProductVO> productSellList =  productService.selectProductSellList(mvo);
+		
+		if(productSellList.size() > 0){
+		ProductVO pvo3 = productSellList.get(0);
+		pvo3.setAmount(3);
+		
+		model.addAttribute("productSellList", productSellList);
+		}
+		return "user/myPage/myPageIndex";
+	}
 }

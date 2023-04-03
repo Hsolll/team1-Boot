@@ -49,6 +49,11 @@ h1 {
     background-size: 64px 28px;
 }
 
+em{
+	font-size:10px;
+	color: #0b83e6;
+}
+
 .sp_login {
     background-image: url(/img/member/sp_login.png);
     background-repeat: no-repeat;
@@ -165,11 +170,16 @@ legend {
     line-height: 0;
     position: absolute;
     margin-left: -20px;
+    border: 0 !important;
 }
 
 body, h1, h2, h3, h4, h5, h6, p, ul, ol, dl, dd, form, fieldset, pre, figure, blockquote, input, button, textarea {
     padding: 0;
     margin: 0;
+}
+
+.join_write{
+	margin: 0 25px;
 }
 
 .join_write > li {
@@ -215,7 +225,7 @@ body, h1, h2, h3, h4, h5, h6, p, ul, ol, dl, dd, form, fieldset, pre, figure, bl
 }
 
 .btn_Atype {
-    width: 100%;
+    width: 428px;
     display: inline-block;
     text-align: center;
     font-size: 17px;

@@ -7,11 +7,11 @@
         #ux-container {
     position: relative;
     box-sizing: border-box;
-    margin-top: -450px;
     margin: 0 auto;
     width: 480px;
     min-height: 100%;
     padding: 50px 0;
+    font-family: 'Noto Sans KR', Tahoma, '돋움', Dotum;
     
 }
 .header > .title {
@@ -72,7 +72,6 @@ label, .label {
     padding-bottom: 10px;
     height: 22px;
     line-height: 22px;
-    font-size: 17px;
     font-weight: 500;
     color: #434159;
 }
@@ -90,7 +89,7 @@ label, .label {
 input[type=button], input[type=text], input[type=image], input[type=submit], input[type=password], input[type=tel], input[type=number], select, textarea {
     
     border-radius: 0;
-    font-family: 'Noto Sans KR', Tahoma, '돋움', Dotum;
+    
 }
 
 .btn, .cbox, .rbox, .tbox, .sbox {
@@ -105,14 +104,15 @@ input[type=button], input[type=text], input[type=image], input[type=submit], inp
 
 
 .tbox {
-    height: 62px;
-    padding: 13px 20px;
-    border: 1px solid #dfdee2;
-    outline: 0;
-    color: #000;
-    font-size: 16px;
-    line-height: 34px;
-    font-weight: 300;
+	width:460px !important;
+    height: 62px !important;
+    padding: 13px 20px !important;
+    border: 1px solid #dfdee2 !important;
+    outline: 0 !important;
+    color: #000 !important;
+    font-size: 16px !important;
+    line-height: 34px !important;
+    font-weight: 300 !important;
 }
 
 
@@ -180,7 +180,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
     vertical-align: baseline;
     font: inherit;
     font-size: 100%;
-    font-family: 'Noto Sans KR', Tahoma, '돋움', Dotum;
+    
 }
 
 input {
