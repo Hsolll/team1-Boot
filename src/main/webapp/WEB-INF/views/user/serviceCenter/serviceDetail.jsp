@@ -72,7 +72,7 @@
 							<tbody>
 								<tr>
 									<td class="col-md-3">작성자</td>
-									<td class="col-md-3 text-center">${serviceDetail.u_name }</td>
+									<td class="col-md-3 text-center">${serviceDetail.u_name }   (조회수 : ${serviceDetail.sc_readcnt })</td>
 									<td class="col-md-3">등록일</td>
 									<td class="col-md-3 text-center">${serviceDetail.sc_created_at }</td>
 								</tr>

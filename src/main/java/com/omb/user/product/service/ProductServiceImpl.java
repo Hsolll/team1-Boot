@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.omb.user.member.vo.MemberVO;
 import com.omb.user.product.common.file.FileUploadUtil;
 import com.omb.user.product.dao.ProductDao;
 import com.omb.user.product.vo.ProductVO;
@@ -90,6 +91,48 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public int productLcoalListCnt(ProductVO pvo) {
 		return productDao.productLocalListCnt(pvo);
+	}
+
+	
+	
+
+	@Override
+	public void productStatus(ProductVO pvo) {
+		productDao.productStatus(pvo);
+		
+	}
+
+	@Override
+	public List<ProductVO> selectProductBuyList(MemberVO mvo) {
+		List<ProductVO> productBuyList = productDao.selectProductBuyList(mvo);
+		
+		 return productBuyList;
+	}
+
+	@Override
+	public List<ProductVO> selectProductSellList(MemberVO mvo) {
+		List<ProductVO> productSellList = productDao.selectProductSellList(mvo);
+		
+		 return productSellList;
+	}
+
+	@Override
+	public List<ProductVO> selectProductLikeList(MemberVO mvo) {
+		List<ProductVO> productLikeList = productDao.selectProductLikeList(mvo);
+		
+		 return productLikeList;
+	}
+
+	@Override
+	public int productMyPageListCnt(ProductVO pvo) {
+		return productDao.productMyPageListCnt(pvo);
+	}
+
+	@Override
+	public List<ProductVO> selectProductMyPageList(MemberVO mvo) {
+		List<ProductVO> productMyPageList = productDao.selectProductMyPageList(mvo);
+		
+		 return productMyPageList;
 	}
 
 	

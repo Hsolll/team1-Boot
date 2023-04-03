@@ -29,7 +29,7 @@
         <!-- 폰트어썸 사용 링크 -->
         <script src="https://kit.fontawesome.com/64a5181ca4.js" crossorigin="anonymous"></script>
         
-        <script type="text/javascript" src="/resources/include/js/jquery-3.6.2.min.js"></script>
+        <!-- <script type="text/javascript" src="/resources/include/js/jquery-3.6.2.min.js"></script> -->
         <script type="text/javascript" src="/resources/include/js/subList.js"></script>
         
     </head> 

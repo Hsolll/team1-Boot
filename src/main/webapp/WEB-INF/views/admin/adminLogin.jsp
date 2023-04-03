@@ -7,13 +7,14 @@
     	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<title>관리자 로그인</title>
 		<link rel="stylesheet" href="/resources/vendor/bootstrap/css/bootstrap.min.css">
-    <link href="/resources/include/dist/assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="/resources/libs/css/style.css">
-    <link rel="stylesheet" href="/resources/include/dist/assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
-    <script type="text/javascript" src="/resources/include/js/jquery-3.6.2.min.js"></script>
-    <script src="/resources/include/dist/js/main-js.js"></script>
-    <script src="/resources/vendor/bootstrap/js/bootstrap.bundle.js"></script>
-    <script type="text/javascript" src="/resources/include/js/common.js"></script>
+	    <link href="/resources/include/dist/assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
+	    <link rel="stylesheet" href="/resources/libs/css/style.css">
+	    <link rel="stylesheet" href="/resources/include/dist/assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
+	    <script type="text/javascript" src="/resources/include/js/jquery-3.6.2.min.js"></script>
+	    <script src="/resources/include/dist/js/main-js.js"></script>
+	    <script src="/resources/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+	    <script type="text/javascript" src="/resources/include/js/common.js"></script>
+
 		<style>
 		    html,
 		    body {
@@ -27,6 +28,22 @@
 		        align-items: center;
 		        padding-top: 40px;
 		        padding-bottom: 40px;
+		    }
+		    
+		    .card-body{
+		    	height: 300px;
+		    }
+		    .form-group{
+		    	margin-top: 20px;
+		    	margin-bottom: 20px;
+		    }
+		    
+		    #loginForm{
+		    	height: 230px;
+		    }
+		    
+		    #loginBtn{
+		    	margin-top: 60px;
 		    }
 	    </style>
 	    

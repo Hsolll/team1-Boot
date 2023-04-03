@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.omb.admin.serviceCenter.dao.AdmServiceCenterDao">
+	
+	<insert id="admServiceInsert" parameterType="admservice">
+		INSERT INTO TB_ADMIN_SERVICE_CENTER (AS_NO, SC_NO, A_NO, AS_TITLE, AS_CONTENT, AS_PWD)
+		VALUES (TB_ADMIN_SERVICE_CENTER_SEQ.NEXTVAL, #{sc_no}, 1, #{as_title}, #{as_content}, #{sc_pwd})
+	</insert>
+	
+	
+	<select id="admReplyList" resultType="admservice">
+		SELECT A.AS_NO, A.AS_TITLE, A.A_NO, A.SC_NO, B.A_NAME,
+        TO_CHAR(A.AS_CREATED_AT, 'YYYY-MM-DD') AS AS_CREATED_AT
+        FROM TB_ADMIN_SERVICE_CENTER A
+        RIGHT JOIN TB_ADMIN B
+        ON A.A_NO = B.A_NO
+        WHERE AS_DELETED_AT IS NULL
+	</select>
+	 
+	<select id="replyServiceDetail" parameterType="admservice" resultType="admservice">
+		SELECT A.AS_NO, A.AS_TITLE, B.A_NAME, A.AS_CONTENT, A.AS_PWD,
+        TO_CHAR(A.AS_CREATED_AT, 'YYYY-MM-DD') AS AS_CREATED_AT
+        FROM TB_ADMIN_SERVICE_CENTER A
+        RIGHT JOIN TB_ADMIN B
+        ON A.A_NO = B.A_NO
+        WHERE A.AS_NO = #{as_no}
+	</select>
+	
+	<update id="admReplyUpdate" parameterType="admservice">
+		UPDATE tb_admin_service_center
+		SET as_content = #{as_content},
+			as_created_at = sysdate 
+		WHERE as_no = #{as_no}
+	</update>
+	
+	<delete id="admServiceCenterDelete" parameterType="admservice">
+		DELETE FROM tb_admin_service_center WHERE as_no = #{as_no}
+	</delete>
+	
+	<!-- 비밀번호 체크 -->
+	<select id="admselectPwdChk" parameterType="admservice" resultType="int">
+		SELECT NVL((SELECT 1 FROM TB_ADMIN_SERVICE_CENTER
+			WHERE AS_NO = #{as_no} AND AS_PWD = #{as_pwd}), 0) AS STATE
+		FROM DUAL
+	</select>
+	
+	<!-- 마이페이지 신고내역 답글 조회 -->
+	<select id="admReplyMyPageList" resultType="admservice">
+		SELECT A.AS_NO, A.AS_TITLE, A.A_NO, A.SC_NO, B.A_NAME,
+        TO_CHAR(A.AS_CREATED_AT, 'YYYY-MM-DD') AS AS_CREATED_AT
+        FROM TB_ADMIN_SERVICE_CENTER A
+        RIGHT JOIN TB_ADMIN B
+        ON A.A_NO = B.A_NO
+        WHERE AS_DELETED_AT IS NULL
+	</select>
+</mapper>

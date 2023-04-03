@@ -5,7 +5,11 @@
 		var btn = 0;
 			$(function(){
 				
-				
+				let admin = "<c:out value='${adminLogin.a_no }'/>";
+				if(admin == ""){
+					alert("잘못된 접근입니다.");
+					location.href="/admin/login";
+				}
 				$("input[name='allChk']").click(function(){
 					var item = $("input[name='queChk']");
 					for(var i = 0; i<item.length;i++){
@@ -57,6 +61,17 @@
 				
 			});
 			
+			function goPage(){
+				if($("#search").val()=="all"){
+					$("#keyword").val("");
+				}
+				$("#f_search").attr({
+					"method":"get",
+					"action":"/admin/product/rejectedList"
+				});
+				$("#f_search").submit();
+			}
+			
 			function proValue(){
 				var valueArr = new Array();
 				var list = $("input[name='queChk']");
@@ -104,12 +119,13 @@
 		</script>
 	</head>
 	<body>
+	<c:if test='${not empty adminLogin }'>
 		<div class="contentContainer container">
 			<!-- <div class="contentTit page-header"><h3 class="text-center">글 목록</h3></div> -->
 			<form id="proForm">
 				<input type="hidden" id="p_no" name="p_no">
 			</form>
-			<div class="chooseList">
+			<div class="chooseList text-center">
 				<h3><a href="/admin/product/queuedList" id="que">대기</a> / <a href="/admin/product/rejectedList" id="reject">거절</a></h3>
 			</div>
 			<div class="contentBtn text-right">
@@ -161,7 +177,12 @@
 					</table>
 				</div>
 			</div>
-			
+			<div id="serviceSearch" class="text-right">
+				<form id="f_search" name="f_search" class="form-inline">
+					<input type="hidden" name="pageNum" id="pageNum" value="${pageMaker.cvo.pageNum }">
+					<input type="hidden" name="amount" id="amount" value="${pageMaker.cvo.amount }">
+				</form>
+			</div>
 			<div class="text-center">
 				<ul class="pagination">
 					<!-- 이전 바로가기 10개 존재 여부를 prev 필드의 값으로 확인 -->
@@ -174,7 +195,7 @@
 					<!-- 바로가기 번호 출력 -->
 					<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
 						<li class="paginate_button ${pageMaker.cvo.pageNum == num ? 'active':''}">
-							<a href='${num }'>${num }</a>
+							<a href='${num }'>${num } </a>
 						</li>
 					</c:forEach>
 					
@@ -187,5 +208,6 @@
 				</ul>
 			</div>
 		</div>
+		</c:if>
 	</body>
 </html>

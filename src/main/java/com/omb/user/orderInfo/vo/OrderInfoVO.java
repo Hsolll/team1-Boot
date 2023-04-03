@@ -1,9 +1,13 @@
 package com.omb.user.orderInfo.vo;
 
+import com.omb.common.vo.CommonVO;
+
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
-public class OrderInfoVO {
+@EqualsAndHashCode(callSuper=false)
+public class OrderInfoVO extends CommonVO {
 	
 	// 주문 내역 저장을 위한 필드
 	private int o_no;

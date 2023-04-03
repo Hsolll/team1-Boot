@@ -9,17 +9,13 @@
 		<ul>
 			<!-- <li><a href="/member/signUp">회원가입</a></li> -->
 			<li><c:if test="${not empty memberLogin }">
-          		${memberLogin.u_name }님 반갑습니다.
-          		<a href="/logout" class="btn btn-primary btn-sm active" role="button">로그아웃</a>
+          		${memberLogin.u_name }님 반갑습니다
+          		<a href="/logout">로그아웃</a>
           		<a href="/member/mypage">마이페이지</a>
           	</c:if>
           	<c:if test="${empty memberLogin }">
-          		<!-- <script type="text/javascript">
-          			location.href="/member/login";
-          		</script> -->
-          		<a href="/member/signUp">회원가입</a>
-          		<a href="/login" class="btn btn-primary btn-sm active" role="button">로그인</a>
-          		<li><a href="/login">마이페이지</a></li>
+          		<a href="/login">로그인</a>
+          		<a href="/member/signUpAgree">회원가입</a>
           	</c:if></li>
 			<!-- <li><a href="/member/login">로그인</a></li> -->
 			<!-- <li><a href="/login">마이페이지</a></li> -->
@@ -30,7 +26,7 @@
 	<div class="logo_wrap">
 		<div class="logo">
 			<a href="/"> 
-				<img src="/resources/include/img/logo.png" alt="OMB_LOGO">
+				<img src="/resources/include/img/main.png" alt="OMB_LOGO">
 			</a>
 		</div>
 	</div>
@@ -38,7 +34,7 @@
 		<div class="menu_content">
 			<div class="omb_main">
 				<ul>
-					<li id="ml1"><a href="#">공지사항</a></li>
+					<li id="ml1"><a href="/notice/noticeList">공지사항</a></li>
 					<li><a href="/product/productList">중고마켓</a></li>
 					<li><a href="#">나눔마켓</a></li>
 					<li id="ml2"><a href="/safe/productList">안심거래</a></li>
@@ -58,17 +54,17 @@
 			<div class="omb_sub">
 				<div id="sl1" class="sub_list">
 	                <ul class="nav">
-	                <li><a href="#">공지사항</a></li>
-	                <li><a href="#">이벤트</a></li>
+	                <li><a href="/notice/noticeList">공지사항</a></li>
+	                <li><a href="/notice/eventList">이벤트</a></li>
 	                </ul>
 	            </div>
 	            <div id="sl2" class="sub_list">
 	                <ul class="nav">
-	                <li><a href="/safe/productList">물품보기</a></li>
-	                <li><a href="/safe/productInsertView">물품등록</a></li>
+	                <li><a href="/safe/productList">상품보기</a></li>
+	                <li><a href="/safe/productInsertView">상품등록</a></li>
 	                <li><a href="/order/buyList">구매내역</a></li>
 	                <li><a href="/safe/productSell">판매내역</a></li>
-	                <li><a href="/order/sellList">판매완료내역</a></li>
+	                <li><a href="/order/sellList">판매자 주문내역</a></li>
 	                </ul>
 	            </div>
 	            <div id="sl3" class="sub_list">

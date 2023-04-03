@@ -39,6 +39,41 @@ public class StatisticsServiceImpl implements StatisticsService {
 	
 		return statisticsDAO.selectCategory();
 	}
+
+	@Override
+	public List<Map<String, Integer>> selectProduct() {
+		List<Map<String, Integer>> list = null;
+		list = statisticsDAO.selectProduct();
+		return list;
+	}
+
+	@Override
+	public List<Map<String, Integer>> selectAmount() {
+		List<Map<String, Integer>> list = null;
+		list = statisticsDAO.selectAmount();
+		return list;
+	}
+
+	@Override
+	public List<Map<String, Object>> selectLocal() {
+		List<Map<String, Object>> list = null;
+		list = statisticsDAO.selectLocal();
+		return list;
+	}
+
+	@Override
+	public List<Map<String, Object>> selectUser() {
+		List<Map<String, Object>> list = null;
+		list = statisticsDAO.selectUser();
+		return list;
+	}
+
+	@Override
+	public List<Map<String, Object>> selectOrder() {
+		List<Map<String, Object>> list = null;
+		list = statisticsDAO.selectOrder();
+		return list;
+	}
 	
 
 }

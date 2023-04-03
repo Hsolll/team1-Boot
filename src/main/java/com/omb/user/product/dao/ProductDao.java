@@ -4,13 +4,20 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.omb.user.member.vo.MemberVO;
 import com.omb.user.product.vo.ProductVO;
 
 @Mapper
 public interface ProductDao {
 
 	public List<ProductVO> selectProductList(ProductVO pvo);
+	public List<ProductVO> selectProductBuyList(MemberVO mvo);
+	public List<ProductVO> selectProductSellList(MemberVO mvo);
+	public List<ProductVO> selectProductLikeList(MemberVO mvo);
+	public List<ProductVO> selectProductMyPageList(MemberVO mvo);
 
+	public void productStatus(ProductVO pvo);
+	
 	public ProductVO selectProductDetail(int p_no);
 
 	public int insertProduct(ProductVO pvo);
@@ -22,6 +29,8 @@ public interface ProductDao {
 	public List<ProductVO> category(ProductVO pvo);
 
 	public int productListCnt(ProductVO pvo);
+	
+	public int productMyPageListCnt(ProductVO pvo);
 
 	public int productCateListCnt(ProductVO pvo);
 

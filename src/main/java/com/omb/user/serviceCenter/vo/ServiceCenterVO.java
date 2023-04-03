@@ -18,4 +18,6 @@ public class ServiceCenterVO extends CommonVO{
 	private String sc_created_at;
 	private String sc_updated_at;
 	private String sc_deleted_at;
+	
+	private int as_no;
 }

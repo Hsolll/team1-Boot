@@ -14,6 +14,17 @@ function chkData(item, msg){
 	}
 }
 
+function selectData(item, msg){
+	if($(item).val().replace(/\s/g,"")==""){
+		alert(msg+" 선택해 주세요.");
+		$(item).val("");
+		$(item).focus();
+		return false;
+	} else{
+		return true;
+	}
+}
+
 /* 함수명 : checkForm(유효성 체크 대상, 메시지 내용)
  * 출력영역 : placeholder 속성을 이용.
  * 예시 : if(!checkForm("#keyword","검색어를")) return;

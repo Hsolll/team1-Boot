@@ -3,6 +3,7 @@
 <%@ include file="/WEB-INF/views/common/admin.jspf"%>
 </head>
 <body>
-	<div class="container-fluid dashboard-content">main</div>
+	<div class="container-fluid dashboard-content">
+	</div>
 </body>
 </html>

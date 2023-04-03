@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.omb.user.member.vo.MemberVO;
+import com.omb.user.product.vo.ProductVO;
 import com.omb.user.safeProduct.dao.SafeProductDAO;
 import com.omb.user.safeProduct.vo.SafeProductVO;
 
@@ -17,9 +19,9 @@ public class SafeProductServiceImpl implements SafeProductService {
 	private SafeProductDAO safeProductDAO;
 
 	@Override
-	public List<SafeProductVO> selectSafeProductList() {
+	public List<SafeProductVO> selectSafeProductList(SafeProductVO spvo) {
 		List<SafeProductVO> list = null;
-		list = safeProductDAO.selectSafeProductList();
+		list = safeProductDAO.selectSafeProductList(spvo);
 		
 		return list;
 	}
@@ -62,8 +64,69 @@ public class SafeProductServiceImpl implements SafeProductService {
 		
 		return result;
 	}
+
+	@Override
+	public List<ProductVO> selectProductList(MemberVO mvo) {
+
+		List<ProductVO> pvoList = safeProductDAO.selectProductList(mvo);
+		
+		return pvoList;
+	}
+
+	@Override
+	public int insertSafeProduct(SafeProductVO spvo) {
+		int result = 0;
+		
+		result = safeProductDAO.insertSafeProduct(spvo);
+		
+		return result;
+	}
 	
 	
+	@Override
+	public int updateProductStatus(SafeProductVO spvo) {
+		int result = 0;
+		
+		result = safeProductDAO.updateProductStatus(spvo);
+		
+		return result;
+	}
+
+	@Override
+	public List<SafeProductVO> selectSafeProductListSell(MemberVO mvo) {
+		
+		List<SafeProductVO> sellList = safeProductDAO.selectSafeProductListSell(mvo);
 	
+		return sellList;
+	}
+
+	@Override
+	public int updateSafeProduct(SafeProductVO spvo) {
+		int result = 0;
+		result = safeProductDAO.updateSafeProduct(spvo);
+		return result;
+	}
+
+	@Override
+	public int deleteSafeProduct(SafeProductVO spvo) {
+		int result = 0;
+		result = safeProductDAO.deleteSafeProduct(spvo);
+		return result;
+	}
+
+	@Override
+	public int updateProductStatusReturn(SafeProductVO spvo) {
+		int result = 0;
+		result = safeProductDAO.updateProductStatusReturn(spvo);
+		return result;
+	}
+
+	
+	// 전체 레코드 수
+	@Override
+	public int safeProductListCnt(SafeProductVO spvo) {
+		
+		return safeProductDAO.safeProductListCnt(spvo);
+	}
 
 }
