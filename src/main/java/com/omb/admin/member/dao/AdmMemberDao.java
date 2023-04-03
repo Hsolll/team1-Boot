@@ -24,4 +24,10 @@ public interface AdmMemberDao {
 	public int memberDelete(int u_no); /* member 삭제 */
 	
 	public Integer admMemberCount(Integer mvo); /* 회원 전체 수 */
+	
+	public AdmMemberVO memberDetailAdd(AdmMemberVO mvo);
+	
+	public AdmMemberVO memberBank(AdmMemberVO mvo);
+	
+	public AdmMemberVO memberDetailAddress(AdmMemberVO mvo);
 }

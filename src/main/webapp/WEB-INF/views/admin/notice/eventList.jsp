@@ -13,6 +13,8 @@
 		<script type="text/javascript">
 	$(function(){	
 			/* 검색 후 검색 대상과 검색 단어 출력 */
+			$(".dashboard-wrapper .page-header h1").html("공지관리");
+			let msg = "<c:if test='${empty adminLogin}'>관리자만 이용할 수 있습니다.</c:if>";
 			let word="<c:out value='${noticeVO.keyword}' />";  // 보여주기 태그
 			let value="";
 			if(word!=""){ 
@@ -58,7 +60,11 @@
 			
 			/* 글쓰기 버튼 클릭 시 처리 이벤트 */		
 			$("#insertFormBtn").click(function(){
-				location.href = "/admin/noticeWriteForm"; 
+				if(msg!=""){
+					alert("로그인을 진행해주세요.");
+				}else{
+					location.href = "/admin/noticeWriteForm";
+				}
 			});
 			
 			
@@ -67,12 +73,15 @@
 				let an_no =  $(this).parents("tr").attr("data-num");	
 				$("#an_no").val(an_no);
 				console.log("글번호 : "+an_no);
-				// 상세 페이지로 이동하기 위해 form 추가 (id : detailForm) 
+				if(msg!=""){
+					alert("로그인을 진행해주세요.");
+				}else{ 
 				$("#detailForm").attr({
 					"method":"get",
-					"action":"/admin/noticeDetail"
+					"action":"/admin/eventDetail"
 				});
-				$("#detailForm").submit(); 
+					$("#detailForm").submit();
+				}
 			});
 			
 			$(".page-item a").click(function(e){
@@ -101,7 +110,7 @@
 
 <body>
 <%-- ============== container 시작 ====================  --%>
-<div class="container"> 
+<div> 
 	<form id="detailForm">
 		<input type="hidden" id="an_no" name="an_no" />
 	</form>

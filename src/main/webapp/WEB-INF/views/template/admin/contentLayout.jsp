@@ -47,7 +47,7 @@
                                 </div>
                                 <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>내정보</a>
                                 <a class="dropdown-item" href="#"><i class="fas fa-cog mr-2"></i>설정</a>
-                                <a class="dropdown-item" href="#"><i class="fas fa-power-off mr-2"></i>로그아웃</a>
+                                <a class="dropdown-item" href="/admin/logout"><i class="fas fa-power-off mr-2"></i>로그아웃</a>
                             </div>
                         </li>
                     </ul>
@@ -105,7 +105,7 @@
                                             <a class="nav-link" href="/admin/faq/faqList">FAQ</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/admin/serviceCenterList">신고내역</a>
+                                            <a class="nav-link" href="/admin/serviceCenterList">문의내역</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -142,12 +142,6 @@
                                     </ul>
                                 </div>
                             </li>
-                            <!-- <li class="nav-divider">
-                                Features
-                            </li> 카테고리 나눔 텍스트 -->
-                            <li class="nav-item">
-                                <a class="nav-link" href="/admin/sharingList" aria-expanded="false" data-target="#submenu-6" aria-controls="submenu-6"><i class="fa fa-fw fa-rocket"></i>나눔관리</a>
-                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-7" aria-controls="submenu-7"><i class="fas fa-fw fa-chart-pie"></i>통계관리 <span class="badge badge-secondary">New</span></a>
                                 <div id="submenu-7" class="collapse submenu" style="">
@@ -179,7 +173,9 @@
         <!-- ============================================================== -->
         
         <div class="dashboard-wrapper" style="top:10px;">
-        
+        	<div class="page-header">
+				<h1 style="margin-bottom: 0;"><tiles:getAsString name="title" /></h1>
+			</div>
         <!-- 내용 삽입 부분 -->
 	        <tiles:insertAttribute name="main" /> 
          

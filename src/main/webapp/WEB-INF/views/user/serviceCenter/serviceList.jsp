@@ -12,8 +12,9 @@
 			$("#keyword").val("<c:out value='${serviceCenterVO.keyword}' />");
 			$("#search").val("<c:out value='${serviceCenterVO.search}' />");
 			
-			if($("#search").val()!='u_name'){
+			if($("#search").val()!='sc_content'){
 				if($("#search").val()=='sc_title') value="#list tr td";
+				else if($("#search").val()=='u_name') value="#list tr td";
 				console.log($(value+":contains('"+word+"')").html());
 				$(value+":contains('"+word+"')").each(function(){
 					let regex = new RegExp(word,'gi');
@@ -128,7 +129,7 @@
 				</form>
 			</div>
 			<div id="serviceList" class="table-height">
-				<table summary="문의 리스트" class="table table-striped">
+				<table summary="문의 리스트" class="table table-striped" style="margin-top: 30px;">
 					<thead>
 						<tr>
 							<th data-value="sc_no" class="order text-center col-md-1">번호</th>
@@ -144,7 +145,7 @@
 								<c:forEach var="service" items="${serviceList}" varStatus="status">
 									<tr class="text-center" data-no='${service.sc_no }'>
 										<td>${service.sc_no }</td>
-										<td class="goDetail text-left">${service.sc_title }</td>
+										<td class="goDetail text-left" style="cursor:pointer;">${service.sc_title }</td>
 										<td class="text-center">${service.u_name }</td>
 										<td class="text-center">${service.sc_created_at }</td>
 										<td class="text-center">${service.sc_readcnt }</td>
@@ -159,7 +160,7 @@
 												<c:if test="${asno eq scno }">
 													<tr data-num='${admservice.as_no}'>
 														<td class="text-center"></td>
-														<td class="replyDetail text-left">${admservice.as_title}</td>
+														<td class="replyDetail text-left" style="cursor:pointer;">${admservice.as_title}</td>
 														<td class="text-center">${admservice.a_name}</td>
 														<td class="text-center">${admservice.as_created_at}</td>
 														<td></td>

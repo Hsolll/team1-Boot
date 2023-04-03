@@ -12,7 +12,7 @@
 		
 		<script type="text/javascript">
 		$(function(){
-			
+			$(".dashboard-wrapper .page-header h1").html("공지관리");
 			/* 등록 버튼 클릭 시 처리 이벤트 */
 			$("#boardInsertBtn").click(function(){
 				if (!chkData("#an_title","제목을"))	return;
@@ -52,10 +52,10 @@
 <body>
 
 	<%-- =================== 등록페이지 시작  ================= --%>
-		<div class="container">
+		<div>
 			<div class="rowTable">
 			<form id="f_writeForm" name="f_writeForm" class="form-horizontal">
-				<table class="table table-bordered">
+				<table>
 					<colgroup>
 						<col width= "18%" />
 						<col width= "82%" />
@@ -67,9 +67,9 @@
 						</tr>
 						<tr>
 							<th>게시판 선택</th>
-							<td>
-								<label for="notice">공지사항 게시판</label><input type="radio" id="notice" class="an_category" name="an_category" value="[공지사항]" style="display: inline-block;" />
-								<label for="event">이벤트 게시판</label><input type="radio" id="event" class="an_category" name="an_category" value="[이벤트]" style="display: inline-block;"  />
+							<td class="text-midle">
+								<label for="notice">공지사항 게시판</label> <input type="radio" id="notice" class="an_category" name="an_category" value="[공지사항]" style="display: inline-block;" /><br />
+								<label for="event">이벤트 게시판</label> <input type="radio" id="event" class="an_category" name="an_category" value="[이벤트]" style="display: inline-block;"  />
 							</td>
 						</tr>
 						<tr>

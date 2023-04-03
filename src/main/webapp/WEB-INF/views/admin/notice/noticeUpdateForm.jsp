@@ -12,6 +12,7 @@
 		<script type="text/javascript">
 		$(function(){
 			/* 수정 버튼 클릭 시 처리 이벤트 */
+			$(".dashboard-wrapper .page-header h1").html("공지수정");
 			$("#boardUpdateBtn").click(function(){
 				//입력값 체크
 				if (!chkData("#an_title","제목을"))	 return;
@@ -46,7 +47,7 @@
 	</head>
 
 <body>
-	<div class="contentContainer container">
+	<div class="contentContainer">
 			<!-- <div class="contentTit page-header"><h3 class="text-center">게시판 글수정</h3></div> -->
 				
 			<div class="rowTable">
@@ -76,6 +77,7 @@
 						<tr>
 							<th>내용</th>
 							<td colspan="3">
+								<div class="note-toolbar card-header" role="toolbar"></div>
 								<textarea name="an_content" id="an_content" class="form-control" rows="8">${updateData.an_content}</textarea>
 							</td>
 						</tr>

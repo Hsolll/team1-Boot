@@ -11,7 +11,7 @@
 		
 		<script>
 			$(function(){
-				
+				$(".dashboard-wrapper .page-header h1").html("문의관리");
 				$("#listBtn").click(function(){
 					location.href="/admin/serviceCenterList";
 				});
@@ -40,7 +40,7 @@
 <body>
 
 	<%-- =================== 상세페이지 시작  ================= --%>
-			<div class="container">
+			<div>
 				<form id="update" name="update">
 					<input type="hidden" id="sc_no" name="sc_no" value="${serviceDetail.sc_no}" />
 				<div class="detailTopTable">
@@ -67,13 +67,13 @@
 							<td colspan="1">${serviceDetail.u_name}</td>
 							<th scope="row">등록일</th>
 							<td colspan="1">${serviceDetail.sc_created_at}</td>
-							<td colspan="1"></td>
+						</tr>
+						<tr>
+							<th scope="row">내용</th>
+							<td class="contents" colspan="4">${serviceDetail.sc_content}</td>
 						</tr>
 					</tbody>
 				</table>
-				</div>
-				<div class="detailContents">
-					<p>${serviceDetail.sc_content}</p>
 				</div>
 				</form>
 				

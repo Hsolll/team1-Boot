@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import com.omb.admin.notice.service.AdmNoticeService;
 import com.omb.admin.notice.vo.AdmNoticeVO;
 import com.omb.common.vo.PageDTO;
@@ -63,4 +62,16 @@ public class NoticeController {
 			
 			return "user/notice/noticeDetail";
 		}
+		
+		// 상세보기
+		@GetMapping("/eventDetail")
+		public String eventDetail(@ModelAttribute AdmNoticeVO nvo, Model model) {
+			log.info("noticeDetail 메서드 호출");
+			
+			AdmNoticeVO detail = admNoticeService.noticeDetail(nvo);
+			model.addAttribute("detail", detail);
+			
+			return "user/notice/eventDetail";
+		}
 }
+

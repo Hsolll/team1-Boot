@@ -10,7 +10,7 @@
 		<title>noticeupdateForm</title>
 		<script type="text/javascript">
 			$(function(){
-				
+				$(".dashboard-wrapper .page-header h1").html("문의관리");
 				$("#updateBtn").click(function(){
 					//console.log("입력한 내용 : " + $("#as_content").text());
 					
@@ -21,15 +21,16 @@
 					$("#updateForm").submit();
 				});
 				
-				let adm = $("#as_no").val();
-				console.log("adm=" + adm);
+				$("#resetBtn").click(function(){
+					location.href = "/admin/serviceCenterList";
+				});
 			});
 		</script>
 		
 	</head>
 
 <body>
-	<div class="contentContainer container">
+	<div class="contentContainer">
 			<!-- <div class="contentTit page-header"><h3 class="text-center">게시판 글수정</h3></div> -->
 				
 			<div class="rowTable">

@@ -4,7 +4,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 <%@ page trimDirectiveWhitespaces="true"%>
-<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
@@ -14,8 +13,9 @@
 		<script src="/resources/vendor/jquery/jquery-3.3.1.min.js"></script>
 		<script type="text/javascript">
 			$(function(){
-				
+				$(".dashboard-wrapper .page-header h1").html("회원관리");
 				/* 검색 후 검색 대상과 검색 단어 출력 */
+				let msg = "<c:if test='${empty adminLogin}'>관리자만 이용할 수 있습니다.</c:if>";
 				let word="<c:out value='${memberVO.keyword}' />";  // 보여주기 태그
 				let value="";
 				if(word!=""){ 
@@ -66,12 +66,15 @@
 					let u_no =  $(this).parents("tr").attr("data-num");	
 					$("#u_no").val(u_no);
 					console.log("회원번호 : "+u_no);
-					// 상세 페이지로 이동하기 위해 form 추가 (id : detailForm) 
+					if(msg!=""){
+						alert("로그인을 진행해주세요.");
+					}else{ 
 					$("#detailForm").attr({
 						"method":"get",
 						"action":"/admin/memberDetail"
 					});
-					$("#detailForm").submit(); 
+						$("#detailForm").submit();
+					}
 				});
 				
 				/* 페이징 */
@@ -90,16 +93,20 @@
 				
 				/* 회원 등급 수정 */
 				$("#grade_update").click(function(){
-					let gradevalue = $("input[name='u_grade_value']:checked").val();
-					$("#u_grade").val(gradevalue);
-					
-					console.log("등급 : "+gradevalue);
-					
-					$("#grade_form").attr({
-						"method":"post",
-						"action":"/admin/memberGrade"
-					});
-					$("#grade_form").submit();
+					if(msg!=""){
+						alert("로그인을 진행해주세요.");
+					}else{
+						let gradevalue = $("input[name='u_grade_value']:checked").val();
+						$("#u_grade").val(gradevalue);
+						
+						console.log("등급 : "+gradevalue);
+						
+						$("#grade_form").attr({
+							"method":"post",
+							"action":"/admin/memberGrade"
+						});
+						$("#grade_form").submit();
+					}
 				});
 				
 				/* 체크박스 */
@@ -140,7 +147,7 @@
 			<input type="hidden" id="u_no" name="u_no" />
 		</form>
 		<%-- ============== container 시작 ====================  --%>
-		<div class="container"> 
+		<div> 
 			<%-- ============== 검색기능 시작 ====================  --%>
 			<div id="memberSearch" class="text-right">
 				<form id="f_search" name="f_search" class="form-inline">
