@@ -24,17 +24,16 @@
 		.bottomDiv{
 			padding:20px;
 		}
-		.category{
+		.local{
 			margin-inline: auto;
 		}
   	</style>
     <script type="text/javascript">
-    
-    	function template(cate, mon1, mon2, mon3, mon4, mon5, mon6, mon7, mon8, mon9, mon10, mon11, mon12, total){
-    		let $tbody = $(".cate-content");
+    	function template(local, mon1, mon2, mon3, mon4, mon5, mon6, mon7, mon8, mon9, mon10, mon11, mon12, total){
+    		let $tbody = $(".local-content");
     		let $tb = $("#item").clone().removeAttr("id");
     		
-    		$tb.find('.item-cate').html(cate);
+    		$tb.find('.item').html(local);
     		$tb.find('.item1').html(mon1);
     		$tb.find('.item2').html(mon2);
     		$tb.find('.item3').html(mon3);
@@ -47,7 +46,7 @@
     		$tb.find('.item10').html(mon10);
     		$tb.find('.item11').html(mon11);
     		$tb.find('.item12').html(mon12);
-    		$tb.find('.item-total').html(total);
+    		$tb.find('.total').html(total);
     		
     		$tbody.append($tb);
     		
@@ -59,20 +58,27 @@
 				location.href="/admin/login";
 			}
 			$.ajax({
-				url : "/admin/statistics/allCategory",
+				url : "/admin/statistics/tradeLocal",
 				type:"get",
 				dataType:"json",
 				contentType:"application/json; charset=utf-8",
 				success:function(data){
+					var labelsList = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
 					var labelList = new Array();
 					var valueList = new Array();
 					var colorList = new Array();
-					
+					var datas = new Array();
 					$.each(data, function(key, value){
-						labelList.push(this["P_CATE"])
-						
-						valueList.push(this["CNT"]);
-						
+						labelList.push(this["LOCAL"]) 
+						let local = this["LOCAL"];
+						console.log(local);
+						var valuesList = new Array();
+						for(let i = 1; i < 13; i++){
+							valuesList.push(this[i+"월"]);
+						}
+						valueList.push(this["총합"]);
+						template(local, valuesList[0], valuesList[1], valuesList[2], valuesList[3], valuesList[4], valuesList[5], valuesList[6], valuesList[7], valuesList[8], valuesList[9],
+								valuesList[10], valuesList[11], this["총합"]);
 						/* 색 랜덤으로 추가하기 */
 						var rcolor = 0;
 						rcolor = Math.random() * 0xffffff;
@@ -84,116 +90,14 @@
 					
 					const ctx = document.getElementById('myChart').getContext('2d');
 					
-					const myChart = new Chart(ctx, {
-						type : "pie",
+					var myChart = new Chart(ctx, {
+						type:"pie",
 						data : {
-							labels : labelList,
+							labels:labelList,
 							datasets : [{
-								label : '카테고리 통계',
-								data : valueList,
-								backgroundColor : colorList
-							}]
-						},
-						options : {
-							responsive:true,
-							plugins:{
-								legend:{
-									position : 'top'
-								},
-								title : {
-									display : true,
-									text: '카테고리 통계'
-								}
-							}
-						}
-					});
-					
-					const ctx2 = document.getElementById('myChart2').getContext('2d');
-					
-					var myChart2 = new Chart(ctx2, {
-						type:"bar",
-						data : {
-							labels : labelList,
-							datasets : [{
-								label : '상품별',
-								data : valueList,
-								backgroundColor : colorList
-							}]
-						},
-						options : {
-							scales : {
-								yAxes : [
-									{
-										ticks:{
-											beginAtZero:true,
-											stepSize: 5
-										}
-									}
-								]
-							}
-						}
-					});
-				},
-				error : function(xhr, textStatus, errorThrown){
-					alert(textStatus + " (HTTP-)"+xhr.status + " / " + errorThrown + ")");
-				}
-			});
-		
-			$.ajax({
-				url : "/admin/statistics/category",
-				type:"get",
-				data : $("#sForm").serialize(),
-				dataType:"json",
-				contentType:"application/json; charset=utf-8",
-				success:function(data){
-					var labelsList = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
-					var labelList2 = new Array();
-					var valueList2 = new Array();
-					var colorList2 = new Array();
-					
-					$.each(data, function(key, value){
-						labelList2.push(this["P_CATE"]) 
-						let cate = this["P_CATE"];
-						console.log(cate);
-						var valuesList = new Array();
-						for(let i = 1; i < 13; i++){
-							valuesList.push(this[i+"월"]);
-							console.log(i+"월 : "+this[i+"월"]);
-						}
-						valueList2.push(valuesList);
-						let total = this["총합"];
-						console.log("총합 : "+this["총합"])
-						
-						template(cate, valuesList[0], valuesList[1], valuesList[2], valuesList[3], valuesList[4], valuesList[5], valuesList[6], valuesList[7], valuesList[8], valuesList[9],
-								valuesList[10], valuesList[11], total);
-						/* 색 랜덤으로 추가하기 */
-						var rcolor = 0;
-						rcolor = Math.random() * 0xffffff;
-						rcolor = parseInt(rcolor);
-						rcolor = rcolor.toString(16);
-						
-						colorList2.push("#"+rcolor);
-					});
-					
-					
-					const ctx4 = document.getElementById('myChart4').getContext('2d');
-					
-					var myChart4 = new Chart(ctx4, {
-						type:"bar",
-						data : {
-							labels : labelsList,
-							datasets : [{
-								label : labelList2[0],
-								data : valueList2[0],
-								backgroundColor : colorList2[0]
-							}, {
-								label : labelList2[1],
-								data : valueList2[1],
-								backgroundColor : colorList2[1]
-							}, {
-								label : labelList2[2],
-								data : valueList2[2],
-								backgroundColor : colorList2[2]
+									label:'지역별',
+									data:valueList,
+									backgroundColor:colorList
 							}]
 						},
 						options : {
@@ -201,23 +105,9 @@
 							responsive:true,
 							interaction:{
 								intersect:true,
-							},
-							scales : {
-								xAxes:[{
-									stacked:true
-								}],
-								yAxes : [
-									{
-										ticks:{
-											beginAtZero:true,
-											stepSize: 5
-										},
-										stacked:true
-									}
-								]
 							}
 						}
-					});
+					});  
 				},
 				error : function(xhr, textStatus, errorThrown){
 					alert(textStatus + " (HTTP-)"+xhr.status + " / " + errorThrown + ")");
@@ -234,39 +124,19 @@
                     <!-- simple pie chart  -->
                     <!-- ============================================================== -->
                     <div>
-                    	<h2>상품별 카테고리 통계</h2>
+                    	<h2>선호 지역 통계</h2>
                     </div>
                     <div class="row">
                     	<div class="col-x1-6 col-lg-6 col-md-6 col-sm-12 col-12">
 	                        <div class="card">
-	                            <h5 class="card-header">상품별 카테고리 통계</h5>
+	                            <h5 class="card-header">지역 통계</h5>
 	                            <div class="card-body">
 	                                <canvas id="myChart"></canvas>
 	                            </div>
 	                        </div>
                         </div>
-                    	<div class="col-x1-6 col-lg-6 col-md-6 col-sm-12 col-12">
-	                        <div class="card">
-	                            <h5 class="card-header">상품별 카테고리 통계</h5>
-	                            <div class="card-body">
-	                                <canvas id="myChart2"></canvas>
-	                            </div>
-	                        </div>
-                        </div>
                     </div>
                     <div class="bottomDiv">
-	                    <div><h3>월별 통계</h3></div>
-	                    <div class="row">
-	                    	<div class="category">
-		                        <div class="card">
-		                            <h5 class="card-header">상품별 카테고리 통계</h5>
-		                            <div class="card-body">
-		                                <canvas id="myChart4"  width="800" height="350"></canvas>
-		                            </div>
-		                        </div>
-	                        </div>
-	                    </div>
-	                    
 	                    <div>
 	                    	<table class="table table-hover cateTb">
 	                    		<thead>
@@ -287,9 +157,9 @@
 	                    				<td>총합</td>
 	                    			</tr>
 	                    		</thead>
-	                    		<tbody class="cate-content">
+	                    		<tbody class="local-content">
 	                    			<tr id="item">
-	                    				<td class="item-cate"></td>
+	                    				<td class="item"></td>
 	                    				<td class="item1"></td>
 	                    				<td class="item2"></td>
 	                    				<td class="item3"></td>
@@ -302,7 +172,7 @@
 	                    				<td class="item10"></td>
 	                    				<td class="item11"></td>
 	                    				<td class="item12"></td>
-	                    				<td class="item-total"></td>
+	                    				<td class="total"></td>
 	                    			</tr>
 	                    		</tbody>
 	                    	</table>

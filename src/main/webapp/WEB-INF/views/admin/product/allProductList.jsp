@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/admin.jspf" %>
-<script>
+	<script>
 			$(function(){
 				let admin = "<c:out value='${adminLogin.a_no }'/>";
 				if(admin == ""){
@@ -10,6 +10,8 @@
 				}
 				$("#search").change(function(){
 					if($("#search").val()=="all"){
+						goPage();
+					} else if($("#search").val()=="product"){
 						goPage();
 					} else if($("#search").val()=="safe_product"){
 						goPage();
@@ -26,7 +28,7 @@
 			/* 검색을 위한 실질적인 처리 함수 */
 			function goPage(){
 				var url = "";
-				if($("#search").val()=="all"){
+				if($("#search").val()=="product"){
 					url = "/admin/product/productList"
 				} else if($("#search").val()=="safe_product"){
 					url = "/admin/product/safeProductList"
@@ -55,6 +57,7 @@
 						<label>검색조건</label>
 						<select id="search" name="search" class="form-control">
 							<option value="all">전체</option>
+							<option value="product">일반</option>
 							<option value="safe_product">안심거래</option>
 						</select>
 					</div>
@@ -76,8 +79,8 @@
 					</thead>
 					<tbody id="list" class="table-striped">
 						<c:choose>
-							<c:when test="${not empty productList }">
-								<c:forEach var="product" items="${productList}" varStatus="status">
+							<c:when test="${not empty allProductList }">
+								<c:forEach var="product" items="${allPproductList}" varStatus="status">
 									<tr class="text-center" data-num="${product.p_no }">
 										<td>${product.p_no }</td>
 										<td class="goDetail text-left">${product.p_title }</td>
@@ -87,6 +90,17 @@
 										<td class="text-center">${product.u_no }</td>
 										<td class="text-left">${product.p_created_at }</td>		
 									</tr>
+								<c:if test="${not empty product.sp_no }">
+									<tr class="text-center">
+										<td>${product.sp_no }</td>
+										<td class="text-left">${product.sp_title }</td>
+										<td class="name">${product.p_name }</td>
+										<td class="text-center">${product.p_price }</td>
+										<td class="text-center">${product.sp_status }</td>
+										<td class="text-center">${product.u_no }</td>
+										<td class="text-left">${product.sp_created_at }</td>	
+									</tr>	
+								</c:if>
 								</c:forEach>
 							</c:when>
 							<c:otherwise>

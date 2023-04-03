@@ -153,3 +153,4 @@ public class AdmNoticeController {
 		return "redirect:"+url;
 	}
 }
+

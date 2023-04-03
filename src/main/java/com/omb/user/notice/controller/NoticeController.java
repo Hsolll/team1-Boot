@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import com.omb.admin.notice.service.AdmNoticeService;
 import com.omb.admin.notice.vo.AdmNoticeVO;
 import com.omb.common.vo.PageDTO;
@@ -75,3 +74,4 @@ public class NoticeController {
 			return "user/notice/eventDetail";
 		}
 }
+

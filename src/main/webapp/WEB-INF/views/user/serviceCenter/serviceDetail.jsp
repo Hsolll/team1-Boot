@@ -78,10 +78,11 @@
 						</colgroup>
 							<tbody>
 								<tr>
-									<th>작성자</th>
-									<td class="text-left">${serviceDetail.u_name }</td>
-									<th>등록일</th>
-									<td class="text-left">${serviceDetail.sc_created_at }</td>
+									<td class="col-md-3">작성자</td>
+									<td class="col-md-3 text-center">${serviceDetail.u_name }   (조회수 : ${serviceDetail.sc_readcnt })</td>
+									<td class="col-md-3">등록일</td>
+									<td class="col-md-3 text-center">${serviceDetail.sc_created_at }</td>
+
 								</tr>
 								<tr>
 									<th>제목</th>

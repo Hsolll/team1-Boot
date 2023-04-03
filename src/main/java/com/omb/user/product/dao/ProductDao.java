@@ -64,5 +64,5 @@ public interface ProductDao {
 
 	// 승인 거절 상품 목록 조회 (관리자)
 	public List<ProductVO> selectRejectedList(ProductVO pvo);
-
+  
 }

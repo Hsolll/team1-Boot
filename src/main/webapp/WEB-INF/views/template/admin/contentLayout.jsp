@@ -134,10 +134,10 @@
                                             <a class="nav-link" href="/admin/product/queuedList">승인관리</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/data-tables.html">중고상품</a>
+                                            <a class="nav-link" href="/admin/product/productList">중고상품</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/data-tables.html">결제관리</a>
+                                            <a class="nav-link" href="/admin/product/depositList">결제관리</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -147,13 +147,13 @@
                                 <div id="submenu-7" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/inbox.html">상품별</a>
+                                            <a class="nav-link" href="/admin/statistics/productList">상품별</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/email-details.html">카테고리별</a>
+                                            <a class="nav-link" href="/admin/statistics/categoryList">카테고리별</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/email-compose.html">지역별</a>
+                                            <a class="nav-link" href="/admin/statistics/localList">지역별</a>
                                         </li>
                                     </ul>
                                 </div>

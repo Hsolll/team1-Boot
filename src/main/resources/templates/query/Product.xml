@@ -234,7 +234,6 @@
 			p.P_NO = #{p_no} AND u.U_NO = #{u_no}
 	</select>
 
-
 	<select id="selectQueuedList" resultType="product" parameterType="product">
   		<![CDATA[ 
 		SELECT 
