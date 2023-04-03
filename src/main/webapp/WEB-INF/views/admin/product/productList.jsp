@@ -102,7 +102,6 @@
 					  <ul class="pagination justify-content-center">
 					  	<c:if test="${pageMaker.prev}">
 						    <li class="page-item disabled">
-						    
 						      <a class="page-link" href="${pageMaker.startPage -1}" tabindex="-1">Previous</a>
 						    </li>
 					    </c:if>

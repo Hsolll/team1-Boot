@@ -49,11 +49,11 @@
   			#selCategory input{
   				display: block;
   				margin-top : 8px;
-  				background-color : rgb(121, 131, 146);
-				color : white;
+  				background-color : #fff;
+				color : #000;
 				border : none;
-				font-weight : bold;
-				font-size: 20px;
+				text-align: left;
+				font-size: 16px;
   			}
   			#cont > div{
   				display:inline-block;
@@ -69,7 +69,7 @@
 			  padding: 0;
 			}
 			input.p_cate,.p_cate_all{
-				width : 180px;
+				width : 150px;
 				height: 60px;
 			}
 			#pForm{
@@ -126,7 +126,7 @@
 				padding-top :10px;
 				font-size:15px;
 			}
-			input#pConfirm{
+			/*input#pConfirm{
 			
 				background-color : rgb(121, 131, 146);
 				color : white;
@@ -137,7 +137,7 @@
 				margin-bottom: 5px;
 				
 			}
-			input#insert{
+			 input#insert{
 			
 				background-color : rgb(121, 131, 146);
 				color : white;
@@ -156,11 +156,13 @@
 				border : none;
 				padding: 10px;
 			}
+			*/
 			#cont{
-				width: 1000px;
+				margin-left: 20px;
+				width: calc(100% - 20px);
 				
 			}
-			select#sido_code,select#sigoon_code,select#dong_code{
+			/* select#sido_code,select#sigoon_code,select#dong_code{
 				background-color : rgb(121, 131, 146);
 				color : white;
 				font-weight: bold;
@@ -170,8 +172,10 @@
 				margin-top:5px;
 				height: 45.71px;
 			}
+			*/
 			#menu{
-				width: 1000px;
+				width: 100%;
+				text-align: right;
 				
 			}
 			#local{
@@ -181,16 +185,16 @@
 			#myWrite{
 				display: inline-block;
 			}
-			#write{
-				margin-bottom: 5px;
-			}
 			#NewConfrim{
-				width: 100px;
 				display: inline-block;
 				margin-bottom: 5px;
 			}
-			.form-control{
-				background-color : rgb(121, 131, 146);
+			
+			 .form-control{
+			 	display: inline-block;
+			 	width: 150px;
+			 	vertical-align: middle;
+				/*background-color : rgb(121, 131, 146);
 				color : white;
 				font-weight: bold;
 				font-size:18px;
@@ -198,19 +202,78 @@
 				padding: 10px;
 				margin-top:5px;
 				height: 45.71px;
+				*/
+			}
+			.ht34 {
+				height: 34px !important;
+			}
+			.ml10 {
+				margin-left: 10px;
 			}
 			.btn{
+				height: 34px;
+				/*
 				background-color : rgb(121, 131, 146);
 				color : white;
+				*/
 			}
+			
 			#productSearch{
 			
 				margin-bottom: 10px;
 			}
-			
-		
-			
-			
+			.flexBox {
+				display: flex;
+			}
+			.prdList {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 100px 27px;
+				margin-right: -27px;
+			}
+			.prdList > li {
+				width: calc(25% - 27px);
+			}
+			.prdList > li > a {
+				display: block;
+			}
+			.prdList > li > a:hover {
+				text-decoration: none;
+			}
+			.prdList .imgBox {
+				height: 240px;
+				background-color: #f1f1f1;
+			}
+			.prdList .imgBox img {
+				width: 100%;
+				height: 100%; 
+				object-fit: cover;
+			}
+			.prdList .txtArea {
+				margin-top: 20px;
+			}
+			.prdList .txtArea .prdName {
+				font-size: 18px;
+				color: #000;
+			}
+			.prdList .txtArea .subName {
+				margin-top: 16px;
+				font-size: 14px;
+				color: #646464;
+			}
+			.prdList .txtArea .prdPrice {
+				margin-top: 5px;
+				font-size: 20px;
+				color: #000;
+				font-weight: bold;
+			}
+			.prdList .txtArea .prdPrice em {
+				display: inline-block;
+				vertical-align: top;
+				font-style: normal;
+				font-size: 19px;
+				font-weight: 100;
+			}
 
 
 			
