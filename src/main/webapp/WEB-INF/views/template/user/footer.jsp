@@ -44,7 +44,7 @@
 			</li>
 		</ul>
 		<a href="" class="footer_logo"> 
-			<img src="/resources/include/img/logo.png" alt="">
+			<img src="/resources/include/img/main.png" alt="">
 		</a>
 	</div>
 </div>
