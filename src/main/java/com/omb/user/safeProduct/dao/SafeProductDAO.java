@@ -11,7 +11,9 @@ import com.omb.user.safeProduct.vo.SafeProductVO;
 @Mapper
 public interface SafeProductDAO {
 	
-	public List<SafeProductVO> selectSafeProductList();
+	public List<SafeProductVO> selectSafeProductList(SafeProductVO spvo);
+	
+	public int safeProductListCnt(SafeProductVO spvo);	// 전체 레코드 수
 	
 	public SafeProductVO selectSafeProductDetail(SafeProductVO spvo);
 	

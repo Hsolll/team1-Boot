@@ -8,8 +8,8 @@
 		VALUES (TB_USER_ORDER_SEQ.NEXTVAL, #{o_id}, #{pay_no}, #{u_no}, #{sp_no}, #{receiver}, ${receiver_tel}, #{o_address})
 	</insert>
 	
-	<!-- 구매목록 조회 쿼리문 -->
-	<select id="buyOrderInfoList" parameterType="member" resultType="orderinfo">
+	<!-- 구매목록 조회 쿼리문
+	<select id="buyOrderInfoList" parameterType="orderinfo" resultType="orderinfo">
 		SELECT 
 		    O_NO, O_ID, PAY_NO, 
 		    (SELECT PAY_ID FROM TB_USER_PAYMENT WHERE PAY_NO = A.PAY_NO) AS PAY_ID,
@@ -24,6 +24,65 @@
 		    ON A.SP_NO = C.SP_NO
 		WHERE A.U_NO = #{u_no}
 		ORDER BY O_NO DESC
+	</select> -->
+	
+	<!-- 구매목록 조회 페이지링 추가 -->
+	<select id="buyOrderInfoList" parameterType="orderinfo" resultType="orderinfo">
+		<![CDATA[
+		SELECT
+		        O_NO, O_ID, PAY_NO, PAY_ID, U_NO, BUYER, SP_NO, SP_NAME, SP_PRICE,
+		        SELLER, SELLER_NO, O_ADDRESS, TO_CHAR(O_DATE, 'YYYY-MM-DD') AS O_DATE, O_STATUS
+		FROM (
+		        SELECT 
+		                rownum as rnum, O_NO, O_ID, A.PAY_NO, 
+		                (SELECT PAY_ID FROM TB_USER_PAYMENT WHERE PAY_NO = A.PAY_NO) AS PAY_ID, 
+		                A.U_NO, U_ID AS BUYER, A.SP_NO, SP_NAME, SP_PRICE,
+		                (SELECT U_ID FROM TB_USER WHERE U_NO = C.U_NO) AS SELLER,
+		                C.U_NO AS SELLER_NO, O_ADDRESS, O_DATE, O_STATUS
+		        FROM TB_USER_ORDER A
+		        INNER JOIN TB_USER B
+		            ON A.U_NO = B.U_NO
+		        INNER JOIN TB_USER_SAFE_PRODUCT C
+		            ON A.SP_NO = C.SP_NO
+		        WHERE ]]>
+		        	<trim prefix="(" suffix=") AND " prefixOverrides="AND">
+						<if test="search=='o_id'">
+							<![CDATA[ o_id LIKE '%'|| #{keyword} ||'%' ]]>					
+						</if>
+						<if test="search=='sp_name'">
+							<![CDATA[ sp_name LIKE '%'|| #{keyword} ||'%' ]]>					
+						</if>
+						<if test="search=='o_date'">
+							<![CDATA[ to_char(o_date,'YYYY-MM-DD') between #{start_date} and #{end_date}  ]]>	
+						</if>
+			        </trim>
+		        	<![CDATA[ A.U_NO = #{u_no} AND rownum <= #{pageNum} * #{amount}
+		        ) orderlist
+		WHERE rnum > (#{pageNum} -1) * #{amount}
+		]]>
+	</select>
+	
+	<!-- 페이징 처리를 위한 전체 레코드 수 조회 쿼리문 -->
+	<select id="buyOrderInfoCnt" parameterType="orderinfo" resultType="int">
+		SELECT COUNT(*)
+		FROM TB_USER_ORDER A
+		INNER JOIN TB_USER B
+			ON A.U_NO = B.U_NO
+		INNER JOIN TB_USER_SAFE_PRODUCT C
+			ON A.SP_NO = C.SP_NO
+		WHERE
+	       	<trim prefix="(" suffix=") AND " prefixOverrides="AND">
+				<if test="search=='o_id'">
+					<![CDATA[ o_id LIKE '%'|| #{keyword} ||'%' ]]>					
+				</if>
+				<if test="search=='sp_name'">
+					<![CDATA[ sp_name LIKE '%'|| #{keyword} ||'%' ]]>					
+				</if>
+				<if test="search=='o_date'">
+					<![CDATA[ to_char(o_date,'YYYY-MM-DD') between #{start_date} and #{end_date}  ]]>	
+				</if>
+	        </trim>
+	       	A.U_NO = #{u_no}
 	</select>
 	
 	
@@ -42,6 +101,33 @@
 		WHERE C.U_NO = #{u_no}
 		ORDER BY O_NO DESC
 	</select>
+	
+	<!-- 페이징 처리를 위한 전체 레코드 수 조회 쿼리문 -->
+	<select id="sellOrderInfoCnt" parameterType="orderinfo" resultType="int">
+		SELECT COUNT(*)
+		FROM TB_USER_ORDER A
+		INNER JOIN TB_USER B
+			ON A.U_NO = B.U_NO
+		INNER JOIN TB_USER_SAFE_PRODUCT C
+			ON A.SP_NO = C.SP_NO
+		WHERE
+	       	<trim prefix="(" suffix=") AND " prefixOverrides="AND">
+				<if test="search=='o_id'">
+					<![CDATA[ o_id LIKE '%'|| #{keyword} ||'%' ]]>					
+				</if>
+				<if test="search=='sp_name'">
+					<![CDATA[ sp_name LIKE '%'|| #{keyword} ||'%' ]]>					
+				</if>
+				<if test="search=='u_id'">
+					<![CDATA[ u_id LIKE '%'|| #{keyword} ||'%' ]]>					
+				</if>
+				<if test="search=='o_date'">
+					<![CDATA[ to_char(o_date,'YYYY-MM-DD') between #{start_date} and #{end_date}  ]]>	
+				</if>
+	        </trim>
+	       	C.U_NO = #{u_no}
+	</select>
+	
 	
 	
 	<select id="selectPaymentId" parameterType="orderinfo" resultType="payment">

@@ -5,9 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.omb.user.orderInfo.dao.OrderInfoDAO;
-import com.omb.user.orderInfo.vo.OrderInfoVO;
 import com.omb.user.payment.dao.PaymentDAO;
 import com.omb.user.safeProduct.dao.SafeProductDAO;
+import com.omb.user.safeProduct.vo.SafeProductVO;
 
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -329,6 +329,7 @@ class Team1ApplicationTests {
 		log.info("입력된 행의 수 : " + result);
 	} */
 	
+	/* 
 	@Test
 	public void testUpdateComplete() {
 		OrderInfoVO ovo = new OrderInfoVO();
@@ -337,8 +338,18 @@ class Team1ApplicationTests {
 		int result = 0;
 		result = orderInfoDAO.updateCompleteSafe(ovo);
 		
-		log.info("출려된 행의 수 : " + result);
+		log.info("출력된 행의 수 : " + result);
 		
+	} */
+	
+	@Test
+	public void testSafeProductListCnt() {
+		
+		SafeProductVO spvo = new SafeProductVO();
+		
+		int total = safeProductDAO.safeProductListCnt(spvo);
+		
+		log.info("전체 레코드 수 : " + total);
 	}
 	
 }

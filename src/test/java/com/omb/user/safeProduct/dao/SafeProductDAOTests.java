@@ -1,12 +1,7 @@
 package com.omb.user.safeProduct.dao;
 
-import java.util.List;
-
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import com.omb.user.safeProduct.vo.SafeProductVO;
 
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +13,7 @@ public class SafeProductDAOTests {
 	@Setter(onMethod_ = @Autowired)
 	private SafeProductDAO safeProductDAO;
 	
-	/* */
+	/* 검색어 처리전 테스트 (검색어 테스트 시 메서드 매개변수 필요함)
 	@Test
 	public void testSelectSafeProductList() {
 		log.info("testSelectSafeProductList 메서드 실행");
@@ -29,7 +24,7 @@ public class SafeProductDAOTests {
 		for(SafeProductVO spvo : list) {
 			log.info("리스트 조회 : " + spvo);
 		}
-	}
+	} */
 	
 	
 	/* 

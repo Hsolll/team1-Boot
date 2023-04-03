@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.omb.common.vo.PageDTO;
 import com.omb.user.address.service.MemberAddressService;
 import com.omb.user.address.vo.MemberAddressVO;
 import com.omb.user.member.vo.MemberVO;
@@ -37,17 +38,23 @@ public class SafeProductController {
 	
 	/* 안심거래 상품목록 조회 */
 	@GetMapping("/productList")
-	public String selectSafeProductList(Model model) {
+	public String selectSafeProductList(SafeProductVO spvo, Model model) {
 		
 		log.info("selectSafeProductList 호출 성공");
-		
+
+		spvo.setAmount(20);
 		// 전체 레코드 조회
-		List<SafeProductVO> safeProduct = safeProductService.selectSafeProductList();
+		List<SafeProductVO> safeProduct = safeProductService.selectSafeProductList(spvo);
 		model.addAttribute("safeProduct", safeProduct);
 		
 		log.info("safeProduct : " + safeProduct);
 		
 		
+		// 전체 레코드 수 구현 
+		int total = safeProductService.safeProductListCnt(spvo); 
+		//페이징 처리
+		model.addAttribute("pageMaker", new PageDTO(spvo, total));
+		 
 		return "user/safeProduct/safeProductList";	// /WEB-INF/views/safeProduct/safeProductList.jsp
 	}
 	
@@ -192,26 +199,25 @@ public class SafeProductController {
 		String path = "";
 		int result = 0;
 		
-		result = safeProductService.deleteSafeProduct(spvo);
+		// 안심상품 삭제 시 중고상품 판매상태 변경 (거래진행중 -> 판매중)
+		int updateResult = safeProductService.updateProductStatusReturn(spvo);
 		
-		if(result == 1) {
-			log.info("안심상품 삭제 성공");
+		if(updateResult == 1) {
+			log.info("중고상품 상태변경 완료");
 			
-			// 안심상품 삭제 시 중고상품 판매상태 변경 (거래진행중 -> 판매중)
-			int updateResult = safeProductService.updateProductStatusReturn(spvo);
+			// 상태변경 후 삭제처리
+			result = safeProductService.deleteSafeProduct(spvo);
 			
-			if(updateResult == 1) {
-				log.info("중고상품 상태변경 완료");
+			if(result == 1) {
+				log.info("안심상품 삭제 성공");
 				ras.addFlashAttribute("msg", "상품이 삭제되었습니다.");
 				path = "/safe/productSell";
 			}
-			
 		} else {
-			log.info("안심상품 삭제 실패");
-			ras.addFlashAttribute("msg", "상품 삭제 실패");
+			log.info("중고상품 상태변경 실패");
+			ras.addFlashAttribute("msg", "다시 시도해주세요.");
 			path = "/safe/productSell";
 		}
-		
 		
 		return "redirect:" + path;
 	}

@@ -36,23 +36,23 @@
             <div class="sell_list">
 	            <table class="tb_sell">
 	                <colgroup>
-	                    <col style="width: 17%">
-	                    <col style="width: 13%">
+	                    <col style="width: 16%">
 	                    <col>
-	                    <col style="width: 13%">
-	                    <col style="width: 13%">
 	                    <col style="width: 12%">
+	                    <col style="width: 12%">
+	                    <col style="width: 10%">
+	                    <col style="width: 10%">
 	                    <col style="width: 12%">
 	                </colgroup>
 	                <thead>
 	                    <tr>
 	                        <th scope="col">주문번호</th>
-	                        <th scope="col">주문일시</th>
 	                        <th scope="col">상품명</th>
 	                        <th scope="col">구매자</th>
 	                        <th scope="col">가격</th>
 	                        <th scope="col">현재상태</th>
 	                        <th scope="col">운송장등록</th>
+	                        <th scope="col">주문일시</th>
 	                    </tr>
 	                </thead>
 	                <tbody>
@@ -61,7 +61,6 @@
 								<c:forEach var="sellList" items="${ sellList }" varStatus="status">
 									<tr class="text-center" data-num="${sellList.o_no }">
 										<td>${ sellList.o_id }</td>
-										<td>${ sellList.o_date }</td>
 										<td>${ sellList.sp_name }</td>
 										<td>${ sellList.buyer }</td>
 										<td>
@@ -83,7 +82,8 @@
 													<span style="font-size: 12px;">구매자취소</span>
 												</c:otherwise>
 											</c:choose>
-										</td> 
+										</td>
+										<td>${ sellList.o_date }</td> 
 									</tr>
 								</c:forEach>
 							</c:when>

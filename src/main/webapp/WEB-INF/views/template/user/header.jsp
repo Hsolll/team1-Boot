@@ -26,7 +26,7 @@
 	<div class="logo_wrap">
 		<div class="logo">
 			<a href="/"> 
-				<img src="/resources/include/img/logo.png" alt="OMB_LOGO">
+				<img src="/resources/include/img/main.png" alt="OMB_LOGO">
 			</a>
 		</div>
 	</div>
