@@ -42,5 +42,8 @@
 		UPDATE TB_USER_SAFE_PRODUCT SET SP_STATUS = '판매완료' where SP_NO = #{sp_no}
 	</update>
 	
-
+	<select id="selectsafeProductCnt" parameterType="safeProduct" resultType="int">
+		SELECT COUNT(*) 
+		FROM TB_USER_SAFE_PRODUCT
+	</select>
 </mapper>

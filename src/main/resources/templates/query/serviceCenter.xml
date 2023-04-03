@@ -14,10 +14,10 @@
 	</sql>
 	<select id="selectServiceList" resultType="center" parameterType="center">
 		<![CDATA[
-			SELECT SC_NO, U_NO, SC_TITLE, U_NAME, SC_READCNT,
+			SELECT RNUM, SC_NO, U_NO, SC_TITLE, U_NAME, SC_READCNT,
 			TO_CHAR(SC_CREATED_AT, 'YYYY-MM-DD') AS SC_CREATED_AT
 			FROM ( 
-				SELECT S.SC_NO, S.U_NO, S.SC_TITLE, S.SC_READCNT, S.SC_CREATED_AT,
+				SELECT rownum AS RNUM, S.SC_NO, S.U_NO, S.SC_TITLE, S.SC_READCNT, S.SC_CREATED_AT,
 				U.U_NAME
 				FROM TB_USER_SERVICE S
 				JOIN TB_USER U
@@ -28,7 +28,8 @@
 					</trim>
 			<![CDATA[	ROWNUM <= #{pageNum} * #{amount}
 				) SERVICELIST
-			WHERE SC_NO > (#{pageNum}-1) * #{amount}
+			WHERE RNUM > (#{pageNum}-1) * #{amount}
+			ORDER BY SC_NO
 		]]>
 	</select>
 	

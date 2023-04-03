@@ -28,7 +28,7 @@ public interface ProductDao {
 	public List<ProductVO> selectLocal(ProductVO pvo);
 
 	public int productLocalListCnt(ProductVO pvo);
-
+	
 	// 승인 대기 상품 목록 조회 (관리자)
 	public List<ProductVO> selectQueuedList(ProductVO pvo);
 

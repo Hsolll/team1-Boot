@@ -18,5 +18,6 @@ public interface SafeProductDAO {
 	public int selectSafeProductPrice(SafeProductVO spvo);	// DB 저장된 상품 금액 조회
 	
 	public int updateSafeProductStatus(SafeProductVO spvo);	// 결제 완료시 상품 판매상태 변경 (판매중 -> 판매완료)
-	 
+	
+	public int selectsafeProductCnt(SafeProductVO spvo);
 }

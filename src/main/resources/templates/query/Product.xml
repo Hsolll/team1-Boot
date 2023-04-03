@@ -127,7 +127,6 @@
 		    p_local = #{p_local} AND P_ADM_PER = 1
 	</select>
 
-
 	<select id="selectQueuedList" resultType="product" parameterType="product">
   		<![CDATA[ 
 		SELECT 
