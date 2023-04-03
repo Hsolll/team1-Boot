@@ -74,5 +74,11 @@ public class AdmProductServiceImpl implements AdmProductService {
 		list = productDao.selectProductList(pvo);
 		return list;
 	}
+
+	@Override
+	public int selectQueuedCnt(ProductVO pvo) {
+		
+		return productDao.selectQueuedCnt(pvo);
+	}
 	
 }
