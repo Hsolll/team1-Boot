@@ -1,0 +1,271 @@
+table,th,td{
+					border:0px solid black;
+					border-collapse: collapse;
+					
+				}
+		#det{
+			border : 0px solid black;
+		}
+	
+		#replyInput,.replyInput{
+			width: 760px;
+			height: 200px;
+			font-size: 40px;
+			font-weight: bold;
+			
+			
+		}
+			
+		div.img2{
+			display: inline-block;
+			vertical-align: top;
+			background-color : rgb(238, 238, 234);
+			font-weight: bold;
+			font-size:18px;
+			padding: 15px;
+			
+			
+		}
+		
+		.con{
+			display: inline-block;
+			vertical-align: top;
+			margin-left:30px;
+			
+			
+		}
+		.con2{
+			display: inline-block;
+			vertical-align: top;	
+			margin-left:40px;
+			
+		}
+		.cons{
+			display: block;
+			color : black;
+			font-weight: bold;
+			font-size:18px;
+			border : none;
+			padding: 3px;
+		}
+		.p_title{
+			margin-top: 18px;
+				
+		}
+		.cre.one{
+			display: inline-block;
+			background-color : rgb(121, 131, 146);
+			color:white;
+			padding:10px;
+			
+		}
+		.cre.two{
+			display: inline-block;
+			background-color : white;
+			color:rgb(121, 131, 146);
+			padding:10px;
+			font-weight: bold;
+			font-size: 20px;
+			
+		}
+		.iim,iim2{
+			width: 300px;
+		}
+		.all{
+			display: inline-block;
+		}
+		.pbtn{
+			background-color : rgb(121, 131, 146);
+			border:none;
+			font-size : 50px;
+		}
+		div.all{
+			background-color :white;
+			border : 0px solid black;
+		}
+		#sts,#md{
+			display: inline-block;
+			font-size: 30px;
+			
+		}
+		.status{
+			margin-top:30px;
+		}
+		.p_created_at{
+			margin-top:50px;
+		}
+		.pbtn{
+			height: 100px;
+			width: 280px;
+			color : white;
+		}
+		.conAll{
+			display: inline-block;
+			margin-left: 20px;
+			background-color: rgb(238, 238, 234);
+			padding : 10px;
+		}
+		.cont{
+			width: 1074px;
+			height: 500px;
+			background-color: rgb(238, 238, 234);
+			margin-top : 20px;
+			margin-bottom : 40px;
+		}
+		.sels{
+			background-color : rgb(121, 131, 146);
+			color: white;
+			display:inline-block;
+			font-weight:bold;
+			font-size: 40px;
+			height: 100px;
+		 	width: 200px;
+		 	padding-top:20px;
+		 	
+		}
+		.sels2{
+			color:w rgb(121, 131, 146);
+			font-weight:bold;
+			font-size: 40px;
+			display:inline-block;
+		 	height: 100px;
+		 	padding-left:20px;
+		 	padding-top:20px;
+		 	
+		}
+		#black{
+			display: inline-block;
+			color : black;
+		}
+		#seller{
+			background-color: white;
+			border:3px solid rgb(121, 131, 146);
+		}
+		#content{
+			margin-top : 100px;
+			margin-left: 100px;
+			color:black;
+			font-size: 30px;
+		}
+		.replyName{
+		
+			display: inline-block;
+			background-color : rgb(121, 131, 146);
+			color: white;
+			width: 200px;
+			height: 100px;
+			padding-top:20px;
+			font-size:40px;
+			font-weight:bold;
+			
+			vertical-align: top;
+		}
+		#replyCon{
+			display: inline-block;
+			background-color : rgb(121, 131, 146);
+			width: 760px;
+		}
+		#replyfirm{
+			display: inline-block;
+			background-color : rgb(121, 131, 146);
+			border:1px solid black;
+		}
+		
+		#replyTr{
+			/* border:1px solid black; */
+			width: 1073px;
+			margin-bottom: 40px;
+		}
+		.sels23{
+			display:inline-block;
+			 background-color:  rgb(121, 131, 146);	
+			 height: 200px;
+			 width: 200px;
+			 vertical-align: top;
+			 color: white;
+			 padding-top: 80px;
+			 font-size:30px;
+			 font-weight: bold;
+		}
+		div.re1{
+			display: inline-block;
+			width:760px;
+			
+		}
+		#re{
+			width: 1073px;
+		}
+		#replyConfirm{
+			width: 100px;
+			height: 200px;
+			font-weight: bold;
+			font-size:30px;
+			background-color:  rgb(121, 131, 146);
+			color: white;
+			border : none;	
+		}
+		
+		.replyInput1{
+			display: inline-block;
+			background-color: rgb(238, 238, 234);
+			border:1px solid black;
+			width: 760px;
+			height:200px;
+			padding-top:70px;
+			font-size:40px;
+			font-weight: bold;
+			padding-left:20px;
+			
+		}
+		.replyF{
+			display: inline-block;
+			vertical-align:top;
+			width: 100px;
+			/* height: 200px; */
+			font-weight: bold;
+			font-size:30px;
+			background-color:  rgb(121, 131, 146);
+			color: white;
+			border : none;	
+			padding-top:80px;
+			padding-bottom:77px;
+			
+			/* padding-bottom:155px; */
+			
+		}
+		.delete{
+			background-color:  none;;
+			border:none;
+			background-color:  rgb(121, 131, 146);
+			/* padding-top:85px;
+			padding-bottom:85px; */
+			
+		}
+		.as{
+			width: 1173px;
+			margin-bottom: 10px;
+		}
+		.line{
+			width: 1068px;
+			height: 70px;
+			background-color: rgb(121, 131, 146);
+			margin-bottom: 10px;
+		}
+		.line1{
+			margin-left: 20px;
+			padding-top: 10px;
+			font-size: 30px;
+			font-weight: bold;
+			color: white;
+			
+		}
+ 		.empty{
+ 			background-color: rgb(121, 131, 146);
+ 			width: 1073px;
+ 			height: 100px;
+ 			padding-top: 30px;
+ 			font-size: 30px;
+ 			color: white;
+ 			font-weight: bold;
+ 		}
+		

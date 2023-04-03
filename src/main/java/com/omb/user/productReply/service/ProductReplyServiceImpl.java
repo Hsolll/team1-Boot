@@ -14,6 +14,8 @@ import lombok.Setter;
 @Service("ProductReplyService")
 public class ProductReplyServiceImpl implements ProductReplyService {
 	
+	
+
 	@Setter(onMethod_ = @Autowired )
 	private ProductReplyDao productReplyDao;
 
@@ -29,6 +31,12 @@ public class ProductReplyServiceImpl implements ProductReplyService {
 		
 		List<ProductReplyVO> list = productReplyDao.replySelect(prvo);
 		return list;
+	}
+	
+	@Override
+	public int delete(ProductReplyVO prov) {
+		int result = productReplyDao.delete(prov);
+		return result;
 	}
 
 	

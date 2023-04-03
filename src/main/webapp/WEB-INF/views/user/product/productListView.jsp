@@ -3,6 +3,11 @@
 <%@ include file="/WEB-INF/views/common/common.jspf" %>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="/resources/include/js/productCommon.js"></script>
+<script type="text/javascript" src="/resources/include/js/search.js"></script>
+<script type="text/javascript" src="/resources/include/js/myWrite.js"></script>
+<script type="text/javascript" src="/resources/include/js/common.js"></script>
+<link rel="stylesheet" type="text/css" href="/resources/include/css/product.css">
+
 <script type="text/javascript" >
 	$(document).ready(function(){
 		
@@ -10,70 +15,9 @@
 		console.log("로딩완료")
 	})
 </script>
-<style type="text/css">
-	 table,th,td{
-				border:1px solid black;
-				border-collapse: collapse;	
-				overflow :hidden;			
-			}
-			table{
-			
-			}
- 			th,td{ 
- 				width : 100px; 
-				heigth : 500px; 
-			} 
-			td.thumb{
-				width : 100px; 
-				heigth : 500px; 
-			}
-			#full,#empty{
-				width: 100px;
-				height: 100px;
-			}
-			.heart {
-			  position: relative;
- 			  width: 50px; 
- 			  height: 50px; 
-			}
-			
-			#full {
-			  position: absolute;
-			  top: 0;
-			  left: 0;
-			  z-index: 1;
-			  width:50px;
-			  height:50px;
-			}
-			
-			#empty {
-			  position: absolute;
-			  top: 0;
-			  left: 0;
-			  z-index: 2;
-		      width:50px;
-			  height:50px;
-			}
-  			.he{
-  				display:none;
-  			}
-  			.clist{
-/*   				display:none; */
-  			}
-  			.active a{
-  				font-weight : bold;
-  				color : green
-  			}
-  		
-			
-</style>
-
 	</head>
 	<body>
-		<h1><a href="/">OH MY BABY</a></h1>
-<!-- 		중고마켓 페이지로 돌아가기 -->
-		<h2><a href="/product/productList">중고마켓페이지</a></h2>
-		<p>${member.u_name}님 안녕하세요</p>
+	<div id="allCon" class="text-center">
 		<!-- 카테고리선택 -->
 		<div id="selCategory">
 			<!-- 카테고리선택(전체) -->
@@ -88,35 +32,74 @@
 			<input class="p_cate" type="button" value="승용완구"/>
 			<input class="p_cate" type="button" value="아기침대"/>
 			<input class="p_cate" type="button" value="기타"/>
+			<input class="cate" type="hidden" value=""/>
 		</div>
 		
-		<!-- 지역별로 검색 -->
-		<div id="local">
-			<select id="sido_code">
-				<option>선택</option>
-			</select>
-			<select id="sigoon_code">
-				<option>선택</option>
-			</select>
-			<select id="dong_code">
-				<option>선택</option>
-			</select>
-			<div><span>지역</span></div>
-			<form id="pForm">
-				시<input  type="text" id="p_local" name="p_local" readonly/><br>
-				구<input  type="text" id="p_local2" name="p_local" readonly/><br>
-				동<input  type="text" id="p_local3" name="p_local" readonly/><br>
-			</form>
-				<input type="button" id="pConfirm" value="지역 선택완료"/>
+		<div id="cont">
+			<div id="menu">
+				<!-- 검색  -->
+				<div id="productSearch" class="text-left">
+					<form id="f_search" name="f_search" class="form-inline text-center" >
+						<div class="form-group">
+		<!-- 						<label>검색조건</label> -->
+							<select id="search" name="search"  class="form-control">
+								<option value="all">전체</option>
+								<option value="p_title">제목</option>
+								<option value="p_content">내용</option>
+		<!-- 							<option value="b_name">작성자</option> -->
+							</select>
+							<input type="text" name="keyword" id="keyword" value="" class="form-control" placeholder="검색어를 입력하세요"/>
+							<button type="button" id="searchData" class="btn">검색</button>
+						</div>
+					</form>
+				</div>
+				
+				<!-- 지역별로 검색 -->
+				<div id="local">
+					<div>
+						<select id="sido_code">
+							<option>선택</option>
+						</select>
+						<select id="sigoon_code">
+							<option>선택</option>
+						</select>
+						<select id="dong_code">
+							<option>선택</option>
+						</select>
+					</div>
+					<div>
+						<!-- <div><span>지역</span></div> -->
+						<form id="pForm">
+							<input  type="hidden" id="p_local" name="p_local" readonly/><br>
+							<input  type="hidden" id="p_local2" name="p_local" readonly/><br>
+							<input  type="hidden" id="p_local3" name="p_local" readonly/><br>
+						</form>
+						<input type="button" id="pConfirm" value="지역 선택완료"/>
+						<input type="hidden" id="p_localC" value=""/>
+					</div>
+				</div>
+				<!-- 내가 쓴 글 보기 -->
+				<div id="myWrite">
+					<input type="hidden" id="MyNo" value="${member.u_no}"/>
+					<input type="button" id="write" value="내가 쓴 글 보기"/>
+				</div>
+				
+				<!-- 상품 등록하기 -->
+				<div id="NewConfrim"> 
+					<input type="button" id="insert" value="등록하기">
+				</div>
+			</div>
+			
+			<div>
+			<!-- 카테고리로 검색 -->
+			<div id="category"></div>
+			</div>
 		</div>
+	</div>
 		
-		<!-- 카테고리로 검색 -->
-		<div id="category"></div>
+	
 		
-		<!-- 상품 등록하기 -->
-		<div id="NewConfrim"> 
-			<input type="button" id="insert" value="등록하기">
-		</div>
+		
 	</body>
 	
 </html>

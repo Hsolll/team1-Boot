@@ -11,4 +11,7 @@ public interface ProductReplyService {
 
 	public List<ProductReplyVO> replySelect(ProductReplyVO prvo);
 
+
+	public int delete(ProductReplyVO prvo);
+
 }

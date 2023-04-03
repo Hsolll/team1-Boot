@@ -37,7 +37,21 @@ public interface ProductDao {
 	public List<ProductVO> selectLocal(ProductVO pvo);
 
 	public int productLocalListCnt(ProductVO pvo);
-	
+
+
+	public List<ProductVO> myWrite(ProductVO pvo);
+
+	public int WriteListCnt(ProductVO pvo);
+
+	public ProductVO updateForm(ProductVO pvo);
+
+	public int update(ProductVO pvo);
+
+	public int delete(ProductVO pvo);
+
+	public ProductVO sel(ProductVO pvo);
+
+
 	// 승인 대기 상품 목록 조회 (관리자)
 	public List<ProductVO> selectQueuedList(ProductVO pvo);
 
@@ -47,7 +61,8 @@ public interface ProductDao {
 	// 상품 승인 거절 (관리자)
 	public int updateAdmReject(ProductVO pvo);
 
+
 	// 승인 거절 상품 목록 조회 (관리자)
 	public List<ProductVO> selectRejectedList(ProductVO pvo);
-
+  
 }

@@ -23,7 +23,6 @@
 		<![endif]-->
 		
 		<!-- 공통 css	 -->
-		<link rel="stylesheet" type="text/css" href="/resources/css/default.css" />
 		<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap-theme.min.css">
 		

@@ -20,7 +20,9 @@
 		<typeAlias type="com.omb.admin.serviceCenter.faq.vo.FaqVO" alias="faq"/>
 		<typeAlias type="com.omb.user.serviceCenter.vo.ServiceCenterVO" alias="center"/>
 
+
 		<typeAlias type="com.omb.admin.notice.vo.AdmNoticeVO" alias="admnotice"/>
+
 
 
 		<typeAlias type="com.omb.user.product.vo.ProductVO" alias="product"/>

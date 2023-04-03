@@ -15,25 +15,12 @@
 </head>
 <body>
 	<table>
-		<thead>
-			<tr>
-				<th>썸네일</th>
-				<th>제목</th>
-<!-- 				<th>상품번호</th> -->
-				<th>카테고리</th>
-				<th>상품이름</th>
-				<th>상품가격</th>
-				<th>상품상태</th>
-			</tr>
-		</thead>
-		
-		
-		<tbody>
-			<c:choose>
-				<c:when test="${not empty clist}">
-					<c:forEach var="product" items="${clist}">
-					<tr>
+		<c:choose>
+			<c:when test="${not empty clist}">
+				<c:forEach var="product" items="${clist}">
+				<tr>
 						<td class="thumb">
+							<div class="p_status">${product.p_status}</div>
 								<div class="heart_con">
 									<div class="heart ${product.prod_like}">
 									</div>
@@ -43,32 +30,27 @@
 										<input type="text" name="p_no" class="he" value="${product.p_no}" readonly/>
 									</form>
 								</div>
-<!-- 									<input name="prod_like" class="heart" type="button" value="하트"/> -->
 							<c:if test="${not empty product.p_thumb}">
 								<img class="thumb_c p_no" id="${product.p_no}" src="/uploadStorage/product/thumbnail/${product.p_thumb}"/>
 							</c:if>
 							<c:if test="${empty product.p_thumb}">
 								<img class="p_no" id="${product.p_no}" src="/resources/images/common/noimage.png"/>
 							</c:if>
-						</td>
-						<td class="p_no" id="${product.p_no}">${product.p_title}</td>
-<%-- 						<td class="p_no">${product.p_no}</td> --%>
-						<td>${product.p_cate}</td>
-						<td>${product.p_name}</td>
-						<td>
-						  <c:if test="${product.p_price == 0}">무료나눔</c:if>
-						  <c:if test="${product.p_price != 0}">${product.p_price}</c:if>
-						</td>
-						<td>${product.p_status}</td>
-					</tr>
-					
-					</c:forEach>
-				</c:when>
-				<c:otherwise>
-					<p>상품이 존재하지 않습니다</p>
-				</c:otherwise>
-			</c:choose>
-		</tbody>
+							<div class="p_info">
+							<div class="tit">
+								<div class="p_title" id="${product.p_no}">${product.p_title}</div>
+							  <c:if test="${product.p_price == 0}">무료나눔</c:if>
+						 	 <c:if test="${product.p_price != 0}">${product.p_price}원</c:if>
+							</div>
+						</div>
+					</td>
+				</tr>
+				</c:forEach>
+			</c:when>
+			<c:otherwise>
+				<p>상품이 존재하지 않습니다</p>
+			</c:otherwise>
+		</c:choose>
 	</table>
 	<%-- =================== 페이징 출력 시작 (클라이언트 페이징 소스 그대로 가져오기) ============== --%>
 	<div class="text-center">

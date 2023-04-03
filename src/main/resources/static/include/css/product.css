@@ -1,0 +1,221 @@
+@charset "UTF-8";
+
+	 th,td{
+/* 				border:1px solid black; */
+				border-collapse: collapse;	
+				overflow :hidden;			
+			}
+ 			/* th,td{ 
+ 				width : 100px; 
+			}  */
+			/* td.thumb{
+				width : 300px; 
+			} */
+			#full,#empty{
+				width: 100px;
+				height: 100px;
+			}
+			.heart {
+			  position: relative;
+ 			  width: 50px; 
+ 			  height: 50px; 
+			}
+			
+			#full {
+			  position: absolute;
+			  top: 0;
+			  left: 0;
+			  z-index: 1;
+			  width:50px;
+			  height:50px;
+			}
+			
+			#empty {
+			  position: absolute;
+			  top: 0;
+			  left: 0;
+			  z-index: 2;
+		      width:50px;
+			  height:50px;
+			}
+  			.he{
+  				display:none;
+  			}
+  		
+  			.active a{
+  				font-weight : bold;
+  				color : green;
+  			}
+  			#selCategory input{
+  				display: block;
+  				margin-top : 8px;
+  				background-color : rgb(121, 131, 146);
+				color : white;
+				border : none;
+				font-weight : bold;
+				font-size: 20px;
+  			}
+  			#cont > div{
+  				display:inline-block;
+  			}
+  			
+  			#cont{
+  				width : 900px;
+  			}
+  			#selCategory, #cont {
+			  display: inline-block;
+			  vertical-align: top;
+			  margin: 0;
+			  padding: 0;
+			}
+			input.p_cate,.p_cate_all{
+				width : 180px;
+				height: 60px;
+			}
+			#pForm{
+				height: 0px;
+			}
+			#local > div{
+				display:inline-block;
+			}
+			table{
+				width:1000px;
+			}
+			tr .thumb{
+				width:20%;
+			}
+			.thumb{
+				background-color : rgb(238,238,234);
+			}
+			tr{
+				display:inline-block;
+				margin-left:10px;
+				text-align : center;
+				width:23%;
+				margin-top : 10px;
+			}
+			tbody{
+				text-align : center;
+			}
+			
+			div.p_info{
+				background-color : rgb(121, 131, 146);
+				color : white;
+				font-weight: bold;
+				height : 50px;
+				text-align: center;
+				
+			}
+			/* td:nth-child(5n+1) {
+			  clear: left; 
+		
+			} */
+			div.heart{
+				display : inline-block;
+			}
+			
+			.p_status{
+				background-color : rgb(121, 131, 146);
+				color : white;
+				font-weight: bold;
+				padding : 10px;
+				font-size:15px;
+				
+			}
+			.p_title{
+				padding-top :10px;
+				font-size:15px;
+			}
+			input#pConfirm{
+			
+				background-color : rgb(121, 131, 146);
+				color : white;
+				font-weight: bold;
+				font-size:18px;
+				border : none;
+				padding: 10px;
+				margin-bottom: 5px;
+				
+			}
+			input#insert{
+			
+				background-color : rgb(121, 131, 146);
+				color : white;
+				font-weight: bold;
+				font-size:18px;
+				border : none;
+				padding: 10px;
+				margin-bottom: 5px;
+			}
+			input#write{
+			
+				background-color : rgb(121, 131, 146);
+				color : white;
+				font-weight: bold;
+				font-size:18px;
+				border : none;
+				padding: 10px;
+			}
+			#cont{
+				width: 1000px;
+				
+			}
+			select#sido_code,select#sigoon_code,select#dong_code{
+				background-color : rgb(121, 131, 146);
+				color : white;
+				font-weight: bold;
+				font-size:18px;
+				border : none;
+				padding: 10px;
+				margin-top:5px;
+				height: 45.71px;
+			}
+			#menu{
+				width: 1000px;
+				
+			}
+			#local{
+				display: inline-block;
+				
+			}
+			#myWrite{
+				display: inline-block;
+			}
+			#write{
+				margin-bottom: 5px;
+			}
+			#NewConfrim{
+				width: 100px;
+				display: inline-block;
+				margin-bottom: 5px;
+			}
+			.form-control{
+				background-color : rgb(121, 131, 146);
+				color : white;
+				font-weight: bold;
+				font-size:18px;
+				border : none;
+				padding: 10px;
+				margin-top:5px;
+				height: 45.71px;
+			}
+			.btn{
+				background-color : rgb(121, 131, 146);
+				color : white;
+			}
+			#productSearch{
+			
+				margin-bottom: 10px;
+			}
+			
+		
+			
+			
+
+
+			
+
+  			
+  			
+  		
+			

@@ -1,24 +1,55 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/common.jspf" %>
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript" src="/resources/include/js/heart.js"></script>
 <script type="text/javascript" src="/resources/include/js/paging.js"></script>
-<!-- <script type="text/javascript" src="/resources/include/js/productCommon.js"></script> -->
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+ <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+ <script src="//code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+ 
+ <style>
+
+ </style>
 <script type="text/javascript">
-$(".p_no").click(function(){
-	let p_no = $(this).attr("id")
-	console.log(p_no)
-	location.href = "/product/productDetail?p_no="+p_no
-})
+/*수정하기*/
+	$(function(){
+		$(".update").click(function(){
+			$(this).parents($(".udForm")).attr({
+				"method" : "GET",
+				"action" : "/product/update"
+			})
+			$(this).parents($(".udForm")).submit();
+		});
+		
+		
+		$(".delete").click(function(){
+			let isBoss = confirm("정말로 삭제하실건가요?");
+	
+			if(isBoss) {
+			    $(this).parents($(".udForm")).attr({
+					"method" : "GET",
+					"action" : "/product/pdelete"
+				})
+				$(this).parents($(".udForm")).submit();
+				
+			}
+			alert("삭제되었습니다")
+			
+			
+		})
+		
+		$(".p_no1").click(function(){
+			var p_no = $(this).attr("id")
+			location.href = "/product/productDetail?p_no="+p_no
+		})
+	});
 
 </script>
 </head>
 <body>
-	<table>
+<table>
 		<c:choose>
-			<c:when test="${not empty plist}">
-				<c:forEach var="product" items="${plist}">
+			<c:when test="${not empty wlist}">
+				<c:forEach var="product" items="${wlist}">
 				<tr>
 						<td class="thumb">
 							<div class="p_status">${product.p_status}</div>
@@ -27,15 +58,15 @@ $(".p_no").click(function(){
 									</div>
 									<form class="heartForm">
 										<input type="text" name="prod_like" class="like he" value="1" readonly/>
-										<input type="text" name="u_no" class="he" value="${member.u_no}" readonly/>
+										<input type="text" name="u_no" class="he un" value="${member.u_no}" readonly/>
 										<input type="text" name="p_no" class="he" value="${product.p_no}" readonly/>
 									</form>
 								</div>
 							<c:if test="${not empty product.p_thumb}">
-								<img class="thumb_c p_no" id="${product.p_no}" src="/uploadStorage/product/thumbnail/${product.p_thumb}"/>
+								<img class="thumb_c p_no1" id="${product.p_no}" src="/uploadStorage/product/thumbnail/${product.p_thumb}"/>
 							</c:if>
 							<c:if test="${empty product.p_thumb}">
-								<img class="p_no" id="${product.p_no}" src="/resources/images/common/noimage.png"/>
+								<img class="p_no1" id="${product.p_no}" src="/resources/images/common/noimage.png"/>
 							</c:if>
 							<div class="p_info">
 							<div class="tit">
@@ -43,7 +74,17 @@ $(".p_no").click(function(){
 							  <c:if test="${product.p_price == 0}">무료나눔</c:if>
 						 	 <c:if test="${product.p_price != 0}">${product.p_price}원</c:if>
 							</div>
+							
 						</div>
+						<%-- <div>
+						<c:if test="${product.u_no == member.u_no}">
+								<input type="button" class="delete" value="삭제"/>
+								<input type="button" class="update" value="수정"/>
+							</c:if>
+							<c:if>
+								<div></div>
+							</c:if>
+						</div> --%>
 					</td>
 				</tr>
 				</c:forEach>
@@ -65,8 +106,7 @@ $(".p_no").click(function(){
 					
 			<!-- 바로가기 번호 출력 -->
 			<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-				<li class="paginate_button3 ${pageMaker.cvo.pageNum == num ? 'active':''}">
-					
+				<li class="paginate_button4 ${pageMaker.cvo.pageNum == num ? 'active':''}">
 					<a href="#">${num}</a>
 				</li>
 			</c:forEach>
@@ -79,6 +119,5 @@ $(".p_no").click(function(){
 			</c:if> 
 		</ul>
 	</div>
-	
 </body>
 </html>

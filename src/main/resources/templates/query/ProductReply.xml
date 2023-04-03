@@ -25,5 +25,13 @@
 			
 			WHERE p.P_NO = #{p_no}
 	</select>
+	
+	<delete id="delete" parameterType="pReply">
+		DELETE 
+		FROM 
+			TB_USER_PRODUCT_REPLY
+		WHERE 
+			P_NO = #{p_no} AND U_NO = #{u_no} AND PR_NO = #{pr_no}
+	</delete>
 
 </mapper>

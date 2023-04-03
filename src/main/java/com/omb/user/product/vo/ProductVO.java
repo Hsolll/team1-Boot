@@ -12,6 +12,7 @@ import lombok.EqualsAndHashCode;
 public class ProductVO extends CommonVO{
 	private int p_no            =0;            
     private int u_no	        =0;
+    private String u_nick		="";
     private String p_title		="";         
     private String p_name		="";            
     private String p_price		="";           
