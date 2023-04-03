@@ -42,7 +42,7 @@ public class OrderInfoController {
 		MemberVO mvo = (MemberVO)session.getAttribute("memberLogin");
 		
 		ovo.setU_no(mvo.getU_no());
-		ovo.setAmount(10);
+		ovo.setAmount(20);
 		
 		// 서비스에서 회원번호를 매개변수로 주문목록 조회하는 쿼리 
 		List<OrderInfoVO> buyList = orderInfoService.buyOrderInfoList(ovo);
@@ -61,18 +61,26 @@ public class OrderInfoController {
 	
 	/* 안심거래 판매목록 조회 */
 	@GetMapping("/sellList")
-	public String safeProductSellList(HttpSession session, Model model) {
+	public String safeProductSellList(@ModelAttribute("data") OrderInfoVO ovo, HttpSession session, Model model) {
 		
 		// 로그인한 세선에서 회원정보를 꺼내온다.
 		MemberVO mvo = (MemberVO)session.getAttribute("memberLogin");
 		log.info("회원정보 : " + mvo);
 		log.info("회원번호 : " + mvo.getU_no());
 		
+		ovo.setU_no(mvo.getU_no());
+		ovo.setAmount(5);
+		
 		// 서비스에서 회원번호를 매개변수로 주문목록 조회하는 쿼리 
-		List<OrderInfoVO> sellList = orderInfoService.sellOrderInfoList(mvo);
+		List<OrderInfoVO> sellList = orderInfoService.sellOrderInfoList(ovo);
 		log.info("sellList : " + sellList);
 		
 		model.addAttribute("sellList", sellList);
+		
+		// 전체 레코드 수 구현 
+		int total = orderInfoService.sellOrderInfoCnt(ovo); 
+		//페이징 처리
+		model.addAttribute("pageMaker", new PageDTO(ovo, total));
 		
 		return "user/orderInfo/sellCompleteList";
 	}

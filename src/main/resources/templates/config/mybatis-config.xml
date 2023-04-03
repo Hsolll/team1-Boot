@@ -23,7 +23,7 @@
 
 		<typeAlias type="com.omb.admin.notice.vo.AdmNoticeVO" alias="admnotice"/>
 
-
+		<typeAlias type="com.omb.user.community.vo.UserCommunityVO" alias="community"/>
 
 		<typeAlias type="com.omb.user.product.vo.ProductVO" alias="product"/>
 		<typeAlias type="com.omb.user.productReply.vo.ProductReplyVO" alias="pReply"/>

@@ -41,7 +41,7 @@
             <!-- Begin page content -->
             <section class="contentWrapper">
                 <div class="content_wrap">
-                    <div class="page-header">
+                    <div class="page-header mt55">
 						<h1><tiles:getAsString name="title" /></h1>
 					</div>
 					

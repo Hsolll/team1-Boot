@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.omb.user.community.dao.UserCommunityDAO">
+
+	<!-- 커뮤니티 리스트 조회 -->
+	<select id="communityList" parameterType="community" resultType="community">
+		<![CDATA[
+		SELECT 
+			    C_NO, U_NO, U_ID , C_TITLE, C_CONTENT, C_FILE, C_THUMB, 
+			    TO_CHAR(C_CREATED_AT, 'YYYY-MM-DD') AS C_CREATED_AT, C_CATEGORY, C_CNT
+		FROM (
+		        SELECT 
+			            ROWNUM AS RNUM, C_NO, U_NO, U_ID, C_TITLE, C_CONTENT, 
+	            		C_FILE, C_THUMB, C_CREATED_AT, C_CATEGORY, C_CNT
+		        FROM (
+		                SELECT 
+			                    ROWNUM AS RNUM, C_NO, A.U_NO, U_ID, C_TITLE, C_CONTENT, 
+			                    C_FILE, C_THUMB, C_CREATED_AT, C_CATEGORY, C_CNT
+		                FROM TB_USER_COMMUNITY A
+		                INNER JOIN TB_USER B
+		                    ON A.U_NO = B.U_NO
+		                ORDER BY C_NO DESC
+		                )
+		        WHERE ]]>
+		        	<trim prefix="(" suffix=") AND " prefixOverrides="AND">
+						<if test="search=='u_id'">
+							<![CDATA[ u_id LIKE '%'|| #{keyword} ||'%' ]]>					
+						</if>
+						<if test="search=='c_title'">
+							<![CDATA[ c_title LIKE '%'|| #{keyword} ||'%' ]]>					
+						</if>
+			        </trim>
+		        	<![CDATA[ C_CATEGORY = #{c_category} AND ROWNUM <= #{pageNum} * #{amount}
+		        ) COMMUNITY
+		WHERE RNUM > (#{pageNum} - 1) * #{amount}
+		]]>
+	</select>
+	
+	<!-- 총 레코드 수 조회 -->
+	<select id="communityListCnt" parameterType="community" resultType="int">
+		SELECT COUNT(*) 
+		FROM TB_USER_COMMUNITY A
+		INNER JOIN TB_USER B
+		    ON A.U_NO = B.U_NO
+		WHERE 
+			<trim prefix="(" suffix=") AND " prefixOverrides="AND">
+				<if test="search=='u_id'">
+					<![CDATA[ u_id LIKE '%'|| #{keyword} ||'%' ]]>					
+				</if>
+				<if test="search=='c_title'">
+					<![CDATA[ c_title LIKE '%'|| #{keyword} ||'%' ]]>					
+				</if>
+	        </trim>
+	        C_CATEGORY = #{c_category}
+	</select>
+	
+	<!-- 상세 조회 -->
+	<select id="communityDetail" parameterType="community" resultType="community">
+		SELECT 
+		    C_NO, A.U_NO, U_ID, C_TITLE, C_CONTENT, C_FILE, C_THUMB, 
+		    TO_CHAR(C_CREATED_AT, 'YYYY-MM-DD HH24:MI:SS') AS C_CREATED_AT, C_CATEGORY, C_CNT
+		FROM TB_USER_COMMUNITY A
+		INNER JOIN TB_USER B
+		    ON A.U_NO = B.U_NO
+		WHERE C_NO = #{c_no}
+	</select>
+	
+	<!-- 조회수 업데이트 -->
+	<update id="updateCommunityCnt" parameterType="community">
+		UPDATE TB_USER_COMMUNITY 
+		SET C_CNT = C_CNT + 1
+		WHERE C_NO = #{c_no}
+	</update>
+	
+	<!-- 게시글 입력 -->
+	<insert id="insertommunity" parameterType="community">
+		INSERT INTO TB_USER_COMMUNITY (C_NO, U_NO, C_TITLE, C_CONTENT, C_FILE, C_THUMB, C_CATEGORY)
+		VALUES (TB_USER_COMMUNITY_SEQ.NEXTVAL, #{u_no}, #{c_title}, #{c_no}, #{c_file}, #{c_thumb}, #{c_categoty})
+	</insert>
+	
+	<!-- 게시글 수정 -->
+	<update id="updateCommunity" parameterType="community">
+		UPDATE TB_USER_COMMUNITY 
+		SET C_TITLE = #{c_title}, C_CONTENT = #{c_content}, C_UPDATED_AT = SYSDATE
+			<if test="c_thumb != ''">
+				, C_THUMB = #{c_thumb}
+			</if>
+			<if test="c_file != ''">
+				, C_FILE = #{c_file}
+			</if> 
+		WHERE C_NO = #{c_no}
+	</update>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="deleteCommunity" parameterType="community">
+		DELETE FROM TB_USER_COMMUNITY WHERE C_NO = #{c_no}
+	</delete>
+
+</mapper>
