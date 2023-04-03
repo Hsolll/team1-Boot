@@ -26,4 +26,15 @@ public interface ProductService {
 
 	public int productLcoalListCnt(ProductVO pvo);
 
+	public List<ProductVO> myWrite(ProductVO pvo);
+
+	public int WriteListCnt(ProductVO pvo);
+
+	public ProductVO updateForm(ProductVO pvo);
+
+
+	public int update(ProductVO pvo) throws Exception;
+
+	public int delete(ProductVO pvo) throws Exception;
+
 }

@@ -29,6 +29,18 @@ public interface ProductDao {
 
 	public int productLocalListCnt(ProductVO pvo);
 
+	public List<ProductVO> myWrite(ProductVO pvo);
+
+	public int WriteListCnt(ProductVO pvo);
+
+	public ProductVO updateForm(ProductVO pvo);
+
+	public int update(ProductVO pvo);
+
+	public int delete(ProductVO pvo);
+
+	public ProductVO sel(ProductVO pvo);
+
 
 		
 

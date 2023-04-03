@@ -1,0 +1,127 @@
+
+h2{
+	
+	color: rgb(121, 131, 146);
+	font-weight: bold;
+}
+table{
+	border:1px solid black;
+	width: 1500px;
+}
+	
+	
+select{
+	
+	height: 40px;
+	width: 130px;
+}
+
+.tit,.pname,.pprice,.sts,.imgg,.locc,.ct{
+	
+	display: inline-block;
+}
+
+	
+.tit{
+	margin-right: 500px;
+}
+.pname{
+	width: 247px;
+}
+.contt{
+	width: 1000px;
+	
+}
+#content{
+	
+	width: 1000px;
+	height: 500px;
+	background-color: rgb(238,238,234);
+	font-size:30px;
+	overflow: auto;
+}
+input#title,input#name,.input{
+	height: 40px;
+	width: 400px;
+}
+input#price-input{
+	height: 40px;
+	width: 404px;
+}
+.locc{
+	display: block;
+	width: 65.5%;
+}
+	
+.md{
+	display: inline-block;
+	width: 30%;
+}
+.mds{
+	width: 100%;
+	font-size:20px;
+}
+.ct{
+	display: inline-block;
+	width: 27%;
+}
+#p_cate{
+	width: 100%;
+	
+}
+.titl{
+	font-size:30px;
+	font-weight: bold;
+	background-color : rgb(121, 131, 146);
+	color:white;
+	
+}
+#free{
+	
+	width: 40px;
+	margin :0px;
+}
+.free-t{
+	
+	display: inline-block;
+	font-size:20px;
+	font-weight: bold;
+}
+.alls{
+	width:1500px;
+}
+.pprice{
+	display: inline-block;
+	margin-right: 500px;
+	
+}
+.pname{
+	width:  30%;
+}
+.imgg{
+	
+	width: 30%;
+	
+	
+}
+#file{
+	margin-top: 4px;
+	
+}
+.two{
+	margin-top: 10px;
+}
+#confirm{
+	width: 66.7%;
+	height: 80px;
+	font-size:40px;
+	font-weight: bold;
+
+}
+.ma{
+	font-size: 20px;
+	
+}	
+#name.ma{
+	width:  100%;
+}

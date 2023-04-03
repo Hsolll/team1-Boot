@@ -1,116 +1,45 @@
-	
-	$.support.cors = true;
+$.support.cors = true;
 	
 	$(function(){
-	//-----------------------------// 카테고리 //-----------------------------------------------//
-		
-	
-		$(".p_cate").click(function(){
-			let p_cate = $(this).val();
-			$(".cate").val(p_cate)
-			console.log(p_cate)
+		$("#confirm").click(function(){
+			let p_local1 = $("#p_local1").val()
+			let p_local2 = $("#p_local2").val()
+			let p_local3 = $("#p_local3").val()
+			let p_local = p_local1+" "+p_local2+" "+p_local3
+			$("#p_local").val(p_local)
 			
-			$.ajax({
-				type : "GET",
-				url  : "/product/p_cate",
-				data : {p_cate:p_cate},
-				success : function(data){
-					
-					let cate = $(data)
-					
-				
-					$("#category").html(cate)
-				},
-				error : function(jqXHR, textStatus, errorThrown) {
-		        }
+			
+	/*	if($("#title").val() && $("#name").val() && $("#price-input").val() 
+		   && $("#content").val() && $("#file").val() && $("#p_local").val()){
+		  	console.log("모두입력완료")
+		} else {
+		  alert("항목을 모두 입력해주세요");
+		  return false;
+		}*/
+		
+		if(!checkForm("#title", "제목")){
+			alert("제목을 입력해주세요")
+		}else if(!checkForm("#name", "상품이름")){
+			alert("상품이름을 입력해주세요")
+		}else if(!checkForm("#price-input", "가격")){
+			alert("가격을 입력해주세요")
+		}else if(!checkForm("#content", "상세정보")){
+			alert("상세정보를 입력해주세요")
+		}else if(!checkForm("#file", "파일")){
+			alert("파일을 입력해주세요")
+		}else if(!checkForm("#p_local", "지역")){
+			alert("지역을 입력해주세요")
+		}else{
+			$("#insertConfirm").attr({
+				"method"  : "POST",
+				"enctype" : "multipart/form-data",
+				"action"  : "/product/insertProduct"
 			})
-		})
-	
-	//-----------------------------// 카테고리_전체 //-----------------------------------------------//
-	
-	$(".p_cate_all").click(function(){
-		
-		$.ajax({
-				type : "GET",
-				url  : "/product/productAllList",
-				success : function(data){
-					let all =$(data)
-				
-				
-					console.log(all)
-					$("#category").html(all)
-				},
-				error : function(jqXHR, textStatus, errorThrown) {
-		        }
-			})
+			$("#insertConfirm").submit();
+			alert("관리자 승인 후 등록이 완료됩니다!")
+		}
 	})
-	//-----------------------------// 댓글작성 //-----------------------------------------------//
-		
-	$("#replyConfirm").click(function(){
-		$("#replyForm").attr({
-			
-			"method" : "GET",
- 			"action" : "/productReply/productReplyInsert",
-		})
-		$("#replyForm").submit();
-	})
-	
-	//-----------------------------// 댓글삭제 //-----------------------------------------------//
-	
-	$(".delete").click(function(){
-		let delete1 =  $(this).parents(".replyDelete");
-		
-		
-		delete1.attr({
-			
-			"method" : "GET",
- 			"action" : "/productReply/delete",
-		})
-		delete1.submit();
-		
-	})
-	
-	
-	
-	
-	//-----------------------------// 상세페이지 이동 //--------------------------------------------//
-	$(".p_no").click(function(){
-		var p_no = $(this).text()
-		location.href = "/product/productDetail?p_no="+p_no
-	})
-	
-	//-----------------------------// 새로운 게시물 등록 //--------------------------------------------//
-		$("#insert").click(function(){
-			location.href ="/product/insertProductView"
-		})
-	////////////////////////////////////지역설정-전달////////////////////////////////////////////////////////
-		
-	$("#pConfirm").click(function(){
-		
-		let p_local1 =  $("#p_local").val()
-		let p_local2 =  $("#p_local2").val()
-		let p_local3 =  $("#p_local3").val()
-		let p_local = p_local1+" "+p_local2+" "+p_local3
-		$("#p_localC").val(p_local)
-		
-		console.log(p_local)
-		$.ajax({
-				type : "GET",
-				url  : "/product/p_local",
-				data : {p_local:p_local},
-				success : function(data){
-					
-					console.log(data)
-					var all = data
-					$("#category").html(all)
-					
-				},
-				error : function(jqXHR, textStatus, errorThrown) {
-		        }
-		})
-	});
-		
-	//-----------------------------// 지역 설정 //--------------------------------------------//	
+			//-----------------------------// 지역 설정 //--------------------------------------------//	
 	
 	
 	////////////////////////////////////1. 시도////////////////////////////////////////////////////////
@@ -183,7 +112,7 @@
 					})
 					/*$("#p_local").val("")*/
 					var select = $("#sido_code").find(":selected").text()
-					$("#p_local").val(select)
+					$("#p_local1").val(select)
 					
 				},
 					error: function(xhr, stat, err) {}
@@ -225,6 +154,17 @@
 		})
 	
 	});
-	
-});//페이지 닫는 태그
-	
+		
+		//-----------------------------//무료나눔 //--------------------------------------------//
+		
+		$(document).ready(function() {
+		  $("#free").change(function() {
+		    if($(this).is(":checked")) {
+	      		$("#price-input").val(0).prop("readonly","true");
+		    }else{
+		    	$("#price-input").val("").prop("placeholer","상품 가격을 입력하세요").removeAttr("readonly");
+		      }
+		  });
+		});
+	})
+		
