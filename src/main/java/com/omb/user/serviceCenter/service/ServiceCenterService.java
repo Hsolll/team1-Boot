@@ -17,6 +17,6 @@ public interface ServiceCenterService {
 	public int deleteService(ServiceCenterVO scno) throws Exception;
 	
 	public List<ServiceCenterVO> selectServiceMyPageList(ServiceCenterVO vo);
-	
+	public int selectNoReplyCnt(ServiceCenterVO vo);
 
 }

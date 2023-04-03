@@ -18,6 +18,7 @@ public interface AdmProductService {
 		public List<ProductVO> selectRejectedList(ProductVO pvo);
 		
 		public int productListCnt(ProductVO pvo);
+		public int selectQueuedCnt(ProductVO pvo);
 		
 		public List<SafeProductVO> selectSafeProductList(SafeProductVO spvo);
 		

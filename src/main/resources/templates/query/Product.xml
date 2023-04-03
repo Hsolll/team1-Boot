@@ -107,6 +107,12 @@
 		    p_cate = #{p_cate} AND P_ADM_PER = 1
 	</select>
 	
+	<select id="selectQueuedCnt" parameterType="product" resultType="int">
+		SELECT COUNT(*)
+		FROM TB_USER_PRODUCT
+		WHERE P_ADM_PER = 0
+	</select>
+	
 	<select id="category" parameterType="product" resultType="product">
 		<![CDATA[ 
 		SELECT 
