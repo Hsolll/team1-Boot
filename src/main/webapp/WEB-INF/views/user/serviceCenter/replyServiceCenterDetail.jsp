@@ -11,6 +11,9 @@
 				});
 			});
 		</script>
+		<style>
+			.thBgGray th {text-align: center !important; background: #f1f1f1 !important;}
+		</style>
 	</head>
 
 <body>
@@ -18,26 +21,33 @@
 			<div class="text-center">
 				<div class="form-container">
 					<div class="detailContainer">
-						<table class="table table-bordered">
+						<table class="table table-bordered thBgGray">
+							<colgroup>
+								<col style="width: 14%;">
+								<col>
+								<col style="width: 14%;">
+								<col>
+							</colgroup>	
 							<tbody>
 								<tr>
-									<td class="col-md-3">글번호</td>
-									<td class="col-md-3 text-left">${replyDetail.as_no}</td>
-									<td class="col-md-3">등록일</td>
-									<td class="col-md-3 text-center">${replyDetail.as_created_at }</td>
+									<th>글번호</th>
+									<td class="text-left">${replyDetail.as_no}</td>
+									<th>등록일</th>
+									<td class="text-left">${replyDetail.as_created_at }</td>
 								</tr>
 								<tr>
-									<td class="col-md-2">제목</td>
-									<td class="col-md-2 text-left">${replyDetail.as_title }</td>
-									<td class="col-md-4">작성자</td>
-									<td class="col-md-4 text-center">${replyDetail.a_name}</td>
+									<th>제목</th>
+									<td class="text-left">${replyDetail.as_title }</td>
+									<th>작성자</th>
+									<td class="text-left">${replyDetail.a_name}</td>
 								</tr>
 								<tr class="table-tr-height">
-									<td colspan="6" class="col-md-4">${replyDetail.as_content }</td>
+									<th style="vertical-align: middle;">내용</th>
+									<td colspan="3" class="text-left" style="overflow-x: auto; height: 280px; word-break: break-all;">${replyDetail.as_content }</td>
 								</tr>
 							</tbody>
 						</table>
-						<div class="btnArea">
+						<div class="btnArea text-right">
 							<button type="button" class="btn btn-dark" id="listBtn">목록으로</button>
 						</div>
 					</div>

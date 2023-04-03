@@ -85,14 +85,39 @@
 	</select>
 	
 	
-	<!-- 상세페이지 조회 -->
+	<!-- 상세페이지 조회-->
 	<select id="memberDetail" parameterType="admmember" resultType="admmember">
-		select A.u_no ,u_id , u_name, u_email , u_phone, u_nick, u_grade, u_status, ('(' || ZIP || ') ' || ADDRESS || ' ' || SUB_ADDRESS) AS ADDRESS,
+		select u_no ,u_id , u_name, u_email , u_phone, u_nick, u_grade, u_status,
 		to_char(u_created_at, 'YYYY-MM-DD') as u_created_at
+		from tb_user
+    	where u_no = #{u_no}
+	</select>
+	
+	<!-- 상세페이지 조회 기본배송지-->
+	<select id="memberDetailAddress" parameterType="admmember" resultType="admmember">
+		select A.u_no , ('(' || ZIP || ') ' || ADDRESS || ' ' || SUB_ADDRESS) AS ADDRESS
 		from tb_user A
 		join tb_user_address_info B
 			on A.u_no = B.u_no
-    	where A.u_no = #{u_no} AND add_status = '기본배송지'
+    	where A.u_no = #{u_no} AND add_status IS NOT NULL AND add_status = '기본배송지'
+	</select>
+	
+	<!-- 상세페이지 조회 추가배송지-->
+	<select id="memberDetailAdd" parameterType="admmember" resultType="admmember">
+		select A.u_no , ('(' || ZIP || ') ' || ADDRESS || ' ' || SUB_ADDRESS) AS ADDRESS
+		from tb_user A
+		join tb_user_address_info B
+			on A.u_no = B.u_no
+    	where A.u_no = #{u_no} AND add_status IS NOT NULL AND add_status = '추가배송지'
+	</select>
+	
+	<!-- 상세페이지 계좌 -->
+	<select id="memberBank" parameterType="admmember" resultType="admmember">
+		SELECT A.U_NO, BANK, ACCOUNT
+		FROM TB_USER A
+		JOIN TB_USER_ACCOUNT_INFO B
+		ON A.U_NO = B.U_NO
+		WHERE A.U_NO = #{u_no} AND BANK IS NOT NULL OR A.U_NO = #{u_no} AND ACCOUNT IS NOT NULL
 	</select>
 	
 	<!-- 회원등급 업데이트 -->

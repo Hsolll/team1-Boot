@@ -90,4 +90,31 @@ public class AdmMemberServiceImpl implements AdmMemberService {
 		return count;
 	}
 
+	@Override
+	public AdmMemberVO memberDetailAdd(AdmMemberVO mvo) {
+		AdmMemberVO detail = null;
+		
+		detail = admMemberDao.memberDetailAdd(mvo);
+		
+		return detail;
+	}
+
+	@Override
+	public AdmMemberVO memberBank(AdmMemberVO mvo) {
+		AdmMemberVO detail = null;
+		
+		detail = admMemberDao.memberBank(mvo);
+		
+		return detail;
+	}
+
+	@Override
+	public AdmMemberVO memberDetailAddress(AdmMemberVO mvo) {
+AdmMemberVO detail = null;
+		
+		detail = admMemberDao.memberDetailAddress(mvo);
+		
+		return detail;
+	}
+
 }

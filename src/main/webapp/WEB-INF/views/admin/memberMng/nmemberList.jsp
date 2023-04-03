@@ -12,8 +12,9 @@
 		<script src="/resources/vendor/jquery/jquery-3.3.1.min.js"></script>
 		<script type="text/javascript">
 			$(function(){
-				
+				$(".dashboard-wrapper .page-header h1").html("회원관리");
 				/* 검색 후 검색 대상과 검색 단어 출력 */
+				let msg = "<c:if test='${empty adminLogin}'>관리자만 이용할 수 있습니다.</c:if>";
 				let word="<c:out value='${memberVO.keyword}' />";  // 보여주기 태그
 				let value="";
 				if(word!=""){ 
@@ -63,11 +64,15 @@
 					let u_no =  $(this).parents("tr").attr("data-num");	
 					$("#u_no").val(u_no);
 					console.log("회원번호 : "+u_no);
+					if(msg!=""){
+						alert("로그인을 진행해주세요.");
+					}else{
 					$("#detailForm").attr({
 						"method":"get",
 						"action":"/admin/nmemberDetail"
 					});
-					$("#detailForm").submit(); 
+						$("#detailForm").submit();
+					}
 				});
 				
 				$(".page-item a").click(function(e){
@@ -79,13 +84,16 @@
 				$(".memberDeleteBtn").click(function(){
 						let u_no = $(this).parents("tr").attr("data-num");
 						$("#u_no").val(u_no);
-						
-						
-						$("#detailForm").attr({
-							"method":"post",
-							"action":"/admin/memberDelete"
-						});
-						$("#detailForm").submit();
+						if(msg!=""){
+							alert("로그인을 진행해주세요.");
+						}else{
+							confirm("해당 회원을 삭제하시겠습니까?")
+							$("#detailForm").attr({
+								"method":"post",
+								"action":"/admin/memberDelete"
+							});
+							$("#detailForm").submit();
+						}
 				});
 				
 				/* 체크박스 */
@@ -161,7 +169,7 @@
 		<input type="hidden" id="u_no" name="u_no" />
 	</form>
 	<%-- ============== container 시작 ====================  --%>
-			<div class="container"> 
+			<div> 
 				<%-- ============== 검색기능 시작 ====================  --%>
 				<div id="memberSearch" class="text-right">
 					<form id="f_search" name="f_search" class="form-inline">

@@ -23,4 +23,6 @@ public class AdmMemberVO extends CommonVO{
 	private String u_updated_at ="";
 
 	private String address;
+	private String bank;
+	private String account;
 }

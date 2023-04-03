@@ -53,6 +53,7 @@
 			.btnArea {
 				margin-bottom : 20px;
 			}
+			.thBgGray th {text-align: center !important; background: #f1f1f1 !important;}
 		</style>
 	</head>
 	<body>
@@ -68,20 +69,27 @@
 							<button type="button" id="delButton" class="btn btn_default">삭제하기</button>
 							<button type="button" class="btn btn_default listBtn">목록보기</button>
 						</div>
-						<table class="table table-bordered">
+						<table class="table table-bordered thBgGray">
+						<colgroup>
+							<col style="width: 14%;">
+							<col>
+							<col style="width: 14%;">
+							<col>
+						</colgroup>
 							<tbody>
 								<tr>
-									<td class="col-md-3">작성자</td>
-									<td class="col-md-3 text-center">${serviceDetail.u_name }</td>
-									<td class="col-md-3">등록일</td>
-									<td class="col-md-3 text-center">${serviceDetail.sc_created_at }</td>
+									<th>작성자</th>
+									<td class="text-left">${serviceDetail.u_name }</td>
+									<th>등록일</th>
+									<td class="text-left">${serviceDetail.sc_created_at }</td>
 								</tr>
 								<tr>
-									<td class="col-md-4">제목</td>
-									<td colspan="3" class="col-md-8 text-left">${serviceDetail.sc_title }</td>
+									<th>제목</th>
+									<td colspan="3" class="text-left">${serviceDetail.sc_title }</td>
 								</tr>
 								<tr class="table-tr-height">
-									<td colspan="4" class="col-md-4">${serviceDetail.sc_content }</td>
+									<th style="vertical-align: middle;">내용</th>
+									<td colspan="3" class="text-left" style="overflow-x: auto; height: 280px; word-break: break-all;">${serviceDetail.sc_content }</td>
 								</tr>
 							</tbody>
 						</table>

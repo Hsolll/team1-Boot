@@ -117,7 +117,7 @@
 
 <%-- =================== 리스트 시작  ================= --%>
 	<div id="noticeList" class="table-responsive">
-		<table summary="공지사항 리스트" class="table table-striped m-t-15" >
+		<table summary="공지사항 리스트" class="table table-striped m-t-15" style="margin-top: 30px;">
 			<thead>
 				<tr>
 					<th data-value="an_no" class="order text-center col-md-1" >공지글 번호</th>

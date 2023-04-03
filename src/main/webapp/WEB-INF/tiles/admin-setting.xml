@@ -5,6 +5,7 @@
 <tiles-definitions>
 
 		<definition name="basic" template="/WEB-INF/views/template/admin/contentLayout.jsp">
+				<put-attribute name="title" value="" />
 				<put-attribute name="main" value="" />
   		</definition>
   		
@@ -36,10 +37,6 @@
   		<definition name="admin/serviceCenter/faq/*" extends="basic">
 				<put-attribute name="main" value="/WEB-INF/views/admin/serviceCenter/faq/{1}.jsp" />
 				<put-attribute name="title" value="FAQ 관리" />
-		</definition>
-  		<definition name="admin/sharing/*" extends="basic">
-				<put-attribute name="main" value="/WEB-INF/views/admin/sharing/{1}.jsp" />
-				<put-attribute name="title" value="" />
 		</definition>
   		<definition name="admin/statistics/*" extends="basic">
 				<put-attribute name="main" value="/WEB-INF/views/admin/statistics/{1}.jsp" />
