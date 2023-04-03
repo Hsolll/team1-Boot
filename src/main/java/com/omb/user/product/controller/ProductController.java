@@ -275,6 +275,21 @@ public class ProductController {
 		pvo.setAmount(8);
 		
 
+		/*
+		 * model.addAttribute("member",member); List<ProductVO> plist =
+		 * productService.selectLocal(pvo); log.info("plist :"+plist);
+		 * 
+		 * model.addAttribute("plist", plist);
+		 * log.info("model.plist :"+model.getAttribute("plist"));
+		 * 
+		 * int total = productService.productLcoalListCnt(pvo);
+		 * log.info("total :"+total);
+		 * 
+		 * model.addAttribute("pageMaker", new PageDTO(pvo, total));
+		 * log.info("model.pageMaker :"+model.getAttribute("pageMaker"));
+		 * log.info("pageNum :" + pvo.getPageNum());
+		 */
+
 		  
 		log.info("member :"+member);
 		

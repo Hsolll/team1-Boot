@@ -41,7 +41,7 @@
 	</head>
 	<body>
 	<c:if test='${not empty adminLogin }'>
-		<div class="contentContainer container">
+		<div class="contentContainer">
 			<!-- <div class="contentTit page-header"><h3 class="text-center">글 목록</h3></div> -->
 			<form id="detailForm">
 				<input type="hidden" id="p_no" name="p_no">

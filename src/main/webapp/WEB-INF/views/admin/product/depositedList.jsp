@@ -73,7 +73,7 @@
 	</head>
 	<body>
 	<c:if test='${not empty adminLogin }'>
-		<div class="contentContainer container">
+		<div class="contentContainer">
 			<!-- <div class="contentTit page-header"><h3 class="text-center">글 목록</h3></div> -->
 			<form id="depForm">
 				<input type="hidden" id="dep_no" name="dep_no">

@@ -14,7 +14,11 @@
 	$(function(){	
 			$(".dashboard-wrapper .page-header h1").html("공지관리");
 			/* 검색 후 검색 대상과 검색 단어 출력 */
-			let msg = "<c:if test='${empty adminLogin}'>관리자만 이용할 수 있습니다.</c:if>";
+			let admin = "<c:out value='${adminLogin.a_no }'/>";
+			if(admin == ""){
+				alert("잘못된 접근입니다.");
+				location.href="/admin/login";
+			}
 			let word="<c:out value='${noticeVO.keyword}' />";  // 보여주기 태그
 			let value="";
 			if(word!=""){ 
@@ -60,11 +64,8 @@
 			
 			/* 글쓰기 버튼 클릭 시 처리 이벤트 */		
 			$("#insertFormBtn").click(function(){
-				if(msg!=""){
-					alert("로그인을 진행해주세요.");
-				}else{
-					location.href = "/admin/noticeWriteForm"; 
-				}
+				location.href = "/admin/noticeWriteForm"; 
+				
 			});
 			
 			
@@ -110,6 +111,7 @@
 
 <body>
 <%-- ============== container 시작 ====================  --%>
+<c:if test='${not empty adminLogin }'>
 <div> 
 	<form id="detailForm">
 		<input type="hidden" id="an_no" name="an_no" />
@@ -211,5 +213,6 @@
 		</nav>
 </div>
 <%-- ============== container 종료 ====================  --%>
+</c:if>
 </body>
 </html>
