@@ -76,7 +76,45 @@ public class AdmMemberServiceImpl implements AdmMemberService {
 		
 		result = admMemberDao.memberDelete(mvo.getU_no());
 		
+		
 		return result;
 
 }
+
+	@Override
+	public Integer admMemberCount(Integer mvo) {
+		
+		int count =0;
+		System.out.println("카운트:"+mvo);
+		count = admMemberDao.admMemberCount(mvo);
+		return count;
+	}
+
+	@Override
+	public AdmMemberVO memberDetailAdd(AdmMemberVO mvo) {
+		AdmMemberVO detail = null;
+		
+		detail = admMemberDao.memberDetailAdd(mvo);
+		
+		return detail;
+	}
+
+	@Override
+	public AdmMemberVO memberBank(AdmMemberVO mvo) {
+		AdmMemberVO detail = null;
+		
+		detail = admMemberDao.memberBank(mvo);
+		
+		return detail;
+	}
+
+	@Override
+	public AdmMemberVO memberDetailAddress(AdmMemberVO mvo) {
+AdmMemberVO detail = null;
+		
+		detail = admMemberDao.memberDetailAddress(mvo);
+		
+		return detail;
+	}
+
 }

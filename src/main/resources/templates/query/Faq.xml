@@ -18,12 +18,12 @@
 		/* FAQ 목록 조회 */
 		<![CDATA[
 			SELECT 
-				F_NO, F_TITLE, F_CONTENT, TO_CHAR(F_CREATED_AT, 'YYYY-MM-DD') AS F_CREATED_AT, 
+				RNUM, F_NO, F_TITLE, F_CONTENT, TO_CHAR(F_CREATED_AT, 'YYYY-MM-DD') AS F_CREATED_AT, 
 				TO_CHAR(F_UPDATED_AT, 'YYYY-MM-DD') AS F_UPDATED_AT, 
 				TO_CHAR(F_DELETED_AT, 'YYYY-MM-DD') AS F_DELETED_AT
 			FROM (
 				SELECT 
-				    F_NO, F_TITLE, F_CONTENT, F_CREATED_AT, F_UPDATED_AT, F_DELETED_AT
+				    ROWNUM AS RNUM, F_NO, F_TITLE, F_CONTENT, F_CREATED_AT, F_UPDATED_AT, F_DELETED_AT
 				FROM TB_ADMIN_FAQ
 				WHERE ]]>
 					<trim prefix="(" suffix=") AND " prefixOverrides="AND">
@@ -31,7 +31,8 @@
 					</trim> 
 			<![CDATA[	ROWNUM <= #{pageNum} * #{amount}
 				) FAQLIST
-			WHERE F_NO > (#{pageNum}-1) * #{amount}
+			WHERE RNUM > (#{pageNum}-1) * #{amount}
+			ORDER BY F_NO
 		]]>
 	</select>
 	
@@ -39,10 +40,12 @@
 		/* FAQ 목록 조회 */
 		<![CDATA[
 			SELECT 
-				F_NO, F_TITLE, F_CONTENT, TO_CHAR(F_CREATED_AT, 'YYYY-MM-DD') AS F_CREATED_AT
+				rnum, F_NO, F_TITLE, F_CONTENT, TO_CHAR(F_CREATED_AT, 'YYYY-MM-DD') AS F_CREATED_AT, 
+				TO_CHAR(F_UPDATED_AT, 'YYYY-MM-DD') AS F_UPDATED_AT, F_READCNT
 			FROM (
 				SELECT 
-				    F_NO, F_TITLE, F_CONTENT, F_CREATED_AT, F_DELETED_AT
+				    ROWNUM as rnum, F_NO, F_TITLE, F_CONTENT, F_CREATED_AT, F_DELETED_AT, F_UPDATED_AT,
+				    F_READCNT
 				FROM TB_ADMIN_FAQ 
 				WHERE ]]>
 					<trim prefix="(" suffix=") AND " prefixOverrides="AND">
@@ -51,7 +54,8 @@
 			<![CDATA[	ROWNUM <= #{pageNum} * #{amount}
 				) FAQLIST
 			WHERE  F_DELETED_AT IS NULL AND
-				   F_NO > (#{pageNum}-1) * #{amount}
+				   rnum > (#{pageNum}-1) * #{amount}
+			ORDER BY F_NO
 		]]>
 	</select>
 	
@@ -76,7 +80,7 @@
 	<select id="selectDetail" parameterType="faq" resultType="faq">
 		SELECT F_NO, F_TITLE, F_CONTENT, TO_CHAR(F_CREATED_AT, 'YY/MM/DD') AS F_CREATED_AT, 
 				TO_CHAR(F_UPDATED_AT, 'YY/MM/DD') AS F_UPDATED_AT, 
-				TO_CHAR(F_DELETED_AT, 'YY/MM/DD') AS F_DELETED_AT
+				TO_CHAR(F_DELETED_AT, 'YY/MM/DD') AS F_DELETED_AT, F_READCNT
 		FROM TB_ADMIN_FAQ
 		WHERE F_NO = #{f_no}
 	</select>
@@ -96,5 +100,11 @@
 		 	F_DELETED_AT = SYSDATE
 		 WHERE F_NO = #{f_no}
 		
+	</update>
+	
+	<update id="updateReadCnt" parameterType="faq">
+		UPDATE TB_ADMIN_FAQ
+		SET F_READCNT = F_READCNT + 1
+		WHERE F_NO = #{f_no}
 	</update>
 </mapper>

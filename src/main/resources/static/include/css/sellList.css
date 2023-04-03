@@ -1,3 +1,111 @@
+.searchbox {
+    overflow: hidden;
+    background: #faf8fb;
+    border: 5px solid #dddddd;
+    margin-top: 35px;
+    padding: 25px 30px;
+}
+.searchbox .keywordbox {
+    display: inline-block;
+    height: 34px;
+    line-height: 34px;
+}
+.searchbox > .keywordbox > .keyword {
+    display: inline-block;
+    width: 400px;
+}
+.keyword > label {
+    margin: 0 15px 0 0;
+    font-weight: 600;
+}
+.searchbox_right {
+    float: right;
+    width: 410px;
+    margin: 0;
+}
+.searchbox > .block {
+    display: inline-block;
+    height: 34px;
+    line-height: 34px;
+}
+.searchbox_right input {
+    vertical-align: top;
+}
+.btn_gray {
+    display: inline-block;
+    color: #FFFFFF;
+    font-weight: 600;
+    background: #768393;
+    border: 1px solid #6e7683;
+    border-radius: 2px;
+    padding: 6px 30px;
+    cursor: pointer;
+    font-size: 14px;
+}
+.btn_gray > .icon {
+    display: inline-block;
+    width: 23px;
+    height: 16px;
+    background: url(/resources/include/img/uni_sprites.png) no-repeat -40px -30px;
+}
+
+.btn_double {
+    display: inline-block;
+    color: #FFFFFF;
+    font-weight: 600;
+    background: #768393;
+    border: 1px solid #6e7683;
+    border-radius: 2px;
+    padding: 6px 20px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 5px;
+}
+.btn_double > .icon {
+    display: inline-block;
+    width: 23px;
+    height: 16px;
+    background: url(/resources/include/img/uni_sprites.png) no-repeat -40px -30px;
+}
+
+/* 목록 아이콘 */
+.location {
+    height: 34px;
+    line-height: 26px;
+    padding-left: 4px;
+}
+.location span {
+    display: inline-block;
+}
+.location_right {
+    float: right;
+}
+.location_right > a {
+    text-decoration: none;
+}
+.list_btn {
+    display: inline-block;
+    height: 23px;
+    line-height: 22px;
+    font-size: 12px;
+    color: #333333;
+    background: #faf8fb;
+    border: 1px solid #c9ccd3;
+    border-bottom: 1px solid #a8aaa9;
+    border-radius: 1px;
+    padding: 0 12px;
+}
+.list_icon {
+    width: 12px;
+    height: 10px;
+    background: url(/resources/include/img/uni_sprites.png) no-repeat -18px -29px;
+}
+/* 목록 아이콘 끝 */
+
+
+
+/* 테이블 스타일 */
+
 .tb_sell {
     border-top: 1px solid #6e6e6e;
     margin: 0 auto;
@@ -7,7 +115,7 @@
     text-align: center;
     font-weight: normal;
     color: #000000;
-    font-size: 13px;
+    font-size: 15px;
     line-height: 120%;
     background: #f9f9f9;
     padding: 10px 5px;
@@ -16,7 +124,7 @@
 .tb_sell td {
     text-align: center;
     color: #555;
-    font-size: 13px;
+    font-size: 15px;
     padding: 10px 5px;
     border-bottom: 1px solid #dcdcdc;
     word-break: break-all;
@@ -36,4 +144,8 @@
     border-bottom: 1px solid #a8aaa9;
     border-radius: 1px;
     padding: 0 12px;
+}
+
+#tableList > thead,tbody {
+	font-size: 16px;
 }

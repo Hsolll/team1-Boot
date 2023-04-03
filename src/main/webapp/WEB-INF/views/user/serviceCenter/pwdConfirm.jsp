@@ -79,6 +79,7 @@
 		<div class="contentContainer container">
 			<form name="detailForm" id="detailForm">
 				<input type="hidden" id="sc_no" name="sc_no" value='${data.sc_no }'>
+				<input type="hidden" id="as_no" name="as_no" value='${data.as_no }'>
 			</form>
 			<div class="text-center">
 				<div class="form-container">

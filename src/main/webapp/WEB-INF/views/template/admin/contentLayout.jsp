@@ -19,8 +19,6 @@
     <link rel="stylesheet" href="/resources/vendor/fonts/flag-icon-css/flag-icon.min.css">
     <link rel="stylesheet" href="/resources/css/admincustom.css">
     <link rel="stylesheet" href="/resources/css/admincommon.css">
-    <script src="/resources/include/js/common.js"></script>
-	<script src="/resources/vendor/jquery/jquery-3.3.1.min.js"></script>
     <title>관리자 페이지</title>
 </head>
 
@@ -47,9 +45,9 @@
                                     <h5 class="mb-0 text-white nav-user-name">ohmybaby 관리자 </h5>
                                     <span class="status"></span><span class="ml-2">manager</span>
                                 </div>
-                                <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>Account</a>
-                                <a class="dropdown-item" href="#"><i class="fas fa-cog mr-2"></i>Setting</a>
-                                <a class="dropdown-item" href="/admin/logout"><i class="fas fa-power-off mr-2"></i>Logout</a>
+                                <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>내정보</a>
+                                <a class="dropdown-item" href="#"><i class="fas fa-cog mr-2"></i>설정</a>
+                                <a class="dropdown-item" href="/admin/logout"><i class="fas fa-power-off mr-2"></i>로그아웃</a>
                             </div>
                         </li>
                     </ul>
@@ -107,7 +105,7 @@
                                             <a class="nav-link" href="/admin/faq/faqList">FAQ</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/admin/serviceCenterList">신고내역</a>
+                                            <a class="nav-link" href="/admin/serviceCenterList">문의내역</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -133,7 +131,7 @@
                                 <div id="submenu-5" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/general-table.html">승인관리</a>
+                                            <a class="nav-link" href="/admin/product/queuedList">승인관리</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="pages/data-tables.html">중고상품</a>
@@ -143,12 +141,6 @@
                                         </li>
                                     </ul>
                                 </div>
-                            </li>
-                            <!-- <li class="nav-divider">
-                                Features
-                            </li> 카테고리 나눔 텍스트 -->
-                            <li class="nav-item">
-                                <a class="nav-link" href="/admin/sharingList" aria-expanded="false" data-target="#submenu-6" aria-controls="submenu-6"><i class="fa fa-fw fa-rocket"></i>나눔관리</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-7" aria-controls="submenu-7"><i class="fas fa-fw fa-chart-pie"></i>통계관리 <span class="badge badge-secondary">New</span></a>
@@ -181,7 +173,9 @@
         <!-- ============================================================== -->
         
         <div class="dashboard-wrapper" style="top:10px;">
-        
+        	<div class="page-header">
+				<h1 style="margin-bottom: 0;"><tiles:getAsString name="title" /></h1>
+			</div>
         <!-- 내용 삽입 부분 -->
 	        <tiles:insertAttribute name="main" /> 
          

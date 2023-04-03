@@ -12,8 +12,9 @@
 			$("#keyword").val("<c:out value='${serviceCenterVO.keyword}' />");
 			$("#search").val("<c:out value='${serviceCenterVO.search}' />");
 			
-			if($("#search").val()!='u_name'){
+			if($("#search").val()!='sc_content'){
 				if($("#search").val()=='sc_title') value="#list tr td";
+				else if($("#search").val()=='u_name') value="#list tr td";
 				console.log($(value+":contains('"+word+"')").html());
 				$(value+":contains('"+word+"')").each(function(){
 					let regex = new RegExp(word,'gi');
@@ -62,6 +63,17 @@
 			$("#detailForm").submit();
 		});
 		
+		$(".replyDetail").click(function(){
+			let as_no = $(this).parents("tr").attr("data-num");
+			$("#as_no").val(as_no);
+			
+			$("#replyDetailForm").attr({
+				"method":"get",
+				"action":"/admin/servicePwdConfirm"
+			});
+			$("#replyDetailForm").submit();
+		});
+		
 		
 		$("#writeBtn").click(function(){
 			if(msg!=""){
@@ -96,6 +108,9 @@
 			<form id="detailForm">
 				<input type="hidden" id="sc_no" name="sc_no">
 			</form>
+			<form id="replyDetailForm">
+				<input type="hidden" id="as_no" name="as_no" />
+			</form>
 			
 			<div id="serviceSearch" class="text-right">
 				<form id="f_search" name="f_search" class="form-inline">
@@ -114,12 +129,12 @@
 				</form>
 			</div>
 			<div id="serviceList" class="table-height">
-				<table summary="문의 리스트" class="table table-striped">
+				<table summary="문의 리스트" class="table table-striped" style="margin-top: 30px;">
 					<thead>
 						<tr>
 							<th data-value="sc_no" class="order text-center col-md-1">번호</th>
 							<th class="text-center col-md-4">제목</th>
-							<th data-value="sc_created_at" class="text-center col-md-1">작성자</th>
+							<th data-value="u_name" class="text-center col-md-1">작성자</th>
 							<th data-value="sc_created_at" class="text-center col-md-2">작성일</th>
 							<th data-value="sc_readcnt" class="text-center col-md-1">조회수</th>
 						</tr>
@@ -130,11 +145,30 @@
 								<c:forEach var="service" items="${serviceList}" varStatus="status">
 									<tr class="text-center" data-no='${service.sc_no }'>
 										<td>${service.sc_no }</td>
-										<td class="goDetail text-left">${service.sc_title }</td>
+										<td class="goDetail text-left" style="cursor:pointer;">${service.sc_title }</td>
 										<td class="text-center">${service.u_name }</td>
 										<td class="text-center">${service.sc_created_at }</td>
 										<td class="text-center">${service.sc_readcnt }</td>
 									</tr>
+									<c:choose>
+										<c:when test="${not empty admServiceList}">
+											<c:forEach var="admservice" items="${admServiceList}" varStatus="status">
+												<c:set var="as" value="${admservice.sc_no}" />
+												<c:set var="sc" value="${service.sc_no}" />
+												<fmt:parseNumber var="asno" type="number" value="${as}"/>
+												<fmt:parseNumber var="scno" type="number" value="${sc}"/>
+												<c:if test="${asno eq scno }">
+													<tr data-num='${admservice.as_no}'>
+														<td class="text-center"></td>
+														<td class="replyDetail text-left" style="cursor:pointer;">${admservice.as_title}</td>
+														<td class="text-center">${admservice.a_name}</td>
+														<td class="text-center">${admservice.as_created_at}</td>
+														<td></td>
+													</tr>
+												</c:if>
+											</c:forEach>
+										</c:when>
+									</c:choose>
 								</c:forEach>
 							</c:when>
 							<c:otherwise>

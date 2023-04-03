@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+
 import com.omb.common.vo.CommonVO;
+
 import com.omb.common.vo.PageDTO;
 import com.omb.user.member.vo.MemberVO;
 import com.omb.user.product.service.ProductService;
@@ -274,7 +276,21 @@ public class ProductController {
 		MemberVO member = (MemberVO)session.getAttribute("memberLogin");
 		pvo.setAmount(8);
 		
-		model.addAttribute("member",member);
+
+		  model.addAttribute("member",member);
+		  List<ProductVO> plist = productService.selectLocal(pvo);
+		  log.info("plist :"+plist);
+		  
+		  model.addAttribute("plist", plist);
+		  log.info("model.plist :"+model.getAttribute("plist"));
+		  
+		  int total = productService.productLcoalListCnt(pvo);
+		  log.info("total :"+total);
+		  
+		  model.addAttribute("pageMaker", new PageDTO(pvo, total));
+		  log.info("model.pageMaker :"+model.getAttribute("pageMaker"));
+		  log.info("pageNum :" + pvo.getPageNum());
+
 		  
 		log.info("member :"+member);
 		

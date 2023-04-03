@@ -15,4 +15,5 @@ public class FaqVO extends CommonVO{
 	private String f_created_at;
 	private String f_updated_at;
 	private String f_deleted_at;
+	private int f_readcnt;
 }

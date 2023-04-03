@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 public class FileUploadUtil {
 	
 	public static String Path = "/Users/kim_yunki/git/team1-Boot/src/main/resources/uploadStorage/";
-	
+	//public static String NoticePath = "C://uploadStorage//";
 	/********************************************************************************
 	/* 파일 업로드할 폴더 생성
 	 ********************************************************************************/

@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.omb.admin.serviceCenter.service.AdmServiceCenterService;
+import com.omb.admin.serviceCenter.vo.AdmServiceCenterVO;
 import com.omb.common.vo.PageDTO;
 import com.omb.user.member.vo.MemberVO;
 import com.omb.user.serviceCenter.service.ServiceCenterService;
@@ -30,6 +32,9 @@ public class ServiceCenterController {
 	@Setter(onMethod_=@Autowired)
 	private ServiceCenterService serviceCenter;
 	
+	@Setter(onMethod_=@Autowired)
+	private AdmServiceCenterService admserviceCenter;
+	
 	@ModelAttribute
 	public MemberVO user(HttpSession session){
 		MemberVO user = null;
@@ -38,12 +43,16 @@ public class ServiceCenterController {
 	}
 	
 	@GetMapping(value="/serviceList")
-	public String serviceList(HttpSession session, @ModelAttribute MemberVO user, @ModelAttribute ServiceCenterVO vo, Model model) {
+	public String serviceList(HttpSession session, @ModelAttribute MemberVO user, @ModelAttribute ServiceCenterVO vo, AdmServiceCenterVO svo, Model model) {
 		log.info("serviceList() 실행...");
 		
 		List<ServiceCenterVO> serviceList = serviceCenter.selectServiceList(vo);
 		model.addAttribute("serviceList", serviceList);
-	
+		
+		List<AdmServiceCenterVO> admServiceList = admserviceCenter.admReplyList();
+		model.addAttribute("admServiceList", admServiceList);
+		log.info("답글 확인 : " + admServiceList);
+
 		int total = serviceCenter.selectServiceCnt(vo);
 		vo.setAmount(10);
 		model.addAttribute("pageMaker", new PageDTO(vo, total));

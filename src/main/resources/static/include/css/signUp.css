@@ -1,0 +1,287 @@
+.member_header {
+    position: relative;
+    z-index: 1;
+    padding-bottom: 28px;
+    margin-bottom: 41px;
+}
+    .member_header .tit {
+    font-size: 26px;
+    color: #111;
+    line-height: 28px;
+    font-family: "Noto Sans KR", "Helvetica Neue", "Apple SD Gothic Neo", "맑은 고딕", "Malgun Gothic", "돋움", dotum, sans-serif;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+    font-size: 100%;
+}
+
+.body_extend .member_wrap {
+    width: 960px;
+    margin: 49px auto 60px;
+    border: none;
+    padding: 0;
+}
+
+body, h1, h2, h3, h4, h5, h6, p, ul, ol, dl, dd, form, fieldset, pre, figure, blockquote, input, button, textarea {
+    padding: 0;
+    margin: 0;
+}
+
+h1 {
+    display: block;
+    font-size: 2em;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+
+a {
+    color: #4d4d4d;
+    text-decoration: none;
+}
+
+.member_header .tit span {
+    display: inline-block;
+    margin-bottom: 2px;
+}
+
+.find_main {
+    width: 480px;
+    margin: 0 auto;
+}
+
+.find_main .tab {
+    padding-bottom: 40px;
+    zoom: 1;
+}
+
+.find_main .tab li {
+    float: left;
+    width: 238px;
+    border: 1px solid #ddd;
+    border-bottom: 1px solid #baac9a;
+    background-color: #fafafa;
+}
+
+ul, ol, li {
+    list-style: none;
+}
+
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+.find_main .tab li.on {
+    border-color: #baac9a;
+    border-bottom: 1px solid #fff;
+    background-color: #fff;
+}
+
+.find_main .tab:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.find_main .tab + section {
+    overflow: hidden;
+}
+
+.body_extend .lable_hide, .body_extend .sr-only, .body_extend .txt_hide {
+    position: absolute;
+    width: 10px;
+    height: 1px;
+    font-size: 12px;
+    color: transparent;
+    line-height: 40px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.find_main .guide {
+    margin-bottom: 12px;
+    padding: 0 26px;
+}
+
+.find_main .guide li {
+    position: relative;
+    padding-left: 9px;
+    font-size: 13px;
+    color: #333;
+    line-height: 23px;
+}
+
+.find_main .seller_guide li:before {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    width: 2px;
+    height: 2px;
+    background-color: #999;
+    border-radius: 50%;
+    content: "";
+}
+
+.find_main .seller_guide li em {
+    color: #0b83e6;
+}
+
+.find_main .form_box {
+    width: 428px;
+    margin: 10px auto 0;
+}
+
+img, fieldset, iframe {
+    border: 0 none;
+}
+
+legend {
+    overflow: hidden;
+    font-size: 0;
+    line-height: 0;
+    position: absolute;
+    margin-left: -20px;
+}
+
+body, h1, h2, h3, h4, h5, h6, p, ul, ol, dl, dd, form, fieldset, pre, figure, blockquote, input, button, textarea {
+    padding: 0;
+    margin: 0;
+}
+
+.join_write > li {
+    position: relative;
+    z-index: 1;
+    margin-top: 10px;
+    zoom: 1;
+}
+
+
+.find_main input.inp, .find_main label.inp {
+    width: 428px;
+    height: 46px;
+    *width: 394px;
+    *height: 44px;
+    line-height: 40px;
+    margin-bottom: 10px;
+        border: 1px solid #C9C9C9;
+}
+
+.join_write > li:after {
+    content: "";
+    overflow: hidden;
+    display: block;
+    clear: both;
+}
+
+.find_main .btn_Atype {
+    height: 48px;
+    margin-top: 10px;
+    padding-bottom: 2px;
+    line-height: 44px;
+    font-size: 16px;
+    margin: 10px auto 0;
+    display: block;
+}
+
+.btn_Atype.btn_a {
+    color: #fff;
+    background: #baac9a;
+    border-color: #baac9a;
+    cursor: pointer;
+}
+
+.btn_Atype {
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+    font-size: 17px;
+    line-height: 46px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px solid #ff0038;
+    *width: 326px;
+    height: 48px;
+    vertical-align: middle;
+}
+
+.find_main .tab li a {
+    display: block;
+    width: 238px;
+    height: 54px;
+    font-size: 17px;
+    text-align: center;
+    line-height: 54px;
+    color: #333;
+ 
+}
+
+.find_result.find_result_id .txt_desc {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+    letter-spacing: 0;
+}
+
+.find_result.find_result_id .id_list {
+    width: 370px;
+    margin: 4px auto 0;
+}
+.find_result.find_result_id .id_info_box {
+    margin-top: 2px;
+    padding-left: 43px;
+}
+
+.find_result.find_result_id .id_list > li:first-child:last-child {
+    border-bottom: 0;
+}
+
+.find_result.find_result_id .id_auto_msg {
+    margin-top: 10px;
+    padding: 8px 8px;
+    font-size: 12px;
+    color: #666;
+    background-color: #fafafa;
+}
+
+.find_result.find_result_id .btn_box {
+    width: 380px;
+    margin: 25px auto;
+}
+.find_main .signcheck{
+    width: 320px;
+    height: 46px;
+    line-height: 40px;
+    margin-bottom: 10px;
+}
+
+.btn-red.disabled, .btn-gray.disabled, .btn-purple.disabled, .btn-gpurple.disabled, .btn-red.disabled:active, .btn-gray.disabled:active, .btn-purple.disabled:active, .btn-gpurple.disabled:active {
+    border-color: #dcdbe0;
+    background: #dcdbe0;
+    color: #9a9a9a;
+    cursor: default;
+}
+
+
+button:disabled {
+  background: #dcdbe0;
+  color :#9a9a9a;
+  cursor: default;
+ }
+.signbutton{
+    float: right;
+    padding: 14px;
+    background: #baac9a;
+    border: #baac9a;
+    border-radius: 4px;
+    color:#fff;
+    cursor: pointer;
+    
+}
+
+input:read-only
+ {background-color: #dcdbe0;}

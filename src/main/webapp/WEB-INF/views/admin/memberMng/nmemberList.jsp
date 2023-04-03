@@ -12,21 +12,20 @@
 		<script src="/resources/vendor/jquery/jquery-3.3.1.min.js"></script>
 		<script type="text/javascript">
 			$(function(){
-				
+				$(".dashboard-wrapper .page-header h1").html("회원관리");
 				/* 검색 후 검색 대상과 검색 단어 출력 */
+				let msg = "<c:if test='${empty adminLogin}'>관리자만 이용할 수 있습니다.</c:if>";
 				let word="<c:out value='${memberVO.keyword}' />";  // 보여주기 태그
 				let value="";
 				if(word!=""){ 
 					$("#keyword").val("<c:out value='${memberVO.keyword}' />");
  					$("#search").val("<c:out value='${memberVO.search}' />");
 				
-					if($("#search").val()!='u_nick'){
-						//:contains()는 특정 텍스트를 포함한 요소반환 	
+					if($("#search").val()!='u_created_at'){
 						if($("#search").val()=='u_id') value = "#list tr td.goDetail";
 						else if($("#search").val()=='u_name') value="#list tr td.name";
 						else if($("#search").val()=='u_grade') value="#list tr td.grade";
 						console.log($(value+":contains('"+word+"')").html());
-						//$("#list tr td.goDetail:contains('노력')").html() => <span class='required'>노력</span>에 대한 명언
 				    	$(value+":contains('"+word+"')").each(function () {
 							let regex = new RegExp(word,'gi');
 							$(this).html($(this).html().replace(regex,"<span class='required'>"+word+"</span>"));
@@ -65,12 +64,15 @@
 					let u_no =  $(this).parents("tr").attr("data-num");	
 					$("#u_no").val(u_no);
 					console.log("회원번호 : "+u_no);
-					// 상세 페이지로 이동하기 위해 form 추가 (id : detailForm) 
+					if(msg!=""){
+						alert("로그인을 진행해주세요.");
+					}else{
 					$("#detailForm").attr({
 						"method":"get",
 						"action":"/admin/nmemberDetail"
 					});
-					$("#detailForm").submit(); 
+						$("#detailForm").submit();
+					}
 				});
 				
 				$(".page-item a").click(function(e){
@@ -79,26 +81,19 @@
 					goPage();
 				});
 				
-				/* 삭제 버튼 클릭 시 처리 이벤트 
-				let chkObj = document.getElementsByName("chk");
-				let rowCnt = chkObj.length;
-				
-				$("input[name='cbx_chkAll']").click(function(){
-					let chk_listArr = $("input=[name='chk']");
-					for (let i=0; i<chk_listArr.length; i++){
-						chk_listArr[i].checked = this.checked;
-					}
-				});
-				$("input[name='chk']").click(function(){
-					if($("input[name='chk']:checked").length == rowCnt){
-						$("input[name='cbx_chkAll']")[0].checked = true;
-					}
-					else{
-						$("input[name='cbx_chkAll']")[0].checked = false;
-					}
-				});*/
-				$("#memberDeleteBtn").click(function(){
-					deleteValue();
+				$(".memberDeleteBtn").click(function(){
+						let u_no = $(this).parents("tr").attr("data-num");
+						$("#u_no").val(u_no);
+						if(msg!=""){
+							alert("로그인을 진행해주세요.");
+						}else{
+							confirm("해당 회원을 삭제하시겠습니까?")
+							$("#detailForm").attr({
+								"method":"post",
+								"action":"/admin/memberDelete"
+							});
+							$("#detailForm").submit();
+						}
 				});
 				
 				/* 체크박스 */
@@ -136,7 +131,7 @@
 			function deleteValue(){
 				let url = "/admin/memberDelete";
 				let checkBoxArr = [];
-				$("input:checkbox[name='chk']:checked").each(function(){
+				$("input:checkbox[name='chk']:checked").each(function(i,iVal){
 					checkBoxArr.push($(this).val());
 					console.log(checkBoxArr);
 				})
@@ -147,19 +142,20 @@
 					let chk = confirm("정말 삭제하시겠습니까?");
 					$.ajax({
 						url : url,
-						type: 'POST',
+						type: "POST",
 						traditional :true,
 						data : {
 							checkBoxArr : checkBoxArr
 						},
+						error: function(xhr, textStatus, errorThrown){
+      						alert(textStatus + " (HTTP-" + xhr.status + " / " + errorThrown + ")" );
+      					},
 						success: function(jdata){
 							
 							if(jdata = 1){
+								console.log("jdata: " + jdata)
 								alert("삭제 성공");
-								location.replace("/admin/nmemberList")
-							}
-							else{
-								alert("삭제 실패");
+								location.href="/admin/nmemberList";
 							}
 						}
 					});
@@ -173,7 +169,7 @@
 		<input type="hidden" id="u_no" name="u_no" />
 	</form>
 	<%-- ============== container 시작 ====================  --%>
-			<div class="container"> 
+			<div> 
 				<%-- ============== 검색기능 시작 ====================  --%>
 				<div id="memberSearch" class="text-right">
 					<form id="f_search" name="f_search" class="form-inline">
@@ -199,25 +195,33 @@
 			
 			<%--================== 전체 회원수 시작 ===================  --%>
 			<div class="tableTop">
-				<button type="button" id="memberDeleteBtn" class="btn btn-dark m-l-100">회원삭제</button>
+				
 			</div>
 			<%--================== 전체 회원수 종료 ===================  --%>
 			
 			<%-- =================== 리스트 시작  ================= --%>
 					<div id="memberList" class="table-responsive">
-						<form id="delete" name="delete">
-							<input type="hidden" id="u_num" name="u_num" />
+						<form id="delete_form" name="delete_form">
+							<input type="hidden" id="u_no1" name="u_no1" />
+							<input type="hidden" id="u_no2" name="u_no2" />
+							<input type="hidden" id="u_no3" name="u_no3" />
+							<input type="hidden" id="u_no4" name="u_no4" />
+							<input type="hidden" id="u_no5" name="u_no5" />
+							<input type="hidden" id="u_no6" name="u_no6" />
+							<input type="hidden" id="u_no7" name="u_no7" />
+							<input type="hidden" id="u_no8" name="u_no8" />
+							<input type="hidden" id="u_no9" name="u_no9" />
+							<input type="hidden" id="u_no10" name="u_no10" />
 						</form>
 							<table summary="탈퇴회원 리스트" class="table table-striped" >
 								<thead>
 									<tr>
-										<th><input id="cbx_chkAll" type="checkbox"></th>
 										<th data-value="u_no" class="order text-center col-md-1" >회원번호</th>
 										<th class="text-center col-md-1">아이디</th>
 										<th class="text-center col-md-1">닉네임</th>
 										<th class="text-center col-md-1">이름</th>
 										<th class="text-center col-md-1">핸드폰번호</th>
-										<th data-value="b_date" class="order text-center col-md-2">회원가입일</th>
+										<th data-value="u_created_at" class="order text-center col-md-1">회원가입일</th>
 										<th class="text-center col-md-3">회원등급(일반:1/경고:2/블랙:3)</th>
 										<th class="text-center col-md-2">회원상태(일반:1/탈퇴:2)</th>
 										<th class="text-hide">버튼영역</th>
@@ -229,7 +233,6 @@
 										<c:when test="${not empty nmemberList}" >
 											<c:forEach var="nmember" items="${nmemberList}" varStatus="status">
 												<tr class="text-center" data-num="${nmember.u_no}">
-													<td><input name="chk" type="checkbox" value="${nmember.u_no}"></td>
 													<td>${nmember.u_no}</td>
 													<td class="goDetail text-center">
 													${nmember.u_id}
@@ -240,6 +243,7 @@
 													<td class="text-center">${nmember.u_created_at}</td>
 													<td class="text-center">${nmember.u_grade}</td>
 													<td class="text-center">${nmember.u_status}</td>
+													<td><button type="button" id="memberDeleteBtn" name="memberDeleteBtn" class="btn btn-dark m-l-10 memberDeleteBtn">회원삭제</button></td>
 												</tr>
 											</c:forEach>
 										</c:when>

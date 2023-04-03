@@ -7,11 +7,12 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		
+		<script src="/resources/vendor/jquery/jquery-3.3.1.min.js"></script>
 		<title>memberDetail</title>
 		
 		<script type="text/javascript">
 			$(function(){
+				$(".dashboard-wrapper .page-header h1").html("회원정보");
 				$("#listBtn").click(function(){
 					location.href="/admin/memberList";
 				});
@@ -20,7 +21,7 @@
 	</head>
 <body>
 		<%-- ============== container 시작 ====================  --%>
-		<div class="container">
+		<div>
 			<div class="rowTable">
 				<table>
 					<colgroup>
@@ -44,19 +45,25 @@
 						</tr>
 						<tr>
 							<th scope="row">이메일</th>
-							<td></td>
+							<td>${detail.u_email}</td>
 							<th scope="row">핸드폰번호</th>
 							<td>${detail.u_phone}</td>
 						</tr>
 						<tr>
 							<th scope="row">주소</th>
-							<td colspan="3"></td>
+							<td colspan="3">${detailaddress.address}<br/>${detailadd.address}</td>
 						</tr>
 						<tr>
 							<th scope="row">회원등급</th>
 							<td>${detail.u_grade}</td>
 							<th scope="row">회원상태(탈퇴여부)</th>
 							<td>${detail.u_status}</td>
+						</tr>
+						<tr>
+							<th scope="row">은행이름</th>
+							<td>${bank.bank}</td>
+							<th scope="row">계좌번호</th>
+							<td>${bank.account}</td>
 						</tr>
 						<tr>
 							<th scope="row">회원가입일</th>

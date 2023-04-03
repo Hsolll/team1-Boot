@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.omb.admin.member.service.AdmMemberService;
 import com.omb.admin.member.vo.AdmMemberVO;
@@ -31,12 +29,18 @@ public class AdmMemberController {
 	
 	
 	@GetMapping("/memberList")
-	public String memberList(@ModelAttribute AdmMemberVO mvo, Model model) {
+	public String memberList(@ModelAttribute AdmMemberVO mvo, Integer vo ,Model model) {
 		log.info("memberList 메서드 확인");
 		log.info("mvo : " + mvo);
+		log.info("카운트 테스트 ="+mvo);
 		
 		List<AdmMemberVO> memberList = admMemberService.memberList(mvo);
 		model.addAttribute("memberList", memberList);
+		
+		Integer count = admMemberService.admMemberCount(vo);
+		log.info("카운트 테스트 =" + count);
+		model.addAttribute("memberCount", count);
+		
 		
 		int total = admMemberService.memberListCnt(mvo);
 		
@@ -51,6 +55,15 @@ public class AdmMemberController {
 		
 		AdmMemberVO detail = admMemberService.memberDetail(mvo);
 		model.addAttribute("detail", detail);
+		
+		AdmMemberVO detailadd = admMemberService.memberDetailAdd(mvo);
+		model.addAttribute("detailadd", detailadd);
+		
+		AdmMemberVO bank = admMemberService.memberBank(mvo);
+		model.addAttribute("bank", bank);
+		
+		AdmMemberVO detailaddress = admMemberService.memberDetailAddress(mvo);
+		model.addAttribute("detailaddress", detailaddress);
 		
 		return "admin/memberMng/memberDetail";
 	}
@@ -101,23 +114,21 @@ public class AdmMemberController {
 		return "redirect:"+url;
 	}
 	
-	@ResponseBody
 	@PostMapping("/memberDelete")
-	public String memberDelete(@RequestParam(value="checkBoxArr[]") List<String> chkbox, AdmMemberVO mvo) throws Exception {
+	public String memberDelete(@ModelAttribute AdmMemberVO mvo) throws Exception {
 		log.info("memberDelete 호출 성공");
-		log.info("삭제할 회원번호: " + mvo.getU_no());
-		log.info("배열 확인:" + chkbox.get(0));
 		
 		int result = 0;
 		String url = "";
 		
 		
 		result = admMemberService.memberDelete(mvo);
-		log.info("result= " +result);
+		log.info("result = " + result);
+		
 		if(result == 1) {
 			url="/admin/nmemberList";
 		}else {
-			url="/admin/memberDetail?u_no="+mvo.getU_no();
+			url="/admin/nmemberDetail?u_no="+mvo.getU_no();
 		}
 		return "redirect:"+url;
 	}

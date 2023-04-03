@@ -28,9 +28,9 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 	}
 
 	@Override
-	public List<OrderInfoVO> buyOrderInfoList(MemberVO mvo) {
+	public List<OrderInfoVO> buyOrderInfoList(OrderInfoVO ovo) {
 		List<OrderInfoVO> buyList = null;
-		buyList = orderInfoDAO.buyOrderInfoList(mvo);
+		buyList = orderInfoDAO.buyOrderInfoList(ovo);
 		return buyList;
 	}
 
@@ -64,6 +64,33 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 	public OrderInfoVO selectOrderInfoPrice(OrderInfoVO ovo) {
 		OrderInfoVO selectPrice = orderInfoDAO.selectOrderInfoPrice(ovo);
 		return selectPrice;
+	}
+
+	@Override
+	public int updateOrderStatusSend(OrderInfoVO ovo) {
+		int result = 0;
+		result = orderInfoDAO.updateOrderStatusSend(ovo);
+		return result;
+	}
+
+	@Override
+	public int updateCompleteSafe(OrderInfoVO ovo) {
+		int result = 0;
+		result = orderInfoDAO.updateCompleteSafe(ovo);
+		return result;
+	}
+
+	@Override
+	public int updateCompleteProduct(OrderInfoVO ovo) {
+		int result = 0;
+		result = orderInfoDAO.updateCompleteProduct(ovo);
+		return result;
+	}
+
+	@Override
+	public int buyOrderInfoCnt(OrderInfoVO ovo) {
+		
+		return orderInfoDAO.buyOrderInfoCnt(ovo);
 	}
 	
 	

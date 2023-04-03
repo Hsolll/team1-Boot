@@ -6,15 +6,54 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		
+		<script src="/resources/include/js/common.js"></script>
+		<script src="/resources/vendor/jquery/jquery-3.3.1.min.js"></script>
 		<title>noticeDetail</title>
-		
+		<script type="text/javascript">
+		let buttonCheck = 0; // 수정버튼과 삭제버튼을 구별하기 위한 변수
+		$(function(){
+			$(".dashboard-wrapper .page-header h1").html("공지관리");
+			/* 수정 버튼 클릭 시 처리 이벤트 */
+			$("#updateFormBtn").click(function(){
+				buttonCheck = 1;
+				if(buttonCheck==1){ // 수정버튼 클릭시
+					goUrl = "/admin/noticeUpdateForm";
+					$("#f_data").attr("action",goUrl);
+					$("#f_data").submit();
+				}
+			});
+			
+			
+			 /*삭제 버튼 클릭 시 처리 이벤트 */
+			$("#noticeDeleteBtn").click(function(){
+				if(confirm("해당 글을 삭제하시겠습니까?")){
+				buttonCheck = 2;
+				let an_no = $("#an_no");
+				$("#an_no").val()
+				
+				goUrl = "/admin/noticeDelete";
+				$("#f_data").attr("action",goUrl);
+				$("#f_data").submit();
+				}
+			});
+			/* 목록 버튼 클릭 시 처리 이벤트 */
+			$("#noticeListBtn").click(function(){
+				location.href="/admin/noticeList"; 
+			});
+			
+		});
+		</script>
 	</head>
 
 <body>
 
 	<%-- =================== 상세페이지 시작  ================= --%>
-			<div class="container">
+			<div>
+			<form name="f_data" id="f_data" method="post">
+				<input type="hidden" name="an_no" id="an_no" value="${detail.an_no}"/>
+				<input type="hidden" name="an_file" value="${detail.an_file}"/>
+				<input type="hidden" name="an_thumbnail" value="${detail.an_thumbnail}"/>   <!-- 히든방법 / 조회방법  -->
+			
 				<div class="detailTopTable">
 				<table>
 					<colgroup>
@@ -27,26 +66,36 @@
 					</colgroup>
 					<tbody>
 						<tr>
+							<th scope="row">글번호</th>
+							<td>${detail.an_no}</td>
 							<th scope="row">제목</th>
-							<td colspan="4">[공지사항] 합병으로 인한 주권제출 및 채건자 이의제출 공고</td>
+							<td colspan="3">${detail.an_title}</td>
 						</tr>
 						<tr>
 							<th scope="row">작성자</th>
-							<td>작성자명</td>
+							<td>${detail.a_no}</td>
 							<th scope="row">등록일</th>
-							<td>2023-03-11</td>
+							<td>${detail.an_created_at}</td>
 							<th scope="row">조회수</th>
-							<td>756</td>
+							<td>${detail.an_cnt}</td>
+						</tr>
+						<tr>
+							<th scope="row">내용</th>
+							<td colspan="5" class="contents">
+								<c:if test="${not empty detail.an_file}">
+						 			<img src="/uploadStorage/notice/${detail.an_file}">
+					 			</c:if>
+					 			${detail.an_content}
+							</td>
 						</tr>
 					</tbody>
 				</table>
 				</div>
-				<div class="detailContents">
-					<p>상세내용 영역</p>
-				</div>
+				</form>
 				<div class="btnArea">
-					<button type="button" class="btn btn-dark">수정하기</button>
-					<button type="button" class="btn btn-dark">목록으로</button>
+					<button type="button" class="btn btn-dark" id="updateFormBtn">수정하기</button>
+					<button type="button" class="btn btn-dark" id="noticeDeleteBtn">삭제하기</button>
+					<button type="button" class="btn btn-dark" id="noticeListBtn">목록으로</button>
 				</div>
 				
 			</div>
