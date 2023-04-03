@@ -1,13 +1,13 @@
 package com.omb.user.safeProduct.vo;
 
-import lombok.AllArgsConstructor;
+import com.omb.common.vo.CommonVO;
+
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.EqualsAndHashCode;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class SafeProductVO {
+@EqualsAndHashCode(callSuper=false)
+public class SafeProductVO extends CommonVO {
 
 	private int sp_no;
 	private int u_no;

@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.omb.admin.depositInfo.service.AdmDepositInfoService;
+import com.omb.common.vo.PageDTO;
 import com.omb.user.member.vo.MemberVO;
 import com.omb.user.orderInfo.service.OrderInfoService;
 import com.omb.user.orderInfo.vo.OrderInfoVO;
@@ -34,16 +36,24 @@ public class OrderInfoController {
 	
 	/* 안심거래 구매목록 조회 */
 	@GetMapping("/buyList")
-	public String buyOrderInfo(HttpSession session, Model model) {
+	public String buyOrderInfo(@ModelAttribute("data") OrderInfoVO ovo, HttpSession session, Model model) {
 		
 		// 로그인한 세선에서 회원정보를 꺼내온다.
 		MemberVO mvo = (MemberVO)session.getAttribute("memberLogin");
 		
+		ovo.setU_no(mvo.getU_no());
+		ovo.setAmount(10);
+		
 		// 서비스에서 회원번호를 매개변수로 주문목록 조회하는 쿼리 
-		List<OrderInfoVO> buyList = orderInfoService.buyOrderInfoList(mvo);
+		List<OrderInfoVO> buyList = orderInfoService.buyOrderInfoList(ovo);
 		log.info("buyList : " + buyList);
 		
 		model.addAttribute("buyList", buyList);
+		
+		// 전체 레코드 수 구현 
+		int total = orderInfoService.buyOrderInfoCnt(ovo); 
+		//페이징 처리
+		model.addAttribute("pageMaker", new PageDTO(ovo, total));
 		
 		return "user/orderInfo/buyList";
 	}

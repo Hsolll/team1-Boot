@@ -9,7 +9,8 @@
 		FROM TB_USER_SAFE_PRODUCT
 	</select> -->
 	
-	<select id="selectSafeProductList" resultType="safeProduct">
+	<!-- 검색기능 추가 쿼리문
+	<select id="selectSafeProductList" parameterType="safeProduct" resultType="safeProduct">
 		SELECT 
 		    SP_NO, A.U_NO, U_ID, U_NAME, P_NO, 
 		    (SELECT P_NAME FROM TB_USER_PRODUCT C WHERE C.P_NO = A.P_NO) AS P_NAME, 
@@ -18,9 +19,81 @@
 		FROM TB_USER_SAFE_PRODUCT A
 		INNER JOIN TB_USER B
 		    ON A.U_NO = B.U_NO
+		<where>
+			<if test="search=='u_id'">
+				<![CDATA[ u_id LIKE '%'|| #{keyword} ||'%' ]]>					
+			</if>
+			<if test="search=='sp_title'">
+				<![CDATA[ sp_title LIKE '%'|| #{keyword} ||'%' ]]>					
+			</if>
+			<if test="search=='sp_name'">
+				<![CDATA[ sp_name LIKE '%'|| #{keyword} ||'%' ]]>					
+			</if>
+		</where>
 		ORDER BY SP_NO DESC
 	</select>
-	
+	 -->
+	 
+	 <!-- 페이징처리 쿼리문 -->
+	 <select id="selectSafeProductList" parameterType="safeProduct" resultType="safeProduct">
+	 	<![CDATA[
+	 	SELECT 
+		        SP_NO, U_NO, U_ID, U_NAME, P_NO, P_NAME, SP_TITLE, SP_NAME, SP_PRICE, 
+		        SP_CONTENT, SP_PWD, SP_STATUS, 
+		        TO_CHAR(SP_CREATED_AT, 'YYYY-MM-DD') AS SP_CREATED_AT, 
+		        TO_CHAR(SP_UPDATED_AT, 'YYYY-MM-DD') AS SP_UPDATED_AT
+		FROM (
+		        SELECT 
+		                ROWNUM as RNUM, SP_NO, U_NO, U_ID, U_NAME, P_NO, 
+		                (SELECT P_NAME FROM TB_USER_PRODUCT C WHERE C.P_NO = Z.P_NO) AS P_NAME, 
+		                SP_TITLE, SP_NAME, SP_PRICE, SP_CONTENT, SP_PWD, SP_STATUS, 
+		                SP_CREATED_AT, SP_UPDATED_AT
+		        FROM (
+		                SELECT 
+		                        SP_NO, A.U_NO, U_ID, U_NAME, P_NO, 
+		                        (SELECT P_NAME FROM TB_USER_PRODUCT C WHERE C.P_NO = A.P_NO) AS P_NAME, 
+		                        SP_TITLE, SP_NAME, SP_PRICE, SP_CONTENT, SP_PWD, SP_STATUS , 
+		                        SP_CREATED_AT, SP_UPDATED_AT
+		                FROM TB_USER_SAFE_PRODUCT A
+		                INNER JOIN TB_USER B
+		                    ON A.U_NO = B.U_NO
+		                ORDER BY SP_NO DESC) Z
+		        WHERE ]]>
+		        	<trim prefix="(" suffix=") AND " prefixOverrides="AND">
+						<if test="search=='u_id'">
+							<![CDATA[ u_id LIKE '%'|| #{keyword} ||'%' ]]>					
+						</if>
+						<if test="search=='sp_title'">
+							<![CDATA[ sp_title LIKE '%'|| #{keyword} ||'%' ]]>					
+						</if>
+						<if test="search=='sp_name'">
+							<![CDATA[ sp_name LIKE '%'|| #{keyword} ||'%' ]]>					
+						</if>
+			        </trim>
+		        	<![CDATA[ ROWNUM <= #{pageNum} * #{amount}) SAFE_PRODUCT
+		WHERE RNUM > (#{pageNum} - 1) * #{amount}
+		]]>
+	 </select>
+	 
+	<!-- 페이징 처리를 위한 전체 레코드 수 조회 쿼리문 -->
+	<select id="safeProductListCnt" parameterType="safeProduct" resultType="int">
+		SELECT COUNT(*) 
+		FROM TB_USER_SAFE_PRODUCT A
+		INNER JOIN TB_USER B
+			ON A.U_NO = B.U_NO
+		<trim prefix=" where (" suffix = ")" >
+			<if test="search=='u_id'">
+				<![CDATA[ u_id LIKE '%'|| #{keyword} ||'%' ]]>					
+			</if>
+			<if test="search=='sp_title'">
+				<![CDATA[ sp_title LIKE '%'|| #{keyword} ||'%' ]]>					
+			</if>
+			<if test="search=='sp_name'">
+				<![CDATA[ sp_name LIKE '%'|| #{keyword} ||'%' ]]>					
+			</if>
+		</trim>
+	</select>
+	 
 	
 	<select id="selectSafeProductDetail" parameterType="safeProduct" resultType="safeProduct">
 		SELECT 
@@ -113,7 +186,7 @@
 		UPDATE TB_USER_PRODUCT SET P_STATUS = '판매중' 
 		WHERE P_NO IN (SELECT P_NO 
 		                FROM TB_USER_SAFE_PRODUCT
-		                WHERE SP_NO = #{sp_no});
+		                WHERE SP_NO = #{sp_no})
 	</update>
 	
 	

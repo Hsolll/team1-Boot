@@ -19,9 +19,9 @@ public class SafeProductServiceImpl implements SafeProductService {
 	private SafeProductDAO safeProductDAO;
 
 	@Override
-	public List<SafeProductVO> selectSafeProductList() {
+	public List<SafeProductVO> selectSafeProductList(SafeProductVO spvo) {
 		List<SafeProductVO> list = null;
-		list = safeProductDAO.selectSafeProductList();
+		list = safeProductDAO.selectSafeProductList(spvo);
 		
 		return list;
 	}
@@ -119,6 +119,14 @@ public class SafeProductServiceImpl implements SafeProductService {
 		int result = 0;
 		result = safeProductDAO.updateProductStatusReturn(spvo);
 		return result;
+	}
+
+	
+	// 전체 레코드 수
+	@Override
+	public int safeProductListCnt(SafeProductVO spvo) {
+		
+		return safeProductDAO.safeProductListCnt(spvo);
 	}
 
 	

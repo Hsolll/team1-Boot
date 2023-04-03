@@ -112,122 +112,130 @@
                <input type="hidden" name="u_no"  value="${ memberLogin.u_no }" />
          </form>
          <%-- ================= 주문 정보 보여주기 시작 ================= --%>
-            <div class="info_wrapper">
-               <div class="list_item_info">
-                   <h3 class="info_title">상품정보</h3>
-                   <div class="box_blue">
-                       <p class="text-left mb5">
-                           <span class="list_img_blue"></span>
-                           <span id="sp_name" class="text24">${detail.sp_name}</span>
-                       </p>
-                       <p class="text-left text18">
-                           판매가 : 
-                           <span id="sp_price">
-                              <fmt:formatNumber value="${detail.sp_price}" groupingUsed="true"/>
-                           </span>
-                           원
-                       </p>
-                       <p class="text-left mt10 text24 text_blue">
-                           총결제금액 : <fmt:formatNumber value="${detail.sp_price}" groupingUsed="true"/> 원
-                       </p>
-                   </div>
-               </div>
-   
-               <div class="list_item_info mt30">
-                   <h3 class="info_title">주문자정보</h3>
-                   <table class="order_user_info">
-                       <colgroup>
-                           <col style="width: 150px;">
-                           <col>
-                       </colgroup>
-                       <tbody>
-                           <tr>
-                               <th>주문자명</th>
-                               <td id="u_name">${memberLogin.u_name}</td>
-                           </tr>
-                           <tr>
-                               <th>연락처</th>
-                               <td id="u_tel">${memberLogin.u_phone}</td>
-                           </tr>
-                           <tr>
-                               <th>이메일</th>
-                               <td id="u_email">${memberLogin.u_email}</td>
-                           </tr>
-                           <tr>
-                               <th>주소</th>
-                               <td id="address">${address.full_address}</td>
-                           </tr>
-                       </tbody>
-                   </table>
-               </div>
-               
-               <div class="list_item_info mt30">
-                   <h3 class="info_title">배송지정보</h3>
-                   <form id="addressForm">
-                       <table class="order_product_info">
-                           <colgroup>
-                               <col style="width: 150px;">
-                               <col>
-                           </colgroup>
-                           <tbody>
-                               <tr>
-                                   <th>배송지 정보</th>
-                                   <td>
-                                       <input type="radio" id="same" name="delevery_info" checked>
-                                       <label for="same" class="mr10">주문자정보와 동일</label>
-                                       <input type="radio" id="new" name="delevery_info">
-                                       <label for="new" class="mr10">새로입력</label>
-                                   </td>
-                               </tr>
-                               <tr>
-                                   <th>배송받는 분</th>
-                                   <td>
-                                       <input type="text" name="receiver" class="w200" maxlength="10" value="${memberLogin.u_name}" />
-                                   </td>
-                               </tr>
-                               <tr>
-                                   <th>휴대폰</th>
-                                   <td>
-                                       <input type="text" name="receiver_tel" class="w200" maxlength="12" value="${memberLogin.u_phone}" />
-                                   </td>
-                               </tr>
-                               <tr>
-                                   <th>주소</th>
-                                   <td>
-                                       <input type="text" name="zip" id="zip" class="w70" maxlength="7" value="${address.zip}" readonly="readonly" />
-                                       <button type="button" id="address_btn" class="address_btn">주소찾기</button>
-                                       <input type="text" id="address1" name="address1" class="w500 db" placeholder="주소를 입력하세요." value="${address.address}" readonly="readonly"  />
-                                       <input type="text" id="address2" name="address2" class="w500 db" placeholder="상세주소를 입력하세요." value="${address.sub_address}" />
-                                   </td>
-                               </tr>
-                           </tbody>
-                       </table>
-                   </form>
-               </div>
-               
-               <div class="payway">
-                   <div class="mt30">
-                       <h3 class="info_title">결제방법 선택</h3>
-                       <div class="box_blue">
-                           <p class="text-left mt10 text24 text_blue">
-                               총결제금액 : <fmt:formatNumber value="${detail.sp_price}" groupingUsed="true"/> 원
-                           </p>
-                           <div class="mt15 hr_top p15 pl0">
-                               <input type="radio" id="card" name="card" value="card" checked />
-                               <label for="card">신용카드</label>
-                           </div>
-                           <ul class="pt10 hr_top txt12">
-                               <li>- 불법신용카드 거래 시 민형사상의 책임을 질 수 있습니다. </li>
-                           </ul>
-                       </div>
-                   </div>
-               </div>
-   
-               <div class="payBtn_bg">
-                   <button id="buy_btn" class="btn_blue">결제하기</button>
-               </div>
-           </div>
-         <%-- ================= 상세 정보 보여주기 끝 ================= --%>
-      </div>
-   </body>
+         <div class="location">
+		    <span class="location_right">
+		        <a href="/safe/productList" class="list_btn">
+		            <span class="list_icon"></span>
+		            목록으로 가기
+		        </a>
+		    </span>
+		</div>
+        <div class="info_wrapper">
+			<div class="list_item_info">
+			    <h3 class="info_title">상품정보</h3>
+			    <div class="box_blue">
+			        <p class="text-left mb5">
+			            <span class="list_img_blue"></span>
+			            <span id="sp_name" class="text24">${detail.sp_name}</span>
+			        </p>
+			        <p class="text-left text18">
+			            판매가 : 
+			            <span id="sp_price">
+			               <fmt:formatNumber value="${detail.sp_price}" groupingUsed="true"/>
+			            </span>
+			            원
+			        </p>
+			        <p class="text-left mt10 text24 text_blue">
+			            총결제금액 : <fmt:formatNumber value="${detail.sp_price}" groupingUsed="true"/> 원
+			        </p>
+			    </div>
+			</div>
+
+			<div class="list_item_info mt30">
+			    <h3 class="info_title">주문자정보</h3>
+			    <table class="order_user_info">
+			        <colgroup>
+			            <col style="width: 150px;">
+			            <col>
+			        </colgroup>
+			        <tbody>
+			            <tr>
+			                <th>주문자명</th>
+			                <td id="u_name">${memberLogin.u_name}</td>
+			            </tr>
+			            <tr>
+			                <th>연락처</th>
+			                <td id="u_tel">${memberLogin.u_phone}</td>
+			            </tr>
+			            <tr>
+			                <th>이메일</th>
+			                <td id="u_email">${memberLogin.u_email}</td>
+			            </tr>
+			            <tr>
+			                <th>주소</th>
+			                <td id="address">${address.full_address}</td>
+			            </tr>
+			        </tbody>
+			    </table>
+			</div>
+           
+			<div class="list_item_info mt30">
+			    <h3 class="info_title">배송지정보</h3>
+			    <form id="addressForm">
+			        <table class="order_product_info">
+		            	<colgroup>
+			                <col style="width: 150px;">
+			               <col>
+		           		</colgroup>
+						<tbody>
+						    <tr>
+						        <th>배송지 정보</th>
+						        <td>
+						            <input type="radio" id="same" name="delevery_info" checked>
+						            <label for="same" class="mr10">주문자정보와 동일</label>
+						            <input type="radio" id="new" name="delevery_info">
+						            <label for="new" class="mr10">새로입력</label>
+						        </td>
+						    </tr>
+						    <tr>
+						        <th>배송받는 분</th>
+						        <td>
+						            <input type="text" name="receiver" class="w200" maxlength="10" value="${memberLogin.u_name}" />
+						        </td>
+						    </tr>
+						    <tr>
+						        <th>휴대폰</th>
+						        <td>
+						            <input type="text" name="receiver_tel" class="w200" maxlength="12" value="${memberLogin.u_phone}" />
+						        </td>
+						    </tr>
+						    <tr>
+						        <th>주소</th>
+						        <td>
+						            <input type="text" name="zip" id="zip" class="w70" maxlength="7" value="${address.zip}" readonly="readonly" />
+						            <button type="button" id="address_btn" class="address_btn">주소찾기</button>
+						            <input type="text" id="address1" name="address1" class="w500 db" placeholder="주소를 입력하세요." value="${address.address}" readonly="readonly"  />
+						            <input type="text" id="address2" name="address2" class="w500 db" placeholder="상세주소를 입력하세요." value="${address.sub_address}" />
+						         </td>
+						     </tr>
+						 </tbody>
+			        </table>
+			    </form>
+			</div>
+           
+			<div class="payway">
+			    <div class="mt30">
+			        <h3 class="info_title">결제방법 선택</h3>
+			        <div class="box_blue">
+			            <p class="text-left mt10 text24 text_blue">
+			                총결제금액 : <fmt:formatNumber value="${detail.sp_price}" groupingUsed="true"/> 원
+			            </p>
+			            <div class="mt15 hr_top p15 pl0">
+			                <input type="radio" id="card" name="card" value="card" checked />
+			                <label for="card">신용카드</label>
+			            </div>
+			            <ul class="pt10 hr_top txt12">
+			                <li>- 불법신용카드 거래 시 민형사상의 책임을 질 수 있습니다. </li>
+			            </ul>
+			        </div>
+			    </div>
+			</div>
+
+			<div class="payBtn_bg">
+			    <button id="buy_btn" class="btn_blue">결제하기</button>
+			</div>
+		</div>
+		<%-- ================= 상세 정보 보여주기 끝 ================= --%>
+		</div>
+	</body>
 </html>

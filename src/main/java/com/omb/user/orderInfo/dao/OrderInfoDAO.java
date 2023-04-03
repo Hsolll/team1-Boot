@@ -13,9 +13,13 @@ public interface OrderInfoDAO {
 
 	public int insertOrderInfo(OrderInfoVO ovo);	// 주문내역 추가
 	
-	public List<OrderInfoVO> buyOrderInfoList(MemberVO mvo);	// 구매자 구매목록 조회 메서드
+	public List<OrderInfoVO> buyOrderInfoList(OrderInfoVO ovo);	// 구매자 구매목록 조회 메서드
+	
+	public int buyOrderInfoCnt(OrderInfoVO ovo); // 구매목록 전체 레코드 수
 	
 	public List<OrderInfoVO> sellOrderInfoList(MemberVO mvo);	// 판매자 판매목록 조회 메서드
+	
+	public int sellOrderInfoCnt(OrderInfoVO ovo); // 판매목록 전체 레코드 수
 	
 	public PaymentVO selectPaymentId(OrderInfoVO ovo);	// 주문번호로 결제id 가져오기
 	

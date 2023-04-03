@@ -18,9 +18,9 @@ table, input, select, textarea, a { font-size: 12px; line-height: 1.25; color: #
 .p15 { padding: 15px !important; }
 .pr5 { padding-right: 5px !important; }
 .pl0 { padding-left: 0 !important; }
-.pl2 { padding-left: 2px !important; }
 .pl10 { padding-left: 10px !important; }
 .pt10 { padding-top: 10px !important; }
+.m0{ margin: 0 !important; }
 .mb5 { margin-bottom: 5px !important; }
 .mt10 { margin-top: 10px !important; }
 .mt15 { margin-top: 15px !important; }
@@ -30,14 +30,14 @@ table, input, select, textarea, a { font-size: 12px; line-height: 1.25; color: #
 .text24 { font-size: 24px; color: #333333; }
 .text18 { font-size: 18px; color: #333333; }
 .w50 {  width: 50px !important; }
-.w70 {  width: 70px !important; }
-.w145 { width: 145px !important; }
 .w200 { width: 200px !important; }
+.w280 { width: 280px !important; }
 .w400 { width: 400px !important; }
 .w500 { width: 500px !important; }
 .w700 { width: 700px !important; }
 .tr { text-align: right !important; }
 .tl { text-align: left !important; }
+.fr { float: right !important; }
 
 .db { display: block !important; }
 
@@ -60,6 +60,10 @@ input[type=password] {
     border: 1px solid #C9C9C9;
     padding: 1px 1px 2px;
     margin: 1px 0;
+}
+input[type=checkbox] {
+    width: 16px;
+    height: 16px;
 }
 /********************************** 상단 배너 **********************************/
 .top_banner {
@@ -373,4 +377,8 @@ input[type=password] {
 .footer_wrap > .footer_right > .footer_logo > img {
     width: 120px;
     margin: 0 15px;
+}
+
+.required {
+	color: red;
 }
