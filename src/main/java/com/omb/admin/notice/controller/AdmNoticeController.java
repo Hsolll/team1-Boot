@@ -84,6 +84,17 @@ public class AdmNoticeController {
 		return "admin/notice/noticeDetail";
 	}
 	
+	// 상세보기
+	@GetMapping("/eventDetail")
+	public String eventDetail(@ModelAttribute AdmNoticeVO nvo, Model model) {
+		log.info("noticeDetail 메서드 호출");
+		
+		AdmNoticeVO detail = admNoticeService.noticeDetail(nvo);
+		model.addAttribute("detail", detail);
+		
+		return "admin/notice/eventDetail";
+	}
+	
 	//글쓰기 폼 출력
 	@RequestMapping(value="/noticeWriteForm")
 	public String noticewriteForm() {

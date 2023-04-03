@@ -36,9 +36,10 @@
 				$("#f_data").submit();
 				}
 			});
+			 
 			/* 목록 버튼 클릭 시 처리 이벤트 */
 			$("#noticeListBtn").click(function(){
-				location.href="/admin/noticeList"; 
+				location.href="/admin/eventList"; 
 			});
 			
 		});
@@ -81,7 +82,7 @@
 						</tr>
 						<tr>
 							<th scope="row">내용</th>
-							<td colspan="5" class="contents">
+							<td class="contents" colspan="5">
 								<c:if test="${not empty detail.an_file}">
 						 			<img src="/uploadStorage/notice/${detail.an_file}">
 					 			</c:if>

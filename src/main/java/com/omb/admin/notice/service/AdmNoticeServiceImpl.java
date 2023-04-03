@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.omb.admin.notice.dao.AdmNoticeDao;
 import com.omb.admin.notice.vo.AdmNoticeVO;
+import com.omb.user.product.common.file.FileUploadUtil;
 
 import lombok.Setter;
 
@@ -23,7 +24,13 @@ public class AdmNoticeServiceImpl implements AdmNoticeService {
 		
 		int result = 0;
 		
-		
+		if(nvo.getFile().getSize() > 0) {
+			String fileName = FileUploadUtil.fileUpload(nvo.getFile(), "notice");
+			nvo.setAn_file(fileName);
+			
+			String thumbName = FileUploadUtil.makeThumbnail(fileName);
+			nvo.setAn_thumbnail(thumbName);
+		}
 		result = admNoticeDao.noticeInsert(nvo);
 		return result;
 	}
@@ -53,6 +60,18 @@ public class AdmNoticeServiceImpl implements AdmNoticeService {
 	public int noticeUpdate(AdmNoticeVO nvo) throws Exception {
 		int result = 0;
 		
+		if(!nvo.getFile().isEmpty()) {
+			if(!nvo.getAn_file().isEmpty()) {
+				FileUploadUtil.fileDelete(nvo.getAn_file());
+				FileUploadUtil.fileDelete(nvo.getAn_thumbnail());
+			}
+			
+			String fileName = FileUploadUtil.fileUpload(nvo.getFile(), "notice");
+			nvo.setAn_file(fileName);
+			
+			String thumbName = FileUploadUtil.makeThumbnail(fileName);
+			nvo.setAn_thumbnail(thumbName);
+		}
 		result = admNoticeDao.noticeUpdate(nvo);
 		return result;
 	}
@@ -60,6 +79,11 @@ public class AdmNoticeServiceImpl implements AdmNoticeService {
 	@Override
 	public int noticeDelete(AdmNoticeVO nvo) throws Exception {
 		int result = 0;
+		
+		if(!nvo.getAn_file().isEmpty()) {
+			FileUploadUtil.fileDelete(nvo.getAn_file());
+			FileUploadUtil.fileDelete(nvo.getAn_thumbnail());
+		}
 		
 		result = admNoticeDao.noticeDelete(nvo.getAn_no());
 		return result;

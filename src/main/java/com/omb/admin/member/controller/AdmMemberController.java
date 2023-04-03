@@ -56,6 +56,15 @@ public class AdmMemberController {
 		AdmMemberVO detail = admMemberService.memberDetail(mvo);
 		model.addAttribute("detail", detail);
 		
+		AdmMemberVO detailadd = admMemberService.memberDetailAdd(mvo);
+		model.addAttribute("detailadd", detailadd);
+		
+		AdmMemberVO bank = admMemberService.memberBank(mvo);
+		model.addAttribute("bank", bank);
+		
+		AdmMemberVO detailaddress = admMemberService.memberDetailAddress(mvo);
+		model.addAttribute("detailaddress", detailaddress);
+		
 		return "admin/memberMng/memberDetail";
 	}
 	

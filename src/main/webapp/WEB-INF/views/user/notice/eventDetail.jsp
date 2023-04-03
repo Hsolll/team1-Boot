@@ -9,7 +9,7 @@
 			 
 			/* 목록 버튼 클릭 시 처리 이벤트 */
 			$("#noticeListBtn").click(function(){
-				location.href="/notice/noticeList"; 
+				location.href="/notice/eventList"; 
 			});
 		});
 		</script>
@@ -19,8 +19,7 @@
 	</head>
 
 <body>
-		
-		<div class="contentContainer container">
+	<div class="contentContainer container">
 			<div class="text-center">
 				<div class="form-container">
 					<div class="detailContainer">

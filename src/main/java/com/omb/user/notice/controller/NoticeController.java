@@ -63,4 +63,15 @@ public class NoticeController {
 			
 			return "user/notice/noticeDetail";
 		}
+		
+		// 상세보기
+		@GetMapping("/eventDetail")
+		public String eventDetail(@ModelAttribute AdmNoticeVO nvo, Model model) {
+			log.info("noticeDetail 메서드 호출");
+			
+			AdmNoticeVO detail = admNoticeService.noticeDetail(nvo);
+			model.addAttribute("detail", detail);
+			
+			return "user/notice/eventDetail";
+		}
 }

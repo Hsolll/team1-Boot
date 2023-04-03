@@ -13,6 +13,8 @@
 		<script>
 	
 	$(function(){
+		$(".dashboard-wrapper .page-header h1").html("고객문의관리");
+		let msg = "<c:if test='${empty adminLogin}'>관리자만 이용할 수 있습니다.</c:if>";
 		let word="<c:out value='${serviceCenterVO.keyword}' />";
 		let value="";
 		if(word!= ""){
@@ -61,23 +63,30 @@
 		$(".goDetail").click(function(){
 			let sc_no = $(this).parents("tr").attr("data-no");
 			$("#sc_no").val(sc_no);
-			
-			$("#detailForm").attr({
-				"method":"get",
-				"action":"/admin/serviceCenterDetail"
+			if(msg!=""){
+				alert("로그인을 진행해주세요.");
+			}else{
+				$("#detailForm").attr({
+					"method":"get",
+					"action":"/admin/serviceCenterDetail"
 			});
-			$("#detailForm").submit();
+				$("#detailForm").submit();
+			}
 		});
 		
 		
 		$(".replyDetail").click(function(){
 			let as_no = $(this).parents("tr").attr("data-num");
 			$("#as_no").val(as_no);
-			$("#replyDetailForm").attr({
-				"method":"get",
-				"action":"/admin/replyDetail"
+			if(msg!=""){
+				alert("로그인을 진행해주세요.");
+			}else{
+				$("#replyDetailForm").attr({
+					"method":"get",
+					"action":"/admin/replyDetail"
 			});
-			$("#replyDetailForm").submit();
+				$("#replyDetailForm").submit();
+			}
 		});
 		
 	});
@@ -104,7 +113,7 @@
 		</form>
 		
 		<%-- ============== container 시작 ====================  --%>
-		<div class="container"> 
+		<div> 
 			<%-- ============== 검색기능 시작 ====================  --%>
 			<div id="serviceSearch" class="text-right">
 				<form id="f_search" name="f_search" class="form-inline">
