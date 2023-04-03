@@ -99,7 +99,7 @@
 	</head>
 	<body>
 		<c:if test='${not empty adminLogin }'>
-		<div class="contentContatiner container">
+		<div class="contentContatiner">
 			<form id="updateForm">
 				<input type="hidden" id="f_no" name="f_no">
 			</form>

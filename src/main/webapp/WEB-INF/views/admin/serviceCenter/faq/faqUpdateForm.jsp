@@ -31,7 +31,7 @@
 		</script>
 	</head>
 	<body>
-		<div class="contentContainer container">
+		<div class="contentContainer">
 			<!-- <div class="contentTit page-header"><h3 class="text-center">글 상세화면</h3></div> -->
 			<form name="f_updateForm" id="f_updateForm">
 				<input type="hidden" id="f_no" name="f_no" value="${faqData.f_no }">

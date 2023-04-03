@@ -38,7 +38,7 @@
 		</style>
 	</head>
 	<body>
-		<div class="contentContainer container">
+		<div class="contentContainer">
 			 <div class="text-center"><h2>글 등록</h2></div> 
 			
 			<form name="insertForm" id="insertForm">

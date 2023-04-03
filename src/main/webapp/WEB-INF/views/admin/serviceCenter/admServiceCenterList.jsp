@@ -13,6 +13,11 @@
 		<script>
 	
 	$(function(){
+		let admin = "<c:out value='${adminLogin.a_no }'/>";
+		if(admin == ""){
+			alert("잘못된 접근입니다.");
+			location.href="/admin/login";
+		}
 		$(".dashboard-wrapper .page-header h1").html("고객문의관리");
 		let msg = "<c:if test='${empty adminLogin}'>관리자만 이용할 수 있습니다.</c:if>";
 		let word="<c:out value='${serviceCenterVO.keyword}' />";
@@ -105,6 +110,7 @@
 	</head>
 
 <body>
+<c:if test='${not empty adminLogin }'>
 		<form id="detailForm">
 			<input type="hidden" id="sc_no" name="sc_no" />
 		</form>
@@ -213,5 +219,6 @@
 			</nav>
 		</div>
 		<%-- ============== container 종료 ====================  --%>
+		</c:if>
 </body>
 </html>
