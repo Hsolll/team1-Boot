@@ -16,10 +16,15 @@
 				<table class="table table-bordered">
 					<tbody>
 						<tr>
-							<td class="col-md-3">글번호</td>
-							<td class="col-md-3 text-center">${detail.f_no }</td>
+							<td class="col-md-3">작성자</td>
+							<td class="col-md-3 text-center">관리자  (조회수 : ${detail.f_readcnt })</td>
 							<td class="col-md-3">등록일</td>
-							<td class="col-md-3 text-center">${detail.f_created_at }</td>
+							<c:if test='${empty detail.f_updated_at }'>
+								<td class="col-md-3 text-center">${detail.f_created_at }</td>
+							</c:if>
+							<c:if test='${not empty detail.f_updated_at }'>
+								<td class="col-md-3 text-center">${detail.f_updated_at }</td>								
+							</c:if>
 						</tr>
 						<tr>
 							<td class="col-md-4">제목</td>

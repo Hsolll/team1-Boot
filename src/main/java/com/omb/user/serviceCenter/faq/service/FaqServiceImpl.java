@@ -33,7 +33,7 @@ public class FaqServiceImpl implements FaqService {
 	@Override
 	public FaqVO selectDetail(FaqVO faq) {
 		FaqVO detail = null;
-		
+		faqDao.updateReadCnt(faq);
 		detail = faqDao.selectDetail(faq);
 		if(detail != null) {
 			detail.setF_content(detail.getF_content().toString().replaceAll("\n", "<br>"));

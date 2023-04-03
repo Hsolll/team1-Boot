@@ -86,7 +86,9 @@
 						<tr>
 							<th data-value="f_no" class="order text-center col-md-1">글 번호</th>
 							<th class="text-center col-md-4">글 제목</th>
+							<th data-value="f_created_at" class="text-center col-md-1">작성자</th>
 							<th data-value="f_created_at" class="text-center col-md-1">작성일</th>
+							<th data-value="f_created_at" class="text-center col-md-1">조회수</th>
 						</tr>
 					</thead>
 					<tbody id="list" class="table-striped">
@@ -96,12 +98,19 @@
 									<tr class="text-center" data-no=${faq.f_no }>
 										<td>${faq.f_no }</td>
 										<td class="goDetail text-left">${faq.f_title }</td>
-										<td class="text-center">${faq.f_created_at }</td>
+										<td class="text-center">관리자</td>
+										<c:if test='${empty faq.f_updated_at }'>
+											<td class="text-center">${faq.f_created_at }</td>
+										</c:if>
+										<c:if test='${not empty faq.f_updated_at }'>
+											<td class="text-center">${faq.f_updated_at }</td>
+										</c:if>
+										<td class="text-center">${faq.f_readcnt }</td>
 									</tr>
 								</c:forEach>
 							</c:when>
 							<c:otherwise>
-								<td colspan="4" class="tac text-center">등록된 게시물이 존재하지 않습니다.</td>
+								<td colspan="5" class="tac text-center">등록된 게시물이 존재하지 않습니다.</td>
 							</c:otherwise>
 						</c:choose>
 					</tbody>
