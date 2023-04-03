@@ -47,7 +47,7 @@
 					$("#detailForm").submit();
 				});
 				
-				$(".paginate_button a").click(function(e){
+				$(".page-item a").click(function(e){
 					e.preventDefault();
 					$("#f_search").find("input[name='pageNum']").val($(this).attr("href"));
 					goPage();
@@ -125,9 +125,9 @@
 			<div class="chooseList text-center">
 				<h3><a href="/admin/product/queuedList" id="que">대기</a> / <a href="/admin/product/rejectedList" id="reject">거절</a></h3>
 			</div>
-			<div class="contentBtn text-right">
-				<input type="button" value="승인" id="upBtn" class="btn btn-success">
-				<input type="button" value="거절" id="downBtn" class="btn btn-danger">
+			<div class="btnArea">
+				<input type="button" value="승인" id="upBtn" class="btn btn-dark">
+				<input type="button" value="거절" id="downBtn" class="btn btn-dark">
 			</div>
 			<div id="div">
 				<div class="boardList" class="table-height">
@@ -181,28 +181,29 @@
 				</form>
 			</div>
 			<div class="text-center">
-				<ul class="pagination">
-					<!-- 이전 바로가기 10개 존재 여부를 prev 필드의 값으로 확인 -->
-					<c:if test="${pageMaker.prev }">
-						<li class="paginate_button previous">
-							<a href="${pageMaker.startPage -1 }">Previous</a>
-						</li>
-					</c:if>
-					
-					<!-- 바로가기 번호 출력 -->
-					<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
-						<li class="paginate_button ${pageMaker.cvo.pageNum == num ? 'active':''}">
-							<a href='${num }'>${num }</a>
-						</li>
-					</c:forEach>
-					
-					<!--  다음 바로가기 10개 존재 여부를 next 필드의 값으로 확인 -->
-					<c:if test="${pageMaker.next }">
-						<li class="paginate_button next">
-							<a href="${pageMaker.endPage+1 }">Next</a>
-						</li>
-					</c:if>
-				</ul>
+				<nav aria-label="Page navigation example">
+					  <ul class="pagination justify-content-center">
+					  	<c:if test="${pageMaker.prev}">
+						    <li class="page-item disabled">
+						    
+						      <a class="page-link" href="${pageMaker.startPage -1}" tabindex="-1">Previous</a>
+						    </li>
+					    </c:if>
+					    
+					    <c:forEach var="num" begin="${pageMaker.startPage}"
+												 end="${pageMaker.endPage}">
+						    <li class="page-item" ${pageMaker.cvo.pageNum == num ? 'active':''}">
+						    	<a class="page-link" href="${num}">${num}</a>
+						    </li>
+					    </c:forEach>
+					    
+					    <c:if test="${pageMaker.next}">
+						    <li class="page-item">
+						      <a class="page-link" href="${pageMaker.endPage + 1}">Next</a>
+						    </li>
+					    </c:if>
+					  </ul>
+				</nav>
 			</div>
 			
 		</div>
