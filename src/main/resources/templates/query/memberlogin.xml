@@ -8,12 +8,14 @@
 		from tb_user
 		where u_id =#{u_id} and u_pwd =#{u_pwd}   -->
 		
-		select 
-			A.u_no, u_id , u_name, u_email , u_phone, u_nick, 
-			zip, address, sub_address, u_grade, u_status ,u_created_at, u_updated_at
-		from tb_user A
-		inner join tb_user_address_info B
-    	on A.u_no = B.u_no
-    	where u_id =#{u_id} and u_pwd =#{u_pwd} and u_status='USING' and add_status = '기본배송지'
+		/* 배송주소가 2개 이상인 회원이 로그인 시 주소객체가 여러개이므로 에러 발생
+		 * 조건절에 배송지 이름을 추가해서 기본주소정보만 갖도록 설정 */
+		SELECT 
+			A.U_NO, U_ID , U_NAME, U_EMAIL , U_PHONE, U_NICK, 
+			ZIP, ADDRESS, SUB_ADDRESS, U_GRADE, U_STATUS ,U_CREATED_AT, U_UPDATED_AT
+		FROM TB_USER A
+		INNER JOIN TB_USER_ADDRESS_INFO B
+    		ON A.U_NO = B.U_NO
+    	WHERE U_ID = #{u_id} AND U_PWD = #{u_pwd} AND U_STATUS = 'USING' AND ADD_NAME = '기본배송지'
 	</select>
 </mapper>

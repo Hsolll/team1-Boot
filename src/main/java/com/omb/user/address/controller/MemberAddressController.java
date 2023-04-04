@@ -3,6 +3,7 @@ package com.omb.user.address.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -41,5 +42,14 @@ public class MemberAddressController {
 		
 		return result;
 	}
-
+	@ResponseBody
+	@GetMapping("/findAddress")
+	public MemberAddressVO findAddress(MemberAddressVO address) {
+		log.info("ajax로 전달받은 값 : " + address);
+		
+		MemberAddressVO addvo = memberAddressService.memberAddressInfoNo(address);
+		log.info("주소 조회 후 반환받은 객체 : " + addvo);
+		
+		return addvo;
+	}
 }

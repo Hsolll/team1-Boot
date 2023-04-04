@@ -14,7 +14,7 @@ public class MemberAddressVO {
 	private String zip;
 	private String address;
 	private String sub_address;
-	private String add_status;
+	private String add_name;
 	
 	// 조회 시 필요한 필드
 	private String full_address;

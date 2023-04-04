@@ -3,7 +3,6 @@ package com.omb.user.member.vo;
 
 import com.omb.common.vo.CommonVO;
 
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -27,9 +26,9 @@ public class MemberVO extends CommonVO {
 	
 	private String p_buyid;
 	
-	private String zip; // 우편번호
-	private String address; // 주소
-	private String sub_address; // 상세주소
+	private String zip = " "; // 우편번호
+	private String address = " "; // 주소
+	private String sub_address = " "; // 상세주소
 	
 	private long n_number;	
 	private String n_age;

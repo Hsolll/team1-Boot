@@ -80,7 +80,7 @@ public class MemberController {
 		int emailResult= memberservice.emailChk(mvo);
 		int phoneResult = memberservice.phoneChk(mvo);
 		
-		if(result == 1 && nickResult == 1 && emailResult ==1 && phoneResult == 1) {
+		if(result == 1 && nickResult == 1 && emailResult == 1 && phoneResult == 1) {
 			return "redirect:/member/signUpForm";
 		}else {
 			memberservice.signUp(mvo);
