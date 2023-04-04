@@ -60,15 +60,17 @@
 			            </div>
 					</li>
 					<li id="ml3">
-						<a href="/community/communityList?c_category=%EC%9E%90%EC%9C%A0%EA%B2%8C%EC%8B%9C%ED%8C%90">커뮤니티</a>
+						<a href="/community/communityList?c_category=C">커뮤니티</a>
 						<div id="sl3" class="sub_list">
 			                <ul class="nav">
-			                <li><a href="/community/communityList?c_category=%EC%9C%A0%EC%95%84%EC%9A%A9%ED%92%88%ED%9B%84%EA%B8%B0">유아용품후기</a></li>
-			                <li><a href="/community/communityList?c_category=%EC%9D%B4%EC%9C%A0%EC%8B%9D%EB%A0%88%EC%8B%9C%ED%94%BC">이유식레시피</a></li>
-			                <li><a href="/community/communityList?c_category=%EC%9E%90%EC%9C%A0%EA%B2%8C%EC%8B%9C%ED%8C%90">자유게시판</a></li>
+			                <li><a href="/community/communityList?c_category=A">유아용품후기</a></li>
+			                <li><a href="/community/communityList?c_category=B">이유식레시피</a></li>
+			                <li><a href="/community/communityList?c_category=C">자유게시판</a></li>
 			                </ul>
 			            </div>
 					</li>
+					
+					
 					<li id="ml4">
 						<a href="/faq/faqList">고객센터</a>
 						<!-- 하위 메뉴 -->

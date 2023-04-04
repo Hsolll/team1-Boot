@@ -119,7 +119,7 @@
 			<%-- ===================== 검색 기능 시작 ===================== --%>
 			<div class="searchbox">
 				<form id="f_search" name="f_search">
-					<input type="hidden" name="c_category" value="유아용품후기" />
+					<input type="hidden" name="c_category" value="A" />
 					<input type="hidden" name="pageNum" value="${pageMaker.cvo.pageNum}">
             		<input type="hidden" name="amount" value="${pageMaker.cvo.amount}">
                 	<input type="hidden" id="search" name="search" value="all" />

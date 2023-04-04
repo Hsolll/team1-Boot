@@ -12,11 +12,20 @@
 					let c_no = $(this).parents("tr").attr("data-num");
 					
 					$("#c_no").val(c_no);
-					$("#detailForm").attr({
+					$("#form_data").attr({
 						"method":"get",
 						"action":"/community/communityDetail"
 					});
-					$("#detailForm").submit();
+					$("#form_data").submit();
+				});
+				
+				/* 글쓰기 버튼 클릭 */
+				$("#writeBtn").click(function(){
+					$("#form_write").attr({
+						"method":"get",
+						"action":"/community/writeView"
+					});
+					$("#form_write").submit();
 				});
 				
 				
@@ -112,10 +121,12 @@
 	<body>
 		<div>
 		
-			<form name="detailForm" id="detailForm">
+			<form name="form_data" id="form_data">
 				<input type="hidden" name="c_no" id="c_no" >
 			</form>
-			
+			<form name="form_write" id="form_write">
+				<input type="hidden" name="c_category" value="C" />
+			</form>
 			<%-- ===================== 검색 기능 시작 ===================== --%>
 			<div class="searchbox">
 				<form id="f_search" name="f_search">
@@ -188,7 +199,14 @@
 	            </table>
 	        </div>
 	        
-	        <div class="text-center">
+	        <!-- 페이징 -->
+	        <div class="text-center pagingArea">
+	        
+	        	<!-- 글쓰기 버튼 -->
+	        	<div class="writeArea">
+		        	<button type="button" id="writeBtn" class="buttonWhite">WRITE</button>
+		        </div>
+		        
 				<ul class="pagination">
 					<c:if test="${ pageMaker.prev }">
 						<li class="paginate_button previous">
@@ -199,7 +217,7 @@
 					<c:forEach var="num" begin="${ pageMaker.startPage }"
 										 end="${ pageMaker.endPage }">
 						<li class="paginate_button ${ pageMaker.cvo.pageNum == num ? 'active':'' }">
-							<a href="${num}">${num}</a>
+							<a href="${num}" style="color: #868686;">${num}</a>
 						</li>
 					</c:forEach>
 					<!-- 다음 바로가기 10개 존재 여부를 next 필드의 값으로 확인 -->

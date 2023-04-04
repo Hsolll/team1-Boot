@@ -42,7 +42,7 @@
             <section class="contentWrapper">
                 <div class="content_wrap">
                     <div class="page-header mt55">
-						<h1><tiles:getAsString name="title" /></h1>
+						<h1 class="txt30"><tiles:getAsString name="title" /></h1>
 					</div>
 					
 	                <tiles:insertAttribute name="body" />

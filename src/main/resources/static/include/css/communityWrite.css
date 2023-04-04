@@ -1,0 +1,65 @@
+.community_wite {
+    margin-top: 10px;
+    border-top: 1px solid #000;
+}
+.community_wite table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    table-layout: fixed;
+}
+.community_wite tbody th,
+.community_wite tbody td {
+    padding: 13px 0;
+    text-align: left;
+    border-bottom: 1px solid #e9e9e9;
+}
+.community_wite tbody th {
+    padding-left: 30px;
+    font-size: 14px;
+    font-weight: normal;
+    background: #f8f8f8;
+}
+.community_wite tbody td {
+    padding: 13px 10px;
+}
+.community_wite tbody textarea {
+    width: 850px;
+    height: 275px;
+    border: 1px solid #C9C9C9;
+    resize: none;
+    outline: none;
+}
+.buttonArea {
+    margin-top: 40px;
+    text-align: center;
+}
+.buttonWhite {
+    display: inline-block;
+    color: #231f20;
+    text-align: center;
+    border: 1px solid #231f20;
+    background: #fff;
+}
+.buttonWhite:hover {
+	color: #fff;
+    background: #231f20;
+}
+
+.buttonBlack {
+	display: inline-block;
+    color: #fff;
+    text-align: center;
+    border: 1px solid #231f20;
+    background: #231f20;
+}
+.buttonBlack:hover {
+	color: #231f20;
+    background: #fff;
+}
+.buttonArea button {
+    width: 228px;
+    height: 58px;
+    font-size: 16px;
+    line-height: 58px;
+}

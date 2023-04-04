@@ -14,6 +14,7 @@ table, input, select, textarea, a { font-size: 12px; line-height: 1.25; color: #
 
 
 .txt12 { font-size: 12px!important; }
+.txt30 { font-size: 30px!important; }
   
 .p15 { padding: 15px !important; }
 .pr5 { padding-right: 5px !important; }
@@ -34,6 +35,7 @@ table, input, select, textarea, a { font-size: 12px; line-height: 1.25; color: #
 .w50 {  width: 50px !important; }
 .w200 { width: 200px !important; }
 .w280 { width: 280px !important; }
+.w350 { width: 350px !important; }
 .w400 { width: 400px !important; }
 .w500 { width: 500px !important; }
 .w700 { width: 700px !important; }
@@ -66,6 +68,9 @@ input[type=password] {
 input[type=checkbox] {
     width: 16px;
     height: 16px;
+}
+.goDetail {
+	cursor: pointer;
 }
 /********************************** 상단 배너 **********************************/
 .top_banner {

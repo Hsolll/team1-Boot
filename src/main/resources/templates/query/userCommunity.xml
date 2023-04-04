@@ -73,9 +73,9 @@
 	</update>
 	
 	<!-- 게시글 입력 -->
-	<insert id="insertommunity" parameterType="community">
+	<insert id="insertCommunity" parameterType="community">
 		INSERT INTO TB_USER_COMMUNITY (C_NO, U_NO, C_TITLE, C_CONTENT, C_FILE, C_THUMB, C_CATEGORY)
-		VALUES (TB_USER_COMMUNITY_SEQ.NEXTVAL, #{u_no}, #{c_title}, #{c_no}, #{c_file}, #{c_thumb}, #{c_categoty})
+		VALUES (TB_USER_COMMUNITY_SEQ.NEXTVAL, #{u_no}, #{c_title}, #{c_content}, #{c_file}, #{c_thumb}, #{c_category})
 	</insert>
 	
 	<!-- 게시글 수정 -->

@@ -14,7 +14,7 @@ public interface UserCommunityService {
 	
 	public int updateCommunityCnt(UserCommunityVO community);	// 조회수 증가
 	
-	public int insertommunity(UserCommunityVO community);
+	public int insertCommunity(UserCommunityVO community);
 	
 	public int updateCommunity(UserCommunityVO community);
 	
