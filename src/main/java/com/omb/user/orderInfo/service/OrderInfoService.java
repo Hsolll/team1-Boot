@@ -2,7 +2,6 @@ package com.omb.user.orderInfo.service;
 
 import java.util.List;
 
-import com.omb.user.member.vo.MemberVO;
 import com.omb.user.orderInfo.vo.OrderInfoVO;
 import com.omb.user.payment.vo.PaymentVO;
 
@@ -14,7 +13,9 @@ public interface OrderInfoService {
 	
 	public int buyOrderInfoCnt(OrderInfoVO ovo); // 구매목록 전체 레코드 수
 	
-	public List<OrderInfoVO> sellOrderInfoList(MemberVO mvo);	// 판매자 판매목록 조회 메서드
+	public List<OrderInfoVO> sellOrderInfoList(OrderInfoVO ovo);	// 판매자 판매목록 조회 메서드
+	
+	public int sellOrderInfoCnt(OrderInfoVO ovo); // 판매목록 전체 레코드 수
 	
 	public PaymentVO selectPaymentId(OrderInfoVO ovo);	// 주문번호로 결제id 가져오기
 	
