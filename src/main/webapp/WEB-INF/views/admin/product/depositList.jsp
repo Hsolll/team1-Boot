@@ -67,7 +67,18 @@
 						});  
 					})
 				}
+				
 			}
+				function goPage(){
+					if($("#search").val()=="all"){
+						$("#keyword").val("");
+					}
+					$("#f_search").attr({
+						"method":"get",
+						"action":"/admin/product/depositList"
+					});
+					$("#f_search").submit();
+				}
 		</script>
 	</head>
 	<body>
@@ -133,7 +144,7 @@
 					    
 					    <c:forEach var="num" begin="${pageMaker.startPage}"
 												 end="${pageMaker.endPage}">
-						    <li class="page-item" ${pageMaker.cvo.pageNum == num ? 'active':''}">
+						    <li class="page-item ${pageMaker.cvo.pageNum == num ? 'active':''}">
 						    	<a class="page-link" href="${num}">${num}</a>
 						    </li>
 					    </c:forEach>
@@ -146,7 +157,6 @@
 					  </ul>
 				</nav>
 			</div>
-			
 		</div>
 		</c:if>
 	</body>

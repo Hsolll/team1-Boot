@@ -243,7 +243,7 @@
 	<select id="selectQueuedList" resultType="product" parameterType="product">
   		<![CDATA[ 
 		SELECT 
-        		P_NO, U_NO, P_TITLE, P_NAME, P_PRICE, P_CONTENT, P_CREATED_AT, 
+        		RNUM, P_NO, U_NO, P_TITLE, P_NAME, P_PRICE, P_CONTENT, P_CREATED_AT, 
         		P_UPDATED_AT, P_DELETED_AT, P_FILE, P_THUMB, P_CATE, P_ADM_PER
 		FROM (
 		        SELECT  

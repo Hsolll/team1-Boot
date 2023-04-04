@@ -9,7 +9,7 @@
 					location.href="/admin/login";
 				}
 				$("#search").change(function(){
-					if($("#search").val()=="all"){
+					if($("#search").val()=="product"){
 						goPage();
 					} else if($("#search").val()=="safe_product"){
 						goPage();
@@ -26,7 +26,7 @@
 			/* 검색을 위한 실질적인 처리 함수 */
 			function goPage(){
 				var url = "";
-				if($("#search").val()=="all"){
+				if($("#search").val()=="product"){
 					url = "/admin/product/productList"
 				} else if($("#search").val()=="safe_product"){
 					url = "/admin/product/safeProductList"
@@ -51,13 +51,11 @@
 						<input type="hidden" name="pageNum" id="pageNum" value="${pageMaker.cvo.pageNum }">
 						<input type="hidden" name="amount" id="amount" value="${pageMaker.cvo.amount }">
 						<div class="form-group ml-auto">
-							<label>검색조건</label>
+							<label>상품 종류 </label>
 							<select id="search" name="search" class="form-control m-l-10">
-								<option value="all">전체</option>
+								<option value="product">전체</option>
 								<option value="safe_product">안심거래</option>
 							</select>
-							<input type="text" name="keyword" id="keyword" value="검색어를 입력하세요" class="form-control m-l-10" />
-							<button type="button" id="searchData" class="btn">검색</button>
 						</div>
 					</form>
 				</div>
@@ -108,7 +106,7 @@
 					    
 					    <c:forEach var="num" begin="${pageMaker.startPage}"
 												 end="${pageMaker.endPage}">
-						    <li class="page-item" ${pageMaker.cvo.pageNum == num ? 'active':''}">
+						    <li class="page-item ${pageMaker.cvo.pageNum == num ? 'active':''}">
 						    	<a class="page-link" href="${num}">${num}</a>
 						    </li>
 					    </c:forEach>

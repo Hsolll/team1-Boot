@@ -71,7 +71,7 @@ public class AdmMainController {
 	}
 	
 	@ResponseBody
-	@GetMapping(value="/main/getUsers")
+	@GetMapping(value="/main/getUsers", produces = "application/json; charset=UTF-8")
 	public String getUserStatistics() {
 		List<Map<String, Object>> list = statisticsService.selectUser();
 		JSONArray jsonList = new JSONArray();
@@ -88,7 +88,7 @@ public class AdmMainController {
 	}
 	
 	@ResponseBody
-	@GetMapping(value="/main/getOrders")
+	@GetMapping(value="/main/getOrders", produces = "application/json; charset=UTF-8")
 	public String getOrderStatistics() {
 		List<Map<String, Object>> list = statisticsService.selectOrder();
 		JSONArray jsonList = new JSONArray();
