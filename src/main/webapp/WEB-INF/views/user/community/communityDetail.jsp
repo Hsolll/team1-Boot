@@ -15,17 +15,35 @@
 				});
 				
 				/* EDIT 버튼 클릭 시 처리 이벤트 */
-				
+				$("#updateBtn").click(function(){
+					$("#form_data").attr({
+						"method":"get",
+						"action":"/community/updateView"
+					});
+					$("#form_data").submit();
+				});
 				
 				
 				/* DELETE 버튼 클릭 시 처리 이벤트 */
-				
+				$("#deleteBtn").click(function(){
+					if(confirm("정말 삭제하시겠습니까?")){
+						$("#form_data").attr({
+							"method":"get",
+							"action":"/community/deleteCommunity"
+						});
+						$("#form_data").submit();
+					}
+				});
 				
 			});
 		</script>
 	</head>
 	<body>
 		<div style="position: relative;">
+			<form id="form_data">
+				<input type="hidden" name="c_no" id="c_no" value="${ detail.c_no }" />
+				<input type="hidden" name="c_category" id="c_category" value="${ detail.c_category }" />
+			</form>
 			
 			<div class="detail_table mt30">
 				<c:set var="member" value="${memberLogin.u_no}" />
