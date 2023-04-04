@@ -73,9 +73,71 @@
     padding: 6px 30px;
     cursor: pointer;
     font-size: 14px;
+    text-decoration: none;
 }
 
+.active a {
+	background: #f2f2f2 !important;
+    border-color: #ddd !important;
+    color: #5f5f5f !important;
+}
+.pagingArea {
+	position: relative;
+}
+.writeArea {
+	position: relative;
+	top: 15px;
+    right: -490px;
+}
+.writeArea .buttonWhite {
+	position: absolute;
+	width: 108px;
+    height: 38px;
+    font-size: 13px;
+    line-height: 34px;
+}
 /* 상세페이지 */
+
+.buttonList {
+	display: flex;
+    justify-content: space-between;
+	padding: 10px 0;
+    width: 345px;
+}
+
+.buttonList {
+	float: right;
+}
+.buttonWhite {
+    display: inline-block;
+    color: #231f20;
+    text-align: center;
+    border: 1px solid #231f20;
+    background: #fff;
+}
+.buttonWhite:hover {
+	color: #fff;
+    background: #231f20;
+}
+.buttonBlack {
+	display: inline-block;
+    color: #fff;
+    text-align: center;
+    border: 1px solid #231f20;
+    background: #231f20;
+}
+.buttonBlack:hover {
+	color: #231f20;
+    background: #fff;
+}
+
+.buttonList button {
+    width: 108px;
+    height: 38px;
+    font-size: 13px;
+    line-height: 34px;
+}
+
 .detail_table > table {
     width: 100%;
     border-collapse: collapse;
@@ -125,6 +187,9 @@
 }
 
 /* 댓글입력 */
+#replyForm table {
+	width: 100%;
+}
 .replyBox {
 	padding-top: 20px;
     vertical-align: top;
@@ -151,4 +216,30 @@
 .writeReply {
     padding-bottom: 15px;
     font-size: 0;
+    display: flex;
+}
+.writeReply textarea {
+	padding: 1px 0;
+    width: 978px;
+    height: 120px;
+    border: 1px solid #ddd;
+    resize: none;
+    outline: none;
+}
+.replyBtn {
+	display: inline-block;
+    color: #fff;
+    text-align: center;
+    border: 1px solid #231f20;
+    background: #231f20;
+}
+.replyBtn:hover {
+	color: #231f20;
+    background: #fff;
+}
+.writeReply .replyBtn {
+	width: 118px;
+    height: 120px;
+    font-size: 16px;
+    line-height: 120px;
 }

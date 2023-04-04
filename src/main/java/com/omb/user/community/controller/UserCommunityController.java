@@ -1,11 +1,13 @@
 package com.omb.user.community.controller;
 
+import java.net.URLEncoder;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.omb.common.vo.PageDTO;
@@ -32,13 +34,13 @@ public class UserCommunityController {
 		log.info("1. 현재 페이지 : " + community.getPageNum());
 		log.info("1. 보여줄 데이터 수 : " + community.getAmount());
 		
-		if(community.getC_category().equals("자유게시판")) {
+		if(community.getC_category().equals("C")) {
 			path = "user/community/communityList";
 		}
-		else if(community.getC_category().equals("유아용품후기")) {
+		else if(community.getC_category().equals("A")) {
 			path = "user/community/communityListReview";
 		}
-		else if(community.getC_category().equals("이유식레시피")) {
+		else if(community.getC_category().equals("B")) {
 			path = "user/community/communityListRecipe";
 		}
 		
@@ -69,5 +71,37 @@ public class UserCommunityController {
 		model.addAttribute("detail", detail);
 		
 		return "user/community/communityDetail";
+	}
+	
+	@GetMapping("/writeView")
+	public String insertCommunityView(UserCommunityVO community, Model model) {
+		log.info("전달받은 카테고리명 : " + community.getC_category());
+		
+		model.addAttribute("community", community);
+		
+		return "user/community/communityWriteView";
+	}
+	
+	@PostMapping("insertCommunity")
+	public String insertCommunity(UserCommunityVO community) throws Exception {
+		
+		log.info("입력받은 데이터 : " + community);
+		
+		int result = 0;
+		String path = "";
+		
+		result = userCommunityService.insertCommunity(community);
+		
+		 community.setC_category(URLEncoder.encode(community.getC_category(), "UTF-8"));
+		
+		if(result == 1) {
+			log.info("입력 성공");
+			path = "/community/communityList?c_category=" + community.getC_category();
+		} else {
+			path = "/community/writeView";
+		}
+		log.info("path : " + path);
+		
+		return "redirect:" + path;
 	}
 }

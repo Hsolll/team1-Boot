@@ -7,16 +7,46 @@
 			$(function(){
 				$(".content_wrap .page-header h1").html("상세페이지");
 				
+				/* LIST 버튼 클릭 시 처리 이벤트 */
+				$("#listBtn").click(function(){
+					let category = "<c:out value='${detail.c_category}' />";
+					console.log("category : " + category);
+					location.href="/community/communityList?c_category=" + category;
+				});
+				
+				/* EDIT 버튼 클릭 시 처리 이벤트 */
+				
+				
+				
+				/* DELETE 버튼 클릭 시 처리 이벤트 */
 				
 				
 			});
 		</script>
 	</head>
 	<body>
-		<div>
+		<div style="position: relative;">
 			
 			<div class="detail_table mt30">
-	            <table>
+				<c:set var="member" value="${memberLogin.u_no}" />
+				<c:set var="community" value="${detail.u_no}" />
+				<fmt:parseNumber var="member" type="number" value="${member}"/>
+				<fmt:parseNumber var="community" type="number" value="${community}"/>
+				<c:choose>
+					<c:when test="${member eq community }">
+						<div class="buttonList tr">
+							<button type="button" class="buttonWhite" id="updateBtn">EDIT</button>
+							<button type="button" class="buttonWhite" id="deleteBtn">DELETE</button>
+							<button type="button" class="buttonBlack" id="listBtn">LIST</button>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div class="buttonList tr" style="display: block;">
+							<button type="button" class="buttonBlack" id="listBtn">LIST</button>
+						</div>
+					</c:otherwise>
+				</c:choose>
+	            <table class="detailView">
 	                <colgroup>
 	                </colgroup>
 	                <thead>
@@ -48,7 +78,7 @@
 	                </tbody>
 	            </table>
 	            
-	            <form>
+	            <form id="replyForm" class="mt30">
 	            	<fieldset>
 	            		<table>
 	            			<tbody>
@@ -60,7 +90,8 @@
 	            								<input type="text" name="u_id" id="u_id" placeholder="이름" />
 	            							</div>
 	            							<div class="mt7 writeReply">
-	            							
+	            								<textarea placeholder="댓글 내용"></textarea>
+	            								<button type="button" class="replyBtn">댓글쓰기</button>
 	            							</div>
 	            						</div>
 	            					</td>

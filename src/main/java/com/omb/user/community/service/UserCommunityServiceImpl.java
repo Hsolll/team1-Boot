@@ -60,11 +60,11 @@ public class UserCommunityServiceImpl implements UserCommunityService {
 	}
 
 	@Override
-	public int insertommunity(UserCommunityVO community) {
+	public int insertCommunity(UserCommunityVO community) {
 
 		int result = 0;
 		
-		result = userCommunityDAO.insertommunity(community);
+		result = userCommunityDAO.insertCommunity(community);
 		
 		return result;
 	}
