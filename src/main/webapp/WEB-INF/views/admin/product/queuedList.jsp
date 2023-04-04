@@ -192,7 +192,7 @@
 					    
 					    <c:forEach var="num" begin="${pageMaker.startPage}"
 												 end="${pageMaker.endPage}">
-						    <li class="page-item" ${pageMaker.cvo.pageNum == num ? 'active':''}">
+						    <li class="page-item" ${pageMaker.cvo.pageNum == num ? 'active':''}>
 						    	<a class="page-link" href="${num}">${num}</a>
 						    </li>
 					    </c:forEach>
