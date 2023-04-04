@@ -1,6 +1,5 @@
 package com.omb.user.community.controller;
 
-import java.net.URLEncoder;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,6 +72,7 @@ public class UserCommunityController {
 		return "user/community/communityDetail";
 	}
 	
+	// 입력 폼 이동
 	@GetMapping("/writeView")
 	public String insertCommunityView(UserCommunityVO community, Model model) {
 		log.info("전달받은 카테고리명 : " + community.getC_category());
@@ -82,6 +82,7 @@ public class UserCommunityController {
 		return "user/community/communityWriteView";
 	}
 	
+	// 데이터 입력 처리
 	@PostMapping("insertCommunity")
 	public String insertCommunity(UserCommunityVO community) throws Exception {
 		
@@ -92,8 +93,6 @@ public class UserCommunityController {
 		
 		result = userCommunityService.insertCommunity(community);
 		
-		 community.setC_category(URLEncoder.encode(community.getC_category(), "UTF-8"));
-		
 		if(result == 1) {
 			log.info("입력 성공");
 			path = "/community/communityList?c_category=" + community.getC_category();
@@ -101,6 +100,61 @@ public class UserCommunityController {
 			path = "/community/writeView";
 		}
 		log.info("path : " + path);
+		
+		return "redirect:" + path;
+	}
+	
+	// 수정 폼 이동
+	@GetMapping("/updateView")
+	public String updateCommunityView(UserCommunityVO community, Model model) {
+		
+		log.info("전달받은 글번호 : " + community.getC_no());
+		
+		UserCommunityVO detail = userCommunityService.communityDetail(community);
+		
+		model.addAttribute("detail", detail);
+		
+		return "user/community/communityUpdateView";
+	}
+	
+	// 데이터 수정 처리
+	@PostMapping("/updateCommunity")
+	public String updateCommunity(UserCommunityVO community) {
+		
+		log.info("입력받은 데이터 : " + community);
+		
+		int result = 0;
+		String path = "";
+		
+		result = userCommunityService.updateCommunity(community);
+		
+		if(result == 1) {
+			log.info("수정 성공");
+			path = "/community/communityDetail?c_no=" + community.getC_no();
+		} else {
+			path = "/community/writeView?c_category=" + community.getC_category();
+		}
+		log.info("path : " + path);
+		
+		return "redirect:" + path;
+	}
+	
+	// 데이터 삭제 처리
+	@GetMapping("/deleteCommunity")
+	public String deleteCommunity(UserCommunityVO community) {
+		log.info("삭제 전달받은 글번호 : " + community.getC_no());
+		
+		int result = 0;
+		String path = "";
+		
+		result = userCommunityService.deleteCommunity(community);
+		
+		if(result == 1) {
+			log.info("삭제완료");
+			path = "/community/communityList?c_category=" + community.getC_category();
+		} else {
+			path = "/community/communityDetail?c_no=" + community.getC_no();
+		}
 		
 		return "redirect:" + path;
 	}
