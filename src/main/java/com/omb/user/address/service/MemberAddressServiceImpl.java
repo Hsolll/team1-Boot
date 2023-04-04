@@ -1,5 +1,7 @@
 package com.omb.user.address.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,11 +27,29 @@ public class MemberAddressServiceImpl implements MemberAddressService {
 		return memberAddressVO;
 	}
 
+	
+	@Override
+	public List<MemberAddressVO> memberAddressInfoAll(MemberVO mvo) {
+		
+		List<MemberAddressVO> addressList = memberAddressDAO.memberAddressInfoAll(mvo);
+		
+		return addressList;
+	}
+	
+	
 	@Override
 	public int insertMemberAddress(MemberAddressVO addvo) {
 		int result = 0;
 		result = memberAddressDAO.insertMemberAddress(addvo);
 		return result;
 	}
+
+
+	@Override
+	public MemberAddressVO memberAddressInfoNo(MemberAddressVO addvo) {
+		MemberAddressVO address = memberAddressDAO.memberAddressInfoNo(addvo);
+		return address;
+	}
+
 
 }
