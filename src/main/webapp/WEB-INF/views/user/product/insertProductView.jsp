@@ -3,7 +3,6 @@
 <%@ include file="/WEB-INF/views/common/common.jspf"%>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="/resources/include/js/insert.js"></script>
-<script src="/resources/include/js/common.js"></script>
 <link rel="stylesheet" type="text/css" href="/resources/include/css/insert.css">
 
 	

@@ -12,22 +12,22 @@
 		
 		<script type="text/javascript">
 	$(function(){	
-			$(".dashboard-wrapper .page-header h1").html("공지관리");
+			$(".dashboard-wrapper .page-header h1").html("유아용품 후기 게시판 관리");
 			/* 검색 후 검색 대상과 검색 단어 출력 */
 			let admin = "<c:out value='${adminLogin.a_no }'/>";
 			if(admin == ""){
 				alert("잘못된 접근입니다.");
 				location.href="/admin/login";
 			}
-			let word="<c:out value='${noticeVO.keyword}' />";  // 보여주기 태그
+			let word="<c:out value='${userCommunityVO.keyword}' />";  // 보여주기 태그
 			let value="";
 			if(word!=""){ 
-				$("#keyword").val("<c:out value='${noticeVO.keyword}' />");
-				$("#search").val("<c:out value='${noticeVO.search}' />");
+				$("#keyword").val("<c:out value='${userCommunityVO.keyword}' />");
+				$("#search").val("<c:out value='${userCommunityVO.search}' />");
 			
-				if($("#search").val()!='an_content'){
-					if($("#search").val()=='an_title') value = "#list tr td.goDetail";
-					else if($("#search").val()=='an_no') value="#list tr td.no";
+				if($("#search").val()!='c_name'){
+					if($("#search").val()=='u_id') value = "#list tr td.name";
+					else if($("#search").val()=='c_title') value="#list tr td.goDetail";
 					console.log($(value+":contains('"+word+"')").html());
 			    	$(value+":contains('"+word+"')").each(function () {
 						let regex = new RegExp(word,'gi');
@@ -62,22 +62,15 @@
 				goPage();
 			});
 			
-			/* 글쓰기 버튼 클릭 시 처리 이벤트 */		
-			$("#insertFormBtn").click(function(){
-				location.href = "/admin/noticeWriteForm"; 
-				
-			});
-			
-			
 			/* 제목 클릭시 상세 페이지 이동을 위한 처리 이벤트 */		
 			$(".goDetail").click(function(){
-				let an_no =  $(this).parents("tr").attr("data-num");	
-				$("#an_no").val(an_no);
-				console.log("글번호 : "+an_no);
+				let c_no =  $(this).parents("tr").attr("data-num");	
+				$("#c_no").val(c_no);
+				console.log("글번호 : "+c_no);
 				
 				$("#detailForm").attr({
 					"method":"get",
-					"action":"/admin/noticeDetail"
+					"action":"/admin/admCommunityDetail"
 				});
 					$("#detailForm").submit();
 			});
@@ -99,7 +92,7 @@
 		
 			$("#f_search").attr({
 				"method":"get",
-				"action":"/admin/noticeList"
+				"action":"/admin/admCommunityList?c_category=A"
 			});
 			$("#f_search").submit();
 		}
@@ -111,24 +104,25 @@
 <c:if test='${not empty adminLogin }'>
 <div> 
 	<form id="detailForm">
-		<input type="hidden" id="an_no" name="an_no" />
+		<input type="hidden" id="c_no" name="c_no" />
 	</form>
 	
 	<%-- ============== 검색기능 시작 ====================  --%>
-	<div id="noticeSearch" class="text-right">
+	<div id="communitySearch" class="text-right">
 		<form id="f_search" name="f_search" class="form-inline">
+			<input type="hidden" name="c_category" value="A" />
 			<input type="hidden" name="pageNum" value="${pageMaker.cvo.pageNum}">
-			<input type="hidden" name="amount" value="${pageMaker.cvo.amount}">
+        	<input type="hidden" name="amount" value="${pageMaker.cvo.amount}">
+            <input type="hidden" id="search" name="search" value="all" />
 			<div class="form-group ml-auto">
 				<label>검색조건</label>
 				<select id="search" name="search"  class="form-control m-l-10">
 					<option value="all">전체</option>
-					<option value="an_no">글번호</option>
-					<option value="an_title">제목</option>
+					<option value="u_id">작성자</option>
+					<option value="c_title">제목</option>
 				</select>
 				<input type="text" name="keyword" id="keyword" value="검색어를 입력하세요" class="form-control m-l-10" />
 				<button type="button" id="searchData" class="btn">검색</button>
-				<button type="button" id="insertFormBtn" class="btn btn-dark m-l-100">글쓰기</button>
 			</div>
 		</form>
 	</div>
@@ -136,37 +130,33 @@
 
 <%-- =================== 리스트 시작  ================= --%>
 		<div id="noticeList" class="table-responsive">
-		<table summary="공지사항 리스트" class="table table-striped m-t-15" >
+		<table summary="유아용품 후기 리스트" class="table table-striped m-t-15" >
 			<thead>
 				<tr>
-					<th data-value="an_no" class="order text-center col-md-1" >공지글 번호</th>
-					<th class="text-center col-md-1">구분</th>
-					<th class="text-center col-md-1">작성자</th>
+					<th data-value="an_no" class="order text-center col-md-1" >글번호</th>
+					<th class="text-center col-md-2">작성자</th>
 					<th class="text-center col-md-4">제목</th>
 					<th class="text-center col-md-1">등록일</th>
 					<th data-value="an_cnt" class="order text-center col-md-2">조회수</th>
-					<th class="text-center col-md-2">이미지</th>
+					<th class="text-center col-md-4">이미지</th>
 				</tr>
 			</thead>
 	 		<tbody id="list" class="table-striped" >
 				<!-- 데이터 출력 -->
 				<c:choose>
-					<c:when test="${not empty noticeList}" >
-						<c:forEach var="notice" items="${noticeList}" varStatus="status">
-							<tr class="text-center" data-num="${notice.an_no}">
-								<td class="no text-center">${notice.an_no}</td>
-								<td class="text-center">
-								${notice.an_category}
-								</td>
-								<td class="text-center">${notice.a_name}</td>
-								<td class="goDetail text-center">${notice.an_title}</td>
-								<td class="text-center">${notice.an_created_at}</td>
-								<td class="text-center">${notice.an_cnt}</td>
+					<c:when test="${not empty communityList}" >
+						<c:forEach var="community" items="${communityList}" varStatus="status">
+							<tr class="text-center" data-num="${community.c_no}">
+								<td class="no text-center">${community.c_no}</td>
+								<td class="name text-center">${ community.u_id }</td>
+								<td class="goDetail text-center">${ community.c_title }</td>
+								<td class="text-center">${ community.c_created_at }</td>
+								<td class="text-center">${ community.c_cnt }</td>
 								<td>
-									<c:if test="${not empty notice.an_thumbnail}">
-										<img src="/uploadStorage/notice/thumbnail/${notice.an_thumbnail}"/>
+									<c:if test="${not empty community.c_thumb}">
+										<img src="/uploadStorage/communityA/thumbnail/${community.c_thumb}"/>
 									</c:if>
-									<c:if test="${empty notice.an_thumbnail}">
+									<c:if test="${empty community.c_thumb}">
 										<img src="/resources/images/common/icon.png" />
 									</c:if>
 								</td>
@@ -196,7 +186,7 @@
 			    
 			    <c:forEach var="num" begin="${pageMaker.startPage}"
 										 end="${pageMaker.endPage}">
-				    <li class="page-item">
+				    <li class="page-item ${ pageMaker.cvo.pageNum == num ? 'active':'' }">
 				    	<a class="page-link" href="${num}">${num}</a>
 				    </li>
 			    </c:forEach>

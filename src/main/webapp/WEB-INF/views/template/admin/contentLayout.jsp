@@ -115,13 +115,13 @@
                                 <div id="submenu-4" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/admin/babyPRDList">용품후기</a>
+                                            <a class="nav-link" href="/admin/admCommunityList?c_category=A">유아용품후기</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/admin/babyFDList">레시피후기</a>
+                                            <a class="nav-link" href="/admin/admCommunityList?c_category=B">레시피후기</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/admin/babyFreeList">자유게시판</a>
+                                            <a class="nav-link" href="/admin/admCommunityList?c_category=C">자유게시판</a>
                                         </li>
                                     </ul>
                                 </div>
