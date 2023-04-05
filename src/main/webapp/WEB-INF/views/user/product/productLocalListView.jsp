@@ -15,17 +15,22 @@ $(".p_no").click(function(){
 </script>
 </head>
 <body>
-	<ul class="prdList">
+<ul class="prdList">
+  	<c:forEach var="like" items="${like }">
+		<input type='hidden' class="likeList" value="${like.prod_like}"/>
+  	</c:forEach>
      <c:choose>
-       <c:when test="${not empty productList}">
-         <c:forEach var="product" items="${productList}">
+       <c:when test="${not empty plist}">
+         <c:forEach var="product" items="${plist}">
            <li>
-              <span class="heart ${product.prod_like}"></span>
-              <form class="heartForm">
-                   <input type="text" name="prod_like" class="like he" value="1" readonly/>
-                   <input type="text" name="u_no" class="he" value="${member.u_no}" readonly/>
-                      <input type="text" name="p_no" class="he" value="${product.p_no}" readonly/>
-                 </form>
+              <div class="heart_con">
+         	 		<form class="heartForm">
+		                <input type="text" name="u_no" class="he u" value="${member.u_no}" readonly/>
+		                <input type="text" name="p_no" class="he p" value="${product.p_no}" readonly/>
+	              	</form>
+        	 		<div class="heart ${product.prod_like }">
+            		</div>
+           </div>
             <a href="/">
                <div class="imgBox">
                   <c:if test="${not empty product.p_thumb}">
@@ -34,6 +39,7 @@ $(".p_no").click(function(){
                      <c:if test="${empty product.p_thumb}">
                           <img class="p_no" id="${product.p_no}" src="/resources/images/common/noimage.png"/>
                      </c:if>
+
                </div>
                <div class="txtArea">
                   <ul>
@@ -42,7 +48,7 @@ $(".p_no").click(function(){
                      <li class="prdPrice">
                         <c:if test="${product.p_price == 0}">무료나눔</c:if>
                         <c:if test="${product.p_price != 0}">
-							<fmt:formatNumber value="${product.p_price}" groupingUsed="true"/>
+                   			<fmt:formatNumber value="${product.p_price}" groupingUsed="true"/>
                    			<em>원</em>
                         </c:if>
                      </li>

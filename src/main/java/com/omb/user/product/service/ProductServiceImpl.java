@@ -108,8 +108,8 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public ProductVO updateForm(ProductVO pvo) {
-		ProductVO list = productDao.updateForm(pvo);
+	public ProductVO updateForm(int u_no, int p_no) {
+		ProductVO list = productDao.updateForm(u_no,p_no);
 		return list;
 	}
 
@@ -188,7 +188,19 @@ public class ProductServiceImpl implements ProductService {
 		 return productMyPageList;
 	}
 
-	
+//	@Override
+//	public List<ProductVO> selectProductLike(int p_no, int u_no) {
+//		List<ProductVO> like = productDao.selectProductLike(p_no, u_no);
+//	    return like;
+//
+//	}
+	@Override
+	public List<ProductVO> selectProductLike(MemberVO vo) {
+		List<ProductVO> list = null;
+		list = productDao.selectProductLike(vo);
+	 	return list;
+		
+	}
 
 	
 

@@ -1,4 +1,32 @@
 //-----------------------------// 좋아요 여부 //--------------------------------------------//
+	/*
+	$(".no").each(function(){
+		let pno = $(this).find(".pno").val();
+		let uno = $(this).find(".uno").val();
+		
+		console.log("pno : "+pno);
+		console.log("uno : "+uno);
+			$.ajax({
+			
+			type:"GET",
+			url:"/product/heartSel",
+			data:{p_no:pno,u_no:uno},
+			success:function(data){
+				let result = $(data)[33]
+			console.log(result)
+			
+			
+			$(".heartForm").html(result)
+			}
+		
+		
+			
+		})
+	
+		
+		
+	})*/
+	
 
 
 $(".heart").each(function() {
@@ -12,21 +40,24 @@ $(".heart").each(function() {
 });
 
 $(".heart_con").click(function(){
+	 
 	if($(this).find(".heart").hasClass("0")){
 		let full = '<img id="full" src="/resources/images/common/heart/full.png"/>'
 	    
 		$(this).find(".heart").html(full);
 	    $(this).find(".heartForm").find(".like").val(1);
+	    console.log($(this).find(".heartForm").find(".u").val())
 	    
 	    $(this).find(".heart").removeClass().addClass("heart 1")
 	    
-	    
+	   
 	    
 	    let heartForm = $(this).find(".heartForm");
 		  $.ajax({
 		        type: "GET",
 		        url: "/product/prod_like_in",
 		        data: heartForm.serialize(),
+		        dataType:"json",
 		        success: function(data) {
 					console.log(data)
 		        },
