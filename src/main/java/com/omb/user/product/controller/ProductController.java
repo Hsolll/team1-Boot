@@ -206,7 +206,7 @@ public class ProductController {
 		return "/user/product/productCategoryListView";
 	}
 	
-	@GetMapping(value="productDetail")
+	@GetMapping(value="/productDetail")
 	public String selectProductDetail(HttpSession session, Model model,int p_no,ProductReplyVO prvo) {
 		 // 세션 정보 사용
 		
@@ -220,6 +220,7 @@ public class ProductController {
 		log.info("selectProductDetail() 메서드 실행성공");
 		
 		ProductVO detail = productService.selectProductDetail(p_no);
+		log.info("p_no :"+p_no);
 		detail.setAmount(8);
 		
 		
@@ -227,6 +228,7 @@ public class ProductController {
 		
 		model.addAttribute("detail", detail);
 		
+		log.info("detail:"+detail);
 		List<ProductReplyVO> list = productReplyService.replySelect(prvo);
 		
 		model.addAttribute("list",list);

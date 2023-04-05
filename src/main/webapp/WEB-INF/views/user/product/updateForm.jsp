@@ -275,7 +275,13 @@
 						
 						<div class="sts">
 							<div class="titl">
-								<input type=hidden class="ma" name="p_status" id="p_status" value="판매중" value="${update.p_status}"/>
+								<div id="local">
+									<div>거래상태 변경</div>
+									<select id="p_status" name="p_status">
+										<option value="판매중" selected>판매중</option>
+										<option value="거래완료">거래완료</option>
+									</select>
+								</div>
 							</div>
 						</div>
 						

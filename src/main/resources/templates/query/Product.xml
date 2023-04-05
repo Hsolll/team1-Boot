@@ -73,9 +73,9 @@
 	<insert id="insertProduct" parameterType="product">
 	    
 	    INSERT INTO TB_USER_PRODUCT
-	        (P_NO,U_NO,P_TITLE,P_NAME,P_PRICE,P_STATUS,P_CONTENT,P_LOCAL,TRANS_METHOD,p_thumb,p_file,P_CATE,p_adm_per)
+	        (P_NO,U_NO,P_TITLE,P_NAME,P_PRICE,P_STATUS,P_CONTENT,P_LOCAL,TRANS_METHOD,p_thumb,p_file,P_CATE)
 	    VALUES
-	        (TB_USER_PRODUCT_SEQ.NEXTVAL,#{u_no},#{p_title},#{p_name},#{p_price},#{p_status},#{p_content},#{p_local},#{trans_method},#{p_thumb},#{p_file},#{p_cate},#{p_adm_per})
+	        (TB_USER_PRODUCT_SEQ.NEXTVAL,#{u_no},#{p_title},#{p_name},#{p_price},#{p_status},#{p_content},#{p_local},#{trans_method},#{p_thumb},#{p_file},#{p_cate})
 	</insert>
 	
 	<insert id="insertProductLike" parameterType="product">
