@@ -82,12 +82,17 @@ public class SafeProductController {
 		SafeProductVO detail = safeProductService.selectSafeProductDetail(spvo);
 		model.addAttribute("detail", detail);
 		log.info("상품 가격 : " + detail.getSp_price());
-		// 주소 정보 조회
+		
+		// 회원정보 세션에서 꺼내오기
 		MemberVO mvo = (MemberVO)session.getAttribute("memberLogin");
 		
+		// 회원 기본 배송지 조회
 		MemberAddressVO addressvo =  memberAddressService.memberAddressInfo(mvo);
 		model.addAttribute("address", addressvo);
 		
+		// 회원 배송지 목록 조회
+		List<MemberAddressVO> addressList = memberAddressService.memberAddressInfoAll(mvo);
+		model.addAttribute("addressList", addressList);
 		
 		return "user/safeProduct/safeProductOrder";
 	}

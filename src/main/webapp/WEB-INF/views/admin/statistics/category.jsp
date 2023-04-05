@@ -29,6 +29,7 @@
 		}
   	</style>
     <script type="text/javascript">
+    
     	function template(cate, mon1, mon2, mon3, mon4, mon5, mon6, mon7, mon8, mon9, mon10, mon11, mon12, total){
     		let $tbody = $(".cate-content");
     		let $tb = $("#item").clone().removeAttr("id");
@@ -52,7 +53,11 @@
     		
     	}
 		$(function(){
-			
+			let admin = "<c:out value='${adminLogin.a_no }'/>";
+			if(admin == ""){
+				alert("잘못된 접근입니다.");
+				location.href="/admin/login";
+			}
 			$.ajax({
 				url : "/admin/statistics/allCategory",
 				type:"get",
@@ -223,6 +228,7 @@
 	</script>
 	</head>
 	<body>
+	<c:if test='${not empty adminLogin }'>
 		<div class="container-fluid  dashboard-content">
 			<!-- ============================================================== -->
                     <!-- simple pie chart  -->
@@ -306,5 +312,6 @@
                     <!-- end simple pie chart  -->
                     <!-- ============================================================== -->
 		</div>
+		</c:if>
 	</body>
 </html>

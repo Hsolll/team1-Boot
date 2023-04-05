@@ -14,7 +14,11 @@
 	$(function(){	
 			$(".dashboard-wrapper .page-header h1").html("공지관리");
 			/* 검색 후 검색 대상과 검색 단어 출력 */
-			let msg = "<c:if test='${empty adminLogin}'>관리자만 이용할 수 있습니다.</c:if>";
+			let admin = "<c:out value='${adminLogin.a_no }'/>";
+			if(admin == ""){
+				alert("잘못된 접근입니다.");
+				location.href="/admin/login";
+			}
 			let word="<c:out value='${noticeVO.keyword}' />";  // 보여주기 태그
 			let value="";
 			if(word!=""){ 
@@ -60,11 +64,8 @@
 			
 			/* 글쓰기 버튼 클릭 시 처리 이벤트 */		
 			$("#insertFormBtn").click(function(){
-				if(msg!=""){
-					alert("로그인을 진행해주세요.");
-				}else{
-					location.href = "/admin/noticeWriteForm"; 
-				}
+				location.href = "/admin/noticeWriteForm"; 
+				
 			});
 			
 			
@@ -73,15 +74,12 @@
 				let an_no =  $(this).parents("tr").attr("data-num");	
 				$("#an_no").val(an_no);
 				console.log("글번호 : "+an_no);
-				if(msg!=""){
-					alert("로그인을 진행해주세요.");
-				}else{ 
+				
 				$("#detailForm").attr({
 					"method":"get",
 					"action":"/admin/noticeDetail"
 				});
 					$("#detailForm").submit();
-				}
 			});
 			
 			$(".page-item a").click(function(e){
@@ -110,6 +108,7 @@
 
 <body>
 <%-- ============== container 시작 ====================  --%>
+<c:if test='${not empty adminLogin }'>
 <div> 
 	<form id="detailForm">
 		<input type="hidden" id="an_no" name="an_no" />
@@ -143,10 +142,10 @@
 					<th data-value="an_no" class="order text-center col-md-1" >공지글 번호</th>
 					<th class="text-center col-md-1">구분</th>
 					<th class="text-center col-md-1">작성자</th>
-					<th class="text-center col-md-2">제목</th>
-					<th class="text-center col-md-3">등록일</th>
-					<th data-value="an_cnt" class="order text-center col-md-1">조회수</th>
-					<th class="text-center col-md-3">이미지</th>
+					<th class="text-center col-md-4">제목</th>
+					<th class="text-center col-md-1">등록일</th>
+					<th data-value="an_cnt" class="order text-center col-md-2">조회수</th>
+					<th class="text-center col-md-2">이미지</th>
 				</tr>
 			</thead>
 	 		<tbody id="list" class="table-striped" >
@@ -211,5 +210,6 @@
 		</nav>
 </div>
 <%-- ============== container 종료 ====================  --%>
+</c:if>
 </body>
 </html>

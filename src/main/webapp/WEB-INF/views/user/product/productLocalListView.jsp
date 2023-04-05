@@ -15,48 +15,54 @@ $(".p_no").click(function(){
 </script>
 </head>
 <body>
-	<table>
-		<c:forEach var="like" items="${like }">
-			<input type='hidden' class="likeList" value="${like.prod_like}"/>
-		</c:forEach>
-		<c:choose>
-			<c:when test="${not empty plist}">
-				<c:forEach var="product" items="${plist}">
-				<tr>
-						<td class="thumb">
-							<div class="p_status">${product.p_status}</div>
-	          	<div class="heart_con">
-	         	 		<form class="heartForm">
-					                <input type="text" name="u_no" class="he u" value="${member.u_no}" readonly/>
-					                <input type="text" name="p_no" class="he p" value="${product.p_no}" readonly/>
-				              	</form>
-			        	 	<div class="heart ${product.prod_like }">
-			            	</div>
-			           </div>
-			            <c:if test="${not empty product.p_thumb}">
-			              <img class="thumb_c p_no" id="${product.p_no}" src="/uploadStorage/product/thumbnail/${product.p_thumb}"/>
-			            </c:if>
-			            <c:if test="${empty product.p_thumb}">
-			              <img class="p_no" id="${product.p_no}" src="/resources/images/common/noimage.png"/>
-			            </c:if>
-			            <div class="p_info">
-			            	<div class="tit">
-				              <div class="p_title" id="${product.p_no}">${product.p_title}</div>
-					              <div class="p_price">
-				               	 <c:if test="${product.p_price == 0}">무료나눔</c:if>
-				               	 <c:if test="${product.p_price != 0}">${product.p_price}원</c:if>
-			             	  </div>
-							</div>
-						</div>
-					</td>
-				</tr>
-				</c:forEach>
-			</c:when>
-			<c:otherwise>
-				<p>상품이 존재하지 않습니다</p>
-			</c:otherwise>
-		</c:choose>
-	</table>
+<ul class="prdList">
+  	<c:forEach var="like" items="${like }">
+		<input type='hidden' class="likeList" value="${like.prod_like}"/>
+  	</c:forEach>
+     <c:choose>
+       <c:when test="${not empty plist}">
+         <c:forEach var="product" items="${plist}">
+           <li>
+              <div class="heart_con">
+         	 		<form class="heartForm">
+		                <input type="text" name="u_no" class="he u" value="${member.u_no}" readonly/>
+		                <input type="text" name="p_no" class="he p" value="${product.p_no}" readonly/>
+	              	</form>
+        	 		<div class="heart ${product.prod_like }">
+            		</div>
+           </div>
+            <a href="/">
+               <div class="imgBox">
+                  <c:if test="${not empty product.p_thumb}">
+                          <img class="thumb_c p_no" id="${product.p_no}" src="/uploadStorage/product/thumbnail/${product.p_thumb}"/>
+                     </c:if>
+                     <c:if test="${empty product.p_thumb}">
+                          <img class="p_no" id="${product.p_no}" src="/resources/images/common/noimage.png"/>
+                     </c:if>
+
+               </div>
+               <div class="txtArea">
+                  <ul>
+                     <li class="prdName" id="${product.p_no}">${product.p_title}</li>
+                     <li class="subName">${product.p_status}</li>
+                     <li class="prdPrice">
+                        <c:if test="${product.p_price == 0}">무료나눔</c:if>
+                        <c:if test="${product.p_price != 0}">
+                   			<fmt:formatNumber value="${product.p_price}" groupingUsed="true"/>
+                   			<em>원</em>
+                        </c:if>
+                     </li>
+                  </ul>
+               </div>   
+            </a>
+         </li>
+         </c:forEach>
+       </c:when>
+       <c:otherwise>
+         <p>상품이 존재하지 않습니다</p>
+       </c:otherwise>
+     </c:choose>
+   </ul>	
 	<%-- =================== 페이징 출력 시작 (클라이언트 페이징 소스 그대로 가져오기) ============== --%>
 	<div class="text-center">
 		<ul class="pagination">

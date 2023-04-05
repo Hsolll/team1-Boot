@@ -117,6 +117,12 @@
 		UPDATE TB_USER_SAFE_PRODUCT SET SP_STATUS = '판매완료' where SP_NO = #{sp_no}
 	</update>
 	
+
+	<select id="selectsafeProductCnt" parameterType="safeProduct" resultType="int">
+		SELECT COUNT(*) 
+		FROM TB_USER_SAFE_PRODUCT
+	</select>
+
 	
 	<!-- 안심상품 등록 쿼리문 -->
 	<insert id="insertSafeProduct" parameterType="safeProduct">
@@ -189,6 +195,15 @@
 		                WHERE SP_NO = #{sp_no})
 	</update>
 	
-	
-
+	<select id="selectSproductList" resultType="safeProduct">
+		SELECT 
+		    SP_NO, A.U_NO, U_ID, U_NAME, P_NO, 
+		    (SELECT P_NAME FROM TB_USER_PRODUCT C WHERE C.P_NO = A.P_NO) AS P_NAME, 
+		    SP_TITLE, SP_NAME, SP_PRICE, 
+		    SP_CONTENT, TO_CHAR(SP_CREATED_AT, 'YYYY-MM-DD') AS SP_CREATED_AT, SP_PWD, SP_STATUS
+		FROM TB_USER_SAFE_PRODUCT A
+		INNER JOIN TB_USER B
+		    ON A.U_NO = B.U_NO
+		ORDER BY SP_NO
+	</select>
 </mapper>

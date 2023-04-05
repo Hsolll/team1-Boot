@@ -110,5 +110,10 @@ public class AdmNoticeServiceImpl implements AdmNoticeService {
 		return list;
 	}
 
+	@Override
+	public int eventListCnt(AdmNoticeVO nvo) {
+		return admNoticeDao.eventListCnt(nvo);
+	}
+
 
 }

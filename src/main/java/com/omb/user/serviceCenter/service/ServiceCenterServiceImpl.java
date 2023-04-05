@@ -88,6 +88,13 @@ public class ServiceCenterServiceImpl implements ServiceCenterService {
 		return serviceMyPageList;
 	}
 
+	@Override
+	public int selectNoReplyCnt(ServiceCenterVO vo) {
+		 int result = 0;
+		 result =serviceDao.selectNoReplyCnt(vo); 
+		return result;
+	}
+
 	
 
 }

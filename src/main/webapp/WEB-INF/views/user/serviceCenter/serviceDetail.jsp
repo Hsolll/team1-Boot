@@ -64,18 +64,13 @@
 						<form id="update" name="update" >
 							<input type="hidden" id="sc_no" name="sc_no" value=${serviceDetail.sc_no }>
 						</form>
-						<div class="btnArea text-right">
-							<button type="button" id="updateButton" class="btn btn_default">수정하기</button>
-							<button type="button" id="delButton" class="btn btn_default">삭제하기</button>
-							<button type="button" class="btn btn_default listBtn">목록보기</button>
-						</div>
 						<table class="table table-bordered thBgGray">
-						<colgroup>
-							<col style="width: 14%;">
-							<col>
-							<col style="width: 14%;">
-							<col>
-						</colgroup>
+							<colgroup>
+								<col style="width: 14%;">
+								<col>
+								<col style="width: 14%;">
+								<col>
+							</colgroup>	
 							<tbody>
 								<tr>
 									<th>작성자</th>
@@ -85,7 +80,9 @@
 								</tr>
 								<tr>
 									<th>제목</th>
-									<td colspan="3" class="text-left">${serviceDetail.sc_title }</td>
+									<td class="text-left">${serviceDetail.sc_title }</td>
+									<th>조회수</th>
+									<td class="text-left">${serviceDetail.sc_readcnt }</td>
 								</tr>
 								<tr class="table-tr-height">
 									<th style="vertical-align: middle;">내용</th>
@@ -93,6 +90,11 @@
 								</tr>
 							</tbody>
 						</table>
+						<div class="btnArea text-right">
+							<button type="button" id="updateButton" class="btn btn_default">수정하기</button>
+							<button type="button" id="delButton" class="btn btn_default">삭제하기</button>
+							<button type="button" class="btn btn_default listBtn">목록보기</button>
+						</div>
 					</div>
 				</div>
 			</div>

@@ -4,20 +4,20 @@
 
 	<!-- 회원가입 -->
 	<insert id="signUp" parameterType="member">
-	<selectKey keyProperty="u_no" resultType="int" order="BEFORE">
-		select tb_user_seq.nextval from dual
-	</selectKey>
+		<selectKey keyProperty="u_no" resultType="int" order="BEFORE">
+			select tb_user_seq.nextval from dual
+		</selectKey>
 		insert into tb_user(u_no , u_id , u_nick , u_name , u_pwd , u_email , u_phone , u_grade)
-		values(#{u_no} , #{u_id} , #{u_nick} , #{u_name} , #{u_pwd} ,#{u_email} ,#{u_phone} , '1')
+		values(#{u_no}, #{u_id}, #{u_nick}, #{u_name}, #{u_pwd}, #{u_email}, #{u_phone}, '1')
 	</insert>
 	
 	<!-- 회원가입 주소-->
 	<insert id="addressInsert" parameterType="member">
-	<selectKey keyProperty="add_no" resultType="int" order="BEFORE">
-		select tb_user_address_info_seq.nextval from dual
-	</selectKey>
-		insert into tb_user_address_info(add_no , u_no , zip , address , sub_address)
-		values(#{add_no} , #{u_no} ,#{zip},#{address} ,  #{sub_address})
+		<selectKey keyProperty="add_no" resultType="int" order="BEFORE">
+			select tb_user_address_info_seq.nextval from dual
+		</selectKey>
+		insert into tb_user_address_info(add_no, u_no, zip, address, sub_address)
+		values(#{add_no}, #{u_no}, #{zip}, #{address}, #{sub_address})
 	</insert>
 	
     

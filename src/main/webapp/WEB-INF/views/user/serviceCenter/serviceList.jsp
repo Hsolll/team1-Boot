@@ -55,12 +55,15 @@
 		$(".goDetail").click(function(){
 			let sc_no = $(this).parents("tr").attr("data-no");
 			$("#sc_no").val(sc_no);
-			
-			$("#detailForm").attr({
-				"method":"get",
-				"action":"/serviceCenter/servicePwdConfirm"
-			});
-			$("#detailForm").submit();
+			if(msg!=""){
+				alert("로그인을 진행해주세요.");
+			} else{				
+				$("#detailForm").attr({
+					"method":"get",
+					"action":"/serviceCenter/servicePwdConfirm"
+				});
+				$("#detailForm").submit();
+			}
 		});
 		
 		$(".replyDetail").click(function(){

@@ -6,6 +6,7 @@
 		<typeAlias type="com.omb.user.safeProduct.vo.SafeProductVO" alias="safeProduct" />
 		<typeAlias type="com.omb.user.payment.vo.PaymentVO" alias="payment" />
 		<typeAlias type="com.omb.user.orderInfo.vo.OrderInfoVO" alias="orderinfo" />
+		<typeAlias type="com.omb.admin.depositInfo.vo.AdmDepositInfoVO" alias="depositInfo"/>
 		
 		<typeAlias type="com.omb.admin.member.vo.AdmMemberVO" alias="admmember"/>
 		<typeAlias type="com.omb.user.member.vo.MemberVO" alias="member"/>
@@ -22,7 +23,7 @@
 
 		<typeAlias type="com.omb.admin.notice.vo.AdmNoticeVO" alias="admnotice"/>
 
-
+		<typeAlias type="com.omb.user.community.vo.UserCommunityVO" alias="community"/>
 
 		<typeAlias type="com.omb.user.product.vo.ProductVO" alias="product"/>
 		<typeAlias type="com.omb.user.productReply.vo.ProductReplyVO" alias="pReply"/>

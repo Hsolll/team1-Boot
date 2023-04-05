@@ -1,9 +1,13 @@
 package com.omb.admin.depositInfo.vo;
 
+import com.omb.common.vo.CommonVO;
+
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
-public class AdmDepositInfoVO {
+@EqualsAndHashCode(callSuper=false)
+public class AdmDepositInfoVO extends CommonVO{
 	
 	private int dep_no;		// 입금정보 테이블 고유번호
 	private int o_no;		// 주문 테이블 고유번호

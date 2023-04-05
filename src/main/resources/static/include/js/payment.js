@@ -6,8 +6,20 @@ $(function() {
 	var IMP = window.IMP;
 	IMP.init("imp54405822");
 
-
-	$(".content_wrap .page-header h1").html("주문/결제");
+ 	let name = $("#sp_name").text();
+    let price = $("#sp_price").text().replace(',', '');
+    let email = $("#u_email").text();
+    let buyer = $("input[name='receiver']").val();
+    let tel = $("input[name='receiver_tel']").val();
+    
+    let address = $("input[name='address1']").val() + ", " + $("input[name='address2']").val();
+    console.log("상품명 : " + name);
+    console.log("가격 : " + price);
+    console.log("이메일 : " + email);
+    console.log("구매자 : " + buyer);
+    console.log("연락처 : " + tel);
+    console.log("우편번호 : " + zip)
+    console.log("주소 : " + address);
 
 	$("#buy_btn").click(function() {	// 결제하기 버튼 클릭 시 결제처리 함수 호출
 
@@ -17,18 +29,21 @@ $(function() {
 		} else {
 			// 배송지 정보를 신규로 작성한 경우 주소 테이블에 정보 추가
 			if($("input:radio[id='new']").is(":checked")){	// 배송지 정보를 새로입력 선택 시
-				let add_status = "신규배송지";
+				let add_name = $("input[name='add_name']").val();
 				let u_no = $("input[name='u_no']").val();
+				let zip = $("input[name='zip']").val();
+				let address = $("input[name='address1']").val();
+				let sub_address = $("input[name='address2']").val();
 				$.ajax({
 		    		url: "/address/insert", 
 		    		type: 'POST',
 		    		dataType: 'text',
 		    		data: {
 						u_no : u_no,
-			    		zip : rsp.imp_uid,
-			    		address : rsp.merchant_uid,
-			    		sub_address : rsp.buyer_name,
-			    		add_status : add_status
+			    		zip : zip,
+			    		address : address,
+			    		sub_address : sub_address,
+			    		add_name : add_name
 		    		},
 		    		success : function(result){
 						

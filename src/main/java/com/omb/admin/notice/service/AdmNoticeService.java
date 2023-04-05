@@ -14,4 +14,5 @@ public interface AdmNoticeService {
 	public List<AdmNoticeVO> noticeList(AdmNoticeVO nvo); /* 검색 포함 리스트 */
 	public int noticeListCnt(AdmNoticeVO nvo);
 	public List<AdmNoticeVO> eventList(AdmNoticeVO nvo);
+	public int eventListCnt(AdmNoticeVO nvo);
 }

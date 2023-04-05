@@ -13,4 +13,14 @@ public interface StatisticsDAO {
 	public List<Map<String, Object>> selectAllCategory();
 	public StatisticsVO selectDate(StatisticsVO vo);
 	public List<Map<String, Object>> selectCategory();
+	
+	// 일반 상품
+	public List<Map<String, Integer>> selectProduct();
+	// 안심거래 결제내역
+	public List<Map<String, Integer>> selectAmount();
+	
+	public List<Map<String, Object>> selectLocal();
+	
+	public List<Map<String, Object>> selectUser();
+	public List<Map<String, Object>> selectOrder();
 }

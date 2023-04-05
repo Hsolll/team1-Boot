@@ -38,7 +38,7 @@
 		</style>
 	</head>
 	<body>
-		<div class="contentContainer container">
+		<div class="contentContainer">
 			 <div class="text-center"><h2>글 등록</h2></div> 
 			
 			<form name="insertForm" id="insertForm">
@@ -46,7 +46,7 @@
 				<tbody>
 					<tr>
 						<td>작성자</td>
-						<td class="text-left"><input type="text" id="a_no" name="a_no" value="${adminLogin.a_no }"></td>
+						<td class="text-left"><input type="text" id="a_no" name="a_no" value="${adminLogin.a_name }"></td>
 					</tr>
 					<tr>
 						<td>제목</td>
@@ -58,10 +58,10 @@
 					</tr>
 				</tbody>
 			</table>
-				<div class="text-left inline">
-					<button id="addBtn" type="button" class="btn btn-success">등록하기</button>
-					<button id="cancelBtn" type="button" class="btn btn-success">다시하기</button>
-					<button id="listBtn" type="button" class="btn btn-success">목록</button>
+				<div class="btnArea">
+					<button id="addBtn" type="button" class="btn btn-dark">등록하기</button>
+					<button id="cancelBtn" type="button" class="btn btn-dark">다시하기</button>
+					<button id="listBtn" type="button" class="btn btn-dark">목록</button>
 				</div>
 			</form>
 		</div>

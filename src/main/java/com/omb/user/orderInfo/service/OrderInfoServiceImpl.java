@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.omb.user.member.vo.MemberVO;
 import com.omb.user.orderInfo.dao.OrderInfoDAO;
 import com.omb.user.orderInfo.vo.OrderInfoVO;
 import com.omb.user.payment.vo.PaymentVO;
@@ -35,9 +34,9 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 	}
 
 	@Override
-	public List<OrderInfoVO> sellOrderInfoList(MemberVO mvo) {
+	public List<OrderInfoVO> sellOrderInfoList(OrderInfoVO ovo) {
 		List<OrderInfoVO> sellList = null;
-		sellList = orderInfoDAO.sellOrderInfoList(mvo);
+		sellList = orderInfoDAO.sellOrderInfoList(ovo);
 		return sellList;
 	}
 
@@ -91,6 +90,12 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 	public int buyOrderInfoCnt(OrderInfoVO ovo) {
 		
 		return orderInfoDAO.buyOrderInfoCnt(ovo);
+	}
+
+	@Override
+	public int sellOrderInfoCnt(OrderInfoVO ovo) {
+		
+		return orderInfoDAO.sellOrderInfoCnt(ovo);
 	}
 	
 	

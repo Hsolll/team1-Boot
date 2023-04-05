@@ -42,5 +42,9 @@
 				<put-attribute name="main" value="/WEB-INF/views/admin/statistics/{1}.jsp" />
 				<put-attribute name="title" value="통계 관리" />
 		</definition>
+		<definition name="admin/admCommunity/*" extends="basic">
+				<put-attribute name="main" value="/WEB-INF/views/admin/admCommunity/{1}.jsp" />
+				<put-attribute name="title" value="통계 관리" />
+		</definition>
 	
 </tiles-definitions>

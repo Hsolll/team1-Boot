@@ -13,25 +13,10 @@
       <script type="text/javascript">
          $(function(){
             
-            let name = $("#sp_name").text();
-            let price = $("#sp_price").text().replace(',', '');
-            let email = $("#u_email").text();
-            let buyer = $("input[name='receiver']").val();
-            let tel = $("input[name='receiver_tel']").val();
-            let zip = $("input[name='zip']").val();
-            let address = $("input[name='address1']").val() + ", " + $("input[name='address2']").val();
-            console.log("상품명 : " + name);
-            console.log("가격 : " + price);
-            console.log("이메일 : " + email);
-            console.log("구매자 : " + buyer);
-            console.log("연락처 : " + tel);
-            console.log("우편번호 : " + zip)
-            console.log("주소 : " + address);
-            
-            
-            
             $("input[id='new']").click(function(){
                console.log("new 클릭");
+               $("#addName").css("display", "table-row");
+               $("#addList").css("display", "none");
                
                $("input[name='receiver']").val("");
                $("input[name='receiver_tel']").val("");
@@ -41,8 +26,51 @@
                
             });
             
+            $("input[id='other']").click(function(){
+            	$("#addName").css("display", "none");
+            	$("#addList").css("display", "table-row");
+            	$("input[name='receiver']").val("");
+                $("input[name='receiver_tel']").val("");
+                $("input[name='zip']").val("");
+                $("input[name='address1']").val("");
+                $("input[name='address2']").val("");
+            });
+            
+            /* option 선택 시 이벤트 */
+			$("#selectBox").change(function(){
+				console.log($(this).val()); //value값 가져오기
+				console.log("value2 : " + $("#selectBox option:selected").val());
+				
+				let add_no = $(this).val();
+				
+				$.ajax({
+		    		url: "/address/findAddress?add_no=" + add_no, 
+		    		type: 'get',
+					dataType : "text",
+		    		success : function(result){
+						console.log(result);
+						
+						let obj = JSON.parse(result);
+						
+						let zip = obj.zip;
+						let address1 = obj.address;
+						let address2 = obj.sub_address;
+						
+						$("input[name='zip']").val(zip);
+						$("input[name='address1']").val(address1);
+						$("input[name='address2']").val(address2);
+					},
+					error : function(xhr, textStatus, errorThrown) {
+						alert("실패");
+					}
+		    	});
+			});
+            
+            
             $("input[id='same']").click(function(){
                console.log("same 클릭");
+               $("#addName").css("display", "none");
+               $("#addList").css("display", "none");
                
                $("input[name='receiver']").val("${memberLogin.u_name}");
                $("input[name='receiver_tel']").val("${memberLogin.u_phone}");
@@ -155,7 +183,9 @@
 			            </tr>
 			            <tr>
 			                <th>연락처</th>
-			                <td id="u_tel">${memberLogin.u_phone}</td>
+			                <td id="u_tel">
+			                	${fn:substring(memberLogin.u_phone,0,3)}-${fn:substring(memberLogin.u_phone,3,7)}-${fn:substring(memberLogin.u_phone,7,11)}
+			                </td>
 			            </tr>
 			            <tr>
 			                <th>이메일</th>
@@ -185,6 +215,34 @@
 						            <label for="same" class="mr10">주문자정보와 동일</label>
 						            <input type="radio" id="new" name="delevery_info">
 						            <label for="new" class="mr10">새로입력</label>
+						            <input type="radio" id="other" name="delevery_info">
+						            <label for="new" class="mr10">배송지목록</label>
+						        </td>
+						    </tr>
+						    <tr id="addName" style="display: none">
+						        <th>배송지 명</th>
+						        <td>
+						            <input type="text" name="add_name" class="w200" maxlength="10" />
+						        </td>
+						    </tr>
+						    <tr id="addList" style="display: none">
+						        <th>배송지 목록</th>
+						        <td>
+						            <select id="selectBox">
+						            	<option>배송지를 선택해주세요</option>
+                                    	<c:choose>
+											<c:when test="${ not empty addressList }">
+												<c:forEach var="addressList" items="${ addressList }" varStatus="status">
+													<option value="${addressList.add_no}">
+														${addressList.add_name}
+													</option>
+												</c:forEach>
+											</c:when>
+											<c:otherwise>
+												<option>등록된 배송지가 없습니다</option>
+											</c:otherwise>
+										</c:choose>
+						            </select>
 						        </td>
 						    </tr>
 						    <tr>

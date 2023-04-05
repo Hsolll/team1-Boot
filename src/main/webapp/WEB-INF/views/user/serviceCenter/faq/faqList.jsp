@@ -79,9 +79,24 @@
 			<form id="detailForm">
 				<input type="hidden" id="f_no" name="f_no">
 			</form>
-			
+			<div id="faqSearch" class="text-right">
+				<form id="f_search" name="f_search" class="form-inline">
+					<input type="hidden" name="pageNum" id="pageNum" value="${pageMaker.cvo.pageNum }">
+					<input type="hidden" name="amount" id="amount" value="${pageMaker.cvo.amount }">
+					<div class="form-group">
+						<label>검색조건</label>
+						<select id="search" name="search" class="form-control">
+							<option value="all">전체</option>
+							<option value="f_title">제목</option>
+							<option value="f_content">내용</option>
+						</select>
+						<input type="text" name="keyword" id="keyword" value="검색어를 입력하세요" class="form-control">
+						<button type='button' id="searchData" class="btn btn_success">검색</button>
+					</div>
+				</form>
+			</div>
 			<div id="faqList" class="table-height">
-				<table summary="FAQ 리스트" class="table table-striped">
+				<table summary="FAQ 리스트" class="table table-striped" style="margin-top: 30px;">
 					<thead>
 						<tr>
 							<th data-value="f_no" class="order text-center col-md-1">글 번호</th>
@@ -142,22 +157,7 @@
 				</ul>
 			</div>
 			
-			<div id="faqSearch" class="text-right">
-				<form id="f_search" name="f_search" class="form-inline">
-					<input type="hidden" name="pageNum" id="pageNum" value="${pageMaker.cvo.pageNum }">
-					<input type="hidden" name="amount" id="amount" value="${pageMaker.cvo.amount }">
-					<div class="form-group">
-						<label>검색조건</label>
-						<select id="search" name="search" class="form-control">
-							<option value="all">전체</option>
-							<option value="f_title">제목</option>
-							<option value="f_content">내용</option>
-						</select>
-						<input type="text" name="keyword" id="keyword" value="검색어를 입력하세요" class="form-control">
-						<button type='button' id="searchData" class="btn btn_success">검색</button>
-					</div>
-				</form>
-			</div>
+			
 		</div>
 	</body>
 </html>

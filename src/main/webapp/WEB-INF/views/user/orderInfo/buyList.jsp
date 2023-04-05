@@ -25,6 +25,22 @@
 					alert(comment);
 				}
 				
+				$("#testBtn").click(function(){
+					$.ajax({
+			    		url: "/delevery/codeSearch",
+						dataType : "text",
+			    		success : function(result){
+							console.log(result);
+							
+							let obj = JSON.parse(result);
+							
+						},
+						error : function() {
+							alert("실패");
+						}
+			    	});
+				});
+				
 				
 				$(".paymentCancelBtn").click(function(){
 					
@@ -123,7 +139,7 @@
 			<%-- ===================== 검색 기능 종료 ===================== --%>
 		
 			
-			<%-- ================= 판매목록 보여주기 시작 ================= --%>
+			<%-- ================= 구매목록 보여주기 시작 ================= --%>
             <div class="sell_list mt30">
             	<div class="location">
 	                <span class="location_right">
@@ -223,5 +239,6 @@
 			<%-- ===================== 페이징 출력 종료 ===================== --%>
 			
 		</div>
+		<button type="button" id="testBtn">버튼</button>
 	</body>
 </html>

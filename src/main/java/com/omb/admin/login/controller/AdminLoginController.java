@@ -25,16 +25,16 @@ public class AdminLoginController {
 	@Setter(onMethod_= @Autowired)
 	private AdminLoginService adminLoginService;
 	
+	
 	@ModelAttribute
 	public AdminVO admin() {
 		return new AdminVO();
 	}
 	
 	@RequestMapping("/main")
-	public String adminMain() {
+	public void adminMain() {
 		log.info("관리자 메인 화면 호출...");
 		
-		return "admin/main/adminMain";
 	}
 	
 	@GetMapping("/login")
@@ -64,4 +64,5 @@ public class AdminLoginController {
 		sessionStatus.setComplete();
 		return "redirect:/admin/login";
 	}
+	
 }

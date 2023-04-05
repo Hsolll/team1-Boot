@@ -34,12 +34,53 @@
 		<div class="menu_content">
 			<div class="omb_main">
 				<ul>
-					<li id="ml1"><a href="/notice/noticeList">공지사항</a></li>
+					<li id="ml1">
+						<a href="/notice/noticeList">공지사항</a>
+						<!-- 하위 메뉴 -->
+						<div id="sl1" class="sub_list">
+			                <ul class="nav">
+			                <li><a href="/notice/noticeList">공지사항</a></li>
+			                <li><a href="/notice/eventList">이벤트</a></li>
+			                </ul>
+			            </div>
+					</li>
 					<li><a href="/product/productList">중고마켓</a></li>
 					<li><a href="#">나눔마켓</a></li>
-					<li id="ml2"><a href="/safe/productList">안심거래</a></li>
-					<li id="ml3"><a href="#">커뮤니티</a></li>
-					<li id="ml4"><a href="/faq/faqList">고객센터</a></li>
+					<li id="ml2">
+						<a href="/safe/productList">안심거래</a>
+						<!-- 하위 메뉴 -->
+						<div id="sl2" class="sub_list">
+			                <ul class="nav">
+			                <li><a href="/safe/productList">상품보기</a></li>
+			                <li><a href="/safe/productInsertView">상품등록</a></li>
+			                <li><a href="/order/buyList">구매목록</a></li>
+			                <li><a href="/safe/productSell">판매등록목록</a></li>
+			                <li><a href="/order/sellList">판매주문관리</a></li>
+			                </ul>
+			            </div>
+					</li>
+					<li id="ml3">
+						<a href="/community/communityList?c_category=C">커뮤니티</a>
+						<div id="sl3" class="sub_list">
+			                <ul class="nav">
+			                <li><a href="/community/communityList?c_category=A">유아용품후기</a></li>
+			                <li><a href="/community/communityList?c_category=B">이유식레시피</a></li>
+			                <li><a href="/community/communityList?c_category=C">자유게시판</a></li>
+			                </ul>
+			            </div>
+					</li>
+					
+					
+					<li id="ml4">
+						<a href="/faq/faqList">고객센터</a>
+						<!-- 하위 메뉴 -->
+						<div id="sl4" class="sub_list">
+			                <ul class="nav">
+				                <li><a href="/faq/faqList">FAQ</a></li>
+				                <li><a href="/serviceCenter/serviceList">문의하기</a></li>
+			                </ul>
+			            </div>
+					</li>
 				</ul>
 				<div class="menu_search">
 					<form action="#">
@@ -49,37 +90,6 @@
 						</button>
 					</form>
 				</div>
-			</div>
-			<!-- 하위 메뉴 -->
-			<div class="omb_sub">
-				<div id="sl1" class="sub_list">
-	                <ul class="nav">
-	                <li><a href="/notice/noticeList">공지사항</a></li>
-	                <li><a href="/notice/eventList">이벤트</a></li>
-	                </ul>
-	            </div>
-	            <div id="sl2" class="sub_list">
-	                <ul class="nav">
-	                <li><a href="/safe/productList">상품보기</a></li>
-	                <li><a href="/safe/productInsertView">상품등록</a></li>
-	                <li><a href="/order/buyList">구매내역</a></li>
-	                <li><a href="/safe/productSell">판매내역</a></li>
-	                <li><a href="/order/sellList">판매자 주문내역</a></li>
-	                </ul>
-	            </div>
-	            <div id="sl3" class="sub_list">
-	                <ul class="nav">
-	                <li><a href="">유아용품후기</a></li>
-	                <li><a href="">이유식레시피</a></li>
-	                <li><a href="">자유게시판</a></li>
-	                </ul>
-	            </div>
-	            <div id="sl4" class="sub_list">
-	                <ul class="nav">
-	                <li><a href="/faq/faqList">FAQ</a></li>
-	                <li><a href="/serviceCenter/serviceList">문의하기</a></li>
-	                </ul>
-	            </div>
 			</div>
 		</div>
 	</div>
