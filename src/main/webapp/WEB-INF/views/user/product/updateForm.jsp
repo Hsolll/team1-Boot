@@ -29,6 +29,8 @@
 				alert("상세정보를 입력해주세요")
 			}else if(!checkForm("#file", "파일")){
 				alert("파일을 입력해주세요")
+			}else if(!checkForm("#trans_method", "거래방법")){
+				alert("거래방법 입력해주세요")
 			}else if(!checkForm("#p_local", "지역")){
 				alert("지역을 입력해주세요")
 			}else{
@@ -177,12 +179,12 @@
 </head>
 	<body>
 				<form id="insertConfirm">
-			<h2>새로운 게시물 등록하기</h2>
+			<h2>게시물 수정하기</h2>
 			<table >
 				<tr>
 					<td class="alls"> 
-						<div><input type="text" name="u_no" placeholder="유저번호" value="${member.u_no}"/></div>
-						<div><input type="text" name="p_no" placeholder="상품번호" value="${update.p_no}"/></div>
+						<div><input type="hidden" name="u_no" placeholder="유저번호" value="${member.u_no}"/></div>
+						<div><input type="hidden" name="p_no" placeholder="상품번호" value="${update.p_no}"/></div>
 						
 						
 						<div class="imgg">
@@ -234,7 +236,7 @@
 						<div class="md">
 							<div class="titl">거래방법</div>
 							<div>
-								<select class="mds" name="trans_method" class="ma" >
+								<select class="mds" id="trans_method" name="trans_method" class="ma" >
 								  <option value=""  selected>거래방법을 선택하세요</option>
 								  <option value="직거래+택배거래" >직거래+택배거래</option>
 								  <option value="직거래" >직거래</option>
@@ -273,17 +275,13 @@
 						
 						
 						
-						<div class="sts">
-							<div class="titl">
-								<div id="local">
-									<div>거래상태 변경</div>
-									<select id="p_status" name="p_status">
-										<option value="판매중" selected>판매중</option>
-										<option value="거래완료">거래완료</option>
-									</select>
-								</div>
-							</div>
-						</div>
+									<div class="st1" >
+										<div class="titl">거래상태 변경</div>
+										<select id="p_status" name="p_status">
+											<option value="판매중" selected>판매중</option>
+											<option value="거래완료">거래완료</option>
+										</select>
+									</div>
 						
 						
 						<div class="locc">

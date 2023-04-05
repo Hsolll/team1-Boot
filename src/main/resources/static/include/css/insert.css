@@ -125,3 +125,12 @@ input#price-input{
 #name.ma{
 	width:  100%;
 }
+#p_status{
+	color: rgb(121, 131, 146);
+	width: 100%;
+	font-size:20px;
+}
+.st1{
+	
+	width: 30%;
+}
