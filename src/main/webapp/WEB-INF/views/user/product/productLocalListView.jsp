@@ -77,7 +77,7 @@ $(".p_no").click(function(){
 			<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
 				<li class="paginate_button3 ${pageMaker.cvo.pageNum == num ? 'active':''}">
 					
-					<a href="#">${num}</a>
+					<a href="#" class="a">${num}</a>
 				</li>
 			</c:forEach>
 	
