@@ -9,6 +9,24 @@
     			box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
     			height: 34px;
         	}
+        	.close {
+        		position: absolute;
+			    top: 10px;
+			    right: 10px;
+        	}
+        	.insert_invoice {
+        		display: flex;
+       		    align-items: center;
+        		width: 100%;
+        		height: 70px;
+        	}
+        	#parcelSelect {
+        		display: inline-block;
+        		border: 1px solid #C9C9C9;
+        		outline: none;
+			    height: 30px;
+			    margin: 20px 10px;
+        	}
         </style>
         
         <script type="text/javascript" src="/resources/include/js/sellListSearch.js"></script>
@@ -22,28 +40,166 @@
 			keyword = "<c:out value='${data.keyword}' />";
 			
 			
-			/* 발송완료 버튼 클릭 시 주문상태 배송중으로 변경 
-			 * 추후 운송장 등록으로 변경 예정 */
+			/* 모달창에서 택배사 코드, 운송장번호 입력받기 */
+			$("#parcelSelect").change(function(){
+				let t_code = $("#parcelSelect option:selected").val();
+				console.log("t_code : " + t_code);
+				
+				let t_invoice = $("input[name='invoice']").val();
+				console.log("t_invoice : " + t_invoice);
+			});
+			
 			$(".sendBtn").click(function(){
 				let o_no = $(this).parents("tr").attr("data-num");
 				console.log("o_no = " + o_no);
 				
-				$("#o_no").val(o_no);
-				$("#f_data").attr({
-					"method":"get",
-					"action":"/order/send"
+				/* 발송완료 버튼 클릭 시 주문상태 배송중으로 변경 
+				 * 추후 운송장 등록으로 변경 예정 */
+				$("#sendButton").click(function(){
+					console.log("o_no = " + o_no);
+					
+					/* 모달창에서 택배사 코드, 운송장번호 입력받기 */
+					let t_code = $("#parcelSelect option:selected").val();
+					console.log("t_code : " + t_code);
+					
+					let t_invoice = $("input[name='invoice']").val();
+					console.log("t_invoice : " + t_invoice);
+					
+					$("#o_no").val(o_no);
+					$("#t_code").val(t_code);
+					$("#t_invoice").val(t_invoice);
+					
+					let value = JSON.stringify({
+						o_no : $("#o_no").val(),
+			    		t_code : $("#t_code").val(),
+			    		t_invoice : $("#t_invoice").val()
+					});
+					
+					$.ajax({
+			    		url: "/delivery/insertDelivery",
+			    		type: 'post',
+			    		headers : {
+							"Content-Type":"application/json"
+						},
+						dataType : "text",
+						data: value,
+			    		success : function(result){
+			    			if(result == "success"){
+								console.log("운송장 정보 저장에 성공했습니다.");
+								// 전송 후 입력값 초기화
+								$("#o_no").val("");
+								$("#t_code").val("");
+								$("#t_invoice").val("");
+			    			}else{
+			    				return;
+			    			}
+						},
+						error : function() {
+							alert("실패");
+						}
+			    	});
+					
+					$("#f_data").attr({
+						"method":"get",
+						"action":"/order/send"
+					});
+					$("#f_data").submit();
 				});
-				$("#f_data").submit();
+			});
+			
+			/* 배송조회 */
+			$("#parcelSearchBtn").click(function(){
+				let o_no = $(this).parents("tr").attr("data-num");
+				console.log("o_no = " + o_no);
+				$("#o_no").val(o_no);
+				
+				
+				$.ajax({
+		    		url: "/delivery/deliveryInfo?o_no=" + o_no, 
+		    		type: 'get',
+					dataType : "text",
+		    		success : function(result){
+						console.log(result);
+						
+						let obj = JSON.parse(result);
+						
+						let t_code = obj.t_code;
+						let t_invoice = obj.t_invoice;
+						let t_key = obj.t_key;
+						
+						$("input[name='t_code']").val(t_code);
+						$("input[name='t_invoice']").val(t_invoice);
+						$("input[name='t_key']").val(t_key);
+						
+						goSubmit();
+					},
+					error : function(xhr, textStatus, errorThrown) {
+						alert("실패");
+					}
+		    	});
+				
 			});
 			
 
 		});
+		
+		function goSubmit(){
+			let win = window.open('','newPopup','scrollbars=yes, width=480, height=1100');
+			let form = document.searchForm;
+			
+			form.action = "http://info.sweettracker.co.kr/tracking/4";
+			form.method = "post";
+			form.target = "newPopup";
+			form.submit();
+		}
 		</script>
 	</head>
 	<body>
+		<!-- Button trigger modal
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+		  	Launch demo modal
+		</button> -->
+	
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalCenterTitle">운송장등록</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+					  	</button>
+					</div>
+					<div class="modal-body">
+						<h4>운송장번호 등록하기</h4>
+						<div class="insert_invoice">
+					 	<select id="parcelSelect">
+					 		<option>택배사를 선택해주세요</option>
+					 		<option value="04">CJ대한통운</option>
+					 		<option value="05">한진택배</option>
+					 		<option value="08">롯대택배</option>
+					 		<option value="01">우체국택배</option>
+					 		<option value="06">로젠택배</option>
+					 		<option value="23">경동택배</option>
+					 		<option value="46">CU편의점택배</option>
+					 		<option value="24">GS편의점택배</option>
+					 	</select>
+					 	<input type="text" name="invoice" id="invoice" placeholder="운송장번호를 입력해주세요." class="w350" />
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+						<button type="button" class="btn btn-primary" id="sendButton">등록하기</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
 		<div class="container">
 			<form name="f_data" id="f_data">
 				<input type="hidden" id="o_no" name="o_no" />
+				<input type="hidden" id="t_code" name="t_code" />
+				<input type="hidden" id="t_invoice" name="t_invoice" />
 			</form>
 			
 			<%-- ===================== 검색 기능 시작 ===================== --%>
@@ -121,10 +277,10 @@
 										<td>
 											<c:choose>
 												<c:when test="${sellList.o_status eq '결제완료'}">
-													<button type="button" class="btn_swh sendBtn">발송완료</button>
+													<button type="button" class="btn_swh sendBtn" data-toggle="modal" data-target="#exampleModalCenter">운송장등록</button>
 												</c:when>
 												<c:when test="${sellList.o_status eq '배송중'}">
-													<span style="font-size: 13px;">발송완료</span>
+													<button type="button" id="parcelSearchBtn" class="btn_swh">배송조회</button>
 												</c:when>
 												<c:when test="${sellList.o_status eq '거래완료'}">
 													<span style="font-size: 13px;">거래완료</span>
@@ -146,7 +302,7 @@
 						</c:choose>
 	                </tbody>
 	            </table>
-	        </div>
+            </div>
 			<%-- ================= 판매목록 보여주기 끝 ================= --%>
 			
 			<%-- ===================== 페이징 출력 시작 ===================== --%>
@@ -173,6 +329,13 @@
 				</ul>
 			</div>
 			<%-- ===================== 페이징 출력 종료 ===================== --%>
-		</div>
+			
+			<%-- ===================== 배송 조회 폼 ===================== --%>
+			<form id="searchForm" name="searchForm" ><!-- style="display: none;" -->
+	            <input type="hidden" id="t_key" name="t_key">
+	            <input type="hidden" name="t_code" id="t_code">
+	            <input type="hidden" name="t_invoice" id="t_invoice">
+        	</form>
+    	</div>
 	</body>
 </html>

@@ -67,6 +67,7 @@ public class SafeProductController {
 		// 전체 레코드 조회
 		SafeProductVO detail = safeProductService.selectSafeProductDetail(spvo);
 		model.addAttribute("detail", detail);
+		log.info("detail : " + detail);
 		
 		return "user/safeProduct/safeProductDetail";
 	}

@@ -103,6 +103,24 @@
     font-family: "Nanum Gothic", sans-serif, "Nanum GothicWeb", 나눔고딕;
 }
 
+.unablePayment_btn {
+	position: absolute;
+    bottom: 20px;
+    width: 270px;
+    vertical-align: bottom;
+    display: inline-block;
+    text-align: center;
+    font-size: 24px;
+    color: #FFFFFF;
+    font-weight: 600;
+    background: #acacac;
+    border: 1px solid #acacac;
+    border-radius: 1px;
+    padding: 18px 60px;
+    cursor: pointer;
+    font-family: "Nanum Gothic", sans-serif, "Nanum GothicWeb", 나눔고딕;
+}
+
 .item_img_wrap {
     width: 1024px;
     height: 195px;

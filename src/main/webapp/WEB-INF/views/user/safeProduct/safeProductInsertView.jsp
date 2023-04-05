@@ -93,6 +93,42 @@
 				<c:remove var="msg"/>
 			</script>
 		</c:if>
+		
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalCenterTitle">운송장등록</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+					  	</button>
+					</div>
+					<div class="modal-body">
+						<h4>계좌번호 등록하기</h4>
+						<div class="insert_invoice">
+					 	<select id="parcelSelect">
+					 		<option>택배사를 선택해주세요</option>
+					 		<option value="04">CJ대한통운</option>
+					 		<option value="05">한진택배</option>
+					 		<option value="08">롯대택배</option>
+					 		<option value="01">우체국택배</option>
+					 		<option value="06">로젠택배</option>
+					 		<option value="23">경동택배</option>
+					 		<option value="46">CU편의점택배</option>
+					 		<option value="24">GS편의점택배</option>
+					 	</select>
+					 	<input type="text" name="invoice" id="invoice" placeholder="운송장번호를 입력해주세요." class="w350" />
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+						<button type="button" class="btn btn-primary" id="sendButton">등록하기</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
 		<div class="container">
 			
 			<%-- ================= 입력 정보 보여주기 시작 ================= --%>
