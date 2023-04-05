@@ -41,13 +41,13 @@
 						<tbody>
 							<tr>
 								<th>글번호</th> 
-								<td><input type="text" value="${updateForm.as_no}" readonly="readonly" /></td>
+								<td><input type="text" class="form-control" value="${updateForm.as_no}" readonly="readonly" /></td>
 								<th>작성일</th> 
 								<td>${updateForm.as_created_at}</td> 
 							</tr>
 							<tr>
 								<th>작성자</th>
-								<td colspan="3"><input type="text" value="${updateForm.a_name}" readonly="readonly" /></td>
+								<td colspan="3"><input class="form-control" type="text" value="${updateForm.a_name}" readonly="readonly" /></td>
 							</tr>
 							<tr>
 								<th>글제목</th>
