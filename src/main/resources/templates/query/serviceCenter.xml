@@ -105,11 +105,12 @@
 			WHERE SC_NO > (#{pageNum}-1) * #{amount} and u_no=#{u_no}
 		]]>
 	</select>
-	<select id="selectNoReplyCnt" parameterType="center" resultType="int" >
-		SELECT COUNT(*)
-		FROM TB_USER_SERVICE U, TB_ADMIN_SERVICE_CENTER A
-		WHERE U.SC_NO = A.SC_NO(+)
-			  AND A.AS_NO IS NULL
-		GROUP BY A.SC_NO
+	<select id="selectNoReplyCnt" resultType="int" >
+		SELECT NVL(SUM(CNT),0) AS CNT
+		FROM (SELECT COUNT(*) AS CNT FROM TB_USER_SERVICE U, TB_ADMIN_SERVICE_CENTER A
+				WHERE U.SC_NO = A.SC_NO(+)
+					  AND A.AS_NO IS NULL
+				GROUP BY A.SC_NO
+		)
 	</select>
 </mapper>

@@ -49,7 +49,7 @@ public class AdmMainController {
 	@GetMapping("/main/queuedCnt")
 	public int productCnt(ProductVO vo) {
 		int cnt = 0;
-		cnt = admProductService.selectQueuedCnt(vo);
+		cnt = admProductService.queuedCnt(vo);
 		
 		return cnt;
 	}
@@ -64,9 +64,9 @@ public class AdmMainController {
 	
 	@ResponseBody
 	@GetMapping("/main/serviceCnt")
-	public int serviceCnt(ServiceCenterVO vo) {
+	public int serviceCnt() throws Exception{
 		int cnt = 0;
-		cnt = serviceCenterService.selectNoReplyCnt(vo);
+		cnt = serviceCenterService.selectNoReplyCnt();
 		return cnt;
 	}
 	

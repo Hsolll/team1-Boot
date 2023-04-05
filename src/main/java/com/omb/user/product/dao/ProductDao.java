@@ -71,5 +71,5 @@ public interface ProductDao {
 
 
 	public int selectQueuedCnt(ProductVO vo);
-
+	public int selectRejectedCnt(ProductVO vo);
 }

@@ -22,7 +22,6 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
-@SessionAttributes("adminLogin") 
 @RequestMapping(value = "/admin/*")
 @Slf4j
 public class AdmFaqController {
