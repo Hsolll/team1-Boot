@@ -93,12 +93,8 @@
 						</div>
 						
 						
-					
-					
 						
-						<div>
-							<input type=hidden name="p_adm_per" id="p_adm_per" value="1"/>
-						</div>
+						
 						
 						
 						
