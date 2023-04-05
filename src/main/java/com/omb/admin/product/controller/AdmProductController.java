@@ -65,7 +65,7 @@ public class AdmProductController {
 		List<ProductVO> list = admProductService.selectQueuedList(vo);
 		model.addAttribute("queuedList", list);
 		
-		int total = admProductService.productListCnt(vo);
+		int total = admProductService.queuedCnt(vo);
 		vo.setAmount(15);
 		model.addAttribute("pageMaker", new PageDTO(vo, total));
 		
@@ -100,7 +100,7 @@ public class AdmProductController {
 		admin = (AdminVO)model.getAttribute("adminLogin");
 		model.addAttribute("rejectedList", list);
 		
-		int total = admProductService.productListCnt(vo);
+		int total = admProductService.rejectedCnt(vo);
 		vo.setAmount(15);
 		model.addAttribute("pageMaker", new PageDTO(vo, total));
 		return "admin/product/rejectedList";

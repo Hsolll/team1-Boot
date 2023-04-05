@@ -21,6 +21,6 @@ public interface ServiceCenterDAO {
 	public int updateServiceDel(ServiceCenterVO vo);
 	public int updateReadCnt(ServiceCenterVO vo);
 	public int deleteService(int scno);
-	public int selectNoReplyCnt(ServiceCenterVO vo);
+	public int selectNoReplyCnt();
 	
 }

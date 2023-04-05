@@ -130,6 +130,11 @@
 		FROM TB_USER_PRODUCT
 		WHERE P_ADM_PER = 0
 	</select>
+	<select id="selectRejectedCnt" parameterType="product" resultType="int">
+		SELECT COUNT(*)
+		FROM TB_USER_PRODUCT
+		WHERE P_ADM_PER = 2
+	</select>
 	
 	<select id="category" parameterType="product" resultType="product">
 		<![CDATA[ 
@@ -274,10 +279,10 @@
 		        FROM 
 		            TB_USER_PRODUCT p INNER JOIN TB_USER u ON p.U_NO = u.U_NO 
 		        WHERE 
-		            rownum <= #{pageNum} * #{amount}
+		            rownum <= #{pageNum} * #{amount} AND P.P_ADM_PER = 0
 		     ) PRODUCTLIST
 		WHERE 
-		    rnum > (#{pageNum} - 1) * #{amount} AND P_ADM_PER = 0
+		    rnum > (#{pageNum} - 1) * #{amount}
     	]]>
 	</select>
 	
@@ -306,10 +311,10 @@
 		        FROM 
 		            TB_USER_PRODUCT p INNER JOIN TB_USER u ON p.U_NO = u.U_NO 
 		        WHERE 
-		            rownum <= #{pageNum} * #{amount}
+		            rownum <= #{pageNum} * #{amount} AND P_ADM_PER = 2
 		     ) PRODUCTLIST
 		WHERE 
-		    rnum > (#{pageNum} - 1) * #{amount} AND P_ADM_PER = 2
+		    rnum > (#{pageNum} - 1) * #{amount} 
     	]]>
 	</select>
 	

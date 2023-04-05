@@ -89,9 +89,9 @@ public class ServiceCenterServiceImpl implements ServiceCenterService {
 	}
 
 	@Override
-	public int selectNoReplyCnt(ServiceCenterVO vo) {
+	public int selectNoReplyCnt() throws Exception{
 		 int result = 0;
-		 result =serviceDao.selectNoReplyCnt(vo); 
+		 result =serviceDao.selectNoReplyCnt(); 
 		return result;
 	}
 
