@@ -88,10 +88,10 @@ public class StatisticsDAOTests {
 	@Test
 	public void testAmountList(){
 		
-		List<Map<String, Integer>> list = statisticsDAO.selectAmount();
+		List<Map<String, Object>> list = statisticsDAO.selectLocal();
 		
 		
-		for(Map<String,Integer> m : list) {
+		for(Map<String,Object> m : list) {
 			log.info("key : "+m.keySet());
 			log.info("value : "+m.values());
 		}

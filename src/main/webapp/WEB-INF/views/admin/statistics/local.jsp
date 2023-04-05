@@ -84,7 +84,13 @@
 						rcolor = Math.random() * 0xffffff;
 						rcolor = parseInt(rcolor);
 						rcolor = rcolor.toString(16);
-						
+						for(let color in colorList){
+							if(rcolor == color){
+								rcolor = Math.random() * 0xffffff;
+								rcolor = parseInt(rcolor);
+								rcolor = rcolor.toString(16);
+							}
+						}
 						colorList.push("#"+rcolor);
 					});
 					
@@ -101,10 +107,51 @@
 							}]
 						},
 						options : {
-							maintainAspectRatio:false,
+							
 							responsive:true,
 							interaction:{
 								intersect:true,
+							},
+							legend:{
+								position:'left'
+							}
+						}
+					});  
+					
+					const ctx2 = document.getElementById('myChart2').getContext('2d');
+					
+					var myChart2 = new Chart(ctx2, {
+						type:"bar",
+						data : {
+							labels:labelList,
+							datasets : [{
+									label:'',
+									data:valueList,
+									backgroundColor:colorList
+								}
+						]
+						},
+						options : {
+							
+							responsive:true,
+							tooltips:{
+								mode:'index',
+								intersect:false
+							},
+							hover:{
+								intersect:false,
+								mode:'index'
+							},
+							scales:{
+								yAxes : [{
+									ticks:{
+										beginAtZero:true,
+										stepSize: 5
+									}
+								}]
+							},
+							legend:{
+									display:false	
 							}
 						}
 					});  
@@ -132,6 +179,14 @@
 	                            <h5 class="card-header">지역 통계</h5>
 	                            <div class="card-body">
 	                                <canvas id="myChart"></canvas>
+	                            </div>
+	                        </div>
+                        </div>
+                    	<div class="col-x1-6 col-lg-6 col-md-6 col-sm-12 col-12">
+	                        <div class="card">
+	                            <h5 class="card-header">지역 통계</h5>
+	                            <div class="card-body">
+	                                <canvas id="myChart2"></canvas>
 	                            </div>
 	                        </div>
                         </div>
