@@ -97,7 +97,7 @@
 	
 	<select id="selectSafeProductDetail" parameterType="safeProduct" resultType="safeProduct">
 		SELECT 
-			SP_NO, SP_TITLE, SP_NAME, U_ID, U_NAME, SP_PRICE, SP_CONTENT, SP_CREATED_AT
+			SP_NO, SP_TITLE, SP_NAME, A.U_NO, U_ID, U_NAME, SP_PRICE, SP_CONTENT, SP_CREATED_AT, SP_STATUS
 		FROM TB_USER_SAFE_PRODUCT A
 		INNER JOIN TB_USER B
 		    ON A.U_NO = B.U_NO

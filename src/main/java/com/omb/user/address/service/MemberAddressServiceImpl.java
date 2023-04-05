@@ -52,4 +52,12 @@ public class MemberAddressServiceImpl implements MemberAddressService {
 	}
 
 
+	@Override
+	public int deleteMemberAddress(MemberAddressVO addvo) {
+		int result = 0;
+		result = memberAddressDAO.deleteMemberAddress(addvo);
+		return result;
+	}
+
+
 }

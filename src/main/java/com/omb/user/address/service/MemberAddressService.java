@@ -14,5 +14,7 @@ public interface MemberAddressService {
 	public int insertMemberAddress(MemberAddressVO addvo);	// 배송지 추가 메서드
 	
 	public MemberAddressVO memberAddressInfoNo(MemberAddressVO addvo);
+	
+	public int deleteMemberAddress(MemberAddressVO addvo);
 
 }
