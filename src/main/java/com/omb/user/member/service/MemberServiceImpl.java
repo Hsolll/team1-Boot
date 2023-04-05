@@ -88,6 +88,8 @@ public class MemberServiceImpl implements MemberService {
 		int pwdChkResult = memberdao.pwdChk(mvo);
 		return pwdChkResult;
 	}
+	
+	
 
 	@Override
 	public void confirmPwd(MemberVO mvo) {
@@ -136,6 +138,19 @@ public class MemberServiceImpl implements MemberService {
 		return memberdao.getMemberInfo(mvo);
 	
 	}
+
+	@Override
+	public void naverSignUp(MemberVO mvo) {
+		memberdao.naverSignUp(mvo);
+		
+	}
+
+	@Override
+	public void kakaoSignUp(MemberVO mvo) {
+		memberdao.kakaoSignUp(mvo);
+		
+	}
+
 	
 
 	

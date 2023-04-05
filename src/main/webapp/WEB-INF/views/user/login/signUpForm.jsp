@@ -377,12 +377,18 @@
       				 alert("비밀번호가 일치하지 않습니다.");
         				chk5= false;
        			}else if($("#btn1").val()==="Y" && $("#btn2").val()==="Y" && $("#btn5").val()==="Y" && $("#btn6").val()==="Y" && chk1 && chk2 && chk3 && chk4 && chk5 && chk6 && chk7&& chk8){
-    				alert("회원가입이 완료되었습니다.");
-    				$("#signUp").attr({
-    					"method" :"post",
-    					"action" : "/member/signUp"
-    				})
-    				$("#signUp").submit(); 
+					var result = confirm("회원가입 하시겠습니까?");
+			        
+			        if(result)
+			        {
+			        	$("#signUp").attr({
+	    					"method" :"post",
+	    					"action" : "/member/signUp"
+	    				})
+	    				$("#signUp").submit(); 
+	    			
+			        	alert("회원가입이 완료되었습니다.");
+			        }
        			}
     			else{
     				alert("양식을 확인해주세요");
@@ -395,9 +401,8 @@
 	<body>
 		<form id="signUp">
             <div class="member_wrap">
-                <header class="member_header">                 
-                </header>
-                <div class="find_main">
+                <header class="member_header"></header>
+                <div class="find_main" style="height: 1100px;">
                     <ul class="tab">
                     	<li><a href="/login" id="tab1">로그인</a></li>
                     	<li class="on"><a href="/member/signUpAgree" id="tab2">회원가입</a></li>

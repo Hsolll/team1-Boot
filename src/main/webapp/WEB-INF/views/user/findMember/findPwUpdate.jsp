@@ -14,7 +14,7 @@
 		<link rel="shortcut icon" href="/resources/images/common/icon.png" />
 		<link rel="apple-touch-icon" href="/resources/images/common/icon.png" />
 		<!-- <link type="text/css" rel="stylesheet" href="/resources/include/css/findMember.css" /> -->
-		<link type="text/css" rel="stylesheet" href="/resources/include/css/Member.css" />
+		<link type="text/css" rel="stylesheet" href="/resources/include/css/findMemberPw.css" />
 	
 		<!--[if lt IE 9]>
 		<script src="/resources/js/html5shiv.js"></script>
@@ -131,7 +131,7 @@
 		<div class="member_wrap">
             <header class="member_header">    
             </header>
-            <div class="find_main">
+            <div class="find_main" style="height: 570px;">
                 <ul class="tab">
                     <li><a href="/member/findId">아이디 찾기</a></li>
                     <li class="on"><a href="/member/findPw">비밀번호 찾기</a></li>

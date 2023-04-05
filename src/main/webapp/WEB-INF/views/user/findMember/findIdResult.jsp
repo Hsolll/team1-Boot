@@ -13,7 +13,7 @@
 	
 		<link rel="shortcut icon" href="/resources/images/common/icon.png" />
 		<link rel="apple-touch-icon" href="/resources/images/common/icon.png" />
-		<link type="text/css" rel="stylesheet" href="/resources/include/css/Member.css" />
+		<link type="text/css" rel="stylesheet" href="/resources/include/css/findMember.css" />
 		
 		<!--[if lt IE 9]>
 		<script src="/resources/js/html5shiv.js"></script>
@@ -55,7 +55,7 @@
                                     <li class="tid_box">
                                         <div class="id_info_box">
                                           
-                                            <p class="id_auto_msg">일치하는 아이디가 없습니다. 이름과 아이디를 확인해주세요</p>
+                                            <p class="id_auto_msg">일치하는 아이디가 없습니다. 이름과 이메일을 확인해주세요</p>
                                         </div>
                                     </li>               
                     </ul>
@@ -77,7 +77,7 @@
                     <li class="on"><a href="/member/findId" id="tab1">아이디 찾기</a></li>
                     <li><a href="/member/findPw" id="tab2">비밀번호 찾기</a></li>
                 </ul>           
-                <section class="find_result find_result_id">
+                <section class="find_result find_result_id" style="margin-top: 100px;">
                     <p class="txt_desc">아이디 찾기 결과입니다.</p>
                     <ul class="id_list">       
                                     <li class="tid_box">

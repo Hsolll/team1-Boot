@@ -20,8 +20,8 @@
 		
 		<link rel="stylesheet" type="text/css" href="/resources/dist/css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="/resources/dist/css/bootstrap-theme.css" />
-		<!-- <link type="text/css" rel="stylesheet" href="/resources/include/css/findMember.css" /> -->
-		<link type="text/css" rel="stylesheet" href="/resources/include/css/Member.css" />
+		<link type="text/css" rel="stylesheet" href="/resources/include/css/findMember.css" />
+		
 		
 		<script type="text/javascript" src="/resources/include/js/jquery-3.6.2.min.js"></script>
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>
@@ -63,7 +63,7 @@
                           
                 <section style="display: block;">
                     <ul class="guide">
-                        <li><em>*</em> 가입 시 입력한 <em>이름, 이메일</em>로 아이디를 찾을 수 있습니다.</li>
+                        <li style="padding-top: 35px;"><em>*</em> 가입 시 입력한 <em>이름, 이메일</em>로 아이디를 찾을 수 있습니다.</li>
                     </ul>
                     <fieldset class="form_box">
                         <legend></legend>

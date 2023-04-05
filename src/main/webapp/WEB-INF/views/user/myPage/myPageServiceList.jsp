@@ -90,7 +90,7 @@
 		}
 		$("#f_search").attr({
 			"method":"get",
-			"action":"/serviceCenter/serviceList"
+			"action":"/member/myPageServiceList"
 		});
 		$("#f_search").submit();
 	}
@@ -102,6 +102,9 @@
 	</style>
 	</head>
 	<body>
+	<input type="hidden" name="u_no" value="${memberLogin.u_no }" />
+	<input type="hidden" name="u_id" value="${update.u_id }" />
+	
 		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" style="margin:0;">
 		<div class="contentContainer container">
 		

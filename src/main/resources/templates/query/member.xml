@@ -11,6 +11,24 @@
 		values(#{u_no} , #{u_id} , #{u_nick} , #{u_name} , #{u_pwd} ,#{u_email} ,#{u_phone} , '1')
 	</insert>
 	
+	<!-- 네이버 회원가입 -->
+	<insert id="naverSignUp" parameterType="member">
+	<selectKey keyProperty="u_no" resultType="int" order="BEFORE">
+		select tb_user_seq.nextval from dual
+	</selectKey>
+		insert into tb_user(u_no , u_id , u_nick , u_name , u_pwd , u_email , u_phone , u_grade ,u_type)
+		values(#{u_no} , #{u_id} , #{u_nick} , #{u_name} , '1' ,#{u_email} ,#{u_phone} , '1', 'N')
+	</insert>
+	
+	<!-- 카카오 회원가입 -->
+	<insert id="kakaoSignUp" parameterType="member">
+	<selectKey keyProperty="u_no" resultType="int" order="BEFORE">
+		select tb_user_seq.nextval from dual
+	</selectKey>
+		insert into tb_user(u_no , u_id , u_nick , u_name , u_pwd , u_email , u_phone , u_grade ,u_type)
+		values(#{u_no} , #{u_id} , #{u_nick} , #{u_name} , '1' ,#{u_email} ,#{u_phone} , '1', 'K')
+	</insert>
+	
 	<!-- 회원가입 주소-->
 	<insert id="addressInsert" parameterType="member">
 	<selectKey keyProperty="add_no" resultType="int" order="BEFORE">
@@ -65,11 +83,11 @@
     
     <!-- 회원정보수정 조회 -->
     <select id="getMemberInfo" resultType="member">
-		select A.u_no,add_no ,u_id , u_name, u_email , u_phone, u_nick, u_phone  ,zip, address, sub_address, u_grade, u_status ,u_created_at, u_updated_at
+		select A.u_no,add_no ,u_id , u_name, u_email , u_phone, u_nick, u_phone  ,zip, address, sub_address, u_grade, u_status ,u_created_at, u_updated_at, u_type, add_status
 		from tb_user A
 		inner join tb_user_address_info B
     	on A.u_no = B.u_no
-    	where A.u_no =#{u_no} 	
+    	where A.u_no =#{u_no} and add_status='기본배송지'	
 	</select>
     
     <!-- 회원수정 비밀번호 수정-->
@@ -86,7 +104,7 @@
      where u_no = #{u_no} 
     </update>
     
-    <!-- 회원 비밀번호 확인 -->
+     <!-- 회원 비밀번호 확인 -->
     <select id="pwdChk" resultType="int">
 	select count(*) from tb_user where u_pwd = #{u_pwd} and u_no =#{u_no}
 	</select>

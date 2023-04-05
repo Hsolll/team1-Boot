@@ -26,14 +26,19 @@
 			$(function(){
 				
 				$("#btn").click(function(){
-					alert("회원탈퇴 되었습니다. 이용해주셔서 감사합니다.");
-								$("#u_status").attr('value','N');
-								$("#memberDelete").attr({
-			    					"method" :"post",
-			    					"action" : "/member/memberDelete"
-			    				})
-			    				$("#memberDelete").submit();
-				})
+					var result = confirm("탈퇴 하시겠습니까?");
+			        
+			        if(result)
+			        {
+			        	$("#u_status").attr('value','N');
+						$("#memberDelete").attr({
+	    					"method" :"post",
+	    					"action" : "/member/memberDelete"
+	    				})
+	    				$("#memberDelete").submit();
+						alert("회원탈퇴 되었습니다. 이용해주셔서 감사합니다.");
+			        }
+				})   
 			})
 		</script>
 	</head>
@@ -42,8 +47,8 @@
 	<input type="hidden" name="u_no" value="${memberLogin.u_no }" />
 	<input type="hidden" id="u_status" name="u_status" value="${memberLogin.u_status }" />
 	
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" style="margin:0;">
-            <div id="container" style="margin-left: -100px;">
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" style="margin: 150px;border: 1px solid #baac9a;width: 700px;margin-top: 40px;">
+            <div id="container" style="margin-left: -285px;">
             <div class="join_wrap">
                 <div id="join_container">
                     <div class="join_header">

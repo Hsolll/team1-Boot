@@ -71,7 +71,7 @@
 		
 	</select>
 	
-	<!-- 마이페이지 카운트 -->
+	<!-- 마이페이지 판매내역 카운트 -->
 	<select id="productMyPageListCnt" parameterType="product" resultType="int">
 		SELECT 
 		    count(*) 
@@ -81,6 +81,30 @@
 		    u_no=#{u_no}
 		
 	</select>
+	
+	<!-- 마이페이지 구매내역 카운트 -->
+	<select id="productMyPageBuyListCnt" parameterType="product" resultType="int">
+		SELECT 
+		    count(*) 
+		FROM 
+		    TB_USER_PRODUCT
+		WHERE 
+		   P_STATUS='판매완료'
+		
+	</select>
+	
+	<!-- 마이페이지 좋아요(찜)내역 카운트 -->
+	<select id="productMyPageLikeListCnt" parameterType="product" resultType="int">
+		SELECT 
+		    count(*) 
+		FROM 
+		    tb_user_product_like
+		WHERE 
+        u_no = #{u_no} and prod_like =1
+		
+	</select>
+	
+	
 	
 	
 	
@@ -192,65 +216,105 @@
 		    rnum > (#{pageNum} - 1) * #{amount} AND P_ADM_PER = 2
     	]]>
 	</select>
+    	
+   	<select id="selectProductSellList" parameterType="member" resultType="product">
+   		<![CDATA[
+  		SELECT
+		        P_NO, u_no, P_TITLE, P_NAME, P_PRICE, P_STATUS, P_CONTENT, P_LOCAL, TRANS_METHOD,
+		         P_CREATED_AT, P_UPDATED_AT, P_DELETED_AT, p_file, p_thumb, P_CATE, P_ADM_PER, p_buyid
+		FROM (
+		        SELECT  
+		                 rownum as rnum, p.P_NO, u.u_no, p.P_TITLE, p.P_NAME, p.P_PRICE, p.P_STATUS,p.P_CONTENT,p.P_LOCAL,p.TRANS_METHOD,
+		                 p.P_CREATED_AT,p.P_UPDATED_AT,p.P_DELETED_AT,p.p_file,p.p_thumb,p.P_CATE,p.P_ADM_PER, p.p_buyid
+		        FROM 
+		            TB_USER_PRODUCT p 
+		        INNER JOIN TB_USER u 
+		            ON p.U_NO = u.U_NO 
+		        WHERE ]]>
+		        	<trim prefix="(" suffix=") AND " prefixOverrides="AND">
+						<if test="search=='o_id'">
+							<![CDATA[ o_id LIKE '%'|| #{keyword} ||'%' ]]>					
+						</if>
+						<if test="search=='p_name'">
+							<![CDATA[ p_name LIKE '%'|| #{keyword} ||'%' ]]>					
+						</if>
+						<if test="search=='o_date'">
+							<![CDATA[ to_char(o_date,'YYYY-MM-DD') between #{start_date} and #{end_date}  ]]>	
+						</if>
+			        </trim>
+		            <![CDATA[ u.u_no = #{u_no}  AND P_ADM_PER = 1 AND rownum <= #{pageNum} * #{amount}
+		        order by p_no desc
+		        )
+		WHERE rnum > (#{pageNum} -1) * #{amount}
+		]]>
+   	</select> 
+    	
+    
 	
-	<!-- 마이페이지 판매내역 조회 -->
-	<select id="selectProductSellList" parameterType="member" resultType="product">
-  		<![CDATA[ 
-		SELECT 
-        		rownum,P_NO, u_no, P_TITLE, P_NAME, P_PRICE, P_STATUS, P_CONTENT, P_LOCAL, TRANS_METHOD, P_CREATED_AT, P_UPDATED_AT, P_DELETED_AT, p_file, p_thumb, P_CATE, P_ADM_PER , p_buyid
-		FROM (
-		        SELECT /*+ INDEX_DESC(TB_USER_PRODUCT TB_USER_PRODUCT_PK) */ 
-		             p.P_NO,u.u_no,p.P_TITLE,p.P_NAME,p.P_PRICE,p.P_STATUS,p.P_CONTENT,p.P_LOCAL,p.TRANS_METHOD,p.P_CREATED_AT,p.P_UPDATED_AT,p.P_DELETED_AT,p.p_file,p.p_thumb,p.P_CATE,p.P_ADM_PER, p.p_buyid
-		        FROM 
-		            TB_USER_PRODUCT p INNER JOIN TB_USER u ON p.U_NO = u.U_NO 
-		        WHERE 
-		            u.u_no=#{u_no}  AND P_ADM_PER = 1 
-		            order by p_no desc
-		     ) PRODUCTLIST
-		WHERE 
-		    rownum <= #{pageNum} * #{amount}
-		    
-    	]]>
-    	</select>
 
-	<!-- 마이페이지 구매내역 조회 -->
-	<select id="selectProductBuyList" parameterType="member" resultType="product">
-  		<![CDATA[ 
-		SELECT 
-        		rownum,P_NO, u_no, P_TITLE, P_NAME, P_PRICE, P_STATUS, P_CONTENT, P_LOCAL, TRANS_METHOD, P_CREATED_AT, P_UPDATED_AT, P_DELETED_AT, p_file, p_thumb, P_CATE, P_ADM_PER , p_buyid
+	
+   	<!-- 마이페이지 구매내역 조회 -->
+   	<select id="selectProductBuyList" parameterType="product" resultType="product">
+ 		<![CDATA[
+  		SELECT
+		        P_NO, u_no, P_TITLE, P_NAME, P_PRICE, P_STATUS, P_CONTENT, P_LOCAL, TRANS_METHOD,
+		         P_CREATED_AT, P_UPDATED_AT, P_DELETED_AT, p_file, p_thumb, P_CATE, P_ADM_PER, p_buyid 
 		FROM (
-		        SELECT /*+ INDEX_DESC(TB_USER_PRODUCT TB_USER_PRODUCT_PK) */ 
-		             p.P_NO,u.u_no,p.P_TITLE,p.P_NAME,p.P_PRICE,p.P_STATUS,p.P_CONTENT,p.P_LOCAL,p.TRANS_METHOD,p.P_CREATED_AT,p.P_UPDATED_AT,p.P_DELETED_AT,p.p_file,p.p_thumb,p.P_CATE,p.P_ADM_PER, p.p_buyid
+		        SELECT  
+		                 rownum as rnum, P_NO, u_no, P_TITLE, P_NAME, P_PRICE, P_STATUS,P_CONTENT,P_LOCAL,TRANS_METHOD,
+		                 P_CREATED_AT,P_UPDATED_AT,P_DELETED_AT,p_file,p_thumb,P_CATE,P_ADM_PER, p_buyid 
 		        FROM 
-		            TB_USER_PRODUCT p INNER JOIN TB_USER u ON p.U_NO = u.U_NO 
-		        WHERE 
-		            p.p_buyid=#{u_id}  AND P_ADM_PER = 1 
-		            order by p_no desc
-		     ) PRODUCTLIST
-		WHERE 
-		    rownum <= #{pageNum} * #{amount}
-		    
-    	]]>
-    	</select>
+		            TB_USER_PRODUCT 
+		        WHERE ]]>
+		        	<trim prefix="(" suffix=") AND " prefixOverrides="AND">
+						<if test="search=='o_id'">
+							<![CDATA[ o_id LIKE '%'|| #{keyword} ||'%' ]]>					
+						</if>
+						<if test="search=='p_name'">
+							<![CDATA[ p_name LIKE '%'|| #{keyword} ||'%' ]]>					
+						</if>
+						<if test="search=='o_date'">
+							<![CDATA[ to_char(o_date,'YYYY-MM-DD') between #{start_date} and #{end_date}  ]]>	
+						</if>
+			        </trim>
+		            <![CDATA[ p_buyid=#{u_id} and p_status='판매완료' AND rownum <= #{pageNum} * #{amount}
+		        order by p_no desc
+		        )
+		WHERE rnum > (#{pageNum} -1) * #{amount}
+		]]>
+   	</select>
     	
     	<!-- 마이페이지 좋아요(찜)내역 조회 -->
 	<select id="selectProductLikeList" parameterType="member" resultType="product">
-  		<![CDATA[ 
-		SELECT 
-        		rownum,P_NO, u_no, P_TITLE, P_NAME, P_PRICE, P_STATUS, P_CONTENT, P_LOCAL, TRANS_METHOD, P_CREATED_AT, P_UPDATED_AT, P_DELETED_AT, p_file, p_thumb, P_CATE, P_ADM_PER , p_buyid ,prod_no,prod_like
+  		<![CDATA[
+  		SELECT 
+		         PROD_NO, P_NO, U_NO, PROD_LIKE, P_TITLE, P_NAME, P_PRICE, 
+		        P_STATUS, P_CONTENT , P_CATE , P_FILE, P_THUMB
 		FROM (
-		        SELECT /*+ INDEX_DESC(TB_USER_PRODUCT TB_USER_PRODUCT_PK) */ 
-		             p.P_NO,u.u_no,p.P_TITLE,p.P_NAME,p.P_PRICE,p.P_STATUS,p.P_CONTENT,p.P_LOCAL,p.TRANS_METHOD,p.P_CREATED_AT,p.P_UPDATED_AT,p.P_DELETED_AT,p.p_file,p.p_thumb,p.P_CATE,p.P_ADM_PER, p.p_buyid ,prod_no,prod_like
-		        FROM 
-		            TB_USER_PRODUCT p INNER JOIN TB_USER u ON p.U_NO = u.U_NO inner join tb_user_product_like l on p.u_no = l.u_no
-		        WHERE 
-		            u.u_no=#{u_no}  AND P_ADM_PER = 1 and prod_like=1 
-		            order by p_no desc
-		     ) PRODUCTLIST
-		WHERE 
-		    rownum <= #{pageNum} * #{amount}
-		    
-    	]]>
+		         SELECT 
+                rownum as rnum, A.P_NO, A.U_NO, PROD_NO, PROD_LIKE, P_TITLE, P_NAME, P_PRICE, 
+                P_STATUS, P_CONTENT , P_CATE , P_FILE, P_THUMB
+        FROM  
+			            TB_USER_PRODUCT_LIKE A
+	        INNER JOIN TB_USER_PRODUCT B
+	            ON A.P_NO = B.P_NO 
+		        WHERE ]]>
+		        	<trim prefix="(" suffix=") AND " prefixOverrides="AND">
+						<if test="search=='o_id'">
+							<![CDATA[ o_id LIKE '%'|| #{keyword} ||'%' ]]>					
+						</if>
+						<if test="search=='p_name'">
+							<![CDATA[ p_name LIKE '%'|| #{keyword} ||'%' ]]>					
+						</if>
+						<if test="search=='o_date'">
+							<![CDATA[ to_char(o_date,'YYYY-MM-DD') between #{start_date} and #{end_date}  ]]>	
+						</if>
+			        </trim>
+						            <![CDATA[ A.U_NO = #{u_no} AND rownum <= #{pageNum} * #{amount}
+				        ORDER BY PROD_NO DESC
+				        )
+				WHERE rnum > (#{pageNum} -1) * #{amount}
+		]]>
     	</select>
     	<!-- 마이페이지 판매확정  -->
     	<update id="productStatus" parameterType="product">

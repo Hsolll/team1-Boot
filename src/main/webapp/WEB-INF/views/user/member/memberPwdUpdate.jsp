@@ -62,13 +62,18 @@
      				chk5= false;
     			}
     			else if(chk4 && chk5){
-    				$("#memberPwdupdate").attr({
-    					"method" :"post",
-    					"action" : "/member/memberPwdUpdate"
-    				})
-    				$("#memberPwdupdate").submit();
-    			
-    				alert("비밀번호가 변경되어 로그아웃됩니다.");  				
+					var result = confirm("변경 하시겠습니까?");
+			        
+			        if(result)
+			        {
+			        	$("#memberPwdupdate").attr({
+	    					"method" :"post",
+	    					"action" : "/member/memberPwdUpdate"
+	    				})
+	    				$("#memberPwdupdate").submit();
+	    			
+	    				alert("비밀번호가 변경되어 로그아웃됩니다."); 
+			        }				
     			}else {
     				alert("양식을 확인해주세요");
     				console.log(chk4,chk5);
@@ -80,27 +85,19 @@
 	<body>
 		<form id="memberPwdupdate">
 		<input type="hidden" name="u_no" value="${memberLogin.u_no }" />
-            <div class="member_wrap">
-                <header class="member_header">                 
-                </header>
-                <div class="find_main">
-                                              
-                    <section id="sectionBsns" style="display: block;">
-                        <!-- <ul class="tab" role="tablist">
-                        <li id="tabPrvt" role="presentation"><a id="tab1" role="tab" onclick="toggleTab('tabPrvt');" aria-controls="tabPrvt" data-log-actionid-area="tab" data-log-actionid-label="tab" aria-selected="false">회원수정</a></li>
-                        <li id="tabBsns" role="presentation" class="on"><a href="/member/pwdChkForm2" id="tab2" role="tab" onclick="toggleTab('tabBsns');" aria-controls="tabBsns" data-log-actionid-area="tab" data-log-actionid-label="tab" aria-selected="true">비밀번호수정</a></li>
-                    </ul> -->
-                        <fieldset class="form_box">
-                          <ul class="tab" role="tablist">
-                        <li id="tabPrvt" role="presentation"><a id="tab1" role="tab" onclick="toggleTab('tabPrvt');" aria-controls="tabPrvt" data-log-actionid-area="tab" data-log-actionid-label="tab" aria-selected="false">회원수정</a></li>
-                        <li id="tabBsns" role="presentation" class="on"><a href="/member/pwdChkForm2" id="tab2" role="tab" onclick="toggleTab('tabBsns');" aria-controls="tabBsns" data-log-actionid-area="tab" data-log-actionid-label="tab" aria-selected="true">비밀번호수정</a></li>
+			<div class="member_wrap"> 
+               <header class="member_header"></header>
+                <div class="find_main" style="height: 420px;">
+                	<ul class="tab" style="height:100px;">
+	                   <li><a id="tab1">회원수정</a></li>
+	                   <li class="on"><a href="/member/pwdChkForm2" id="tab2">비밀번호수정</a></li>
+	                </ul>  
+                <section style="display: block;">
+                	<ul class="guide">
+                            <li><em style="color: #0b83e6">*비밀번호를 입력해주세요</em></li>
                     </ul>
-                            <legend>회원수정 폼</legend>
-                             
+                     	<fieldset class="form_box">                  
                             <div class="join_write">
-                            <ul class="seller_guide">
-                            <li><em>비밀번호를 입력해주세요</em></li>
-                        </ul>
                             <ul>
                                 <li>
                                     비밀번호
@@ -121,8 +118,8 @@
                             </div>
                         </fieldset>
                     </section>
+                   </div>
                 </div>
-            </div>
             </form>
 	</body>
 </html>

@@ -9,10 +9,11 @@ public interface ProductService {
 
 	public List<ProductVO> selectProductList(ProductVO pvo);
 	
-	public List<ProductVO> selectProductBuyList(MemberVO mvo);
-	public List<ProductVO> selectProductSellList(MemberVO mvo);
-	public List<ProductVO> selectProductLikeList(MemberVO mvo);
-	public List<ProductVO> selectProductMyPageList(MemberVO mvo);
+	public List<ProductVO> selectProductBuyList(ProductVO pvo);
+	public List<ProductVO> selectProductSellList(ProductVO pvo);
+	public List<ProductVO> selectProductLikeList(ProductVO pvo);
+	public List<ProductVO> selectProductMyPageList(ProductVO pvo);
+	
 	public ProductVO selectProductDetail(int p_no);
 
 	public int insertProduct(ProductVO pvo) throws Exception;
@@ -22,6 +23,8 @@ public interface ProductService {
 	public List<ProductVO> category(ProductVO pvo);
 	
 	public int productMyPageListCnt(ProductVO pvo);
+	public int productMyPageBuyListCnt(ProductVO pvo);
+	public int productMyPageLikeListCnt(ProductVO pvo);
 
 	public int deleteProductLike(ProductVO pvo);
 

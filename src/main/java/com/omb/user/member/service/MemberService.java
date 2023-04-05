@@ -4,6 +4,8 @@ import com.omb.user.member.vo.MemberVO;
 
 public interface MemberService {
 	public void signUp(MemberVO mvo);
+	public void naverSignUp(MemberVO mvo);
+	public void kakaoSignUp(MemberVO mvo);
 	
 	public MemberVO myPage(MemberVO mvo);
 	
@@ -15,6 +17,7 @@ public interface MemberService {
 	public int nickChk(MemberVO mvo);
 	
 	public int pwdChk(MemberVO mvo);
+	
 	public int emailChk(MemberVO mvo);
 	public int phoneChk(MemberVO mvo);
 	

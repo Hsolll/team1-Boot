@@ -9,5 +9,8 @@ import com.omb.user.member.vo.MemberVO;
 @Mapper
 public interface MemberLoginDAO {
 	public MemberVO memberLogin(MemberVO mvo);
+	public MemberVO socialLogin(MemberVO mvo);
+	
+	public String socialChk(MemberVO mvo);
 }
 

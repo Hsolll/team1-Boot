@@ -51,6 +51,7 @@ a {
 .find_main {
     width: 480px;
     margin: 0 auto;
+    border: 1px solid #baac9a;
 }
 
 .find_main .tab {
@@ -61,7 +62,6 @@ a {
 .find_main .tab li {
     float: left;
     width: 238px;
-    border: 1px solid #ddd;
     border-bottom: 1px solid #baac9a;
     background-color: #fafafa;
 }
@@ -78,6 +78,7 @@ li {
 .find_main .tab li.on {
     border-color: #baac9a;
     border-bottom: 1px solid #fff;
+    border-left:1px solid #baac9a;
     background-color: #fff;
 }
 

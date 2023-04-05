@@ -10,10 +10,32 @@
 		
 		select 
 			A.u_no, u_id , u_name, u_email , u_phone, u_nick, 
-			zip, address, sub_address, u_grade, u_status ,u_created_at, u_updated_at
+			zip, address, sub_address, add_status, u_grade, u_status ,u_created_at, u_updated_at , u_type
 		from tb_user A
 		inner join tb_user_address_info B
     	on A.u_no = B.u_no
-    	where u_id =#{u_id} and u_pwd =#{u_pwd} and u_status='USING' and add_status = '기본배송지'
+    	where u_id =#{u_id} and u_pwd =#{u_pwd} and u_status='USING' and add_status = '기본배송지' and u_type='U'
 	</select>
+	
+	<select id="socialLogin" resultType="member">
+		/* 로그인 처리 쿼리 */
+		<!-- select u_no ,u_id , u_name, u_email , u_phone, u_nick, u_phone , u_grade, u_created_at, u_updated_at
+		from tb_user
+		where u_id =#{u_id} and u_pwd =#{u_pwd}   -->
+		
+		select 
+			A.u_no, u_id , u_name, u_email , u_phone, u_nick, 
+			zip, address, sub_address, u_grade, u_status ,u_created_at, u_updated_at , u_type
+		from tb_user A
+		inner join tb_user_address_info B
+    	on A.u_no = B.u_no
+    	where u_email =#{u_email} and u_status='USING' and add_status = '기본배송지' 
+	</select>
+	
+	
+	 <select id="socialChk" parameterType="String" resultType="String">
+	select u_type from tb_user where u_email = #{u_email}
+	</select>
+	
+	
 </mapper>

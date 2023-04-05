@@ -84,7 +84,7 @@
 		DELETE FROM tb_user_service WHERE sc_no = #{sc_no}
 	</delete>
 	
-	<!-- 마이페이지 신고내역 조회 -->
+	<!-- 마이페이지 문의내역 조회 -->
 	<select id="selectServiceMyPageList" resultType="center" parameterType="center">
 		<![CDATA[
 			SELECT SC_NO, U_NO, SC_TITLE, U_NAME, SC_READCNT,

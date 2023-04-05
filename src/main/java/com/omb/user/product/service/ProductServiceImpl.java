@@ -102,26 +102,6 @@ public class ProductServiceImpl implements ProductService {
 		
 	}
 
-	@Override
-	public List<ProductVO> selectProductBuyList(MemberVO mvo) {
-		List<ProductVO> productBuyList = productDao.selectProductBuyList(mvo);
-		
-		 return productBuyList;
-	}
-
-	@Override
-	public List<ProductVO> selectProductSellList(MemberVO mvo) {
-		List<ProductVO> productSellList = productDao.selectProductSellList(mvo);
-		
-		 return productSellList;
-	}
-
-	@Override
-	public List<ProductVO> selectProductLikeList(MemberVO mvo) {
-		List<ProductVO> productLikeList = productDao.selectProductLikeList(mvo);
-		
-		 return productLikeList;
-	}
 
 	@Override
 	public int productMyPageListCnt(ProductVO pvo) {
@@ -129,16 +109,48 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<ProductVO> selectProductMyPageList(MemberVO mvo) {
-		List<ProductVO> productMyPageList = productDao.selectProductMyPageList(mvo);
+	public List<ProductVO> selectProductMyPageList(ProductVO pvo) {
+		List<ProductVO> productMyPageList = null;
+		productMyPageList = productDao.selectProductMyPageList(pvo);
 		
 		 return productMyPageList;
 	}
 
-	
+	@Override
+	public List<ProductVO> selectProductSellList(ProductVO pvo) {
+		List<ProductVO> productSellList = null;
+		productSellList=productDao.selectProductSellList(pvo);
+		
+		 return productSellList;
+	}
 
-	
+	@Override
+	public List<ProductVO> selectProductBuyList(ProductVO pvo) {
+		List<ProductVO> productBuyList = null;
+		productBuyList=productDao.selectProductBuyList(pvo);
+		
+		 return productBuyList;
+	}
 
+	@Override
+	public int productMyPageBuyListCnt(ProductVO pvo) {
+		
+		return productDao.productMyPageBuyListCnt(pvo);
+
+	}
+
+	@Override
+	public List<ProductVO> selectProductLikeList(ProductVO pvo) {
+		List<ProductVO> productLikeList = null;
+		productLikeList=productDao.selectProductLikeList(pvo);
+		return productLikeList;
+	}
+
+	@Override
+	public int productMyPageLikeListCnt(ProductVO pvo) {
+		
+		return productDao.productMyPageLikeListCnt(pvo);
+	}
 	
 	
 }

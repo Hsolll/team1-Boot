@@ -10,6 +10,8 @@ import com.omb.user.member.vo.MemberVO;
 @Mapper
 public interface MemberDAO {
 	public void signUp(MemberVO mvo);
+	public void naverSignUp(MemberVO mvo);
+	public void kakaoSignUp(MemberVO mvo);
 	
 	public MemberVO myPage(MemberVO mvo);
 
@@ -25,6 +27,7 @@ public interface MemberDAO {
 	public void memberPwdUpdate(MemberVO mvo);
 	
 	public int pwdChk(MemberVO mvo);
+	
 	public void confirmPwd(MemberVO mvo);
 	
 	public void addressInsert(MemberVO mvo);

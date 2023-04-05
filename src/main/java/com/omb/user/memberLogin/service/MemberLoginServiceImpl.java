@@ -20,7 +20,19 @@ public class MemberLoginServiceImpl implements MemberLoginService {
 
 	
 
-	
 
-	
+	@Override
+	public MemberVO socialLogin(MemberVO mvo) {
+		return memberLogindao.socialLogin(mvo);
+	}
+
+
+	@Override
+	public String socialChk(MemberVO mvo) {
+		String socialChkResult = memberLogindao.socialChk(mvo);
+		return socialChkResult;
+	}
+
+
+
 }

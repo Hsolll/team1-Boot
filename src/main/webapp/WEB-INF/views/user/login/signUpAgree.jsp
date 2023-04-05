@@ -11,7 +11,7 @@
 		<link rel="shortcut icon" href="/resources/image/icon.png" />
 		<link rel="apple-touch-icon" href="/resources/image/icon.png" />
 		<link type="text/css" rel="stylesheet" href="/resources/include/css/agree.css" />
-	<link type="text/css" rel="stylesheet" href="/resources/include/css/signUp.css" />
+		<link type="text/css" rel="stylesheet" href="/resources/include/css/signUp.css" />
 		<!--[if lt IE 9]>
 		<script src="/resources/js/html5shiv.js"></script>
 		<![endif]-->
@@ -72,7 +72,7 @@
                     <li class="on"><a href="/member/signUpAgree" id="tab2">회원가입</a></li>
                 </ul>
                 <div id="complet2" class="join_content individual">
-                    <p class="txt_info"><em style="color:#0b83e6;">회원/전자금융서비스 이용약관과 개인정보 수집 및 이용에 동의를 하셔야 회원가입이 가능합니다.</em></p>
+                    <p class="txt_info"><em style="color:#0b83e6;">* 회원/전자금융서비스 이용약관과 개인정보 수집 및 이용에 동의를 하셔야 회원가입이 가능합니다.</em></p>
                     <p class="form tm_all">
                         <input type="checkbox" name="agree_all" id="agree_all" class="chk_all big agree" onclick='selectAll(this)'>
                         <label for="agree_all">전체동의(선택제외)</label>
