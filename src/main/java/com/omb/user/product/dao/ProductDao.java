@@ -43,7 +43,7 @@ public interface ProductDao {
 
 	public int WriteListCnt(ProductVO pvo);
 
-	public ProductVO updateForm(ProductVO pvo);
+	public ProductVO updateForm(int u_no, int p_no);
 
 	public int update(ProductVO pvo);
 
@@ -64,5 +64,8 @@ public interface ProductDao {
 
 	// 승인 거절 상품 목록 조회 (관리자)
 	public List<ProductVO> selectRejectedList(ProductVO pvo);
+	public ProductVO selectProductLikeList(ProductVO pvo);
+//	public List<ProductVO> selectProductLike(int p_no, int u_no);
+	public List<ProductVO> selectProductLike(MemberVO u_no);
 
 }

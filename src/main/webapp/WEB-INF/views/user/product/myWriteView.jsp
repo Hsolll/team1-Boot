@@ -76,15 +76,13 @@
 							</div>
 							
 						</div>
-						<%-- <div>
-						<c:if test="${product.u_no == member.u_no}">
+						<div>
+					    	<form class="udForm">
+					    		<input type="hidden" name="p_no" value="${product.p_no}"/>
 								<input type="button" class="delete" value="삭제"/>
 								<input type="button" class="update" value="수정"/>
-							</c:if>
-							<c:if>
-								<div></div>
-							</c:if>
-						</div> --%>
+							</form>
+						</div>
 					</td>
 				</tr>
 				</c:forEach>

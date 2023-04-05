@@ -22,6 +22,7 @@ public class ProductVO extends CommonVO{
     private String p_local		="";           
     private String trans_method	="";      
     private int prod_like 		= 0;
+    private int prod_no			=0;
     private String p_created_at;    
     private String p_updated_at;    
     private String p_deleted_at; 
@@ -34,4 +35,5 @@ public class ProductVO extends CommonVO{
     private String p_thumb		="";  
     private String p_file		="";  
     
+   
 }

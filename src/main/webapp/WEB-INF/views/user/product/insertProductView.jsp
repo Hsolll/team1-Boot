@@ -14,13 +14,13 @@
 			<table >
 				<tr>
 					<td class="alls"> 
-						<div><input type="hidden" name="u_no" placeholder="유저번호" value="${member.u_no}"/></div>
+						<div><input type="hidden" name="u_no" placeholder="유저번호" value="${member.u_no}" /></div>
 						
 						
 						<div class="imgg">
 							<div class="titl one">상품이미지</div>
 							<div>
-								<input id="file" type="file" name="file"class="ma"  placeholder="상품이미지 입력해주세요"/>
+								<input id="file" type="file" name="file"class="ma"  placeholder="상품이미지 입력해주세요" />
 							</div>
 						</div>
 						
@@ -30,7 +30,7 @@
 						
 						<div class="tit">
 							<div class="titl two">게시글제목</div>
-							<div><input id="title" class="ma" type="text" name="p_title"placeholder="상품제목을 입력해주세요"/></div>
+							<div><input id="title" class="ma" type="text" name="p_title"  placeholder="상품제목을 입력해주세요" /></div>
 						</div>
 					
 					
@@ -38,7 +38,7 @@
 					
 						<div class="pname">
 							<div class="titl">상품이름</div>
-							<div><input id="name" class="ma"type="text" name="p_name" placeholder="상품이름 입력해주세요"/></div>
+							<div><input id="name" class="ma"type="text" name="p_name"  placeholder="상품이름 입력해주세요"/></div>
 						</div>
 						
 						
@@ -107,7 +107,7 @@
 						
 						<div class="sts">
 							<div class="titl">
-								<input type=hidden class="ma" name="p_status" id="p_status" value="판매중"/>
+								<input type=hidden class="ma" name="p_status" id="p_status" value="판매중" />
 							</div>
 						</div>
 						
@@ -140,7 +140,7 @@
 							
 						<div class="contt ma">
 							<div class="titl">상품상세설명</div>
-							<div><input id="content" type="text" name="p_content" placeholder="상품상세설명 입력해주세요"/></div>
+							<div><input id="content" type="text" name="p_content"  placeholder="상품상세설명 입력해주세요"/></div>
 						</div>
 					
 					

@@ -6,6 +6,7 @@
 <script type="text/javascript" src="/resources/include/js/search.js"></script>
 <script type="text/javascript" src="/resources/include/js/myWrite.js"></script>
 <script type="text/javascript" src="/resources/include/js/common.js"></script>
+<script type="text/javascript" src="/resources/include/js/heart.js"></script>
 <link rel="stylesheet" type="text/css" href="/resources/include/css/product.css">
 
 <script type="text/javascript" >

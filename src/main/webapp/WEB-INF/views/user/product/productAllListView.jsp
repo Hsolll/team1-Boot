@@ -11,27 +11,29 @@
 		console.log(p_no)
 		location.href = "/product/productDetail?p_no="+p_no
 	})
-
 </script>
 </head>
 <body>
 <table>
+	<c:forEach var="like" items="${like }">
+		<input type='hidden' class="likeList" value="${like.prod_like}"/>
+	</c:forEach>
   <c:choose>
     <c:when test="${not empty productList}">
       <c:forEach var="product" items="${productList}">
         <tr>
           <td class="thumb">
+          	
           	<div class="p_status">${product.p_status}</div>
-           	 <div class="heart_con">
-              <div class="heart ${product.prod_like}">
-              </div>
-              <form class="heartForm">
-                <input type="text" name="prod_like" class="like he" value="1" readonly/>
-                <input type="text" name="u_no" class="he" value="${member.u_no}" readonly/>
-                <input type="text" name="p_no" class="he" value="${product.p_no}" readonly/>
-                	
-              </form>
-            </div>
+          	<div class="heart_con">
+         	 		<form class="heartForm">
+		                <input type="text" name="u_no" class="he u" value="${member.u_no}" readonly/>
+		                <input type="text" name="p_no" class="he p" value="${product.p_no}" readonly/>
+	              	</form>
+        	 		<div class="heart ${product.prod_like }">
+            		</div>
+           </div>
+     
             <c:if test="${not empty product.p_thumb}">
               <img class="thumb_c p_no" id="${product.p_no}" src="/uploadStorage/product/thumbnail/${product.p_thumb}"/>
             </c:if>

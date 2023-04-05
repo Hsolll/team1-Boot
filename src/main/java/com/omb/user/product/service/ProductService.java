@@ -41,11 +41,15 @@ public interface ProductService {
 
 	public int WriteListCnt(ProductVO pvo);
 
-	public ProductVO updateForm(ProductVO pvo);
+	public ProductVO updateForm(int u_no, int p_no);
 
 
 	public int update(ProductVO pvo) throws Exception;
 
 	public int delete(ProductVO pvo) throws Exception;
+
+
+//	public List<ProductVO> selectProductLike(int p_no, int u_no);
+	public List<ProductVO> selectProductLike(MemberVO mvo);
 
 }

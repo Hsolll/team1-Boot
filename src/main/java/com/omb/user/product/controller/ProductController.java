@@ -46,6 +46,7 @@ public class ProductController {
 	    
 	    // 모델 객체에 데이터 전달
 		 model.addAttribute("member", member); 
+		
 		 
 	    
 	    
@@ -62,18 +63,39 @@ public class ProductController {
 	public String selectProductList( HttpSession session,RedirectAttributes ras, Model model,ProductVO pvo) {
 		 // 세션 정보 사용
 		pvo.setAmount(8);
-	    MemberVO member = (MemberVO)session.getAttribute("memberLogin");
+		MemberVO member = (MemberVO)session.getAttribute("memberLogin");
 	    log.info("selectProductList() 메서드 실행성공");
+	    
 	    
 	    ras.addFlashAttribute("ProductVO", pvo);
 	    // 모델 객체에 데이터 전달
 	    model.addAttribute("member", member);
 	    
 	    log.info("member :"+member);
-	    
+	    log.info("member.getU_no() :"+member.getU_no());
+			
+		int u_no = member.getU_no();
 		
+		log.info("u_no :"+u_no);
 		List<ProductVO> productList =  productService.selectProductList(pvo);
 		
+		List<ProductVO> like = productService.selectProductLike(member);
+		log.info(like+"");
+		for (int i = 0; i<productList.size(); i++) {
+			ProductVO ppv = productList.get(i);
+			ProductVO lvo = like.get(i);
+			int p_no = ppv.getP_no();
+			int prod_like = lvo.getProd_like();
+			log.info("p_no :"+p_no + ", prod_like : "+prod_like);
+			ppv.setProd_like(prod_like);
+			//ppv.setProd_like(vo.getProd_like());
+			//like.add(vo);
+			
+		}
+		log.info(like.size()+", "+productList.size());
+		model.addAttribute("like",like);
+		log.info("like :"+like);
+
 		log.info("productList :"+productList);
 		log.info("pvo :"+pvo);
 		
@@ -103,19 +125,40 @@ public class ProductController {
 		
 		return "/user/product/productAllListView";
 	}
+	
+//	@GetMapping(value="heartSel")
+//	public String heartSel(int p_no,int u_no,Model model) {
+//		
+//
+//		int like = productService.selectProductLike(p_no,u_no);
+//		log.info("like :"+like);
+//		model.addAttribute("likes",like);
+//		log.info("model.likes :"+model.getAttribute("likes"));
+//		
+//		return "/user/product/heartPage";
+//	}
+	
+	
+	
+	
 	@GetMapping(value="/p_cate")
 	public String category(HttpSession session, Model model,@ModelAttribute ProductVO pvo) {
 		log.info("category() 메서드 실행성공");
 		pvo.setAmount(8);
 		
-		 // 세션 정보 사용
-	    MemberVO member = (MemberVO)session.getAttribute("memberLogin");
+		MemberVO member = (MemberVO)session.getAttribute("memberLogin");
+	    log.info("selectProductList() 메서드 실행성공");
+	    
 	    
 	    // 모델 객체에 데이터 전달
 	    model.addAttribute("member", member);
 	    
 	    log.info("member :"+member);
+	    log.info("member.getU_no() :"+member.getU_no());
+			
+		int u_no = member.getU_no();
 		
+		log.info("u_no :"+u_no);
 		
 		List<ProductVO> clist = productService.category(pvo);
 		log.info("category 서비스 완료, clist :"+clist);
@@ -125,6 +168,24 @@ public class ProductController {
 		
 		model.addAttribute("clist",clist);
 		log.info("모델에 clist : " + model.getAttribute("clist"));
+		
+		List<ProductVO> like = productService.selectProductLike(member);
+		log.info(like+"");
+		for (int i = 0; i<clist.size(); i++) {
+			ProductVO ppv = clist.get(i);
+			ProductVO lvo = like.get(i);
+			int p_no = ppv.getP_no();
+			int prod_like = lvo.getProd_like();
+			log.info("p_no :"+p_no + ", prod_like : "+prod_like);
+			ppv.setProd_like(prod_like);
+			//ppv.setProd_like(vo.getProd_like());
+			//like.add(vo);
+			
+		}
+		log.info(like.size()+", "+clist.size());
+		model.addAttribute("like",like);
+		log.info("like :"+like);
+		
 		
 		
 	
@@ -191,11 +252,31 @@ public class ProductController {
 	
 	
 	@PostMapping("/insertProduct")
-	public String insertProduct(Model model,ProductVO pvo) throws Exception {
+	public String insertProduct(HttpSession session, Model model,ProductVO pvo) throws Exception {
+		
+		
+		MemberVO member = (MemberVO)session.getAttribute("memberLogin");
+		
+		model.addAttribute("member",member);
+		  
+		log.info("member :"+member);
+		int u_no = member.getU_no();
+		pvo.setU_no(u_no);
+		log.info("u_no :"+ u_no);
+		log.info("pvo.getU_no :"+pvo.getU_no());
+		
+		int p_no = pvo.getP_no();
+		log.info("p_no :"+ p_no);
+		pvo.setP_no(p_no);
+		log.info("pvo.getP_no :"+pvo.getP_no());
+		
 		
 		int result = productService.insertProduct(pvo);
+		
+		log.info("pvo.getP_no :"+pvo.getP_no());
 		String url=null;
 		log.info("result :"+result);
+		
 		
 		if(result == 1) {
 			url ="redirect:productList";
@@ -208,7 +289,7 @@ public class ProductController {
 
 	@GetMapping(value="/prod_like_in")
 	
-	public String insertProductLike(HttpSession session,Model model,ProductVO pvo) {
+	public String insertProductLike(HttpSession session,Model model, @ModelAttribute ProductVO pvo) {
 		
 		
 		  // 세션 정보 사용 
@@ -217,8 +298,11 @@ public class ProductController {
 		  
 		log.info("member :"+member);
 		String url="";
+		log.info("p_no : "+pvo.getP_no());
+		pvo.setU_no(member.getU_no());
 		int result = productService.insertProductLike(pvo);
 		if (result == 1) {
+			log.info("p_no : "+pvo.getP_no()+", prod_like : "+pvo.getProd_like());
 			url = "redirect:productList";
 		}else {
 			url = "user/product/productError";
@@ -240,10 +324,23 @@ public class ProductController {
 		return url; 
 	}
 	@GetMapping(value="/p_local")
-	public String selectLocal(Model model,ProductVO pvo) {
+	public String selectLocal(HttpSession session, Model model,ProductVO pvo) {
 		
 		pvo.setAmount(8);
 		log.info("selectLocal() 메서드 실행성공");
+		MemberVO member = (MemberVO)session.getAttribute("memberLogin");
+		
+		
+		// 모델 객체에 데이터 전달
+		model.addAttribute("member", member);
+		
+		log.info("member :"+member);
+		log.info("member.getU_no() :"+member.getU_no());
+		
+		int u_no = member.getU_no();
+		
+		log.info("u_no :"+u_no);
+		
 		log.info("pvo :"+ pvo);
 		log.info("pvo.getPageNum :"+ pvo.getPageNum());
 		log.info("pvo.getAmount :"+ pvo.getAmount());
@@ -253,7 +350,31 @@ public class ProductController {
 	  
 	    model.addAttribute("plist", plist);
 	    log.info("model.plist :"+model.getAttribute("plist"));
-	  
+		
+		log.info("서비스 완료, plist :"+plist);
+		
+		log.info("pvo :"+pvo);
+		
+		
+		List<ProductVO> like = productService.selectProductLike(member);
+		log.info(like+"");
+		for (int i = 0; i<plist.size(); i++) {
+			ProductVO ppv = plist.get(i);
+			ProductVO lvo = like.get(i);
+			int p_no = ppv.getP_no();
+			int prod_like = lvo.getProd_like();
+			log.info("p_no :"+p_no + ", prod_like : "+prod_like);
+			ppv.setProd_like(prod_like);
+			//ppv.setProd_like(vo.getProd_like());
+			//like.add(vo);
+			
+		}
+		log.info(like.size()+", "+plist.size());
+		model.addAttribute("like",like);
+		log.info("like :"+like);
+	    
+	    
+	    
 	    int total = productService.productLcoalListCnt(pvo);
 	    log.info("total :"+total);
 	  
@@ -273,24 +394,10 @@ public class ProductController {
 	@GetMapping(value="/myWrite")
 	public String myWrite(HttpSession session,Model model,ProductVO pvo) {
 		
-		MemberVO member = (MemberVO)session.getAttribute("memberLogin");
 		pvo.setAmount(8);
+		MemberVO member = (MemberVO)session.getAttribute("memberLogin");
 		
-
 		  model.addAttribute("member",member);
-		  List<ProductVO> plist = productService.selectLocal(pvo);
-		  log.info("plist :"+plist);
-		  
-		  model.addAttribute("plist", plist);
-		  log.info("model.plist :"+model.getAttribute("plist"));
-		  
-		  int total = productService.productLcoalListCnt(pvo);
-		  log.info("total :"+total);
-		  
-		  model.addAttribute("pageMaker", new PageDTO(pvo, total));
-		  log.info("model.pageMaker :"+model.getAttribute("pageMaker"));
-		  log.info("pageNum :" + pvo.getPageNum());
-
 		  
 		log.info("member :"+member);
 		
@@ -319,23 +426,47 @@ public class ProductController {
 	}
 	
 	@GetMapping(value="/update")
-	public String updateForm(ProductVO pvo,ProductReplyVO prov,Model model) {
+	public String updateForm(HttpSession session, ProductVO pvo,ProductReplyVO prov,Model model) {
+		
 		
 		log.info("updateForm() 메서드 실행성공");
 		
-		ProductVO update = productService.updateForm(pvo);
+		MemberVO member = (MemberVO)session.getAttribute("memberLogin");
+		
+		model.addAttribute("member",member);
+		  
+		log.info("member :"+member);
+		int u_no = member.getU_no();
+		log.info("u_no :"+ u_no);
+		int p_no = pvo.getP_no();
+		log.info("p_no :"+ p_no);
+		ProductVO update = productService.updateForm(u_no,p_no);
 		
 		model.addAttribute("update", update);
+		log.info("update : "+update);
 		
 		List<ProductReplyVO> list = productReplyService.replySelect(prov);
 		
 		model.addAttribute("list",list);
 		
-		return "/user/product/updateForm";
+		return "user/product/updateForm";
 	}
 	
 	@PostMapping("/updateCon")
-	public String update(Model model,ProductVO pvo) throws Exception {
+	public String update(HttpSession session, Model model,ProductVO pvo) throws Exception {
+		
+	MemberVO member = (MemberVO)session.getAttribute("memberLogin");
+		
+		model.addAttribute("member",member);
+		  
+		log.info("member :"+member);
+		int u_no = member.getU_no();
+		pvo.setU_no(u_no);
+		log.info("u_no :"+ u_no);
+		int p_no = pvo.getP_no();
+		log.info("p_no :"+ p_no);
+		pvo.setP_no(p_no);
+		
 		
 		log.info("pvo :"+pvo);
 		int result = productService.update(pvo);
@@ -352,9 +483,24 @@ public class ProductController {
 	}
 	
 	@GetMapping("/pdelete")
-	public String delete(ProductVO pvo) throws Exception {
+	public String delete(HttpSession session,Model model, ProductVO pvo) throws Exception {
+		
+		
 		log.info("delete() 메서드 실행성공");
+		
+		MemberVO member = (MemberVO)session.getAttribute("memberLogin");
+		
+		model.addAttribute("member",member);
+		  
+		log.info("member :"+member);
+		int u_no = member.getU_no();
+		pvo.setU_no(u_no);
+		log.info("u_no :"+ u_no);
+		int p_no = pvo.getP_no();
+		log.info("p_no :"+ p_no);
+		pvo.setP_no(p_no);
 		log.info("pvo :"+pvo);
+		
 		int result = productService.delete(pvo);
 		String url=null;
 		log.info("result :"+result);
@@ -367,4 +513,6 @@ public class ProductController {
 		
 		return url;
 	}
+	
+	
 }
