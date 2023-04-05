@@ -9,7 +9,7 @@
 	$.support.cors = true;
 	
 	
-	
+	 
 	
 	$(function(){
 		$("#confirm").click(function(){
