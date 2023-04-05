@@ -49,7 +49,7 @@ public class AdmNoticeController {
 		List<AdmNoticeVO> noticeList = admNoticeService.eventList(nvo);
 		model.addAttribute("noticeList", noticeList);
 		
-		int total = admNoticeService.noticeListCnt(nvo);
+		int total = admNoticeService.eventListCnt(nvo);
 		model.addAttribute("pageMaker", new PageDTO(nvo, total));
 		
 		return "admin/notice/eventList";

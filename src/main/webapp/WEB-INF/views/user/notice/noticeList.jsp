@@ -123,8 +123,8 @@
 					<th data-value="an_no" class="order text-center col-md-1" >공지글 번호</th>
 					<th class="text-center col-md-1">구분</th>
 					<th class="text-center col-md-1">작성자</th>
-					<th class="text-center col-md-2">제목</th>
-					<th class="text-center col-md-3">등록일</th>
+					<th class="text-center col-md-4">제목</th>
+					<th class="text-center col-md-1">등록일</th>
 					<th data-value="an_cnt" class="order text-center col-md-1">조회수</th>
 				</tr>
 			</thead>

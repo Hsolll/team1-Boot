@@ -16,9 +16,10 @@
 				height: 100px;
 			}
 			.heart {
-			  position: relative;
+			  position: absolute;
  			  width: 50px; 
- 			  height: 50px; 
+ 			  height: 50px;
+ 			  right: 0; 
 			}
 			
 			#full {
@@ -31,10 +32,6 @@
 			}
 			
 			#empty {
-			  position: absolute;
-			  top: 0;
-			  left: 0;
-			  z-index: 2;
 		      width:50px;
 			  height:50px;
 			}
@@ -232,6 +229,7 @@
 				margin-right: -27px;
 			}
 			.prdList > li {
+				position: relative;
 				width: calc(25% - 27px);
 			}
 			.prdList > li > a {
@@ -274,7 +272,12 @@
 				font-size: 19px;
 				font-weight: 100;
 			}
-
+			.w150 {
+				width: 150px !important;
+			}
+			.i-block {
+				display: inline-block !important;
+			}
 
 			
 

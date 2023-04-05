@@ -26,46 +26,50 @@
 	<select id="noticeList" parameterType="admnotice" resultType="admnotice">
 		<![CDATA[
 		SELECT 
-		AN_NO, A_NO, AN_TITLE, AN_CONTENT, AN_CATEGORY, TO_CHAR(AN_CREATED_AT, 'YYYY-MM-DD') AS AN_CREATED_AT, 
-		AN_CNT, AN_THUMBNAIL, AN_FILE, A_NAME
+				AN_NO, A_NO, AN_TITLE, AN_CONTENT, AN_CATEGORY, TO_CHAR(AN_CREATED_AT, 'YYYY-MM-DD') AS AN_CREATED_AT, 
+				AN_CNT, AN_THUMBNAIL, AN_FILE, A_NAME
 		FROM (
 			SELECT /*+ INDEX_DESC(tb_admin_notice tb_admin_notice_pk) */
-				rownum as rnum, an_no, A.a_no as a_no, B.a_name, an_title, an_content, an_category, an_created_at, an_cnt, an_thumbnail, an_file
+					rownum as rnum, an_no, A.a_no as a_no, B.a_name, an_title, an_content, an_category, 
+					an_created_at, an_cnt, an_thumbnail, an_file
 			FROM tb_admin_notice A
 			INNER JOIN tb_admin B
-			ON A.a_no = B.a_no
-		WHERE ]]>
-		<trim prefix="(" suffix=") AND " prefixOverrides="AND">
-			<include refid = "noticeSearch"></include>
-		</trim>
-		<![CDATA[ rownum <= #{pageNum} * #{amount}
-				) noticelist
-		WHERE rnum > (#{pageNum}- 1) * #{amount}
+				ON A.a_no = B.a_no
+			WHERE ]]>
+			<trim prefix="(" suffix=") AND " prefixOverrides="AND">
+				<include refid = "noticeSearch"></include>
+			</trim>
+			<![CDATA[ rownum <= #{pageNum} * #{amount} AND an_category = '[공지사항]'
+			ORDER BY AN_NO DESC ) noticelist
+		WHERE rnum > (#{pageNum} - 1) * #{amount}
 		]]>
-		AND an_category = '[공지사항]'
 	</select>
 	
 	<!-- 이벤트공지사항 게시판 리스트 조회 -->
 	<select id="eventList" parameterType="admnotice" resultType="admnotice">
 		<![CDATA[
 		SELECT 
-		AN_NO, A_NO, AN_TITLE, AN_CONTENT, AN_CATEGORY, TO_CHAR(AN_CREATED_AT, 'YYYY-MM-DD') AS AN_CREATED_AT, 
-		AN_CNT, AN_THUMBNAIL, AN_FILE, A_NAME
+		        an_no, a_no, a_name, an_title, an_content, an_category, 
+		        TO_CHAR(AN_CREATED_AT, 'YYYY-MM-DD') AS AN_CREATED_AT, an_cnt, an_thumbnail, an_file
 		FROM (
-			SELECT /*+ INDEX_DESC(tb_admin_notice tb_admin_notice_pk) */
-				rownum as rnum, an_no, A.a_no as a_no, B.a_name, an_title, an_content, an_category, an_created_at, an_cnt, an_thumbnail, an_file
-			FROM tb_admin_notice A
-			INNER JOIN tb_admin B
-			ON A.a_no = B.a_no
-		WHERE ]]>
-		<trim prefix="(" suffix=") AND " prefixOverrides="AND">
-			<include refid = "eventSearch"></include>
-		</trim>
-		<![CDATA[ rownum <= #{pageNum} * #{amount}
-				) noticelist
-		WHERE rnum > (#{pageNum}- 1) * #{amount}
+		        SELECT
+		                rownum as rnum, an_no, a_no, a_name, an_title, an_content, an_category, 
+		                an_created_at, an_cnt, an_thumbnail, an_file
+		        FROM (
+		                SELECT
+		                        rownum as rnum, an_no, A.a_no, B.a_name, an_title, an_content, an_category, 
+		                        an_created_at, an_cnt, an_thumbnail, an_file
+		                FROM tb_admin_notice A
+		                INNER JOIN tb_admin B
+		                    ON A.a_no = B.a_no
+		                WHERE ]]>
+		                <trim prefix="(" suffix=") AND " prefixOverrides="AND">
+							<include refid = "noticeSearch"></include>
+						</trim>
+		                <![CDATA[ rownum <= #{pageNum} * #{amount} AND an_category = '[이벤트]'
+		                ORDER BY AN_NO DESC) ) noticelist
+		WHERE rnum > (#{pageNum} - 1) * #{amount}
 		]]>
-		AND an_category = '[이벤트]'
 	</select>
 	
 	<!-- 공지사항 등록 -->
@@ -118,10 +122,22 @@
 	</delete>
 	
 	<!-- 전체 레코드 수 조회 -->
+	<select id="eventListCnt" parameterType="admnotice" resultType="int">
+		SELECT count(*) FROM tb_admin_notice
+		WHERE
+		<trim prefix="(" suffix=") AND " prefixOverrides="AND">
+			<include refid = "noticeSearch"></include>
+		</trim>
+		AN_CATEGORY = '[이벤트]'
+	</select>
+	
+	<!-- 전체 레코드 수 조회 -->
 	<select id="noticeListCnt" parameterType="admnotice" resultType="int">
 		SELECT count(*) FROM tb_admin_notice
-		<trim prefix=" where (" suffix=")">
-			<include refid="noticeSearch"></include>
+		WHERE
+		<trim prefix="(" suffix=") AND " prefixOverrides="AND">
+			<include refid = "noticeSearch"></include>
 		</trim>
+		AN_CATEGORY = '[공지사항]'
 	</select>
 </mapper>
