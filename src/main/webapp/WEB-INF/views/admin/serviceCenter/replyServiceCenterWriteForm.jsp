@@ -41,18 +41,24 @@
 			  		<tbody>
 			  				<tr>
 								<th>글번호</th> 
-								<td><input type="text" value="${serviceDetail.sc_no}" readonly="readonly" /></td>
+								<td><input type="text" class="form-control" value="${serviceDetail.sc_no}" readonly="readonly" /></td>
 								<th>작성일</th> 
 								<td>${serviceDetail.sc_created_at}</td> 
 							</tr>
 							<tr>
 								<th>작성자</th>
-								<td colspan="3"><input type="text" value="${serviceDetail.u_name}" readonly="readonly" /></td>
+								<td colspan="3"><input type="text" class="form-control" value="${serviceDetail.u_name}" readonly="readonly" /></td>
 							</tr>
 							<tr>
 								<th>글제목</th>
 								<td colspan="3">
 									<input type="text" class="form-control" name="as_title" id="as_title" value="ㄴ[답글] [${serviceDetail.u_name}]고객님의 문의입니다" readonly="readonly" />
+								</td>
+							</tr>
+							<tr>
+								<th>원글내용</th>
+								<td colspan="3">
+									<input type="text" class="form-control" name="sc_content" id="sc_content" value="${serviceDetail.sc_content}" readonly="readonly" style="height: 30px;" />
 								</td>
 							</tr>
 							<tr>

@@ -12,7 +12,7 @@
 		<script type="text/javascript">
 		let buttonCheck = 0; // 수정버튼과 삭제버튼을 구별하기 위한 변수
 		$(function(){
-			$(".dashboard-wrapper .page-header h1").html("자유게시판 관리");
+			$(".dashboard-wrapper .page-header h1").html("커뮤니티 게시판");
 			 /*삭제 버튼 클릭 시 처리 이벤트 */
 			$("#communityDeleteBtn").click(function(){
 				if(confirm("해당 글을 삭제하시겠습니까?")){
