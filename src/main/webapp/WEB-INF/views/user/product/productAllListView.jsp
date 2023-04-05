@@ -76,7 +76,7 @@
 			<!-- 바로가기 번호 출력 -->
 			<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
 				<li class="paginate_button ${pageMaker.cvo.pageNum == num ? 'active':''}">
-					<a href="#">${num}</a>
+					<a href="#" class="a">${num}</a>
 				</li>
 			</c:forEach>
 	

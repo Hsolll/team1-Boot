@@ -29,6 +29,7 @@ $.support.cors = true;
 			alert("파일을 입력해주세요")
 		}else if(!checkForm("#p_local", "지역")){
 			alert("지역을 입력해주세요")
+			
 		}else{
 			$("#insertConfirm").attr({
 				"method"  : "POST",
