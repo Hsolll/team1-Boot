@@ -143,6 +143,14 @@
 								type:'bar',
 								data: datas,
 								options:{
+									tooltips:{
+										mode:'index',
+										intersect:false
+									},
+									hover:{
+										intersect:false,
+										mode:'index'
+									},
 									responsive:true,
 									scales:{
 										y:[{

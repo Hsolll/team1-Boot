@@ -79,6 +79,13 @@
 						rcolor = parseInt(rcolor);
 						rcolor = rcolor.toString(16);
 						
+						for(let color in colorList){
+							if(rcolor == color){
+								rcolor = Math.random() * 0xffffff;
+								rcolor = parseInt(rcolor);
+								rcolor = rcolor.toString(16);
+							}
+						}
 						colorList.push("#"+rcolor);
 					});
 					
@@ -96,15 +103,9 @@
 						},
 						options : {
 							responsive:true,
-							plugins:{
 								legend:{
-									position : 'top'
-								},
-								title : {
-									display : true,
-									text: '카테고리 통계'
+									position:'left'
 								}
-							}
 						}
 					});
 					
@@ -130,7 +131,18 @@
 										}
 									}
 								]
-							}
+							},
+							legend:{
+								display:false	
+							},
+							tooltips:{
+								mode:'index',
+								intersect:false
+							},
+							hover:{
+								intersect:false,
+								mode:'index'
+							},
 						}
 					});
 				},
@@ -199,8 +211,13 @@
 						options : {
 							maintainAspectRatio:false,
 							responsive:true,
-							interaction:{
-								intersect:true,
+							tooltips:{
+								mode:'index',
+								intersect:false
+							},
+							hover:{
+								intersect:false,
+								mode:'index'
 							},
 							scales : {
 								xAxes:[{
