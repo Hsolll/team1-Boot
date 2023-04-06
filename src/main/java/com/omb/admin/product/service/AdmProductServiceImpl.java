@@ -86,6 +86,12 @@ public class AdmProductServiceImpl implements AdmProductService {
 		 
 		return productDao.selectRejectedCnt(pvo);
 	}
+
+	@Override
+	public ProductVO productDetail(int p_no) {
+		ProductVO detail = productDao.selectProductDetail(p_no);
+		return detail;
+	}
 	
 	
 }
