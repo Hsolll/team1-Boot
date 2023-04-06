@@ -31,7 +31,6 @@ $(".p_no").click(function(){
         	 		<div class="heart ${product.prod_like }">
             		</div>
            </div>
-            <a href="/">
                <div class="imgBox">
                   <c:if test="${not empty product.p_thumb}">
                           <img class="thumb_c p_no" id="${product.p_no}" src="/uploadStorage/product/thumbnail/${product.p_thumb}"/>
@@ -54,7 +53,6 @@ $(".p_no").click(function(){
                      </li>
                   </ul>
                </div>   
-            </a>
          </li>
          </c:forEach>
        </c:when>
