@@ -53,7 +53,6 @@
                      </li>
                   </ul>
                </div>   
-            </a>
          </li>
          </c:forEach>
        </c:when>
