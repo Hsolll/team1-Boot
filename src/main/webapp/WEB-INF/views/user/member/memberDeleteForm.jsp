@@ -2,48 +2,53 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />	
-		<title>Insert title here</title>
-	
-		<link rel="shortcut icon" href="/resources/image/icon.png" />
-		<link rel="apple-touch-icon" href="/resources/image/icon.png" />
-		<link type="text/css" rel="stylesheet" href="/resources/include/css/delete.css" />
-		<!-- <link type="text/css" rel="stylesheet" href="/resources/include/css/myPageSub.css" /> -->
-	
-		<!--[if lt IE 9]>
-		<script src="/resources/js/html5shiv.js"></script>
-		<![endif]-->
-		
-		<link rel="stylesheet" type="text/css" href="/resources/dist/css/bootstrap.min.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/dist/css/bootstrap-theme.css" />
-		
-		<script type="text/javascript" src="/resources/include/js/jquery-3.6.2.min.js"></script>
-		<script type="text/javascript" src="/resources/dist/js/bootstrap.min.js"></script>
-		<script type="text/javascript">
-			$(function(){
-				
-				$("#btn").click(function(){
-					alert("회원탈퇴 되었습니다. 이용해주셔서 감사합니다.");
-								$("#u_status").attr('value','N');
-								$("#memberDelete").attr({
-			    					"method" :"post",
-			    					"action" : "/member/memberDelete"
-			    				})
-			    				$("#memberDelete").submit();
-				})
-			})
-		</script>
-	</head>
-	<body>
-	<form id="memberDelete">
-	<input type="hidden" name="u_no" value="${memberLogin.u_no }" />
-	<input type="hidden" id="u_status" name="u_status" value="${memberLogin.u_status }" />
-	
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" style="margin:0;">
-            <div id="container" style="margin-left: -100px;">
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />   
+      <title>Insert title here</title>
+   
+      <link rel="shortcut icon" href="/resources/image/icon.png" />
+      <link rel="apple-touch-icon" href="/resources/image/icon.png" />
+      <link type="text/css" rel="stylesheet" href="/resources/include/css/delete.css" />
+      <!-- <link type="text/css" rel="stylesheet" href="/resources/include/css/myPageSub.css" /> -->
+   
+      <!--[if lt IE 9]>
+      <script src="/resources/js/html5shiv.js"></script>
+      <![endif]-->
+      
+      <link rel="stylesheet" type="text/css" href="/resources/dist/css/bootstrap.min.css" />
+      <link rel="stylesheet" type="text/css" href="/resources/dist/css/bootstrap-theme.css" />
+      
+      <script type="text/javascript" src="/resources/include/js/jquery-3.6.2.min.js"></script>
+      <script type="text/javascript" src="/resources/dist/js/bootstrap.min.js"></script>
+      <script type="text/javascript">
+         $(function(){
+            
+            $("#btn").click(function(){
+               var result = confirm("탈퇴 하시겠습니까?");
+                 
+                 if(result)
+                 {
+                    $("#u_status").attr('value','N');
+                  $("#memberDelete").attr({
+                      "method" :"post",
+                      "action" : "/member/memberDelete"
+                   })
+                   $("#memberDelete").submit();
+                  alert("회원탈퇴 되었습니다. 이용해주셔서 감사합니다.");
+                 }
+            })   
+         })
+      </script>
+   </head>
+   <body>
+   <form id="memberDelete">
+   <input type="hidden" name="u_no" value="${memberLogin.u_no }" />
+   <input type="hidden" id="u_status" name="u_status" value="${memberLogin.u_status }" />
+   
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" style="margin: 150px;border: 1px solid #baac9a;width: 700px;margin-top: 40px;">
+            <div id="container" style="margin-left: -285px;">
             <div class="join_wrap">
                 <div id="join_container">
                     <div class="join_header">
@@ -101,5 +106,5 @@
             </div>
         </div>
         </form>
-	</body>
+   </body>
 </html>
