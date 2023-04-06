@@ -1,20 +1,10 @@
 .member_header {
     position: relative;
     z-index: 1;
-    padding-bottom: 28px;
+    padding-bottom: 7px;
     margin-bottom: 41px;
-    border-bottom: 1px solid #333;
 }
-    .member_header .tit {
-    font-size: 26px;
-    color: #111;
-    line-height: 28px;
-    font-family: "Noto Sans KR", "Helvetica Neue", "Apple SD Gothic Neo", "맑은 고딕", "Malgun Gothic", "돋움", dotum, sans-serif;
-    }
 
-    h1, h2, h3, h4, h5, h6 {
-    font-size: 100%;
-}
 
 .body_extend .member_wrap {
     width: 960px;
@@ -38,29 +28,6 @@ h1 {
     font-weight: bold;
 }
 
-.sp_login.logo_11st_s {
-    width: 64px;
-    height: 28px;
-    margin-right: 10px;
-    vertical-align: bottom;
-    width: 64px;
-    height: 28px;
-    background-image: url(/img/svg/logo/11st.svg);
-    background-size: 64px 28px;
-}
-
-em{
-	font-size:10px;
-	color: #0b83e6;
-}
-
-.sp_login {
-    background-image: url(/img/member/sp_login.png);
-    background-repeat: no-repeat;
-    display: inline-block;
-    overflow: hidden;
-    line-height: 200px;
-}
 
 a {
     color: #4d4d4d;
@@ -75,17 +42,17 @@ a {
 .find_main {
     width: 480px;
     margin: 0 auto;
+    border: 1px solid #baac9a;
 }
 
 .find_main .tab {
     padding-bottom: 40px;
     zoom: 1;
-    display:inline-flex;
 }
 
 .find_main .tab li {
     float: left;
-    width: 238px;
+    width: 239px;
     border: 1px solid #ddd;
     border-bottom: 1px solid #baac9a;
     background-color: #fafafa;
@@ -101,9 +68,9 @@ li {
 }
 
 .find_main .tab li.on {
-    border-color: #baac9a;
     border-bottom: 1px solid #fff;
     background-color: #fff;
+    border-left: 0px;
 }
 
 .find_main .tab:after {
@@ -127,12 +94,12 @@ li {
     overflow: hidden;
 }
 
-.find_main .seller_guide {
+.find_main .guide {
     margin-bottom: 12px;
     padding: 0 26px;
 }
 
-.find_main .seller_guide li {
+.find_main .guide li {
     position: relative;
     padding-left: 9px;
     font-size: 13px;
@@ -170,16 +137,11 @@ legend {
     line-height: 0;
     position: absolute;
     margin-left: -20px;
-    border: 0 !important;
 }
 
 body, h1, h2, h3, h4, h5, h6, p, ul, ol, dl, dd, form, fieldset, pre, figure, blockquote, input, button, textarea {
     padding: 0;
     margin: 0;
-}
-
-.join_write{
-	margin: 0 25px;
 }
 
 .join_write > li {
@@ -225,7 +187,7 @@ body, h1, h2, h3, h4, h5, h6, p, ul, ol, dl, dd, form, fieldset, pre, figure, bl
 }
 
 .btn_Atype {
-    width: 428px;
+    width: 100%;
     display: inline-block;
     text-align: center;
     font-size: 17px;
