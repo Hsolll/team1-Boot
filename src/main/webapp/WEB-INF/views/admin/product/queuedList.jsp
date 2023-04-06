@@ -37,14 +37,14 @@
 				});
 				
 				$(".goDetail").click(function(){
-					let b_num = $(this).parents("tr").attr("data-num");
+					let p_no = $(this).parents("tr").attr("data-num");
 					$("#p_no").val(p_no);
 					
-					$("#detailForm").attr({
+					$("#proForm").attr({
 						"method":"get",
 						"action":"/admin/product/productDetail"
 					});
-					$("#detailForm").submit();
+					$("#proForm").submit();
 				});
 				
 				$(".page-item a").click(function(e){
@@ -160,7 +160,7 @@
 												</c:if>
 											</td>
 											<td class="goDetail text-left">${product.p_title }</td>
-											<td class="name">${product.p_name }</td>
+											<td class="goDetail name">${product.p_name }</td>
 											<td class="text-center">${product.p_price }</td>
 											<td class="text-center">${product.p_created_at }</td>		
 										</tr>

@@ -1,14 +1,15 @@
 
 h2{
-	
-	color: rgb(121, 131, 146);
-	font-weight: bold;
+	/* color: rgb(121, 131, 146); */
+	color: #000;
+	font-size: 24px;
 }
+
+/* 
 table{
 	border:1px solid black;
-	width: 1500px;
 }
-	
+*/	
 	
 select{
 	
@@ -77,8 +78,7 @@ input#price-input{
 	
 }
 #free{
-	
-	width: 40px;
+	/* width: 40px; */
 	margin :0px;
 }
 .free-t{
@@ -124,4 +124,42 @@ input#price-input{
 }	
 #name.ma{
 	width:  100%;
+}
+
+.ht34 {
+	height: 34px !important;
+}
+.w150 {
+	width:150px;
+}
+.w130 {
+	width:130px;
+}
+.w300 {
+	width: 300px;
+}
+.i-block {
+	display: inline-block;
+}
+.insertTbl {
+	margin-top: 30px;
+	width: 100%;
+	table-layout: fixed;
+}
+.insertTbl th {
+	padding: 8px 10px;
+	font-size: 16px;
+}
+.insertTbl td {
+	padding: 8px 10px;
+	font-size: 16px;
+
+#p_status{
+	color: rgb(121, 131, 146);
+	width: 100%;
+	font-size:20px;
+}
+.st1{
+	
+	width: 30%;
 }

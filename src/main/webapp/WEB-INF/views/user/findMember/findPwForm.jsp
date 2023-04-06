@@ -13,8 +13,8 @@
 	
 		<link rel="shortcut icon" href="/resources/images/common/icon.png" />
 		<link rel="apple-touch-icon" href="/resources/images/common/icon.png" />
-		<!-- <link type="text/css" rel="stylesheet" href="/resources/include/css/findMember.css" /> -->
-		<link type="text/css" rel="stylesheet" href="/resources/include/css/Member.css" />
+		<link type="text/css" rel="stylesheet" href="/resources/include/css/findMemberPw.css" />
+	
 	
 		<!--[if lt IE 9]>
 		<script src="/resources/js/html5shiv.js"></script>
@@ -78,7 +78,7 @@
                     <li class="on"><a href="/member/findPw">비밀번호 찾기</a></li>
                 </ul>
                           
-                <section style="display: block;">
+                <section style="display: block; margin-top: 10px;">
                     <ul class="guide">
                         <li>* 가입 시 입력한 <em>이름, 아이디. 이메일</em>로 비밀번호를 찾을 수 있습니다.</li>
                         <li>* 가입 시 입력한 <em>이메일</em>로 인증번호가 전송됩니다.</li>
