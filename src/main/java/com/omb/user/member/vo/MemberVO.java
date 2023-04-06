@@ -22,6 +22,7 @@ public class MemberVO extends CommonVO {
 	private String u_status;  //회원상태
 	private String u_created_at; //회원가입일
 	private String u_update_at;  //회원수정일
+	private String u_type;		// 로그인 분류 (네이버/카카오/일반)
 	
 	
 	private String p_buyid;
@@ -29,6 +30,7 @@ public class MemberVO extends CommonVO {
 	private String zip = " "; // 우편번호
 	private String address = " "; // 주소
 	private String sub_address = " "; // 상세주소
+	private String add_name=" ";	// 배송지 이름
 	
 	private long n_number;	
 	private String n_age;

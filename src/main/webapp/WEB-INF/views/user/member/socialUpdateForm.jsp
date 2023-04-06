@@ -14,8 +14,7 @@
       <link rel="shortcut icon" href="/resources/images/common/icon.png" />
       <link rel="apple-touch-icon" href="/resources/images/common/icon.png" />
       <link type="text/css" rel="stylesheet" href="/resources/include/css/memberUpdateForm.css" />
-      
-      
+   
       <!--[if lt IE 9]>
       <script src="/resources/js/html5shiv.js"></script>
       <![endif]-->
@@ -62,34 +61,6 @@
          }
       })
       
-      
-      
-      
-      
-      $('#u_email').keyup(function(){
-         if(getEmailChk.test($(this).val())){
-            //$('#emailCheck').html('사용가능합니다. 중복확인 해주세요.').css('color','green');
-            $("#btn5").attr("value","N");
-            $('#btn5').attr("disabled", false);
-            $('#btn4').attr("disabled", true);
-            chk6=false;
-         }else{
-            //$('#emailCheck').html('올바른 이메일을 입력해주세요').css('color','red');
-            $('#btn5').attr("disabled", true);
-            $('#btn4').attr("disabled", true);
-            $("#btn5").attr("value","N");
-            chk6 =true;
-         }
-         
-         if($(this).val() === ''){
-            $('#emailCheck').html('');
-            $('#btn5').attr("disabled", true);
-            $('#btn4').attr("disabled", true);
-            $("#btn5").attr("value","N");
-            chk6 =true;
-         }
-      })
-      
       $('#u_phone').keyup(function(){
          if(getPhoneChk.test($(this).val())){
             //$('#phoneCheck').html('사용가능합니다').css('color','green');
@@ -110,29 +81,7 @@
             chk7 =true;
          }
       })
-      
-      $("#u_emailCheck").keyup(function(){
-             var inputCode = $("#u_emailCheck").val();        // 입력코드    
-              var checkResult = $("#emailCodeCheck");    // 비교 결과
-              
-              if(inputCode == code){                            // 일치할 경우
-                  checkResult.html("인증번호가 일치합니다.").css('color','green');
-                  checkResult.attr("class", "correct");
-                  $("#btn4").attr("value","Y");
-                  chk8=false;
-              } else {                                            // 일치하지 않을 경우
-                  checkResult.html("인증번호를 다시 확인해주세요.").css('color','red');;
-                  checkResult.attr("class", "incorrect");
-                  chk8=true;
-              } 
-              if($(this).val() === ''){
-                //$('#emailCodeCheck').html('');
-                chk8=true;
-             
-             }
-              
-          });
-          
+
       $("#btn2").click(function(){
          $.ajax({
             url : "/member/nickChk",
@@ -208,47 +157,6 @@
          daumAddress();
       })
       
-      $("#btn4").click(function(){
-             
-             var email = $("#u_email").val();
-             var checkBox = $("#emailCheck");        // 인증번호 입력란    
-             $.ajax({
-                  
-                  type:"GET",
-                  url:"/member/updateMailCheck?email=" + email,
-                  success:function(data){
-                      //console.log("data : " + data);
-                     //checkBox.attr("disabled",false);
-                     code = data;
-                     alert("이메일로 인증번호를 전송하였습니다.");
-                  }
-                          
-              });
-         });
-      
-      $("#btn5").click(function(){
-         $.ajax({
-            url : "/member/emailChk",
-            type : "post",
-            dataType : "json",
-            data : {"u_email" : $("#u_email").val()},
-            success : function(data){
-               if(data == 1){
-                  alert("중복된 이메일입니다.");
-                  $('#btn4').attr("disabled", true);
-                  chk6 =true;
-               }else if(data == 0){
-                  $("#btn5").attr("value","Y");
-                  alert("사용가능한 이메일입니다.");
-                  $('#btn5').attr("disabled", true);
-                   $('#btn4').attr("disabled", false);
-                   $("#btn4").attr("value","N");
-                  
-                  chk6 =false;
-               }
-            }
-         })
-      })
       
       $("#btn6").click(function(){
              $.ajax({
@@ -270,25 +178,16 @@
             })
           })
       
-          $("#btn").click(function(){         
-             if($("#btn2").val()==="Y" && $("#btn4").val()==="Y" && $("#btn5").val()==="Y" && $("#btn6").val()==="Y"  && !chk2 && !chk3 && !chk6 && !chk7&& !chk8){
-               var result = confirm("수정 하시겠습니까?");
-                 
-                 if(result)
-                 {
-                    $("#update").attr({
-                      "method" :"post",
-                      "action" : "/member/memberUpdate"
-                   })
-                   $("#update").submit(); 
-                    alert("회원수정이 완료되었습니다.");
-                 }               
+          $("#btn").click(function(){   
+             if($("#btn2").val()==="Y"&& $("#btn6").val()==="Y"  && !chk2&& !chk7){
+                alert("회원수정이 완료되었습니다.");
+                $("#update").attr({
+                   "method" :"post",
+                   "action" : "/member/memberUpdate"
+                })
+                $("#update").submit();               
              }else if($("#btn2").val()==="N"){
                  alert("닉네임 중복확인해주세요");
-              }else if($("#btn4").val()==="N"){
-                 alert("이메일 인증 해주세요");
-              }else if($("#btn5").val()==="N"){
-                 alert("이메일 중복확인해주세요");
               }else if($("#btn6").val()==="N"){
                  alert("휴대폰번호 중복확인해주세요");
               }
@@ -301,40 +200,30 @@
        })
       </script>
    </head>
-   <body>   
-      <form id="update">       
+   <body>
+      <form id="update">
          <input type="hidden" name="u_no" value="${memberLogin.u_no }" />
-         <input type="hidden" name="u_id" value="${memberLogin.u_id }" />
-         <div class="member_wrap">     
-            <header class="member_header"></header>          
-                   <div class="find_main" style="height: 710px;">
-                    <ul class="tab" style="height:70px;">
-                       <li class="on"><a id="tab1">회원수정</a></li>
-                       <li><a href="/member/pwdChkForm2" id="tab2">비밀번호수정</a></li>
-                   </ul> 
-                       <section style="display: block;">
-                       <ul class="guide">
-                            <li></li>
-                        </ul> 
-                        <fieldset class="form_box">                    
+         <input type="hidden" name="u_id" value="${update.u_id }" />
+            <div class="member_wrap">     
+            <header class="member_header"></header>  
+            <div class="find_main" style="height: 630px;">
+                       <ul class="tab" style="height:70px;">
+                          <li class="on"><a id="tab1">회원수정</a></li>
+                          <li><a id="tab2">주소관리</a></li>
+                      </ul>                            
+                   <section id="sectionBsns"> 
+                        <fieldset class="form_box" style="margin: 0px auto 0;">
                             <div class="join_write">
                             <ul>
+                               <li>
+                                    이메일<em style="color:red">*</em><br />
+                                    <input type="text" name="u_email" id="u_email" class="inp" maxlength="100" value="${update.u_email }" readonly="readonly"/>
+                                </li>
                                 <li>
                                     닉네임<br />
                                     <input type="text" name="u_nick" id="u_nick" class="signcheck" placeholder="닉네임" maxlength="100" value="${ update.u_nick}" />
                                     <button type="button" id="btn2" class="signbutton" style="float:right" disabled="disabled" value="Y" >중복확인</button>
                                     <span id="nickCheck"><em style="color: #0b83e6">2~10 자의 영문 소문자,대문자, 한글, 숫자 조합</em></span> <br />
-                                </li>
-                                <li>
-                                    이메일<br />
-                                    <input type="text" name="u_email" id="u_email" class="signcheck" placeholder="이메일" maxlength="100" value="${ update.u_email}" />
-                                    <button type="button" id="btn5" class="signbutton" style="float:right" disabled="disabled" value="Y" >중복확인</button>
-                                </li>
-                                <li>
-                                    인증번호<br />
-                                    <input type="text" name="u_emailCheck" id="u_emailCheck" class="signcheck" placeholder="인증번호" maxlength="100" />
-                                    <button type="button" id="btn4" class="signbutton" style="float:right" disabled="disabled" value="Y" >인증받기</button><br />
-                                    <span id="emailCodeCheck"></span> 
                                 </li>
                                 <li>
                                     휴대폰번호<br />
@@ -356,9 +245,9 @@
                             </div>
                             </div>
                         </fieldset>
-                    </section>
-                 </div>
-                 </div>
+                      </section>
+            </div>
+                </div>
             </form>
    </body>
 </html>

@@ -4,56 +4,56 @@
   
 <tiles-definitions>
 
-	<definition name="intro" template="/WEB-INF/views/template/user/mainLayout.jsp">
-		<put-attribute name="title" value="OhMybaby" />
-		<put-attribute name="header" value="/WEB-INF/views/template/user/header.jsp" />
-		<put-attribute name="footer" value="/WEB-INF/views/template/user/footer.jsp" />
-	</definition>
+   <definition name="intro" template="/WEB-INF/views/template/user/mainLayout.jsp">
+      <put-attribute name="title" value="OhMybaby" />
+      <put-attribute name="header" value="/WEB-INF/views/template/user/header.jsp" />
+      <put-attribute name="footer" value="/WEB-INF/views/template/user/footer.jsp" />
+   </definition>
 
-	<definition name="content" template="/WEB-INF/views/template/user/contentLayout.jsp">
-		<put-attribute name="title" value="" />
-		<put-attribute name="header" value="/WEB-INF/views/template/user/header.jsp" />
- 		<put-attribute name="body" value="" />
-		<put-attribute name="footer" value="/WEB-INF/views/template/user/footer.jsp" />		
-	</definition>
-	
-	<definition name="myPage" template="/WEB-INF/views/template/user/myPageLayout.jsp">
-		<put-attribute name="title" value="" />
-		<put-attribute name="header" value="/WEB-INF/views/template/user/header.jsp" />
-		<put-attribute name="left" value="/WEB-INF/views/template/user/left.jsp" />
- 		<put-attribute name="body" value="" />
-		<put-attribute name="footer" value="/WEB-INF/views/template/user/footer.jsp" />		
-	</definition>
-	
-	<definition name="user/login/*" extends="content">
-		<put-attribute name="title" value="" />
-		<put-attribute name="body" value="/WEB-INF/views/user/login/{1}.jsp" /> 
-	</definition>
-	
-	<definition name="user/member/*" extends="myPage">
-		<put-attribute name="title" value="" />
-		<put-attribute name="body" value="/WEB-INF/views/user/member/{1}.jsp" /> 
-	</definition>
-	
-	<definition name="user/findMember/*" extends="content">
-		<put-attribute name="title" value="" />
-		<put-attribute name="body" value="/WEB-INF/views/user/findMember/{1}.jsp" /> 
-	</definition>
-	
-	<definition name="user/myPage/*" extends="myPage">
-		<put-attribute name="title" value="" />
-		<put-attribute name="body" value="/WEB-INF/views/user/myPage/{1}.jsp" /> 
-	</definition>
-	
-	<definition name="user/safeProduct/*" extends="content">
-		<put-attribute name="title" value="" />
-		<put-attribute name="body" value="/WEB-INF/views/user/safeProduct/{1}.jsp" /> 
-	</definition>
-	
-	<definition name="user/orderInfo/*" extends="content">
-		<put-attribute name="title" value="" />
-		<put-attribute name="body" value="/WEB-INF/views/user/orderInfo/{1}.jsp" /> 
-	</definition>	
+   <definition name="content" template="/WEB-INF/views/template/user/contentLayout.jsp">
+      <put-attribute name="title" value="" />
+      <put-attribute name="header" value="/WEB-INF/views/template/user/header.jsp" />
+       <put-attribute name="body" value="" />
+      <put-attribute name="footer" value="/WEB-INF/views/template/user/footer.jsp" />      
+   </definition>
+   
+   <definition name="myPage" template="/WEB-INF/views/template/user/myPageLayout.jsp">
+      <put-attribute name="title" value="마이페이지" />
+      <put-attribute name="header" value="/WEB-INF/views/template/user/header.jsp" />
+      <put-attribute name="left" value="/WEB-INF/views/template/user/left.jsp" />
+       <put-attribute name="body" value="" />
+      <put-attribute name="footer" value="/WEB-INF/views/template/user/footer.jsp" />      
+   </definition>
+   
+   <definition name="user/login/*" extends="content">
+      <put-attribute name="title" value="" />
+      <put-attribute name="body" value="/WEB-INF/views/user/login/{1}.jsp" /> 
+   </definition>
+   
+   <definition name="user/member/*" extends="myPage">
+      <put-attribute name="title" value="" />
+      <put-attribute name="body" value="/WEB-INF/views/user/member/{1}.jsp" /> 
+   </definition>
+   
+   <definition name="user/findMember/*" extends="content">
+      <put-attribute name="title" value="" />
+      <put-attribute name="body" value="/WEB-INF/views/user/findMember/{1}.jsp" /> 
+   </definition>
+   
+   <definition name="user/myPage/*" extends="myPage">
+      <put-attribute name="title" value="마이페이지" />
+      <put-attribute name="body" value="/WEB-INF/views/user/myPage/{1}.jsp" /> 
+   </definition>
+   
+   <definition name="user/safeProduct/*" extends="content">
+      <put-attribute name="title" value="" />
+      <put-attribute name="body" value="/WEB-INF/views/user/safeProduct/{1}.jsp" /> 
+   </definition>
+   
+   <definition name="user/orderInfo/*" extends="content">
+      <put-attribute name="title" value="" />
+      <put-attribute name="body" value="/WEB-INF/views/user/orderInfo/{1}.jsp" /> 
+   </definition>   
 
 	<definition name="user/serviceCenter/faq/*" extends="content">
 		<put-attribute name="title" value="자주하는 문의" />

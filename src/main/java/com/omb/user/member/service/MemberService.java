@@ -3,8 +3,12 @@ package com.omb.user.member.service;
 import com.omb.user.member.vo.MemberVO;
 
 public interface MemberService {
-	public void signUp(MemberVO mvo);
 	
+	public void signUp(MemberVO mvo);
+	public void naverSignUp(MemberVO mvo);
+	public void kakaoSignUp(MemberVO mvo);
+
+	   
 	public MemberVO myPage(MemberVO mvo);
 	
 	public void memberUpdate(MemberVO mvo);
