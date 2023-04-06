@@ -76,5 +76,8 @@
 		<put-attribute name="title" value="중고마켓" />
 		<put-attribute name="body" value="/WEB-INF/views/user/product/{1}.jsp" /> 
 	</definition>
-	
+	<definition name="error/*" extends="content">
+		<put-attribute name="title" value=""/>
+		<put-attribute name="body" value="/WEB-INF/views/error/{1}.jsp" />
+	</definition>
 </tiles-definitions>
