@@ -272,7 +272,7 @@ tr {
 }
 
 tbody{
-	text-align:center;
+   text-align:center;
 }
 .mytmall_tbl1 .orderProdInfo_v2 .cont p a {
     overflow: hidden;
@@ -390,5 +390,6 @@ div.shopinfo_wrap .shop_box ul li {
     box-sizing: border-box;
 }
 
-
-
+.required{
+   color:red;
+}
