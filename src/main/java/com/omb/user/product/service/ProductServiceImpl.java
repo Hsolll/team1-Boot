@@ -156,18 +156,22 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<ProductVO> selectProductBuyList(MemberVO mvo) {
-		List<ProductVO> productBuyList = productDao.selectProductBuyList(mvo);
-		
-		 return productBuyList;
-	}
+   public List<ProductVO> selectProductBuyList(ProductVO pvo) {
+      List<ProductVO> productBuyList = null;
+      productBuyList=productDao.selectProductBuyList(pvo);
+      
+       return productBuyList;
+   }
 
-	@Override
-	public List<ProductVO> selectProductSellList(MemberVO mvo) {
-		List<ProductVO> productSellList = productDao.selectProductSellList(mvo);
-		
-		 return productSellList;
-	}
+
+	 @Override
+	   public List<ProductVO> selectProductSellList(ProductVO pvo) {
+	      List<ProductVO> productSellList = null;
+	      productSellList=productDao.selectProductSellList(pvo);
+	      
+	       return productSellList;
+	   }
+
 
 	@Override
 	public List<ProductVO> selectProductLikeList(MemberVO mvo) {
@@ -175,18 +179,42 @@ public class ProductServiceImpl implements ProductService {
 		
 		 return productLikeList;
 	}
+	
+	@Override
+	   public List<ProductVO> selectProductMyPageLikeList(ProductVO pvo) {
+	      List<ProductVO> productMyPageLikeList = null;
+	      productMyPageLikeList=productDao.selectProductMyPageLikeList(pvo);
+	      return productMyPageLikeList;
+	   }
 
 	@Override
-	public int productMyPageListCnt(ProductVO pvo) {
-		return productDao.productMyPageListCnt(pvo);
-	}
-
+	   public int productMyPageListCnt(ProductVO pvo) {
+	      return productDao.productMyPageListCnt(pvo);
+	   }
+	
 	@Override
-	public List<ProductVO> selectProductMyPageList(MemberVO mvo) {
-		List<ProductVO> productMyPageList = productDao.selectProductMyPageList(mvo);
-		
-		 return productMyPageList;
-	}
+	   public int productMyPageLikeListCnt(ProductVO pvo) {
+	      
+	      return productDao.productMyPageLikeListCnt(pvo);
+	   }
+
+
+
+	  @Override
+	   public int productMyPageBuyListCnt(ProductVO pvo) {
+	      
+	      return productDao.productMyPageBuyListCnt(pvo);
+
+	   }
+
+	
+	  @Override
+	   public List<ProductVO> selectProductMyPageList(ProductVO pvo) {
+	      List<ProductVO> productMyPageList = null;
+	      productMyPageList = productDao.selectProductMyPageList(pvo);
+	      
+	       return productMyPageList;
+	   }
 
 //	@Override
 //	public List<ProductVO> selectProductLike(int p_no, int u_no) {

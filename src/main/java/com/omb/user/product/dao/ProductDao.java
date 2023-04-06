@@ -11,10 +11,17 @@ import com.omb.user.product.vo.ProductVO;
 public interface ProductDao {
 
 	public List<ProductVO> selectProductList(ProductVO pvo);
-	public List<ProductVO> selectProductBuyList(MemberVO mvo);
-	public List<ProductVO> selectProductSellList(MemberVO mvo);
-	public List<ProductVO> selectProductLikeList(MemberVO mvo);
-	public List<ProductVO> selectProductMyPageList(MemberVO mvo);
+	public List<ProductVO> selectProductBuyList(ProductVO pvo);
+    public List<ProductVO> selectProductSellList(ProductVO pvo);
+    public List<ProductVO> selectProductMyPageLikeList(ProductVO pvo);
+    public List<ProductVO> selectProductLikeList(MemberVO mvo);
+    public List<ProductVO> selectProductMyPageList(ProductVO pvo);
+    
+    public int productMyPageListCnt(ProductVO pvo);
+    public int productMyPageBuyListCnt(ProductVO pvo);
+    public int productMyPageLikeListCnt(ProductVO pvo);
+    
+    
 
 	public void productStatus(ProductVO pvo);
 	
@@ -29,8 +36,6 @@ public interface ProductDao {
 	public List<ProductVO> category(ProductVO pvo);
 
 	public int productListCnt(ProductVO pvo);
-	
-	public int productMyPageListCnt(ProductVO pvo);
 
 	public int productCateListCnt(ProductVO pvo);
 
