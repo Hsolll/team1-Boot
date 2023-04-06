@@ -61,8 +61,7 @@
 						<th scope="row">거래방법</th>
 						<td>
 							<select class="form-control w300 i-block" name="trans_method">
-								<option value=""  selected>거래방법을 선택하세요</option>
-								<option value="직거래+택배거래" >직거래+택배거래</option>
+								<option value="직거래+택배거래" selected>직거래+택배거래</option>
 								<option value="직거래" >직거래</option>
 								<option value="택배거래">택배거래</option>
 							</select>

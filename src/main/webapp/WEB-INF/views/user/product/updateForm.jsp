@@ -23,14 +23,12 @@
 				alert("제목을 입력해주세요")
 			}else if(!checkForm("#p_name", "상품이름")){
 				alert("상품이름을 입력해주세요")
-			}else if(!checkForm("#p_price", "가격")){
+			}else if(!checkForm("#pprice-input", "가격")){
 				alert("가격을 입력해주세요")
 			}else if(!checkForm("#p_content", "상세정보")){
 				alert("상세정보를 입력해주세요")
 			}else if(!checkForm("#file", "파일")){
 				alert("파일을 입력해주세요")
-			}else if(!checkForm("#trans_method", "거래방법")){
-				alert("거래방법 입력해주세요")
 			}else if(!checkForm("#p_local", "지역")){
 				alert("지역을 입력해주세요")
 			}else{
@@ -168,9 +166,9 @@
 		$(document).ready(function() {
 		  $("#free").change(function() {
 		    if($(this).is(":checked")) {
-	      		$("#price-input").val(0).prop("readonly","true");
+	      		$("#pprice-input").val(0).prop("readonly","true");
 		    }else{
-		    	$("#price-input").val("").prop("placeholer","상품 가격을 입력하세요").removeAttr("readonly");
+		    	$("#pprice-input").val("").prop("placeholer","상품 가격을 입력하세요").removeAttr("readonly");
 		      }
 		  });
 		});
@@ -191,7 +189,7 @@
 			<input  type="hidden" id="p_local3"  readonly/><br>
 			<input  type="hidden" id="p_local" name="p_local" value="${update.p_local}" readonly />
 			<input type=hidden name="p_adm_per" id="p_adm_per" value="1"/>
-		</form>
+		
 		
 			<h2 class="text-left">게시물 수정</h2>
 			<table class="insertTbl">
@@ -229,7 +227,7 @@
 						</td>
 						<th scope="row">상품가격</th>
 						<td>
-							<input type="text" class="form-control w300 i-block ht34" id="p_price" name="p_price" value="${update.p_price }" placeholder="상품가격을 입력해주세요">
+							<input type="number" class="form-control w300 i-block ht34" id="pprice-input" name="p_price" value="${update.p_price }" placeholder="상품가격을 입력해주세요">
 							<input type="checkbox" id="free" name="p_free" value="1">
 							<label class="media-middle" style="margin-bottom: 0px;" for="free">무료나눔</label>
 						</td>
@@ -238,8 +236,7 @@
 						<th scope="row">거래방법</th>
 						<td>
 							<select class="form-control w300 i-block" name="trans_method">
-								<option value=""  selected>거래방법을 선택하세요</option>
-								<option value="직거래+택배거래" >직거래+택배거래</option>
+								<option value="직거래+택배거래" selected>직거래+택배거래</option>
 								<option value="직거래" >직거래</option>
 								<option value="택배거래">택배거래</option>
 							</select>
@@ -284,5 +281,6 @@
 				<button type="button" class="btn btn-dark" id="pconfirm">수정</button>
 				<button type="button" class="btn btn-dark" id="productListBtn">목록으로</button>
 			</div>
+		</form>
 	</body>
 </html>

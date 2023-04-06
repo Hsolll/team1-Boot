@@ -153,13 +153,4 @@ input#price-input{
 .insertTbl td {
 	padding: 8px 10px;
 	font-size: 16px;
-
-#p_status{
-	color: rgb(121, 131, 146);
-	width: 100%;
-	font-size:20px;
-}
-.st1{
-	
-	width: 30%;
 }
