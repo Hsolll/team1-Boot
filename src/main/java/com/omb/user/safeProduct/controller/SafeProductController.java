@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.omb.common.vo.PageDTO;
+import com.omb.user.account.service.AccountService;
+import com.omb.user.account.vo.AccountVO;
 import com.omb.user.address.service.MemberAddressService;
 import com.omb.user.address.vo.MemberAddressVO;
 import com.omb.user.member.vo.MemberVO;
@@ -35,6 +37,8 @@ public class SafeProductController {
 	@Setter(onMethod_ = @Autowired)
 	private MemberAddressService memberAddressService;
 	
+	@Setter(onMethod_ = @Autowired)
+	private AccountService accountService;
 	
 	/* 안심거래 상품목록 조회 */
 	@GetMapping("/productList")
@@ -67,6 +71,7 @@ public class SafeProductController {
 		// 전체 레코드 조회
 		SafeProductVO detail = safeProductService.selectSafeProductDetail(spvo);
 		model.addAttribute("detail", detail);
+		log.info("detail : " + detail);
 		
 		return "user/safeProduct/safeProductDetail";
 	}
@@ -107,6 +112,10 @@ public class SafeProductController {
 		List<ProductVO> list = safeProductService.selectProductList(mvo);
 		
 		model.addAttribute("productList", list);
+		
+		AccountVO account = accountService.selectAccount(mvo);
+		
+		model.addAttribute("account", account);
 		
 		return "user/safeProduct/safeProductInsertView";
 	}

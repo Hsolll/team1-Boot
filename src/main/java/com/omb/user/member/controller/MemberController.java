@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.omb.admin.serviceCenter.service.AdmServiceCenterService;
 import com.omb.admin.serviceCenter.vo.AdmServiceCenterVO;
 import com.omb.common.vo.PageDTO;
+import com.omb.user.address.service.MemberAddressService;
+import com.omb.user.address.vo.MemberAddressVO;
 import com.omb.user.member.service.MemberService;
 import com.omb.user.member.vo.MemberVO;
 import com.omb.user.product.service.ProductService;
@@ -49,6 +51,9 @@ public class MemberController {
 	
 	@Setter(onMethod_=@Autowired)
 	private AdmServiceCenterService admserviceCenter;
+	
+	@Setter(onMethod_ = @Autowired)
+	private MemberAddressService memberAddressService;
 	
 	@Autowired
     private JavaMailSender mailSender;
@@ -622,4 +627,20 @@ public class MemberController {
 		}
 		return "user/myPage/myPageIndex";
 	}
+    
+    @GetMapping("/addressCheck")
+    public String addressCheck(HttpSession session, Model model) {
+    	
+    	MemberVO mvo = (MemberVO)session.getAttribute("memberLogin");
+    	
+    	log.info("세션에서 꺼내온 정보 : " + mvo);
+    	
+    	List<MemberAddressVO> list = memberAddressService.memberAddressInfoAll(mvo);
+    	
+    	log.info("조회 후 결과 : " + list);
+    	
+    	model.addAttribute("addressList", list);
+    	
+    	return "user/myPage/myPageAddressInfo";
+    }
 }

@@ -9,7 +9,7 @@
 	$.support.cors = true;
 	
 	
-	
+	 
 	
 	$(function(){
 		$("#pconfirm").click(function(){
@@ -29,6 +29,8 @@
 				alert("상세정보를 입력해주세요")
 			}else if(!checkForm("#file", "파일")){
 				alert("파일을 입력해주세요")
+			}else if(!checkForm("#trans_method", "거래방법")){
+				alert("거래방법 입력해주세요")
 			}else if(!checkForm("#p_local", "지역")){
 				alert("지역을 입력해주세요")
 			}else{
@@ -180,6 +182,7 @@
 </script>
 </head>
 	<body>
+
 		<form id="insertConfirm">
 			<input type="hidden" name="u_no" placeholder="유저번호" value="${member.u_no}"/>
 			<input type="hidden" name="p_no" placeholder="상품번호" value="${update.p_no}"/>
@@ -274,6 +277,7 @@
 						</td>
 					</tr>
 				</tbody>
+						
 			</table>
 			
 			<div class="btnArea text-right">

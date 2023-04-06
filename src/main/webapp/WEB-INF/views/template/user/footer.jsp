@@ -36,15 +36,15 @@
 	<div class="footer_right">
 		<ul>
 			<li class="sns">
-				<a href=""><img src="/resources/include/img/sns-ico1.png" alt=""></a>
-				<a href=""><img src="/resources/include/img/sns-ico2.png" alt=""></a>
-				<a href=""><img src="/resources/include/img/sns-ico3.png" alt=""></a>
-				<a href=""><img src="/resources/include/img/sns-kakaot.png" alt=""></a>
-				<a href=""><img src="/resources/include/img/sns-ico5.png" alt=""></a>
+				<a href="#"><img src="/resources/include/img/sns-ico1.png" alt=""></a>
+				<a href="#"><img src="/resources/include/img/sns-ico2.png" alt=""></a>
+				<a href="#"><img src="/resources/include/img/sns-ico3.png" alt=""></a>
+				<a href="#"><img src="/resources/include/img/sns-kakaot.png" alt=""></a>
+				<a href="#"><img src="/resources/include/img/sns-ico5.png" alt=""></a>
 			</li>
 		</ul>
 		<a href="" class="footer_logo"> 
-			<img src="/resources/include/img/main.png" alt="">
+			<img src="/resources/include/img/footerLogo.png" alt="">
 		</a>
 	</div>
 </div>

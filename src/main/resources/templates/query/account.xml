@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.omb.user.account.dao.AccountDAO">
+
+	<select id="selectAccount" parameterType="member" resultType="account">
+		SELECT ACC_NO, U_NO, BANK, ACCOUNT
+		FROM TB_USER_ACCOUNT_INFO
+		WHERE U_NO = #{u_no}
+	</select>
+	
+	
+	<insert id="insertAccount" parameterType="account">
+		INSERT INTO TB_USER_ACCOUNT_INFO (ACC_NO, U_NO, BANK, ACCOUNT)
+		VALUES (TB_USER_ACCOUNT_INFO_SEQ.NEXTVAL, #{u_no}, #{bank}, #{account})
+	</insert>
+	
+	
+	<update id="updateAccount" parameterType="account">
+		UPDATE TB_USER_ACCOUNT_INFO SET BANK = #{bank}, ACCOUNT = #{account}
+		WHERE U_NO = #{u_no}
+	</update>
+	
+	
+	<delete id="deleteAccount" parameterType="member">
+		DELETE FROM TB_USER_ACCOUNT_INFO WHERE U_NO = #{u_no}
+	</delete>
+	
+</mapper>

@@ -16,8 +16,13 @@
 					$("#f_data").submit();
 				});
 				
-			
+				$("#unablePayment_btn").click(function(){
+					alert("본인이 등록한 상품은 결제할 수 없습니다.");
+				});
 				
+				$("#soldOutBtn").click(function(){
+					alert("판매완료된 상품입니다.");
+				});
 				
 			});
 		</script>
@@ -63,7 +68,17 @@
                         </p>
                     </div>
                     <div class="right_area">
-                        <button type="button" id="payment_btn" class="payment_btn">결제하기</button>
+	                    <c:choose>
+							<c:when test="${ memberLogin.u_no eq detail.u_no }">
+								<button type="button" id="unablePayment_btn" class="unablePayment_btn">결제하기</button>
+							</c:when>
+							<c:when test="${ detail.sp_status eq '판매완료' }">
+								<button type="button" id="soldOutBtn" class="unablePayment_btn">판매완료</button>
+							</c:when>
+							<c:otherwise>
+								<button type="button" id="payment_btn" class="payment_btn">결제하기</button>
+							</c:otherwise>
+						</c:choose>
                     </div>
                 </div>
                 <div class="item_img_wrap">
@@ -86,36 +101,6 @@
                 </div>
             
 			</div>
-			
-			
-			<%-- <div class="text-center">
-				<table class="table table-bordered">
-					<tbody>
-						<tr>
-							<td class="col-md-3">글번호</td>
-							<td class="col-md-3 text-left">${ detail.sp_no }</td>
-							<td class="col-md-3">작성일</td>
-							<td class="col-md-3">${ detail.sp_created_at }</td>
-						</tr>
-						<tr>
-							<td class="col-md-3">작성자</td>
-							<td colspan="3" class="col-md-9 text-left">${ detail.sp_no }</td>
-						</tr>
-						<tr>
-							<td class="col-md-3">글제목</td>
-							<td colspan="3" class="col-md-9 text-left">${ detail.sp_title }</td>
-						</tr>
-						<tr>
-							<td class="col-md-3">가격</td>
-							<td colspan="3" class="col-md-9 text-left">${ detail.sp_price }</td>
-						</tr>
-						<tr>
-							<td class="text-valign">글내용</td>
-							<td colspan="3" class="text-left">${ detail.sp_content }</td>
-						</tr>
-					</tbody>
-				</table>
-			</div> --%>
 			<%-- ================= 상세 정보 보여주기 끝 ================= --%>
 		</div>
 	</body>
