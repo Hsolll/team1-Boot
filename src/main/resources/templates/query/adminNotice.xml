@@ -91,7 +91,7 @@
 	<select id="noticeDetail" parameterType="admnotice" resultType="admnotice">
 		/* Notice - noticeDetail */
 		SELECT
-			an_no, A.a_no, B.a_name, an_title, an_content, TO_CHAR(an_created_at, 'YYYY-MM-DD HH24:MI:SS') AS an_created_at, an_cnt, an_thumbnail, an_file
+			an_no, A.a_no, B.a_name, an_title, an_content, TO_CHAR(an_created_at, 'YYYY-MM-DD') AS an_created_at, an_cnt, an_thumbnail, an_file
 		FROM tb_admin_notice A
         INNER JOIN tb_admin B
         ON A.a_no = B.a_no

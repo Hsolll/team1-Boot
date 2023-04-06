@@ -122,8 +122,8 @@
 				<tr>
 					<th data-value="an_no" class="order text-center col-md-1" >공지글 번호</th>
 					<th class="text-center col-md-1">구분</th>
-					<th class="text-center col-md-1">작성자</th>
 					<th class="text-center col-md-4">제목</th>
+					<th class="text-center col-md-1">작성자</th>
 					<th class="text-center col-md-1">등록일</th>
 					<th data-value="an_cnt" class="order text-center col-md-1">조회수</th>
 				</tr>
@@ -138,8 +138,8 @@
 								<td class="text-center">
 								${notice.an_category}
 								</td>
+								<td class="goDetail text-left" style="cursor:pointer;">${notice.an_title}</td>
 								<td class="text-center">${notice.a_name}</td>
-								<td class="goDetail text-center" style="cursor:pointer;">${notice.an_title}</td>
 								<td class="text-center">${notice.an_created_at}</td>
 								<td class="text-center">${notice.an_cnt}</td>
 							</tr>

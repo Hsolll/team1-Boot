@@ -23,8 +23,12 @@
             <li class="active"><a>회원 관리</a></li>
              <li><a href="/member/pwdChkForm">회원수정</a></li>
              <li><a href="/member/pwdChkForm2">비밀번호 수정</a></li>
-             <li><a>주소 관리</a></li>
+
+             
              <li><a>계좌 관리</a></li>
+
+             <li><a href="/member/addressCheck">주소 관리</a></li>
+
              <li><a href="/member/pwdChkForm3">회원탈퇴</a></li>
           </ul>
           </c:if>

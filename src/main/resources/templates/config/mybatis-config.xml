@@ -7,6 +7,8 @@
 		<typeAlias type="com.omb.user.payment.vo.PaymentVO" alias="payment" />
 		<typeAlias type="com.omb.user.orderInfo.vo.OrderInfoVO" alias="orderinfo" />
 		<typeAlias type="com.omb.admin.depositInfo.vo.AdmDepositInfoVO" alias="depositInfo"/>
+		<typeAlias type="com.omb.user.delivery.vo.DeliveryVO" alias="delivery" />
+		<typeAlias type="com.omb.user.account.vo.AccountVO" alias="account" />
 		
 		<typeAlias type="com.omb.admin.member.vo.AdmMemberVO" alias="admmember"/>
 		<typeAlias type="com.omb.user.member.vo.MemberVO" alias="member"/>

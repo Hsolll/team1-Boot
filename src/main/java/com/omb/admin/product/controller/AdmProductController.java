@@ -72,7 +72,14 @@ public class AdmProductController {
 		return "admin/product/queuedList";
 	}
 	
-	
+	@GetMapping(value="/product/productDetail")
+	public String productDetail(Model model, int p_no) {
+		log.info("상품 번호 : "+p_no);
+		ProductVO detail = admProductService.productDetail(p_no);
+		model.addAttribute("detail", detail);
+		
+		return "admin/product/productDetail";
+	}
 //	등록한 상품 승인한 경우 관리자 승인 컬럼 1(승인)로 업데이트
 	@PostMapping(value="/product/productUp")
 	public String productUp(ProductVO vo) {

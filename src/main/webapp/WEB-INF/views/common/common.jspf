@@ -27,4 +27,6 @@
 		<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap-theme.min.css">
 		
 		<!-- 공통 js -->
+		<script type="text/javascript" src="/resources/include/js/jquery-3.6.2.min.js"></script>
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>
+		

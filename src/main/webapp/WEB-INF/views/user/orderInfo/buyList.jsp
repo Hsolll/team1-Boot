@@ -27,13 +27,35 @@
 				
 				$("#testBtn").click(function(){
 					$.ajax({
-			    		url: "/delevery/codeSearch",
+			    		url: "/delivery/codeSearch",
 						dataType : "text",
 			    		success : function(result){
 							console.log(result);
 							
-							let obj = JSON.parse(result);
+							//let obj = JSON.parse(result);
 							
+						},
+						error : function() {
+							alert("실패");
+						}
+			    	});
+				});
+				
+				
+				$("#testBtn1").click(function(){
+					$.ajax({
+			    		url: "/delivery/deliveryTracking?o_no=22",
+						dataType : "text",
+			    		success : function(result){
+							console.log(result);
+
+							let tracking = result.trackingDetails;
+							console.log("---------- 추출 정보 ----------")
+							console.log(tracking);
+							let lastIndex = tracking.length - 1;
+							let kind = tracking[lastIndex]
+							console.log("---------- 출력 정보 ----------")
+							console.log(kind);
 						},
 						error : function() {
 							alert("실패");
@@ -240,5 +262,6 @@
 			
 		</div>
 		<button type="button" id="testBtn">버튼</button>
+		<button type="button" id="testBtn1">버튼1</button>
 	</body>
 </html>
