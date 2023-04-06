@@ -19,7 +19,6 @@
 				else if (!chkData("#an_content","작성할 내용을"))	return;
 				//else if (!chkData("#file","업로드할 이미지 파일을")) return; 필수요소
 				else {
-					radioCheck();
 					if($("#file").val()!=""){  // 업로드할 이미지 파일이 존재한다면
 						// 확장자가 png, jpg, gif 외 파일을 업로드 할 수 없습니다 또는 gif, png, jpg 파일만 업로드 할 수 있습니다. 라고 유효성 체크
 						if (!chkFile($("#file"))) return;
@@ -47,15 +46,6 @@
 				location.href="/admin/noticeList";
 			});
 		});
-		
-			function radioCheck(){
-				if($("input[name=an_category]:radio:checked").length < 1){
-					alert("카테고리를 선택해주세요!");
-					return false;
-				}else{
-					alert("등록되었습니다!");
-				}
-			}
 	</script>
 	</head>
 
@@ -78,7 +68,7 @@
 						<tr>
 							<th>게시판 선택</th>
 							<td class="text-midle">
-								<label for="notice">공지사항 게시판</label> <input type="radio" id="notice" class="an_category" name="an_category" value="[공지사항]" style="display: inline-block;" /><br />
+								<label for="notice">공지사항 게시판</label> <input type="radio" id="notice" class="an_category" name="an_category" value="[공지사항]" style="display: inline-block;" checked="checked" /><br />
 								<label for="event">이벤트 게시판</label> <input type="radio" id="event" class="an_category" name="an_category" value="[이벤트]" style="display: inline-block;"  />
 							</td>
 						</tr>

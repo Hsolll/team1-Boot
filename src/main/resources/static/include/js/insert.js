@@ -1,7 +1,7 @@
 $.support.cors = true;
 	
 	$(function(){
-		$("#confirm").click(function(){
+		$("#pconfirm").click(function(){
 			let p_local1 = $("#p_local1").val()
 			let p_local2 = $("#p_local2").val()
 			let p_local3 = $("#p_local3").val()
@@ -17,13 +17,13 @@ $.support.cors = true;
 		  return false;
 		}*/
 		
-		if(!checkForm("#title", "제목")){
+		if(!checkForm("#p_title", "제목")){
 			alert("제목을 입력해주세요")
-		}else if(!checkForm("#name", "상품이름")){
+		}else if(!checkForm("#p_name", "상품이름")){
 			alert("상품이름을 입력해주세요")
-		}else if(!checkForm("#price-input", "가격")){
+		}else if(!checkForm("#pprice-input", "가격")){
 			alert("가격을 입력해주세요")
-		}else if(!checkForm("#content", "상세정보")){
+		}else if(!checkForm("#pcontent", "상세정보")){
 			alert("상세정보를 입력해주세요")
 		}else if(!checkForm("#file", "파일")){
 			alert("파일을 입력해주세요")
@@ -155,6 +155,10 @@ $.support.cors = true;
 		})
 	
 	});
+		//-----------------------------목록으로가기---------------------//
+		$("#productListBtn").click(function(){
+			location.href="/product/productList";
+		});
 		
 		//-----------------------------//무료나눔 //--------------------------------------------//
 		
