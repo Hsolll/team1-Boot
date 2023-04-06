@@ -10,19 +10,30 @@ import com.omb.user.product.vo.ProductVO;
 @Mapper
 public interface ProductDao {
 
+	/* 민석 작업 */
 	public List<ProductVO> selectProductList(ProductVO pvo);
+	
 	public List<ProductVO> selectProductBuyList(ProductVO pvo);
+	
     public List<ProductVO> selectProductSellList(ProductVO pvo);
+    
     public List<ProductVO> selectProductMyPageLikeList(ProductVO pvo);
+    
     public List<ProductVO> selectProductLikeList(MemberVO mvo);
+    
     public List<ProductVO> selectProductMyPageList(ProductVO pvo);
     
     public int productMyPageListCnt(ProductVO pvo);
+    
     public int productMyPageBuyListCnt(ProductVO pvo);
+    
     public int productMyPageLikeListCnt(ProductVO pvo);
     
+	public ProductVO selectProductLikeList(ProductVO pvo);
+	
     
 
+	/* 윤기 작업 */
 	public void productStatus(ProductVO pvo);
 	
 	public ProductVO selectProductDetail(int p_no);
@@ -70,7 +81,7 @@ public interface ProductDao {
 	// 승인 거절 상품 목록 조회 (관리자)
 	public List<ProductVO> selectRejectedList(ProductVO pvo);
 
-	public ProductVO selectProductLikeList(ProductVO pvo);
+
 //	public List<ProductVO> selectProductLike(int p_no, int u_no);
 	public List<ProductVO> selectProductLike(MemberVO u_no);
 
