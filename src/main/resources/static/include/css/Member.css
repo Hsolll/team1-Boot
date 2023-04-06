@@ -2,8 +2,7 @@
     position: relative;
     z-index: 1;
     padding-bottom: 28px;
-    margin-bottom: 41px;
-    
+    margin-bottom: 41px;  
 }
 
 .member_wrap {
@@ -17,7 +16,9 @@
 
 .find_main {
     width: 480px;
+    height: 480px;
     margin: 0 auto;
+    border: 1px solid #baac9a;
 }
 
 .find_main .tab {
@@ -27,16 +28,16 @@
 
 .find_main .tab li {
     float: left;
-    width: 238px;
+    width: 239px;
     border: 1px solid #ddd;
     border-bottom: 1px solid #baac9a;
     background-color: #fafafa;
 }
 
 .find_main .tab li.on {
-    border-color: #baac9a;
     border-bottom: 1px solid #fff;
     background-color: #fff;
+    border-left: 0px;
 }
 
 
@@ -57,7 +58,9 @@
     color: #0b83e6;
 }
 
-
+.c-infotip{
+   padding-top: 12px;
+}
 
 .find_main .form_box {
     width: 428px;
@@ -65,7 +68,7 @@
 }
 
 legend{
-	 overflow: hidden;
+    overflow: hidden;
     font-size: 0;
     line-height: 0;
     position: absolute;
@@ -142,7 +145,7 @@ img, fieldset, iframe {
     color: #333;
     letter-spacing: 0;
 }
-\.find_result.find_result_id .id_list {
+.find_result.find_result_id .id_list {
     width: 370px;
     margin: 4px auto 0;
 }
@@ -167,4 +170,3 @@ img, fieldset, iframe {
     width: 380px;
     margin: 25px auto;
 }
-

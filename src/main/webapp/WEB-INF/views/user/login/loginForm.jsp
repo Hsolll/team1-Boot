@@ -4,47 +4,47 @@
 <!-- <link type="text/css" rel="stylesheet" href="/resources/include/css/findMember.css" /> -->
 <link type="text/css" rel="stylesheet" href="/resources/include/css/Member.css" />
 <script src="/resources/include/js/common.js"></script>
-		<script type="text/javascript" src="/resources/include/js/common.js"></script>
-		<script type="text/javascript" src="/resources/include/dist/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
+      <script type="text/javascript" src="/resources/include/js/common.js"></script>
+      <script type="text/javascript" src="/resources/include/dist/js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 
-		<script type="text/javascript">
-		 
-		$(function(){
-    		 let errorMsg= "${errorMsg}";
-    		if(errorMsg!=""){
-    			alert(errorMsg);
-    			errorMsg ="";
-    		}
-    		$("#btn1").click(function(){
-    			location.href="/member/signUpAgree";
-    		})
-    		
-    		
-    		
-    		$("#btn").click(function(){
-    				
-    			if(!chkData("#u_id","아이디를")) return;
-    			else if(!chkData("#u_pwd","비밀번호를")) return;
-    			else{
-    				$("#login").attr({
-    					"method" :"post",
-    					"action" : "/login"
-    				})
-    				$("#login").submit();
-    			}
-    				
-    		})
-    		
-    		 
-    	}) 
-		</script>
-	</head>
-	<body>
-	<form id="login">
-		
-		
-		<div class="member_wrap">
+      <script type="text/javascript">
+       
+      $(function(){
+           let errorMsg= "${errorMsg}";
+          if(errorMsg!=""){
+             alert(errorMsg);
+             errorMsg ="";
+          }
+          $("#btn1").click(function(){
+             location.href="/member/signUpAgree";
+          })
+          
+          
+          
+          $("#btn").click(function(){
+                
+             if(!chkData("#u_id","아이디를")) return;
+             else if(!chkData("#u_pwd","비밀번호를")) return;
+             else{
+                $("#login").attr({
+                   "method" :"post",
+                   "action" : "/login"
+                })
+                $("#login").submit();
+             }
+                
+          })
+          
+           
+       }) 
+      </script>
+   </head>
+   <body>
+   <form id="login">
+      
+      
+      <div class="member_wrap">
             <header class="member_header">
                 
             </header>
@@ -71,7 +71,7 @@
                         <button type="button" id="btn" class="btn_Atype btn_a" style="border-radius: 4px;"><span>로그인</span></button>
 
                         <div class="c-util c-infotip">
-                            <div class="c-util__item" style="margin: 5px;">
+                            <div class="c-util__item">
                                 
         
                                
@@ -80,52 +80,17 @@
                                 <a href="/member/findPw" class="c-util__link">비밀번호찾기</a>
                             </div>
                         </div> 
-						</div>
-                        
+                  </div>
                     </fieldset>
+                     <!-- 소셜 로그인 창으로 이동 -->
+         <div id="naver_id_login" style="text-align:center; margin-top: 15px;">
+         <a href="${url }"><img width="223" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/></a>
+         <a href="${urlKakao}"><img width="223" style="height: 50px;" src='/resources/images/kakao_login_medium_narrow.png'></a>
+         </div>
+         
                 </section>
             </div>
         </div>
         </form>
-		<%-- <!-- 네이버 로그인 창으로 이동 -->
-			<div id="naver_id_login" style="text-align:center"><a href="${url}">
-			<img width="223" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/></a></div>
-			<br>
-		<!-- 네이버 로그인 버튼 생성 위치 -->
-	<div id="naverIdLogin"></div> --%>
-    <c:choose>
-		<c:when test="${sessionId != null}">
-			<h2> 네이버 아이디 로그인 성공하셨습니다!! </h2>
-			<h3>'${sessionId}' 님 환영합니다! </h3>
-            	<h3><a href="logout">로그아웃</a></h3>
- 
-		</c:when>
-		<c:otherwise>
-			
-				
-			
-			<!-- 네이버 로그인 창으로 이동 -->
-			<div id="naver_id_login" style="text-align:center"><a href="${url }">
-			<img width="223" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/></a></div>
-			<br>
-		
-		</c:otherwise>
-	</c:choose>
-
-		
-	</body>
-	<!-- <script type="text/javascript">
-	var naverLogin = new naver.LoginWithNaverId(
-		{
-			clientId: "wWkm_Ss309bCsmqi9WxK",
-  			// 본인의 Client ID로 수정, 띄어쓰기는 사용하지 마세요.
-			callbackUrl: "http://localhost:8080/callback",
-  			// 본인의 callBack url로 수정하세요.
-			isPopup: true,
-			loginButton: {color: "white", type: 3, height: 60}
-  			// 네이버 로그인버튼 디자인 설정. 한번 바꿔보세요:D
-		}
-	);
-naverLogin.init();
-</script> -->
+   </body>   
 </html>
