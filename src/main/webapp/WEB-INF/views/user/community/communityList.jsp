@@ -51,10 +51,10 @@
 					$("#keyword").val("<c:out value='${userCommunityVO.keyword}' />");
 					$("#search").val("<c:out value='${userCommunityVO.search}' />");
 				
-					if($("#search").val()!='sp_name'){
+					if($("#search").val()!='all'){
 						//:contains()는 특정 텍스트를 포함한 요소반환 	
-						if($("#search").val()=='u_id') value = "#list tr td.name";
-						else if($("#search").val()=='sp_title') value="#list tr td.goDetail";
+						if($("#search").val()=='u_nick') value = "#list tr td.name";
+						else if($("#search").val()=='c_title') value="#list tr td.goDetail";
 						console.log($(value + ":contains('" + word + "')").html());
 						//$("#list tr td.goDetail:contains('노력')").html() => <span class='required'>노력</span>에 대한 명언
 				    	$(value + ":contains('" + word + "')").each(function () {
@@ -130,7 +130,7 @@
 			<%-- ===================== 검색 기능 시작 ===================== --%>
 			<div class="searchbox">
 				<form id="f_search" name="f_search">
-					<input type="hidden" name="c_category" value="자유게시판" />
+					<input type="hidden" name="c_category" value="C" />
 					<input type="hidden" name="pageNum" value="${pageMaker.cvo.pageNum}">
             		<input type="hidden" name="amount" value="${pageMaker.cvo.amount}">
                 	<input type="hidden" id="search" name="search" value="all" />
@@ -138,8 +138,8 @@
 	                    <span class="keyword">
 	                        <input type="checkbox" name="key" id="all" class="m0" value="all" checked />
 	                        <label for="all">통합검색</label>
-	                        <input type="checkbox" name="key" id="u_id" value="u_id" class="m0" />
-	                        <label for="u_id">작성자ID</label>
+	                        <input type="checkbox" name="key" id="u_nick" value="u_nick" class="m0" />
+	                        <label for="u_nick">작성자</label>
 	                        <input type="checkbox" name="key" id="c_title" value="c_title" class="m0" />
 	                        <label for="c_title">제목</label>
 	                    </span>
@@ -175,14 +175,14 @@
 	                        <th scope="col">HITS</th>
 	                    </tr>
 	                </thead>
-	                <tbody>
+	                <tbody id="list">
 	                	<c:choose>
 							<c:when test="${ not empty communityList }">
 								<c:forEach var="community" items="${ communityList }" varStatus="status">
 									<tr class="text-center" data-num="${community.c_no}">
 										<td>${ community.c_no }</td>
 										<td class="goDetail tl">${ community.c_title }</td>
-										<td class="name">${ community.u_id }</td>
+										<td class="name">${ community.u_nick }</td>
 										<td>${community.c_thumb}</td>
 										<td>${ community.c_created_at }</td> 
 										<td>${ community.c_cnt }</td> 

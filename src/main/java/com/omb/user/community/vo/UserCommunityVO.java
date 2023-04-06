@@ -26,5 +26,6 @@ public class UserCommunityVO extends CommonVO {
     
     // 목록 조회 시 필요한 필드 추가
     private String u_id;
+    private String u_nick;
 
 }

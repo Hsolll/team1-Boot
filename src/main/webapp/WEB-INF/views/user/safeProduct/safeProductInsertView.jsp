@@ -19,21 +19,99 @@
 			$("#sp_phone3").val(u_phone3);
 			
 			
-			
-			
-			/* option 선택 시 이벤트 */
-			$("#selectBox").change(function(){
-				console.log($(this).val()); //value값 가져오기
-				console.log($("#selectBox option:selected").text()); //text값 가져오기
-				let sp_name = $("#selectBox option:selected").text();
-				$("#sp_name").val(sp_name);
-			});
-			
 			/* 가격입력창 숫자만 입력 */
 			$('input[onlyNumber]').on('keyup', function () {
 				
 			    $(this).val($(this).val().replace(/[^0-9]/g, ""));
 			    
+			});
+			
+			
+			/* 계좌정보 등록버튼 클릭 시 */
+			$("#insertButton").click(function(){
+				let bank = $("#bankSelect option:selected").val();
+				console.log("bank : " + bank);
+				
+				let account = $("input[name='account']").val();
+				console.log("account : " + account);
+				
+				$("#bank").val(bank);
+				$("#account").val(account);
+				
+				let value = JSON.stringify({
+					u_no : $("#u_no").val(),
+					bank : $("#bank").val(),
+					account : $("#account").val()
+				});
+				
+				$.ajax({
+		    		url: "/account/insertAccount",
+		    		type: 'post',
+		    		headers : {
+						"Content-Type":"application/json"
+					},
+					dataType : "text",
+					data: value,
+		    		success : function(result){
+		    			if(result == "success"){
+							console.log("계좌정보가 등록되었습니다.");
+							// 전송 후 입력값 초기화
+							$("#u_no").val("");
+							$("#bank").val("");
+							$("#account").val("");
+		    			}else{
+		    				alert("계좌정보 등록을 실패했습니다.");
+		    				return;
+		    			}
+					},
+					error : function() {
+						alert("계좌정보 등록을 실패했습니다.");
+					}
+		    	});
+			});
+			
+			/* 계좌정보 수정버튼 클릭 시 */
+			$("#updateButton").click(function(){
+				let bank = $("#bankSelect option:selected").val();
+				
+				let account = $("input[name='account']").val();
+				
+				let userNum = $("input[name='userNum']").val();
+				
+				
+				let value = JSON.stringify({
+					u_no : userNum,
+					bank : bank,
+					account : account
+				});
+				
+				$.ajax({
+		    		url: "/account/updateAccount",
+		    		type: 'post',
+		    		headers : {
+						"Content-Type":"application/json"
+					},
+					dataType : "text",
+					data: value,
+		    		success : function(result){
+		    			if(result == "success"){
+							console.log("계좌정보가 수정되었습니다.");
+							// 전송 후 입력값 초기화
+							$("#userNum").val("");
+							$("#bank").val("");
+							$("#account").val("");
+							
+							location.href = "/safe/productInsertView";
+							
+		    			}else{
+		    				alert("계좌정보 수정을 실패했습니다.");
+		    				return;
+		    			}
+					},
+					error : function() {
+						alert("계좌정보 수정을 실패했습니다.");
+					}
+		    	});
 			});
 			
 			
@@ -96,34 +174,85 @@
 		
 		<!-- Modal -->
 		<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-dialog modal-dialog-centered" role="document" style="top: 250px;">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalCenterTitle">운송장등록</h5>
+						<h5 class="modal-title" id="exampleModalCenterTitle">계좌관리</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 					  	</button>
 					</div>
 					<div class="modal-body">
 						<h4>계좌번호 등록하기</h4>
-						<div class="insert_invoice">
-					 	<select id="parcelSelect">
-					 		<option>택배사를 선택해주세요</option>
-					 		<option value="04">CJ대한통운</option>
-					 		<option value="05">한진택배</option>
-					 		<option value="08">롯대택배</option>
-					 		<option value="01">우체국택배</option>
-					 		<option value="06">로젠택배</option>
-					 		<option value="23">경동택배</option>
-					 		<option value="46">CU편의점택배</option>
-					 		<option value="24">GS편의점택배</option>
-					 	</select>
-					 	<input type="text" name="invoice" id="invoice" placeholder="운송장번호를 입력해주세요." class="w350" />
-						</div>
+						
+						<div class="list_item_info mt30">
+			                <form id="accInsertForm">
+			                	<input type="hidden" name="u_no" />
+			                	<input type="hidden" name="p_no" />
+			                    <table class="order_product_info">
+			                        <colgroup>
+			                            <col style="width: 140px;">
+			                            <col>
+			                        </colgroup>
+			                        <tbody>
+			                        	<tr>
+			                                <th>은행명</th>
+			                                <td>
+			                                    <select id="bankSelect" class="w200" >
+			                                    	<option value="${ account.bank }">${ account.bank }</option>
+			                                    	<option value=HSBC은행>HSBC은행</option>
+											 		<option value="KEB하나은행">KEB하나은행</option>
+											 		<option value="SC은행">SC은행</option>
+											 		<option value="경남은행">경남은행</option>
+											 		<option value="광주은행">광주은행</option>
+											 		<option value="국민은행">국민은행</option>
+											 		<option value="기업은행">기업은행</option>
+											 		<option value="농협">농협</option>
+											 		<option value="대구은행">대구은행</option>
+											 		<option value="부산은행">부산은행</option>
+											 		<option value="산업은행">산업은행</option>
+											 		<option value="새마을금고">새마을금고</option>
+											 		<option value="수협">수협</option>
+											 		<option value="신한은행">신한은행</option>
+											 		<option value="신협">신협</option>
+											 		<option value="우리은행">우리은행</option>
+											 		<option value="전북은행">전북은행</option>
+											 		<option value="제주은행">제주은행</option>
+											 		<option value="카카오뱅크">카카오뱅크</option>
+											 		<option value=케이뱅크>케이뱅크</option>
+											 		<option value="한국씨티은행">한국씨티은행</option>
+			                                    </select>
+			                                </td>
+			                            </tr>
+			                            <tr>
+			                                <th>예금주</th>
+			                                <td>
+			                                    <input type="text" name="u_name" class="w200" value="${ memberLogin.u_name }" readonly="readonly"/>
+			                                    <input type="hidden" id="userNum" name="userNum" value="${ memberLogin.u_no }" />
+			                                </td>
+			                            </tr>
+			                            <tr>
+			                                <th>계좌번호</th>
+			                                <td>
+			                                    <input type="text" name="account" id="account" class="w200 tl pr5" value="${ account.account }" maxlength="20" autocomplete="off" />
+			                                </td>
+			                            </tr>
+			                        </tbody>
+			                    </table>
+			                </form>
+			            </div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-						<button type="button" class="btn btn-primary" id="sendButton">등록하기</button>
+						<c:choose>
+							<c:when test="${ not empty account }">
+								<button type="button" class="btn btn-primary" id="updateButton">수정하기</button>
+							</c:when>
+							<c:otherwise>
+								<button type="button" class="btn btn-primary" id="insertButton">등록하기</button>
+							</c:otherwise>
+						</c:choose>
+						
 					</div>
 				</div>
 			</div>
@@ -155,8 +284,15 @@
 	                        <tr>
 	                            <th>계좌번호</th>
 	                            <td>
-	                                신한은행 123123123123
-	                                <a href="" class="accBtn ml15">입금계좌 등록/변경</a>
+	                            	<c:choose>
+										<c:when test="${ not empty account }">
+											<span>${ account.bank }</span>&nbsp;&nbsp;${ account.account }
+										</c:when>
+										<c:otherwise>
+											<span>계좌번호를 등록해주세요.</span>
+										</c:otherwise>
+									</c:choose>
+	                                <button type="button" id="accInsertBtn" class="accBtn ml15" data-toggle="modal" data-target="#exampleModalCenter">입금계좌 등록/변경</button>
 	                            </td>
 	                        </tr>
 	                    </tbody>

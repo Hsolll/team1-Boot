@@ -6,15 +6,15 @@
 	<select id="communityList" parameterType="community" resultType="community">
 		<![CDATA[
 		SELECT 
-			    C_NO, U_NO, U_ID , C_TITLE, C_CONTENT, C_FILE, C_THUMB, 
+			    C_NO, U_NO, U_ID, U_NICK, C_TITLE, C_CONTENT, C_FILE, C_THUMB, 
 			    TO_CHAR(C_CREATED_AT, 'YYYY-MM-DD') AS C_CREATED_AT, C_CATEGORY, C_CNT
 		FROM (
 		        SELECT 
-			            ROWNUM AS RNUM, C_NO, U_NO, U_ID, C_TITLE, C_CONTENT, 
+			            ROWNUM AS RNUM, C_NO, U_NO, U_ID, U_NICK, C_TITLE, C_CONTENT, 
 	            		C_FILE, C_THUMB, C_CREATED_AT, C_CATEGORY, C_CNT
 		        FROM (
 		                SELECT 
-			                    ROWNUM AS RNUM, C_NO, A.U_NO, U_ID, C_TITLE, C_CONTENT, 
+			                    ROWNUM AS RNUM, C_NO, A.U_NO, U_ID, U_NICK, C_TITLE, C_CONTENT, 
 			                    C_FILE, C_THUMB, C_CREATED_AT, C_CATEGORY, C_CNT
 		                FROM TB_USER_COMMUNITY A
 		                INNER JOIN TB_USER B
@@ -24,7 +24,7 @@
 		        WHERE ]]>
 		        	<trim prefix="(" suffix=") AND " prefixOverrides="AND">
 						<if test="search=='u_id'">
-							<![CDATA[ u_id LIKE '%'|| #{keyword} ||'%' ]]>					
+							<![CDATA[ u_nick LIKE '%'|| #{keyword} ||'%' ]]>					
 						</if>
 						<if test="search=='c_title'">
 							<![CDATA[ c_title LIKE '%'|| #{keyword} ||'%' ]]>					

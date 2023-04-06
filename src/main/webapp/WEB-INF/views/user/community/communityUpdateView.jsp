@@ -14,7 +14,7 @@
 				
 				/* 목록 버튼 클릭 시 처리 이벤트 */
 				$("#listBtn").click(function(){
-					let category = "<c:out value='${community.c_category}' />";
+					let category = "<c:out value='${detail.c_category}' />";
 					console.log("category : " + category);
 					location.href="/community/communityList?c_category=" + category;
 				});
