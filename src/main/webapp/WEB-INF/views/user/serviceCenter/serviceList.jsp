@@ -175,7 +175,7 @@
 								</c:forEach>
 							</c:when>
 							<c:otherwise>
-								<td colspan="4" class="tac text-center">등록된 게시물이 존재하지 않습니다.</td>
+								<td colspan="5" class="tac text-center">등록된 게시물이 존재하지 않습니다.</td>
 							</c:otherwise>
 						</c:choose>
 					</tbody>

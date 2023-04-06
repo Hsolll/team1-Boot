@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/common.jspf" %>
-<script type="text/javascript" src="/resources/include/js/jquery-3.6.2.min.js"></script>
 	<script type="text/javascript">
 		$(function(){
 			$("#back").click(function(){
@@ -12,6 +11,7 @@
 	<style>
 		img{
 			margin-top:80px;
+			max-width: 100%;
 		}
 		.btn{
 			width: 100px;
@@ -23,10 +23,10 @@
 	</head>
 	<body>
 		<div class="container">
-				<img alt="error404" src="/resources/images/common/404.png" width="1100">
-				<p class="text-center">
-					<button type="button" class="btn" id="back" >돌아가기</button>
-				</p>
+			<div class="text-center">
+				<img alt="error404" src="/resources/images/common/404.png">				
+				<button type="button" class="btn" id="back" >돌아가기</button>
+			</div>
 		</div>
 	</body>
 </html>

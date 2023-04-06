@@ -26,7 +26,7 @@ public class CustomErrorController implements ErrorController {
 				return VIEW_PATH+"500";
 			}
 		}
-		return "error";
+		return "error/404";
 	}
 	
 }
