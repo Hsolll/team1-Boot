@@ -302,7 +302,7 @@
 				<div class="row">
 					<div class="product">
 						<div class="card">
-							<h5 class="card-header">상품별 카테고리 통계</h5>
+							<h5 class="card-header">안심거래 결제내역 통계</h5>
 							<div class="card-body">
 								<canvas id="myChart2" width="800" height="450"></canvas>
 							</div>

@@ -628,11 +628,12 @@ public class MemberController {
           // 모델 객체에 데이터 전달
           pvo.setU_no(mvo.getU_no());
           pvo.setAmount(3);
-         List<ProductVO> productLikeList =  productService.selectProductMyPageLikeList(pvo);
-         log.info("productLikeList : " + productLikeList);
+         List<ProductVO> productMyPageLikeList =  productService.selectProductMyPageLikeList(pvo);
+         log.info("productMyPageLikeList : " + productMyPageLikeList);
          
          
-         model.addAttribute("productLikeList", productLikeList);
+         model.addAttribute("productMyPageLikeList",productMyPageLikeList);
+         
          
           // 모델 객체에 데이터 전달
            pvo.setU_id(mvo.getU_id());
@@ -643,6 +644,7 @@ public class MemberController {
             
             
          model.addAttribute("productBuyList", productBuyList);
+         
             
           // 모델 객체에 데이터 전달
           pvo.setU_no(mvo.getU_no());
@@ -652,6 +654,7 @@ public class MemberController {
             
             
          model.addAttribute("productSellList", productSellList);
+         
       
       
          return "user/myPage/myPageIndex";

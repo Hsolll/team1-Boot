@@ -196,7 +196,7 @@
 	                    	<table class="table table-hover cateTb">
 	                    		<thead>
 	                    			<tr>
-	                    				<td>카테고리명</td>
+	                    				<td>지역명</td>
 	                    				<td>1월</td>
 	                    				<td>2월</td>
 	                    				<td>3월</td>
