@@ -16,7 +16,7 @@
 <body>
 
 <ul class="prdList">
-  
+
      <c:choose>
        <c:when test="${not empty productList}">
          <c:forEach var="product" items="${productList}">
@@ -28,9 +28,9 @@
 	              	</form>
         	 		<div class="heart ${product.prod_like }">
             		</div>
-           </div>
+           	 </div>
                <div class="imgBox">
-                  <c:if test="${not empty product.p_thumb}">
+                  	 <c:if test="${not empty product.p_thumb}">
                           <img class="thumb_c p_no" id="${product.p_no}" src="/uploadStorage/product/thumbnail/${product.p_thumb}"/>
                      </c:if>
                      <c:if test="${empty product.p_thumb}">

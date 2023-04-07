@@ -165,9 +165,9 @@ $.support.cors = true;
 		$(document).ready(function() {
 		  $("#free").change(function() {
 		    if($(this).is(":checked")) {
-	      		$("#price-input").val(0).prop("readonly","true");
+	      		$("#pprice-input").val(0).prop("readonly","true");
 		    }else{
-		    	$("#price-input").val("").prop("placeholer","상품 가격을 입력하세요").removeAttr("readonly");
+		    	$("#pprice-input").val("").prop("placeholer","상품 가격을 입력하세요").removeAttr("readonly");
 		      }
 		  });
 		});

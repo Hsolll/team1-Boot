@@ -1,25 +1,31 @@
 
 //-----------------------------// 페이징처리(전체페이지) //-----------------------------------------------//
-$(".a").click(function(e){
-	e.preventDefault();
-})
-
-$(".paginate_button").click(function(){
-	let pageNum = $(this).find("a").text();
-	
-	$.ajax({
-		type : "GET",
-		url  : "/product/productAllList",
-		data : {pageNum:pageNum},
-		success : function(data){
-			
-			let all = $(data)
-		
-			$("#category").html(all)
-		},
-		error : function(jqXHR, textStatus, errorThrown) {
-        }
+$(function(){
+	$(".a").click(function(e){
+		e.preventDefault();
 	})
+	
+	$(".paginate_button").click(function(){
+		console.log("클릭되었습니다.")
+		let pageNum = $(this).find(".a").text();
+		console.log("pageNum :"+pageNum);
+		
+		$.ajax({
+			type : "GET",
+			url  : "/product/productAllList",
+			data : {pageNum:pageNum},
+			success : function(data){
+				
+				let all = $(data)
+			    console.log(all)
+			
+				$("#category").html(all)
+			},
+			error : function(jqXHR, textStatus, errorThrown) {
+	        }
+		})
+	});
+
 });
 //-----------------------------// 페이징처리(카테고리) //-----------------------------------------------//
 

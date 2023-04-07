@@ -26,21 +26,26 @@
 	<select id="noticeList" parameterType="admnotice" resultType="admnotice">
 		<![CDATA[
 		SELECT 
-				AN_NO, A_NO, AN_TITLE, AN_CONTENT, AN_CATEGORY, TO_CHAR(AN_CREATED_AT, 'YYYY-MM-DD') AS AN_CREATED_AT, 
-				AN_CNT, AN_THUMBNAIL, AN_FILE, A_NAME
+		        rnum, an_no, a_no, a_name, an_title, an_content, an_category, 
+		        TO_CHAR(AN_CREATED_AT, 'YYYY-MM-DD') AS AN_CREATED_AT, an_cnt, an_thumbnail, an_file
 		FROM (
-			SELECT /*+ INDEX_DESC(tb_admin_notice tb_admin_notice_pk) */
-					rownum as rnum, an_no, A.a_no as a_no, B.a_name, an_title, an_content, an_category, 
-					an_created_at, an_cnt, an_thumbnail, an_file
-			FROM tb_admin_notice A
-			INNER JOIN tb_admin B
-				ON A.a_no = B.a_no
-			WHERE ]]>
-			<trim prefix="(" suffix=") AND " prefixOverrides="AND">
-				<include refid = "noticeSearch"></include>
-			</trim>
-			<![CDATA[ rownum <= #{pageNum} * #{amount} AND an_category = '[공지사항]'
-			ORDER BY AN_NO DESC ) noticelist
+		          SELECT
+		                rownum as rnum, an_no, a_no, a_name, an_title, an_content, an_category, 
+		                an_created_at, an_cnt, an_thumbnail, an_file
+		          FROM (
+			                SELECT
+			                        an_no, A.a_no, B.a_name, an_title, an_content, an_category, 
+			                        an_created_at, an_cnt, an_thumbnail, an_file
+			                FROM tb_admin_notice A
+			                INNER JOIN tb_admin B
+			                    ON A.a_no = B.a_no
+			                WHERE ]]>
+			                <trim prefix="(" suffix=") AND " prefixOverrides="AND">
+								<include refid = "noticeSearch"></include>
+							</trim>
+			                <![CDATA[ an_category = '[공지사항]'
+			                ORDER BY AN_NO DESC) 
+		        WHERE rownum <= #{pageNum} * #{amount} ) noticelist
 		WHERE rnum > (#{pageNum} - 1) * #{amount}
 		]]>
 	</select>
@@ -49,7 +54,7 @@
 	<select id="eventList" parameterType="admnotice" resultType="admnotice">
 		<![CDATA[
 		SELECT 
-		        an_no, a_no, a_name, an_title, an_content, an_category, 
+		        rnum, an_no, a_no, a_name, an_title, an_content, an_category, 
 		        TO_CHAR(AN_CREATED_AT, 'YYYY-MM-DD') AS AN_CREATED_AT, an_cnt, an_thumbnail, an_file
 		FROM (
 		        SELECT
@@ -57,7 +62,7 @@
 		                an_created_at, an_cnt, an_thumbnail, an_file
 		        FROM (
 		                SELECT
-		                        rownum as rnum, an_no, A.a_no, B.a_name, an_title, an_content, an_category, 
+		                        an_no, A.a_no, B.a_name, an_title, an_content, an_category, 
 		                        an_created_at, an_cnt, an_thumbnail, an_file
 		                FROM tb_admin_notice A
 		                INNER JOIN tb_admin B
@@ -66,8 +71,9 @@
 		                <trim prefix="(" suffix=") AND " prefixOverrides="AND">
 							<include refid = "noticeSearch"></include>
 						</trim>
-		                <![CDATA[ rownum <= #{pageNum} * #{amount} AND an_category = '[이벤트]'
-		                ORDER BY AN_NO DESC) ) noticelist
+		                <![CDATA[ an_category = '[이벤트]'
+		                ORDER BY AN_NO DESC) 
+		        where rownum <= #{pageNum} * #{amount} ) noticelist
 		WHERE rnum > (#{pageNum} - 1) * #{amount}
 		]]>
 	</select>

@@ -15,7 +15,6 @@
 </head>
 <body>
 <ul class="prdList">
-  
      <c:choose>
        <c:when test="${not empty clist}">
          <c:forEach var="product" items="${clist}">

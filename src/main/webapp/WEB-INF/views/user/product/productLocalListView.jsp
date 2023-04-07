@@ -16,7 +16,6 @@ $(".p_no").click(function(){
 </head>
 <body>
 <ul class="prdList">
-  	
      <c:choose>
        <c:when test="${not empty plist}">
          <c:forEach var="product" items="${plist}">
