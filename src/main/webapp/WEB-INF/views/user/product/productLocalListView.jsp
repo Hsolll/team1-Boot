@@ -16,9 +16,7 @@ $(".p_no").click(function(){
 </head>
 <body>
 <ul class="prdList">
-  	<c:forEach var="like" items="${like }">
-		<input type='hidden' class="likeList" value="${like.prod_like}"/>
-  	</c:forEach>
+  	
      <c:choose>
        <c:when test="${not empty plist}">
          <c:forEach var="product" items="${plist}">

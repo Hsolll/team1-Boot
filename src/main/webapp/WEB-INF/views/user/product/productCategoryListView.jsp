@@ -15,9 +15,7 @@
 </head>
 <body>
 <ul class="prdList">
-  	<c:forEach var="like" items="${like }">
-		<input type='hidden' class="likeList" value="${like.prod_like}"/>
-  	</c:forEach>
+  
      <c:choose>
        <c:when test="${not empty clist}">
          <c:forEach var="product" items="${clist}">

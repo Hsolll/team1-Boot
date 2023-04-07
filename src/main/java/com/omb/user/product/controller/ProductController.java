@@ -86,20 +86,15 @@ public class ProductController {
 			ProductVO ppv = productList.get(i);
 			ProductVO lvo = like.get(i);
 			int p_no = ppv.getP_no();
-			int prod_like = lvo.getProd_like();
-			log.info("p_no :"+p_no + ", prod_like : "+prod_like);
-			ppv.setProd_like(prod_like);
+			if(lvo.getP_no()==p_no) {
+				int prod_like = lvo.getProd_like();
+				log.info("p_no :"+p_no + ", prod_like : "+prod_like);
+				ppv.setProd_like(prod_like);				
+			}
 			//ppv.setProd_like(vo.getProd_like());
 			//like.add(vo);
 			
 		}
-		log.info(like.size()+", "+productList.size());
-		model.addAttribute("like",like);
-		log.info("like :"+like);
-
-		log.info("productList :"+productList);
-		log.info("pvo :"+pvo);
-		
 		
 		model.addAttribute("productList", productList);
 		model.addAttribute("productVO", pvo);
@@ -108,20 +103,20 @@ public class ProductController {
 		
 		log.info("model.productList :"+model.getAttribute("productList"));
 		
-		log.info("keyword : "+pvo.getKeyword() );
-		log.info("search : "+pvo.getSearch() );
+//		log.info("keyword : "+pvo.getKeyword() );
+//		log.info("search : "+pvo.getSearch() );
 		int total = productService.productListCnt(pvo);
-		log.info("total :"+total);
+//		log.info("total :"+total);
 		
 		model.addAttribute("pageMaker", new PageDTO(pvo, total));
-		log.info("model.pageMaker :"+model.getAttribute("pageMaker"));
-		log.info("pageNum :" + pvo.getPageNum());
+//		log.info("model.pageMaker :"+model.getAttribute("pageMaker"));
+//		log.info("pageNum :" + pvo.getPageNum());
 		
 		int count = total - (pvo.getPageNum()-1) * pvo.getAmount();
-		log.info("count :"+count);
+//		log.info("count :"+count);
 		
 		model.addAttribute("count", count);
-		log.info("model.count :"+model.getAttribute("count"));
+//		log.info("model.count :"+model.getAttribute("count"));
 		
 		
 		return "/user/product/productAllListView";
@@ -159,49 +154,47 @@ public class ProductController {
 			
 		int u_no = member.getU_no();
 		
-		log.info("u_no :"+u_no);
+//		log.info("u_no :"+u_no);
 		
 		List<ProductVO> clist = productService.category(pvo);
 		log.info("category 서비스 완료, clist :"+clist);
 		
-		log.info("pvo :"+pvo);
-		log.info("pvo.p_cate :"+pvo.getP_cate());
+//		log.info("pvo :"+pvo);
+//		log.info("pvo.p_cate :"+pvo.getP_cate());
 		
-		model.addAttribute("clist",clist);
-		log.info("모델에 clist : " + model.getAttribute("clist"));
+//		log.info("모델에 clist : " + model.getAttribute("clist"));
 		
 		List<ProductVO> like = productService.selectProductLike(member);
-		log.info(like+"");
+//		log.info(like+"");
 		for (int i = 0; i<clist.size(); i++) {
 			ProductVO ppv = clist.get(i);
 			ProductVO lvo = like.get(i);
 			int p_no = ppv.getP_no();
-			int prod_like = lvo.getProd_like();
-			log.info("p_no :"+p_no + ", prod_like : "+prod_like);
-			ppv.setProd_like(prod_like);
+			if(lvo.getP_no()==p_no) {
+				int prod_like = lvo.getProd_like();
+				log.info("p_no :"+p_no + ", prod_like : "+prod_like);
+				ppv.setProd_like(prod_like);				
+			}
 			//ppv.setProd_like(vo.getProd_like());
 			//like.add(vo);
 			
-		}
-		log.info(like.size()+", "+clist.size());
-		model.addAttribute("like",like);
-		log.info("like :"+like);
+		}		
 		
 		
-		
+		model.addAttribute("clist",clist);
 	
 		int total = productService.productCateListCnt(pvo);
-		log.info("total :"+total);
+//		log.info("total :"+total);
 		
 		model.addAttribute("pageMaker", new PageDTO(pvo, total));
-		log.info("model.pageMaker :"+model.getAttribute("pageMaker"));
-		log.info("pageNum :" + pvo.getPageNum());
+//		log.info("model.pageMaker :"+model.getAttribute("pageMaker"));
+//		log.info("pageNum :" + pvo.getPageNum());
 		
 		int count = total - (pvo.getPageNum()-1) * pvo.getAmount();
-		log.info("count :"+count);
+//		log.info("count :"+count);
 		
 		model.addAttribute("count", count);
-		log.info("model.count :"+model.getAttribute("count"));
+//		log.info("model.count :"+model.getAttribute("count"));
 		
 		return "/user/product/productCategoryListView";
 	}
@@ -337,26 +330,25 @@ public class ProductController {
 		// 모델 객체에 데이터 전달
 		model.addAttribute("member", member);
 		
-		log.info("member :"+member);
-		log.info("member.getU_no() :"+member.getU_no());
+//		log.info("member :"+member);
+//		log.info("member.getU_no() :"+member.getU_no());
 		
 		int u_no = member.getU_no();
 		
-		log.info("u_no :"+u_no);
-		
-		log.info("pvo :"+ pvo);
-		log.info("pvo.getPageNum :"+ pvo.getPageNum());
-		log.info("pvo.getAmount :"+ pvo.getAmount());
+//		log.info("u_no :"+u_no);
+//		
+//		log.info("pvo :"+ pvo);
+//		log.info("pvo.getPageNum :"+ pvo.getPageNum());
+//		log.info("pvo.getAmount :"+ pvo.getAmount());
 
 	    List<ProductVO> plist = productService.selectLocal(pvo);
-	    log.info("plist :"+plist);
+//	    log.info("plist :"+plist);
 	  
-	    model.addAttribute("plist", plist);
-	    log.info("model.plist :"+model.getAttribute("plist"));
+//	    log.info("model.plist :"+model.getAttribute("plist"));
 		
-		log.info("서비스 완료, plist :"+plist);
+//		log.info("서비스 완료, plist :"+plist);
 		
-		log.info("pvo :"+pvo);
+//		log.info("pvo :"+pvo);
 		
 		
 		List<ProductVO> like = productService.selectProductLike(member);
@@ -365,18 +357,17 @@ public class ProductController {
 			ProductVO ppv = plist.get(i);
 			ProductVO lvo = like.get(i);
 			int p_no = ppv.getP_no();
-			int prod_like = lvo.getProd_like();
-			log.info("p_no :"+p_no + ", prod_like : "+prod_like);
-			ppv.setProd_like(prod_like);
+			if(lvo.getP_no()==p_no) {
+				int prod_like = lvo.getProd_like();
+				log.info("p_no :"+p_no + ", prod_like : "+prod_like);
+				ppv.setProd_like(prod_like);				
+			}
 			//ppv.setProd_like(vo.getProd_like());
 			//like.add(vo);
-			
 		}
-		log.info(like.size()+", "+plist.size());
-		model.addAttribute("like",like);
-		log.info("like :"+like);
+		
 	    
-	    
+		model.addAttribute("plist", plist);
 	    
 	    int total = productService.productLcoalListCnt(pvo);
 	    log.info("total :"+total);
