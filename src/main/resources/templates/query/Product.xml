@@ -421,7 +421,7 @@
    </select>
    
    <!-- 마이페이지 판매내역 카운트 -->
-   <select id="productMyPageListCnt" parameterType="product" resultType="int">
+   <!-- <select id="productMyPageListCnt" parameterType="product" resultType="int">
       SELECT 
           count(*) 
       FROM 
@@ -429,7 +429,38 @@
       WHERE 
           u_no=#{u_no}
       
-   </select>
+   </select> -->
+   
+   <select id="productMyPageListCnt" parameterType="member" resultType="int">
+         <![CDATA[
+        SELECT
+              count(*)
+      FROM (
+              SELECT  
+                       p.P_NO, u.u_no, p.P_TITLE, p.P_NAME, p.P_PRICE, p.P_STATUS,p.P_CONTENT,p.P_LOCAL,p.TRANS_METHOD,
+                       p.P_CREATED_AT,p.P_UPDATED_AT,p.P_DELETED_AT,p.p_file,p.p_thumb,p.P_CATE,p.P_ADM_PER, p.p_buyid
+              FROM 
+                  TB_USER_PRODUCT p 
+              INNER JOIN TB_USER u 
+                  ON p.U_NO = u.U_NO 
+              WHERE ]]>
+                 <trim prefix="(" suffix=") AND " prefixOverrides="AND">
+                  <if test="search=='p_buyid'">
+                     <![CDATA[ p_buyid LIKE '%'|| #{keyword} ||'%' ]]>               
+                  </if>
+                  <if test="search=='p_title'">
+                     <![CDATA[ p_title LIKE '%'|| #{keyword} ||'%' ]]>               
+                  </if>
+                  <if test="search=='p_name'">
+                     <![CDATA[ p_name LIKE '%'|| #{keyword} ||'%' ]]>               
+                  </if>
+                 </trim>
+                  <![CDATA[ u.u_no = #{u_no}
+              order by p_no desc
+              )
+      
+      ]]>
+      </select>
    
     <!-- 마이페이지 좋아요(찜)내역 카운트 -->
    <select id="productMyPageLikeListCnt" parameterType="product" resultType="int">
