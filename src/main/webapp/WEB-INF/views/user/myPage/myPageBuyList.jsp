@@ -38,10 +38,8 @@
          $("#keyword").val("<c:out value='${ProductVO.keyword}' />");
          $("#search").val("<c:out value='${ProductVO.search}' />");
       
-         if($("#search").val()!='p_name'){
-            //:contains()는 특정 텍스트를 포함한 요소반환    
-            /* if($("#search").val()=='u_id') value = "#list tr td.name"; */
-            if($("#search").val()=='p_title') value="#list tr td.p_no";
+            if($("#search").val()=='p_title') value = "#list tr td.ptitle"; 
+            if($("#search").val()=='p_name') value="#list tr td.pname";
             console.log($(value + ":contains('" + word + "')").html());
             //$("#list tr td.goDetail:contains('노력')").html() => <span class='required'>노력</span>에 대한 명언
              $(value + ":contains('" + word + "')").each(function () {
@@ -135,7 +133,7 @@
                    </div>
                    <div class="searchbox_right block">
                        <span>
-                           <input type="text" class="w280 pl10" name="keyword" id="keyword" value="검색어를 입력하세요" maxlength="30" />
+                           <input type="text" class="w280 pl10" name="keyword" id="keyword" placeholder="검색어를 입력하세요" maxlength="30" />
                        </span>
                        <a href="#" id="searchData" class="btn_gray fr"><span class="icon"></span>검 색</a>
                    </div>
@@ -174,7 +172,7 @@
                     <td class="first" rowspan="1">
                         ${productBuy.p_cate}
                     </td>  
-                    <td>    
+                    <td class="ptitle">    
                         <div class="orderProdInfo_v2">
                             <label for="1" class="chk"></label>
                             <span class="img">                     
@@ -191,7 +189,7 @@
                             <div class="layer_relative"></div>
                         </div>
                     </td>     
-                    <td>
+                    <td class="pname">
                         <p class="fnt_1">                     
                             <strong>${productBuy.p_name}</strong>    
                         </p>

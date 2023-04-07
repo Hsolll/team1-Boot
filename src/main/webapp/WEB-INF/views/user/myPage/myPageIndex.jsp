@@ -83,7 +83,7 @@
                             <div class="cont ">
                                 <p class="p_no" id="${productLike.p_no}">${productLike.p_title}</p>
                      </div>
-                            <div id="layer_orderDetail_20221006533547059_0" class="layer_relative"></div>
+                            <div class="layer_relative"></div>
                         </div>
                     </td>     
                     <td>
@@ -156,7 +156,7 @@
                     </td>  
                     <td>    
                         <div class="orderProdInfo_v2">
-                            <label for="ck20221006533547059_1" class="chk"><input type="hidden" name="ck20221006533547059" id="ck20221006533547059_1" value="1"></label>
+                            <label for="" class="chk"></label>
                             <span class="img">                     
                                       <c:if test="${not empty productBuy.p_thumb}">
                         <img class="thumb_c p_no" id="${productBuy.p_no}" src="/uploadStorage/product/thumbnail/${productBuy.p_thumb}"/>
@@ -168,7 +168,7 @@
                             <div class="cont ">
                                 <p class="p_no" id="${productBuy.p_no}">${productBuy.p_title}</p>
                      </div>
-                            <div id="layer_orderDetail_20221006533547059_0" class="layer_relative"></div>
+                            <div class="layer_relative"></div>
                         </div>
                     </td>     
                     <td>
@@ -248,7 +248,7 @@
                     </td>  
                     <td>    
                         <div class="orderProdInfo_v2">
-                            <label for="ck20221006533547059_1" class="chk"><input type="hidden" name="ck20221006533547059" id="ck20221006533547059_1" value="1"></label>
+                            <label for="" class="chk"></label>
                             <span class="img">                     
                                       <c:if test="${not empty productSellList.p_thumb}">
                         <img class="thumb_c p_no" id="${productSellList.p_no}" src="/uploadStorage/product/thumbnail/${productSellList.p_thumb}"/>
@@ -260,7 +260,7 @@
                             <div class="cont ">
                                 <p class="p_no" id="${productSellList.p_no}">${productSellList.p_title}</p>
                      </div>
-                            <div id="layer_orderDetail_20221006533547059_0" class="layer_relative"></div>
+                            <div class="layer_relative"></div>
                         </div>
                     </td>     
                     <td>
@@ -281,8 +281,7 @@
                       ${productSellList.p_buyid}
                    </c:when>
                    <c:otherwise>
-                      <input type="text" id="input_buyid" name="input_buyid" /> 
-                     <button type="button" id="buyid" name="buyid" class="buyid" data-id="${productSellList.p_no}">판매확정</button>
+                       <button type="button" id="buyid" name="buyid" class="buyid" style="border: 1px solid #dadada;" data-buyid="${productSellList.p_no}">판매확정</button>
                    </c:otherwise>
                 </c:choose>
                 </td>

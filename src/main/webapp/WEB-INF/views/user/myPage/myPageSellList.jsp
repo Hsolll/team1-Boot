@@ -17,9 +17,9 @@
                   alert("판매완료 되었습니다.");
                   
                   $("#p_no").attr('value',$(this).data('buyid'));
-                  $("#p_buyid").attr('value',pbuyid);
+                  $("#p_buyid.pbuyid").attr('value',pbuyid);
                   $("#p_status").attr('value','판매완료');
-                  console.log(pbuyid);
+                  console.log(pbuyid,$("#p_buyid"));
                   $("#sellList").attr({
                      "method" :"post",
                      "action" : "/member/productStatus"
@@ -55,17 +55,18 @@
                $("#keyword").val("<c:out value='${ProductVO.keyword}' />");
                $("#search").val("<c:out value='${ProductVO.search}' />");
             
-               if($("#search").val()!='p_name'){
+              
                   //:contains()는 특정 텍스트를 포함한 요소반환    
-                  if($("#search").val()=='p_buyid') value = "#list tr td.name";
-                  else if($("#search").val()=='p_title') value="#list tr td.p_cate";
+                  if($("#search").val()=='p_buyid') value = "#list tr td.buy_id";
+                  else if($("#search").val()=='p_title') value="#list tr td.ptitle";
+                  else if($("#search").val()=='p_name') value="#list tr td.pname";
                   console.log($(value + ":contains('" + word + "')").html());
                   //$("#list tr td.goDetail:contains('노력')").html() => <span class='required'>노력</span>에 대한 명언
                    $(value + ":contains('" + word + "')").each(function () {
                      let regex = new RegExp(word,'gi');
                      $(this).html($(this).html().replace(regex,"<span class='required'>"+word+"</span>"));
                    });
-               }
+              
             }
             
             /* 입력 양식 enter 제거 */
@@ -92,8 +93,8 @@
             
             
             /* 검색 버튼 클릭 시 처리 이벤트 */
-            $("#searchData").click(function(){
-               
+            $("#searchData").click(function(e){
+            	e.preventDefault();
                if($("input[type='checkbox'][name='key']:checked").val() != "all"){ // 제목/내용/작성자 선택시 검색어 유효성 체크
                   if(!chkData("#keyword","검색어를")) return;
                }
@@ -103,7 +104,7 @@
             /* 페이징 처리 함수 */
             $(".paginate_button a").click(function(e){
                e.preventDefault();
-               $("#f_search").find("input[name='pageNum']").val($(this).attr("href"));
+               $("#f_search").find("input[name='pageNum']").val($(this).attr("href"));  
                goPage();
             });
             
@@ -142,61 +143,58 @@
                    <input type="hidden" id="search" name="search" value="all" />
                    <div class="keywordbox">
                        <span class="keyword">
-                           <input type="checkbox" name="key" id="all" class="m0" value="all" checked />
+                           <input type="checkbox" name="key" id="all" class="m0" value="all" ${search eq "" or search eq null ? "checked" : "" } />
                            <label for="all">통합검색</label>
-                           <input type="checkbox" name="key" id="p_buyid" value="p_buyid" class="m0" />
+                           <input type="checkbox" name="key" id="p_buyid" value="p_buyid" class="m0" ${search eq "p_buyid" ? "checked" : ""} />
                            <label for="u_id">구매자ID</label>
-                           <input type="checkbox" name="key" id="p_title" value="p_title" class="m0" />
+                           <input type="checkbox" name="key" id="p_title" value="p_title" class="m0" ${search eq "p_title" ? "checked" : ""}/>
                            <label for="p_title">제목</label>
-                           <input type="checkbox" name="key" id="p_name" value="p_name" class="m0" />
+                           <input type="checkbox" name="key" id="p_name" value="p_name" class="m0" ${search eq "p_name" ? "checked" : ""}/>
                            <label for="p_name">상품명</label>
                        </span>
                    </div>
                    <div class="searchbox_right block">
                        <span>
-                           <input type="text" class="w280 pl10" name="keyword" id="keyword" value="검색어를 입력하세요" maxlength="30" />
+                           <input type="text" class="w280 pl10" name="keyword" id="keyword" placeholder="검색어를 입력하세요" maxlength="30" value="${keyword}"/>
                        </span>
                        <a href="#" id="searchData" class="btn_gray fr"><span class="icon"></span>검 색</a>
                    </div>
                 </form>
             </div>
          <%-- ===================== 검색 기능 종료 ===================== --%>
-                    <!-- 마이페이지 컨텐츠 영역 -->
-                    <div class="mytmall_contArea">
-                        <!-- //마이페이지 탭 -->
-        <!-- 최근 주문 정보 -->
-        <div class="mytmall_title" id="deliveryInfo">
-            <h3 class="member"><strong>판매 목록</strong></h3>
-        </div>
+
+           <div class="mytmall_contArea">
+        	  <div class="mytmall_title" id="deliveryInfo">
+            	  <h3 class="member"><strong>판매 목록</strong></h3>
+       	   </div>
     
         <!-- 최근 주문정보  -->
         <div id="objOrderInfo">
-    <div class="mytmall_tbl1" id="mytmall_tbl1_area" role="tabpanel" aria-label="리스트보기">
-            <table width="100%">
+    		<div class="mytmall_tbl1" id="mytmall_tbl1_area" role="tabpanel" aria-label="리스트보기">
+            	<table width="100%">
                 <thead>
-                <tr>
-                    <th class="first" scope="col" data-value="p_cate">카테고리</th>
-                    <th scope="col">상품제목</th>
-                    <th scope="col">상품명</th>
-                    <th scope="col">상품 가격</th>
-                    <th scope="col">상품 상태</th>
-                    <th scope="col">판매 관리</th>
-                </tr>
+                	<tr>
+	                    <th class="first" scope="col">카테고리</th>
+	                    <th scope="col">상품제목</th>
+	                    <th scope="col">상품명</th>
+	                    <th scope="col">상품 가격</th>
+	                    <th scope="col">상품 상태</th>
+	                    <th scope="col">판매 관리</th>
+                	</tr>
                 </thead>
-                <tbody id="list">
-                <c:choose>
-            <c:when test="${not empty productSellList}">
-            <form id="sellList">
-            <input type="hidden" id="p_status" name="p_status" />
-               <input type="hidden" id="p_no" name="p_no" />
-               <input type="hidden" id="p_buyid" name="p_buyid" />
-               <c:forEach var="productSellList" items="${productSellList}" varStatus="status">
-               
+                	<tbody id="list">
+                		<c:choose>
+				            <c:when test="${not empty productSellList}">
+				            	<form id="sellList">
+				            		<input type="hidden" id="p_status" name="p_status" />
+				               		<input type="hidden" id="p_no" name="p_no" />
+				               		<input type="hidden" id="p_buyid" name="p_buyid" class="pbuyid" />
+				               			<c:forEach var="productSellList" items="${productSellList}" varStatus="status">
                  <tr class="first"> 
                     <td class="first" rowspan="1" data-num="${productSellList.p_cate }">
                         ${productSellList.p_cate}
                     </td>  
-                    <td>    
+                    <td class="ptitle">    
                         <div class="orderProdInfo_v2">
                             <label for="thumb" class="chk"></label>
                             <span class="img">                     
@@ -210,10 +208,10 @@
                             <div class="cont ">
                                 <p class="p_no" id="${productSellList.p_no}">${productSellList.p_title}</p>
                      </div>
-                            <div id="layer_orderDetail_20221006533547059_0" class="layer_relative"></div>
+                            <div class="layer_relative"></div>
                         </div>
                     </td>     
-                    <td>
+                    <td class="pname">
                         <p class="fnt_1">                     
                             <strong>${productSellList.p_name}</strong>    
                         </p>
@@ -225,13 +223,13 @@
                     <td class="td-center">           
                         <span class="fc_blue">${productSellList.p_status}</span>                     
                 </td>
-                <td>
+                <td class="buy_id">
                 <c:choose>
                    <c:when test="${not empty productSellList.p_buyid}">
                       ${productSellList.p_buyid}
                    </c:when>
                    <c:otherwise>
-                     <button type="button" id="buyid" name="buyid" class="buyid" data-buyid="${productSellList.p_no}">판매확정</button>
+                     <button type="button" id="buyid" name="buyid" class="buyid" style="border: 1px solid #dadada;" data-buyid="${productSellList.p_no}">판매확정</button>
                    </c:otherwise>
                       </c:choose>
                          </td>    
@@ -278,13 +276,5 @@
             </div>
          </div>
       </div>
-      
-      
-         
-   
-         
-   
-   
-   
    </body>
 </html>

@@ -81,12 +81,24 @@ public class LoginController {
       
       log.info("로그인정보 : " + memberLogin);
       String url = "";
-      if (memberLogin != null) {
-         session.setAttribute("memberLogin", memberLogin);
-         url = "/";
+      if (memberLogin != null && memberLogin.getU_status().equals("USING")) {
+    	  if(memberLogin.getU_grade().equals("3")) {
+    		  ras.addFlashAttribute("errorMsg", "블랙회원입니다.");
+    		  url = "/login";
+    	  } else {
+    		  if(memberLogin.getU_grade().equals("2")) {
+    			  ras.addFlashAttribute("errorMsg", "경고회원입니다.");
+    		  }
+    		  session.setAttribute("memberLogin", memberLogin);
+	          url = "/";  
+    	  }
       }
       else {
-         ras.addFlashAttribute("errorMsg", "아이디와 비밀번호를 확인해주세요");
+    	  if(memberLogin != null) {
+    		  ras.addFlashAttribute("errorMsg", "탈퇴된 회원입니다.");
+    	  } else {
+    		  ras.addFlashAttribute("errorMsg", "아이디와 비밀번호를 확인해주세요");	  
+    	  }
          log.info("memberLogin :"+memberLogin);
          url = "/login";                  
       }

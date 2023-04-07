@@ -34,6 +34,17 @@
         <script type="text/javascript" src="/resources/include/js/jquery-3.6.2.min.js"></script>
         <script type="text/javascript" src="/resources/include/js/subList.js"></script>
         
+        <script type="text/javascript">
+        $(function(){
+        	if("${memberLogin.u_grade}" === "2") {
+        		let errorMsg= "${errorMsg}";
+                if(errorMsg!=""){
+                   alert(errorMsg);
+                   errorMsg ="";
+                }
+        	}
+        })
+        </script>
     </head>
 	<body>
 		<!-- header -->
