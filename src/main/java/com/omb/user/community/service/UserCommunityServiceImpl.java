@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.omb.user.community.dao.UserCommunityDAO;
 import com.omb.user.community.vo.UserCommunityVO;
+import com.omb.user.product.common.file.FileUploadUtil;
 
 import lombok.Setter;
 
@@ -60,9 +61,17 @@ public class UserCommunityServiceImpl implements UserCommunityService {
 	}
 
 	@Override
-	public int insertCommunity(UserCommunityVO community) {
+	public int insertCommunity(UserCommunityVO community) throws Exception {
 
 		int result = 0;
+		
+		if(community.getFile().getSize() > 0){ // 업로드할 파일이 존재하면(파일의 크기로)
+			String fileName = FileUploadUtil.fileUpload(community.getFile(), "community"); //board_1658205347977_cat.jpg
+			community.setC_file(fileName); // 업로드 파일명 설정
+			
+			String thumbName = FileUploadUtil.makeThumbnail(fileName); // thumbnail_board_1658205347977_cat.jpg
+			community.setC_thumb(thumbName); // thumbnail 파일명 설정
+		}
 		
 		result = userCommunityDAO.insertCommunity(community);
 		
@@ -70,7 +79,7 @@ public class UserCommunityServiceImpl implements UserCommunityService {
 	}
 
 	@Override
-	public int updateCommunity(UserCommunityVO community) {
+	public int updateCommunity(UserCommunityVO community) throws Exception {
 
 		int result = 0;
 		
@@ -80,7 +89,7 @@ public class UserCommunityServiceImpl implements UserCommunityService {
 	}
 
 	@Override
-	public int deleteCommunity(UserCommunityVO community) {
+	public int deleteCommunity(UserCommunityVO community) throws Exception {
 
 		int result = 0;
 		

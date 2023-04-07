@@ -43,6 +43,8 @@
 			<form id="form_data">
 				<input type="hidden" name="c_no" id="c_no" value="${ detail.c_no }" />
 				<input type="hidden" name="c_category" id="c_category" value="${ detail.c_category }" />
+				<input type="hidden" name="c_file" value="${detail.c_file}" />
+				<input type="hidden" name="c_thumb" value="${detail.c_thumb}" />
 			</form>
 			
 			<div class="detail_table mt30">
@@ -91,6 +93,11 @@
 								<div class="detail_content">
 									<p>${ detail.c_content }</p>
 								</div>
+								<c:if test="${not empty detail.c_file}">
+									<div class="detail_image">
+										<img src="/uploadStorage/community/${detail.c_file}" />
+									</div>
+								</c:if>
 							</td>
 						</tr>
 	                </tbody>

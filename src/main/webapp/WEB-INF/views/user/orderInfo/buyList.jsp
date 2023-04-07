@@ -28,7 +28,7 @@
 				$("#testBtn").click(function(){
 					$.ajax({
 			    		url: "/delivery/codeSearch",
-						dataType : "text",
+						dataType : "json",
 			    		success : function(result){
 							console.log(result);
 							
@@ -44,8 +44,8 @@
 				
 				$("#testBtn1").click(function(){
 					$.ajax({
-			    		url: "/delivery/deliveryTracking?o_no=22",
-						dataType : "text",
+			    		url: "/delivery/deliveryTracking?o_no=3",
+						dataType : "json",
 			    		success : function(result){
 							console.log(result);
 
