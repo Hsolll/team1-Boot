@@ -64,6 +64,19 @@
 				});
 				
 				
+				$(".godetail").click(function(){
+					let o_no = $(this).parents("tr").attr("data-no");
+					console.log("o_no = " + o_no);
+					$("#o_no").val(o_no);
+					
+					$("#f_data").attr({
+						"method":"get",
+						"action":"/order/buyListDetail"
+					});
+					$("#f_data").submit();
+				});
+				
+				
 				$(".paymentCancelBtn").click(function(){
 					
 					let o_no = $(this).parents("tr").attr("data-no");
@@ -199,7 +212,7 @@
 									<tr class="text-center" data-no="${buyList.o_no}" data-sp="${buyList.sp_no}">
 										<td>${ buyList.o_id }</td>
 										<td>${ buyList.o_date }</td>
-										<td>${ buyList.sp_name }</td>
+										<td class="godetail">${ buyList.sp_name }</td>
 										<td>${ buyList.seller }</td>
 										<td>
 											<fmt:formatNumber value="${buyList.sp_price}" groupingUsed="true"/>

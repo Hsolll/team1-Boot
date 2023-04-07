@@ -6,12 +6,13 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
- 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import com.omb.admin.member.vo.AdmMemberVO;
 import com.omb.user.member.vo.MemberVO;
 
 
@@ -31,7 +32,9 @@ public class LoginInterceptor implements HandlerInterceptor {
         HttpSession session = request.getSession();
         MemberVO mvo =(MemberVO) session.getAttribute("memberLogin");
         
-        if(mvo != null) {
+        AdmMemberVO amvo =(AdmMemberVO) session.getAttribute("adminLogin");
+        
+		if (mvo != null/* || amvo != null */) {
             return true;
         } else {
               try { 
