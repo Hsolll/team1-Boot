@@ -18,6 +18,8 @@ public interface SafeProductService {
 	
 	public int updateSafeProductStatus(SafeProductVO spvo);	// 결제 완료시 상품 판매상태 변경 (판매중 -> 판매완료)
 	
+	public int updateSafeProductStatusReturn(SafeProductVO spvo);	// 결제 취소 시 상품 판매상태 변경 (판매완료 -> 판매중)
+	
 	public int insertSafeProduct(SafeProductVO spvo);	// 안심상품 등록 메서드
 	
 	public int updateProductStatus(SafeProductVO spvo);	// 안심상품 등록 시 중고상품 판매상태 변경 (판매중 -> 거래진행중)

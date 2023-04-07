@@ -28,5 +28,9 @@ public class OrderInfoVO extends CommonVO {
 	private String sp_name;	// 상품 이름
 	private int sp_price;	// 상품 가격
 	private String pay_id;	// 아임포트 결제 고유번호
+	
+	// 주문 상세조회를 위한 필드
+	private String p_name;	// 중고상품 이름
+	private String p_thumb;	// 중고상품 썸네일 이미지 경로
 
 }

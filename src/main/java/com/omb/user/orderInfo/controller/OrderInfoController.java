@@ -1,5 +1,6 @@
 package com.omb.user.orderInfo.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -18,6 +21,8 @@ import com.omb.common.vo.PageDTO;
 import com.omb.user.member.vo.MemberVO;
 import com.omb.user.orderInfo.service.OrderInfoService;
 import com.omb.user.orderInfo.vo.OrderInfoVO;
+import com.omb.user.payment.service.PaymentService;
+import com.omb.user.payment.vo.PaymentVO;
 
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +34,9 @@ public class OrderInfoController {
 	
 	@Setter(onMethod_ = @Autowired)
 	private OrderInfoService orderInfoService;
+	
+	@Setter(onMethod_ = @Autowired)
+	private PaymentService paymentService;
 	
 	@Setter(onMethod_ = @Autowired)
 	private AdmDepositInfoService admDepositInfoService;
@@ -84,6 +92,48 @@ public class OrderInfoController {
 		
 		return "user/orderInfo/sellCompleteList";
 	}
+	
+	@GetMapping("/buyListDetail")
+	public String orderBuyListDetail(OrderInfoVO ovo, Model model) throws IOException {
+		log.info("전달받은 주문번호 : " + ovo.getO_no());
+		
+		OrderInfoVO detail = orderInfoService.selectOrderInfoDetail(ovo);
+		log.info("주문 상세 조회 결과 : " + detail);
+		
+		model.addAttribute("detail", detail);
+		
+		/* ajax로 대체
+		// 결제 내역 조회를 위해 토큰 생성
+		String token = paymentService.getToken();
+		log.info("토큰 : " + token);
+		
+		// 결제 상세내역 조회
+		String paymentDetail = paymentService.paymentDetailInfo(detail.getPay_id(), token);
+	    log.info("결제 상세내역 : " + paymentDetail);
+	    
+		model.addAttribute("paymentDetail", paymentDetail);
+		*/
+		
+		return "user/orderInfo/buyListDetail";
+	}
+	
+	@ResponseBody
+	@PostMapping(value = "/paymentDetail", consumes = "application/json")
+	public String paymentDetailInfo(@RequestBody PaymentVO pvo) throws IOException{
+		
+		log.info("전달받은 결제번호 : " + pvo.getPay_id());
+		
+		// 결제 내역 조회를 위해 토큰 생성
+		String token = paymentService.getToken();
+		log.info("토큰 : " + token);
+		
+		// 결제 상세내역 조회
+		String paymentDetail = paymentService.paymentDetailInfo(pvo.getPay_id(), token);
+	    log.info("결제 상세내역 : " + paymentDetail);
+		
+		return paymentDetail;
+	}
+	
 	
 	/* 상품 발송 시 주문상태 배송중으로 변경 */
 	@GetMapping("/send")

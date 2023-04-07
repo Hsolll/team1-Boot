@@ -30,18 +30,16 @@
 			/* 계좌정보 등록버튼 클릭 시 */
 			$("#insertButton").click(function(){
 				let bank = $("#bankSelect option:selected").val();
-				console.log("bank : " + bank);
 				
 				let account = $("input[name='account']").val();
-				console.log("account : " + account);
 				
-				$("#bank").val(bank);
-				$("#account").val(account);
+				let userNum = $("input[name='userNum']").val();
+				
 				
 				let value = JSON.stringify({
-					u_no : $("#u_no").val(),
-					bank : $("#bank").val(),
-					account : $("#account").val()
+					u_no : userNum,
+					bank : bank,
+					account : account
 				});
 				
 				$.ajax({
@@ -313,21 +311,19 @@
 	                        	<tr>
 	                                <th>상품 선택</th>
 	                                <td>
-	                                    <select id="selectBox">
-	                                    	<option>상품을 선택해주세요</option>
-	                                    	<c:choose>
-												<c:when test="${ not empty productList }">
+	                                    <c:choose>
+		                                	<c:when test="${ not empty productList }">
+			                                    <select id="selectBox">
+			                                    	<option>상품을 선택해주세요</option>
 													<c:forEach var="productList" items="${ productList }" varStatus="status">
 														<option data-no="${productList.p_no}" value="${productList.p_name}">${productList.p_name}</option>
 													</c:forEach>
-												</c:when>
-												<c:otherwise>
-													<tr>
-														<td colspan="4" class="tac text-center">등록된 상품 정보가 존재하지 않습니다.</td>
-													</tr>
-												</c:otherwise>
-											</c:choose>
-	                                    </select>
+			                                    </select>
+		                                    </c:when>
+		                                    <c:otherwise>
+												<span>등록된 상품이 없습니다.</span>
+											</c:otherwise>
+	                                    </c:choose>
 	                                </td>
 	                            </tr>
 	                            <tr>

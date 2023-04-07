@@ -20,6 +20,8 @@ public interface OrderInfoDAO {
 	
 	public int sellOrderInfoCnt(OrderInfoVO ovo); // 판매목록 전체 레코드 수
 	
+	public OrderInfoVO selectOrderInfoDetail(OrderInfoVO ovo);	// 구매자 주문 상세페이지
+	
 	public PaymentVO selectPaymentId(OrderInfoVO ovo);	// 주문번호로 결제id 가져오기
 	
 	public OrderInfoVO selectOrderInfoPrice(OrderInfoVO ovo);	// 주문번호로 결제금액 가져오기

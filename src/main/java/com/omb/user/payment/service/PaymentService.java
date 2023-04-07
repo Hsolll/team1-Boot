@@ -10,6 +10,8 @@ public interface PaymentService {
 	
 	public int paymentInfo(String imp_uid, String access_token) throws IOException;
 	
+	public String paymentDetailInfo(String imp_uid, String access_token) throws IOException;
+	
 	public int paymentCancle(String access_token, String imp_uid, String reason) throws IOException;
 	
 	public void paymentCancle(String access_token, String imp_uid) throws IOException;
@@ -17,5 +19,6 @@ public interface PaymentService {
 	public PaymentVO selectPaymentNo(PaymentVO pvo);	// 주문내역 저장 시 결제번호 추가를 위한 조회 메서드
 	
 	public int insertPaymentInfo(PaymentVO pvo);	// 결제정보 저장 메서드
+
 	
 }

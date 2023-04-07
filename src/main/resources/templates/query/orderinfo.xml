@@ -153,6 +153,19 @@
 	</select>
 	
 	
+	<!-- 구매자 주문상세 내역 -->
+	<select id="selectOrderInfoDetail" parameterType="orderinfo" resultType="orderinfo">
+		select
+			    o_no, o_id, pay_no, sp_no,
+			    (select pay_id from tb_user_payment where pay_no = a.pay_no) as pay_id,
+			    (select p_name from tb_user_product a inner join tb_user_safe_product b on a.p_no = b.p_no  where a.p_no = b.p_no) as p_name,
+			    (select p_thumb from tb_user_product a inner join tb_user_safe_product b on a.p_no = b.p_no  where a.p_no = b.p_no) as p_thumb,
+			    receiver, rec_tel, o_address, o_date, o_status
+			from tb_user_order a
+			where o_no = #{o_no}
+	</select>
+	
+	
 	
 	<select id="selectPaymentId" parameterType="orderinfo" resultType="payment">
 		SELECT 
