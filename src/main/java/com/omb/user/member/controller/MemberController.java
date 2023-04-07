@@ -530,7 +530,12 @@ public class MemberController {
          log.info("total :"+total);
          
          model.addAttribute("pageMaker", new PageDTO(pvo, total));
-         
+         if(pvo.getSearch() != "") {
+        	 model.addAttribute("search",pvo.getSearch());
+         }
+         if(pvo.getKeyword() != "") {
+        	 model.addAttribute("keyword",pvo.getKeyword());
+         }
           
           return "user/myPage/myPageSellList";
        } 

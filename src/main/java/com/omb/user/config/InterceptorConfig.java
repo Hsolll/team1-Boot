@@ -24,10 +24,14 @@ public class InterceptorConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         
         notLoadList.add("/login");
+        notLoadList.add("/admin");
+        notLoadList.add("/admin/main");
+        notLoadList.add("/admin/login");
         notLoadList.add("/socialLogin");
         notLoadList.add("/callback");
         notLoadList.add("/kakaoCallback");
         notLoadList.add("/member/signUp");
+        notLoadList.add("/member/signUpForm");
         notLoadList.add("/member/naverSignUp");
         notLoadList.add("/member/kakaoSignUp");
         notLoadList.add("/member/signUpAgree");
@@ -39,6 +43,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
         notLoadList.add("/member/emailChk");
         notLoadList.add("/member/phoneChk");
         notLoadList.add("/member/mailCheck");
+        notLoadList.add("/member/findPwMailCheck");
         notLoadList.add("/socialChk");
         notLoadList.add("/member/findPwMailCheck");
         notLoadList.add("/member/findPwChk");

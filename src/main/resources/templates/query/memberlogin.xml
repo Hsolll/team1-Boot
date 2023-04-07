@@ -16,7 +16,7 @@
       FROM TB_USER A
       INNER JOIN TB_USER_ADDRESS_INFO B
           ON A.U_NO = B.U_NO
-       WHERE U_ID = #{u_id} AND U_PWD = #{u_pwd} AND U_STATUS = 'USING' AND ADD_NAME = '기본배송지' AND U_TYPE='U'
+       WHERE U_ID = #{u_id} AND U_PWD = #{u_pwd} AND ADD_NAME = '기본배송지' AND U_TYPE='U'
    </select>
    
    <select id="socialLogin" resultType="member">

@@ -54,10 +54,8 @@
             $("#keyword").val("<c:out value='${ProductVO.keyword}' />");
             $("#search").val("<c:out value='${ProductVO.search}' />");
          
-            if($("#search").val()!='p_name'){
-               //:contains()는 특정 텍스트를 포함한 요소반환    
-               /* if($("#search").val()=='u_id') value = "#list tr td.name"; */
-               if($("#search").val()=='p_title') value="#list tr td.p_no";
+               if($("#search").val()=='p_title') value = "#list tr td.ptitle"; 
+               if($("#search").val()=='p_name') value="#list tr td.pname";
                console.log($(value + ":contains('" + word + "')").html());
                //$("#list tr td.goDetail:contains('노력')").html() => <span class='required'>노력</span>에 대한 명언
                 $(value + ":contains('" + word + "')").each(function () {
@@ -190,9 +188,9 @@
                     <td class="first" rowspan="1">
                         ${productMyPageLikeList.p_cate}
                     </td>  
-                    <td>    
+                    <td class="ptitle">    
                         <div class="orderProdInfo_v2">
-                            <label for="ck20221006533547059_1" class="chk"><input type="hidden" name="ck20221006533547059" id="ck20221006533547059_1" value="1"></label>
+                            <label for="" class="chk"></label>
                             <span class="img">                     
                                       <c:if test="${not empty productMyPageLikeList.p_thumb}">
                         <img class="thumb_c p_no" id="${productMyPageLikeList.p_no}" src="/uploadStorage/product/thumbnail/${productMyPageLikeList.p_thumb}"/>
@@ -204,10 +202,10 @@
                             <div class="cont ">
                                 <p class="p_no" id="${productMyPageLikeList.p_no}">${productMyPageLikeList.p_title}</p>
                      </div>
-                            <div id="layer_orderDetail_20221006533547059_0" class="layer_relative"></div>
+                            <div class="layer_relative"></div>
                         </div>
                     </td>     
-                    <td>
+                    <td class="pname">
                         <p class="fnt_1">                     
                             <strong>${productMyPageLikeList.p_name}</strong>    
                         </p>
