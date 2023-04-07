@@ -1,0 +1,173 @@
+.member_header {
+    position: relative;
+    z-index: 1;
+    padding-bottom: 28px;
+    margin-bottom: 41px;
+    
+}
+
+.member_wrap {
+    width: 960px;
+    margin: 49px auto 60px;
+    border: none;
+    padding: 0;
+}
+
+
+
+.find_main {
+    width: 480px;
+    height: 480px;
+    margin: 0 auto;
+    border: 1px solid #baac9a;
+}
+
+.find_main .tab {
+    padding-bottom: 80px;
+    zoom: 1;
+}
+
+.find_main .tab li {
+    float: left;
+    width: 238px;
+    border-bottom: 1px solid #baac9a;
+    background-color: #fafafa;
+}
+
+.find_main .tab li.on {
+    border-bottom: 1px solid #fff;
+    background-color: #fff;
+    border-left: 1px solid #baac9a;
+}
+
+
+.find_main .guide {
+    margin-bottom: 12px;
+    padding: 0 26px;
+}
+
+.find_main .guide li {
+    position: relative;
+    padding-left: 9px;
+    font-size: 13px;
+    color: #333;
+    line-height: 23px;
+}
+
+.find_main .guide li em {
+    color: #0b83e6;
+}
+
+.c-infotip{
+	padding-top: 12px;
+}
+
+.find_main .form_box {
+    width: 428px;
+    margin: 10px auto 0;
+}
+
+legend{
+	 overflow: hidden;
+    font-size: 0;
+    line-height: 0;
+    position: absolute;
+    margin-left: -20px;
+    border: 0;
+}
+
+.join_write > li {
+    position: relative;
+    z-index: 1;
+    margin-top: 10px;
+    zoom: 1;
+}
+
+.find_main input.inp, .find_main label.inp {
+    width: 428px;
+    height: 46px;
+    line-height: 40px;
+    border: 1px solid #C9C9C9;
+}
+
+.find_main .btn_Atype {
+    height: 48px;
+    margin-top: 10px;
+    padding-bottom: 2px;
+    line-height: 44px;
+    font-size: 16px;
+    margin: 16px auto 0;
+    display: block;
+}
+
+.btn_Atype.btn_a {
+    color: #fff;
+    background: #baac9a;
+    border-color: #baac9a;
+    cursor: pointer;
+}
+
+.btn_Atype {
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+    font-size: 17px;
+    line-height: 46px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px solid #baac9a;
+    *width: 326px;
+    height: 48px;
+    vertical-align: middle;
+}
+
+.find_main .tab li a {
+    display: block;
+    width: 239px;
+    height: 54px;
+    font-size: 17px;
+    text-align: center;
+    line-height: 54px;
+    color: #333;
+    text-decoration: none;
+ 
+}
+
+
+img, fieldset, iframe {
+    border: 0 none;
+}
+
+.find_result.find_result_id .txt_desc {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+    letter-spacing: 0;
+}
+\.find_result.find_result_id .id_list {
+    width: 370px;
+    margin: 4px auto 0;
+}
+.find_result.find_result_id .id_info_box {
+    margin-top: 2px;
+    padding-left: 43px;
+}
+
+.find_result.find_result_id .id_list > li:first-child:last-child {
+    border-bottom: 0;
+}
+
+.find_result.find_result_id .id_auto_msg {
+    margin-top: 10px;
+    padding: 8px 8px;
+    font-size: 12px;
+    color: #666;
+    background-color: #fafafa;
+}
+
+.find_result.find_result_id .btn_box {
+    width: 380px;
+    margin: 25px auto;
+}
+
