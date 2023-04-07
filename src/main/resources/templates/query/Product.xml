@@ -37,9 +37,9 @@
 		    rnum > (#{pageNum} - 1) * #{amount} AND P_ADM_PER = 1 
     	]]> -->
     	
-    	<![CDATA[ 
+    	<!-- <![CDATA[ 
  		SELECT  
-         		P_NO, U_NO, P_TITLE, P_NAME, P_PRICE, P_STATUS, P_CONTENT, P_LOCAL, TRANS_METHOD, P_CREATED_AT, P_UPDATED_AT, P_DELETED_AT, p_file, p_thumb, P_CATE, P_ADM_PER ,PROD_LIKE
+         		P_NO, U_NO, P_TITLE, P_NAME, P_PRICE, P_STATUS, P_CONTENT, P_LOCAL, TRANS_METHOD, P_CREATED_AT, P_UPDATED_AT, P_DELETED_AT, p_file, p_thumb, P_CATE,PROD_LIKE
  		FROM ( 
  		        SELECT /*+ INDEX_DESC(TB_USER_PRODUCT TB_USER_PRODUCT_PK) */ 
  		            rownum as rnum, p.P_NO,u.U_NO,p.P_TITLE,p.P_NAME,p.P_PRICE,p.P_STATUS,p.P_CONTENT,p.P_LOCAL,p.TRANS_METHOD,p.P_CREATED_AT,p.P_UPDATED_AT,p.P_DELETED_AT,p.p_file,p.p_thumb,p.P_CATE,p.P_ADM_PER ,p.PROD_LIKE
@@ -50,10 +50,36 @@
             	<trim prefix="(" suffix=") AND " prefixOverrides="AND">
             		<include refid="productSearch"></include>
             	</trim> 
+            <![CDATA[rownum <= #{pageNum} * #{amount} AND P_ADM_PER = 1 
+ 		     ) PRODUCTLIST 
+		WHERE  
+		    rnum > (#{pageNum} - 1) * #{amount} 
+		    ORDER BY P_NO
+		    
+    	]]> -->
+    	<![CDATA[ 
+ 		SELECT  
+         		P_NO, U_NO, P_TITLE, P_NAME, P_PRICE, P_STATUS, P_CONTENT, P_LOCAL, TRANS_METHOD, P_CREATED_AT, P_UPDATED_AT, P_DELETED_AT, p_file, p_thumb, P_CATE,PROD_LIKE
+ 		FROM ( 
+ 		        SELECT ROWNUM AS RNUM, P_NO, U_NO, P_TITLE, P_NAME, P_PRICE, P_STATUS, P_CONTENT, 
+				    P_LOCAL, TRANS_METHOD, P_CREATED_AT, P_UPDATED_AT, P_DELETED_AT, p_file, p_thumb,P_CATE,PROD_LIKE
+				FROM( 
+				    SELECT /*+ INDEX_DESC(TB_USER_PRODUCT TB_USER_PRODUCT_PK) */ 
+				        p.P_NO,u.U_NO,p.P_TITLE,p.P_NAME,p.P_PRICE,p.P_STATUS,p.P_CONTENT,p.P_LOCAL,p.TRANS_METHOD,
+				        p.P_CREATED_AT,p.P_UPDATED_AT,p.P_DELETED_AT,p.p_file,p.p_thumb,p.P_CATE ,p.PROD_LIKE
+				    FROM  
+				        TB_USER_PRODUCT p 
+				            INNER JOIN TB_USER u ON p.U_NO = u.U_NO 
+				    WHERE p.P_ADM_PER = 1
+				    ORDER BY P_NO
+				) WHERE ]]> 
+            	<trim prefix="(" suffix=") AND " prefixOverrides="AND">
+            		<include refid="productSearch"></include>
+            	</trim> 
             <![CDATA[rownum <= #{pageNum} * #{amount} 
  		     ) PRODUCTLIST 
 		WHERE  
-		    rnum > (#{pageNum} - 1) * #{amount} AND P_ADM_PER = 1 
+		    rnum > (#{pageNum} - 1) * #{amount} 
     	]]>
 	</select>
 	
