@@ -18,6 +18,14 @@
 			$("#sp_phone2").val(u_phone2);
 			$("#sp_phone3").val(u_phone3);
 			
+			/* option 선택 시 이벤트 */
+			$("#selectBox").change(function(){
+				console.log($(this).val()); //value값 가져오기
+				console.log($("#selectBox option:selected").text()); //text값 가져오기
+				let sp_name = $("#selectBox option:selected").text();
+				$("#sp_name").val(sp_name);
+			});
+			
 			
 			/* 가격입력창 숫자만 입력 */
 			$('input[onlyNumber]').on('keyup', function () {

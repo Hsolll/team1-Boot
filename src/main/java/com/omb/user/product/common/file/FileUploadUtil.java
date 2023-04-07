@@ -14,8 +14,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class FileUploadUtil {
 	
-	public static String Path = "/Users/kim_yunki/git/team1-Boot/src/main/resources/uploadStorage/";
-	//public static String NoticePath = "C://uploadStorage//";
+	//public static String Path = "/Users/kim_yunki/git/team1-Boot/src/main/resources/uploadStorage/";
+	public static String NoticePath = "C://uploadStorage//";
 	/********************************************************************************
 	/* 파일 업로드할 폴더 생성
 	 ********************************************************************************/
@@ -50,7 +50,7 @@ public class FileUploadUtil {
 		if(org_name != null && (!org_name.equals(""))){
 			real_name = fileName +"_"+ System.currentTimeMillis() +"_"+ org_name; // 저장할 파일 이름
 			
-			String docRoot = Path+fileName;
+			String docRoot = NoticePath+fileName;
 			makeDir(docRoot);
 				
 			File fileAdd = new File(docRoot+"/"+real_name);	
@@ -74,9 +74,9 @@ public class FileUploadUtil {
 		
 		if(dirName.equals("thumbnail")) {
 			startDirName = fileName.substring(dirName.length()+1, fileName.indexOf("_", dirName.length()+1)); // board
-			docRoot = Path+startDirName+"//"+dirName; // C://uploadStorage//board//thumbnail
+			docRoot = NoticePath+startDirName+"//"+dirName; // C://uploadStorage//board//thumbnail
 		}else {
-			docRoot = Path+dirName; // docRoot = C://uploadStorage//board
+			docRoot = NoticePath+dirName; // docRoot = C://uploadStorage//board
 		}
 
 		File fileDelete =new File(docRoot+"/"+fileName); // 	C://uploadStorage//board/
@@ -94,7 +94,7 @@ public class FileUploadUtil {
 	public static String makeThumbnail(String fileName) throws Exception{ // fileName = board_1658205347977_cat.jpg
 		String dirName = fileName.substring(0, fileName.indexOf("_")); // dirName = board
 		// 이미지가 존재하는 폴더 추출
-		String imgPath = Path+dirName;
+		String imgPath = NoticePath+dirName;
 		// 추출된 폴더의 실제 경로(물리적 위치: C:\...)
 		File fileAdd = new File(imgPath, fileName);	// C://uploadStorage//board//board_1658205347977_cat.jpg
 		log.info("원본 이미지 파일(fileAdd) : " + fileAdd);
