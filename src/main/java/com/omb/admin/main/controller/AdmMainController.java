@@ -17,14 +17,11 @@ import com.omb.admin.product.service.AdmProductService;
 import com.omb.admin.statistics.service.StatisticsService;
 import com.omb.user.product.vo.ProductVO;
 import com.omb.user.serviceCenter.service.ServiceCenterService;
-import com.omb.user.serviceCenter.vo.ServiceCenterVO;
 
 import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequestMapping("/admin/*")
-@Slf4j
 public class AdmMainController {
 	
 	@Setter(onMethod_=@Autowired)
@@ -41,7 +38,6 @@ public class AdmMainController {
 	
 	@GetMapping("/main")
 	public String admMain() {
-		log.info("admMain() 실행...");
 		return "admin/main/adminMain";
 	}
 	
