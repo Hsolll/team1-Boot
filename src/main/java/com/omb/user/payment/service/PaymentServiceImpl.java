@@ -92,7 +92,7 @@ public class PaymentServiceImpl implements PaymentService {
    }
 
    
-   // API 요청으로 결제정보 얻어오기
+   // API 요청으로 실제 결제된 금액 정보 얻어오기
    @Override
    public int paymentInfo(String imp_uid, String access_token) throws IOException {
       
@@ -116,6 +116,38 @@ public class PaymentServiceImpl implements PaymentService {
        conn.disconnect();
        
        return response.getResponse().getAmount();   // 결제 금액 리턴 (int 타입)
+   }
+   
+   
+   // API 요청으로 결제 상세 정보 얻어오기
+   @Override
+   public String paymentDetailInfo(String imp_uid, String access_token) throws IOException {
+      
+	   String inputLine = null;
+       StringBuilder outResult = new StringBuilder();
+	   
+       HttpsURLConnection conn = null;
+       
+       URL url = new URL("https://api.iamport.kr/payments/" + imp_uid);
+    
+       conn = (HttpsURLConnection) url.openConnection();
+    
+       conn.setRequestMethod("GET");
+       conn.setRequestProperty("Authorization", access_token);
+       conn.setDoOutput(true);
+    
+       BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
+       
+       while ((inputLine = br.readLine()) != null) {
+           outResult.append(inputLine);
+       }
+	    
+		br.close();
+		conn.disconnect();
+		
+		System.out.println("결제 정보 조회 결과 : " + outResult.toString());
+	    
+		return outResult.toString();
    }
 
    

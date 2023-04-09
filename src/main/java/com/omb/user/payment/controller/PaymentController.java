@@ -154,14 +154,20 @@ public class PaymentController {
       // 주문상태 결제취소로 변경
       int result = orderInfoService.updateOrderStatusCancel(ovo);
       
-      if(result == 1) {
+      SafeProductVO spvo = new SafeProductVO();
+      spvo.setSp_no(ovo.getSp_no());
+      
+      // 안심상품 판매상태 변경 (판매완료 -> 판매중)
+      int spStatusResult = safeProductService.updateSafeProductStatusReturn(spvo);
+      
+      if(result == 1 && spStatusResult == 1) {
          // 상태변경 성공 시 취소처리
          paymentService.paymentCancle(token, pay_id);
          log.info("결제취소 완료");
          ras.addFlashAttribute("msg", "결제가 취소되었습니다.");
          path = "/order/buyList";
       } else {
-         log.info("주문상태 변경 실패");
+         log.info("상태 변경 실패");
          path = "/order/buyList";
          String comment = "처리에 실패하였습니다. 관리자에게 문의해주세요.";
          model.addAttribute("changeFail", comment);

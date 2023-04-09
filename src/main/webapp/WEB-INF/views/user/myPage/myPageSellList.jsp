@@ -66,7 +66,7 @@
                      let regex = new RegExp(word,'gi');
                      $(this).html($(this).html().replace(regex,"<span class='required'>"+word+"</span>"));
                    });
-              
+            	
             }
             
             /* 입력 양식 enter 제거 */

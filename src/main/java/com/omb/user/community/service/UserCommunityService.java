@@ -14,10 +14,10 @@ public interface UserCommunityService {
 	
 	public int updateCommunityCnt(UserCommunityVO community);	// 조회수 증가
 	
-	public int insertCommunity(UserCommunityVO community);
+	public int insertCommunity(UserCommunityVO community) throws Exception;
 	
-	public int updateCommunity(UserCommunityVO community);
+	public int updateCommunity(UserCommunityVO community) throws Exception;
 	
-	public int deleteCommunity(UserCommunityVO community);
+	public int deleteCommunity(UserCommunityVO community) throws Exception;
 
 }

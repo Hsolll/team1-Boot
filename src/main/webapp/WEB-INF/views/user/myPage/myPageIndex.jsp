@@ -63,56 +63,55 @@
                 <tbody>
             
                 <c:choose>
-            <c:when test="${not empty productLikeList}">
-               <c:forEach var="productLike" items="${productLikeList}">
+            <c:when test="${not empty productMyPageLikeList}">
+               <c:forEach var="productMyPageLikeList" items="${productMyPageLikeList}">
                  <tr class="first"> 
                     <td class="first" rowspan="1">
-                        ${productLike.p_cate}
+                        ${productMyPageLikeList.p_cate}
                     </td>  
                     <td>    
                         <div class="orderProdInfo_v2">
                             <label for="ck20221006533547059_1" class="chk"><input type="hidden" name="ck20221006533547059" id="ck20221006533547059_1" value="1"></label>
                             <span class="img">                     
-                                      <c:if test="${not empty productLike.p_thumb}">
-                        <img class="thumb_c p_no" id="${productLike.p_no}" src="/uploadStorage/product/thumbnail/${productLike.p_thumb}"/>
+                                      <c:if test="${not empty productMyPageLikeList.p_thumb}">
+                        <img class="thumb_c p_no" id="${productMyPageLikeList.p_no}" src="/uploadStorage/product/thumbnail/${productMyPageLikeList.p_thumb}"/>
                      </c:if>
-                     <c:if test="${empty product.p_thumb}">
-                        <img class="p_no" id="${productLike.p_no}" src="/resources/images/common/noimage.png"/>
+                     <c:if test="${empty productMyPageLikeList.p_thumb}">
+                        <img class="p_no" id="${productMyPageLikeList.p_no}" src="/resources/images/common/noimage.png"/>
                      </c:if>              
                                     </span>
                             <div class="cont ">
-                                <p class="p_no" id="${productLike.p_no}">${productLike.p_title}</p>
+                                <p class="p_no" id="${productMyPageLikeList.p_no}">${productMyPageLikeList.p_title}</p>
                      </div>
                             <div class="layer_relative"></div>
                         </div>
                     </td>     
                     <td>
                         <p class="fnt_1">                     
-                            <strong>${productLike.p_name}</strong>    
+                            <strong>${productMyPageLikeList.p_name}</strong>    
                         </p>
                     </td>
                     <td rowspan="1">      
-                        <p class="fnt_2"> <c:if test="${productLike.p_price == 0}">무료나눔</c:if>
-                    <c:if test="${productLike.p_price != 0}">${productLike.p_price}</c:if></p>
+                        <p class="fnt_2"> <c:if test="${productMyPageLikeList.p_price == 0}">무료나눔</c:if>
+                    <c:if test="${productMyPageLikeList.p_price != 0}">${productMyPageLikeList.p_price}</c:if></p>
                     </td>
                     <td class="td-center">           
-                        <span class="fc_blue">${productLike.p_status}</span>                        
+                        <span class="fc_blue">${productMyPageLikeList.p_status}</span>                        
                 </td>
-                <td>
-               <c:if test="${not empty productLike.p_buyid}">
-                        ${productLike.p_buyid}
+                <%-- <td>
+               <c:if test="${not empty productMyPageLikeList.p_buyid}">
+                        ${productMyPageLikeList.p_buyid}
                      </c:if>
-                     <c:if test="${empty productLike.p_buyid}">
-                        ${productLike.p_buyid}
+                     <c:if test="${empty productMyPageLikeList.p_buyid}">
+                        ${productMyPageLikeList.p_buyid}
                      </c:if>    
                      <!-- <button type="button" id="buyid">판매확정</button> -->
-                </td>
+                </td> --%>
                 </tr>
                  </c:forEach>
                 </c:when>
                 <c:otherwise>
                    <td>상품이 존재하지 않습니다</td>
-                   <td></td>
                    <td></td>
                    <td></td>
                    <td></td>
@@ -149,39 +148,39 @@
             
                 <c:choose>
             <c:when test="${not empty productBuyList}">
-               <c:forEach var="productBuy" items="${productBuyList}">
+               <c:forEach var="productBuyList" items="${productBuyList}">
                  <tr class="first"> 
                     <td class="first" rowspan="1">
-                        ${productBuy.p_cate}
+                        ${productBuyList.p_cate}
                     </td>  
                     <td>    
                         <div class="orderProdInfo_v2">
                             <label for="" class="chk"></label>
                             <span class="img">                     
-                                      <c:if test="${not empty productBuy.p_thumb}">
-                        <img class="thumb_c p_no" id="${productBuy.p_no}" src="/uploadStorage/product/thumbnail/${productBuy.p_thumb}"/>
+                                      <c:if test="${not empty productBuyList.p_thumb}">
+                        <img class="thumb_c p_no" id="${productBuyList.p_no}" src="/uploadStorage/product/thumbnail/${productBuyList.p_thumb}"/>
                      </c:if>
-                     <c:if test="${empty product.p_thumb}">
-                        <img class="p_no" id="${productBuy.p_no}" src="/resources/images/common/noimage.png"/>
+                     <c:if test="${empty productBuyList.p_thumb}">
+                        <img class="p_no" id="${productBuyList.p_no}" src="/resources/images/common/noimage.png"/>
                      </c:if>              
                                     </span>
                             <div class="cont ">
-                                <p class="p_no" id="${productBuy.p_no}">${productBuy.p_title}</p>
+                                <p class="p_no" id="${productBuyList.p_no}">${productBuyList.p_title}</p>
                      </div>
                             <div class="layer_relative"></div>
                         </div>
                     </td>     
                     <td>
                         <p class="fnt_1">                     
-                            <strong>${productBuy.p_name}</strong>    
+                            <strong>${productBuyList.p_name}</strong>    
                         </p>
                     </td>
                     <td rowspan="1">      
-                        <p class="fnt_2"> <c:if test="${productBuy.p_price == 0}">무료나눔</c:if>
-                    <c:if test="${productBuy.p_price != 0}">${productBuy.p_price}</c:if></p>
+                        <p class="fnt_2"> <c:if test="${productBuyList.p_price == 0}">무료나눔</c:if>
+                    <c:if test="${productBuyList.p_price != 0}">${productBuyList.p_price}</c:if></p>
                     </td>
                     <td class="td-center">           
-                        <span class="fc_blue">${productBuy.p_status}</span>                        
+                        <span class="fc_blue">${productBuyList.p_status}</span>                        
                 </td>
                 <%-- <td>
                <c:if test="${not empty productBuy.p_buyid}">
@@ -198,7 +197,6 @@
                 </c:when>
                 <c:otherwise>
                    <td>상품이 존재하지 않습니다</td>
-                   <td></td>
                    <td></td>
                    <td></td>
                    <td></td>

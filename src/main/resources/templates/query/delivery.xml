@@ -9,7 +9,7 @@
 
 	<select id="selectDeliveryInfo" parameterType="delivery" resultType="delivery">
 		SELECT * FROM TB_USER_DELIVERY
-		WHERE O_NO = 22
+		WHERE O_NO = #{o_no}
 	</select>
 
 </mapper>

@@ -64,6 +64,16 @@ public class SafeProductServiceImpl implements SafeProductService {
 		
 		return result;
 	}
+	
+	@Override
+	public int updateSafeProductStatusReturn(SafeProductVO spvo) {
+
+		int result = 0;
+		
+		result = safeProductDAO.updateSafeProductStatusReturn(spvo);
+		
+		return result;
+	}
 
 	@Override
 	public List<ProductVO> selectProductList(MemberVO mvo) {

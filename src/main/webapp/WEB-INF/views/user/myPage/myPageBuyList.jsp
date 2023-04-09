@@ -46,7 +46,7 @@
                let regex = new RegExp(word,'gi');
                $(this).html($(this).html().replace(regex,"<span class='required'>"+word+"</span>"));
              });
-         }
+         
       }
       
       /* 입력 양식 enter 제거 */
@@ -167,39 +167,39 @@
             
                 <c:choose>
             <c:when test="${not empty productBuyList}">
-               <c:forEach var="productBuy" items="${productBuyList}">
+               <c:forEach var="productBuyList" items="${productBuyList}">
                  <tr class="first"> 
                     <td class="first" rowspan="1">
-                        ${productBuy.p_cate}
+                        ${productBuyList.p_cate}
                     </td>  
                     <td class="ptitle">    
                         <div class="orderProdInfo_v2">
                             <label for="1" class="chk"></label>
                             <span class="img">                     
-                                      <c:if test="${not empty productBuy.p_thumb}">
-                        <img class="thumb_c p_no" id="${productBuy.p_no}" src="/uploadStorage/product/thumbnail/${productBuy.p_thumb}"/>
+                                      <c:if test="${not empty productBuyList.p_thumb}">
+                        <img class="thumb_c p_no" id="${productBuyList.p_no}" src="/uploadStorage/product/thumbnail/${productBuyList.p_thumb}"/>
                      </c:if>
-                     <c:if test="${empty product.p_thumb}">
-                        <img class="p_no" id="${productBuy.p_no}" src="/resources/images/common/noimage.png"/>
+                     <c:if test="${empty productBuyList.p_thumb}">
+                        <img class="p_no" id="${productBuyList.p_no}" src="/resources/images/common/noimage.png"/>
                      </c:if>              
                                     </span>
                             <div class="cont ">
-                                <p class="p_no" id="${productBuy.p_no}">${productBuy.p_title}</p>
+                                <p class="p_no" id="${productBuyList.p_no}">${productBuyList.p_title}</p>
                      </div>
                             <div class="layer_relative"></div>
                         </div>
                     </td>     
                     <td class="pname">
                         <p class="fnt_1">                     
-                            <strong>${productBuy.p_name}</strong>    
+                            <strong>${productBuyList.p_name}</strong>    
                         </p>
                     </td>
                     <td rowspan="1">      
-                        <p class="fnt_2"> <c:if test="${productBuy.p_price == 0}">무료나눔</c:if>
-                    <c:if test="${productBuy.p_price != 0}">${productBuy.p_price}</c:if></p>
+                        <p class="fnt_2"> <c:if test="${productBuyList.p_price == 0}">무료나눔</c:if>
+                    <c:if test="${productBuyList.p_price != 0}">${productBuyList.p_price}</c:if></p>
                     </td>
                     <td class="td-center">           
-                        <span class="fc_blue">${productBuy.p_status}</span>                        
+                        <span class="fc_blue">${productBuyList.p_status}</span>                        
                 </td>
                <%--  <td>
                <c:if test="${not empty productBuy.p_buyid}">
@@ -216,7 +216,6 @@
                 </c:when>
                 <c:otherwise>
                    <td>상품이 존재하지 않습니다</td>
-                   <td></td>
                    <td></td>
                    <td></td>
                    <td></td>

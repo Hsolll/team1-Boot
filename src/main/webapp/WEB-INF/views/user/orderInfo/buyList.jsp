@@ -28,7 +28,7 @@
 				$("#testBtn").click(function(){
 					$.ajax({
 			    		url: "/delivery/codeSearch",
-						dataType : "text",
+						dataType : "json",
 			    		success : function(result){
 							console.log(result);
 							
@@ -44,8 +44,8 @@
 				
 				$("#testBtn1").click(function(){
 					$.ajax({
-			    		url: "/delivery/deliveryTracking?o_no=22",
-						dataType : "text",
+			    		url: "/delivery/deliveryTracking?o_no=3",
+						dataType : "json",
 			    		success : function(result){
 							console.log(result);
 
@@ -61,6 +61,19 @@
 							alert("실패");
 						}
 			    	});
+				});
+				
+				
+				$(".godetail").click(function(){
+					let o_no = $(this).parents("tr").attr("data-no");
+					console.log("o_no = " + o_no);
+					$("#o_no").val(o_no);
+					
+					$("#f_data").attr({
+						"method":"get",
+						"action":"/order/buyListDetail"
+					});
+					$("#f_data").submit();
 				});
 				
 				
@@ -199,7 +212,7 @@
 									<tr class="text-center" data-no="${buyList.o_no}" data-sp="${buyList.sp_no}">
 										<td>${ buyList.o_id }</td>
 										<td>${ buyList.o_date }</td>
-										<td>${ buyList.sp_name }</td>
+										<td class="godetail">${ buyList.sp_name }</td>
 										<td>${ buyList.seller }</td>
 										<td>
 											<fmt:formatNumber value="${buyList.sp_price}" groupingUsed="true"/>
