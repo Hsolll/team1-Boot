@@ -1,78 +1,82 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/common.jspf" %>
-<script src="/resources/include/js/common.js"></script>
-	<script>
-		$(function(){
-			let word="<c:out value='${faqVO.keyword}' />";
-			let value="";
-			if(word!= ""){
-				$("#keyword").val("<c:out value='${faqVO.keyword}' />");
-				$("#search").val("<c:out value='${faqVO.search}' />");
-				
-				if($("#search").val()!='f_content'){
-					if($("#search").val()=='f_title') value="#list tr td";
-					console.log($(value+":contains('"+word+"')").html());
-					$(value+":contains('"+word+"')").each(function(){
-						let regex = new RegExp(word,'gi');
-						$(this).html($(this).html().replace(regex,"<span>"+word+"</span>"));
-					});
-				}
-			}
-			
-			$("#keyword").bind("keydown", function(event){
-				if(event.keyCode == 13){
-					event.preventDefault();
-				}
-			});
-			
-			$("#search").change(function(){
-				if($("#search").val()=="all"){
-					$("#keyword").val("전체 데이터 조회합니다.");
-				} else if($("search").val()!="all"){
-					$("#keyword").val("");
-					$("#keyword").focus();
-				}
-			});
-			
-			$("#searchData").click(function(){
-				if($("#search").val()!='all'){
-					if(!chkData("#keyword", "검색어를")) return;
-				}
-				$("#pageNum").val(1);
-				goPage();
-			});
-			
-			$(".goDetail").click(function(){
-				let f_no = $(this).parents("tr").attr("data-no");
-				$("#f_no").val(f_no);
-				
-				$("#detailForm").attr({
-					"method":"get",
-					"action":"/faq/faqDetail"
-				});
-				$("#detailForm").submit();
-			});
-			
-			$(".paginate_button a").click(function(e){
-				e.preventDefault();
-				$("#f_search").find("input[name='pageNum']").val($(this).attr("href"));
-				goPage();
-			});
-			
-		});
+
+		<script src="/resources/include/js/common.js"></script>
 		
-		function goPage(){
-			if($("#search").val()=="all"){
-				$("#keyword").val("");
-			}
-			$("#f_search").attr({
-				"method":"get",
-				"action":"/faq/faqList"
+		<link rel="stylesheet" href="/resources/include/css/faqList.css">
+		
+		<script>
+			$(function(){
+				let word="<c:out value='${faqVO.keyword}' />";
+				let value="";
+				if(word!= ""){
+					$("#keyword").val("<c:out value='${faqVO.keyword}' />");
+					$("#search").val("<c:out value='${faqVO.search}' />");
+					
+					if($("#search").val()!='f_content'){
+						if($("#search").val()=='f_title') value="#list tr td";
+						console.log($(value+":contains('"+word+"')").html());
+						$(value+":contains('"+word+"')").each(function(){
+							let regex = new RegExp(word,'gi');
+							$(this).html($(this).html().replace(regex,"<span>"+word+"</span>"));
+						});
+					}
+				}
+				
+				$("#keyword").bind("keydown", function(event){
+					if(event.keyCode == 13){
+						event.preventDefault();
+					}
+				});
+				
+				$("#search").change(function(){
+					if($("#search").val()=="all"){
+						$("#keyword").val("전체 데이터 조회합니다.");
+					} else if($("search").val()!="all"){
+						$("#keyword").val("");
+						$("#keyword").focus();
+					}
+				});
+				
+				$("#searchData").click(function(){
+					if($("#search").val()!='all'){
+						if(!chkData("#keyword", "검색어를")) return;
+					}
+					$("#pageNum").val(1);
+					goPage();
+				});
+				
+				$(".goDetail").click(function(){
+					let f_no = $(this).parents("tr").attr("data-no");
+					$("#f_no").val(f_no);
+					
+					$("#detailForm").attr({
+						"method":"get",
+						"action":"/faq/faqDetail"
+					});
+					$("#detailForm").submit();
+				});
+				
+				$(".paginate_button a").click(function(e){
+					e.preventDefault();
+					$("#f_search").find("input[name='pageNum']").val($(this).attr("href"));
+					goPage();
+				});
+				
 			});
-			$("#f_search").submit();
-		}
-	</script>
+			
+			function goPage(){
+				if($("#search").val()=="all"){
+					$("#keyword").val("");
+				}
+				$("#f_search").attr({
+					"method":"get",
+					"action":"/faq/faqList"
+				});
+				$("#f_search").submit();
+			}
+		</script>
 	</head>
 	<body>
 		<div class='contentContainer container'>
@@ -95,18 +99,25 @@
 					</div>
 				</form>
 			</div>
-			<div id="faqList" class="table-height">
-				<table summary="FAQ 리스트" class="table table-striped" style="margin-top: 30px;">
+			<div id="faqList" class="community_table mt30">
+				<table summary="FAQ 리스트" >
+					<colgroup>
+	                    <col style="width: 7%">
+	                    <col>
+	                    <col style="width: 13%">
+	                    <col style="width: 13%">
+	                    <col style="width: 7%">
+	                </colgroup>
 					<thead>
-						<tr>
-							<th data-value="f_no" class="order text-center col-md-1">글 번호</th>
-							<th class="text-center col-md-4">글 제목</th>
-							<th data-value="f_created_at" class="text-center col-md-1">작성자</th>
-							<th data-value="f_created_at" class="text-center col-md-1">작성일</th>
-							<th data-value="f_created_at" class="text-center col-md-1">조회수</th>
+						<tr class="text-center">
+							<th data-value="f_no" >NO</th>
+							<th scope="col">TITLE</th>
+							<th scope="col">NAME</th>
+							<th scope="col">DATE</th>
+							<th scope="col">HITS</th>
 						</tr>
 					</thead>
-					<tbody id="list" class="table-striped">
+					<tbody id="list" >
 						<c:choose>
 							<c:when test="${not empty faqList }">
 								<c:forEach var="faq" items="${faqList}" varStatus="status">
@@ -156,8 +167,6 @@
 					</c:if>
 				</ul>
 			</div>
-			
-			
 		</div>
 	</body>
 </html>

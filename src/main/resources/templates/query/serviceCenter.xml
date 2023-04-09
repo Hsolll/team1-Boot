@@ -12,6 +12,8 @@
 			<![CDATA[ TO_CHAR(SC_CREATED_AT, 'YYYY-MM-DD') BETWEEN #{start_date} AND #{end_date}]]>
 		</if>
 	</sql>
+	
+	<!-- 문의 리스트 조회 -->
 	<select id="selectServiceList" resultType="center" parameterType="center">
 		<![CDATA[
 			SELECT RNUM, SC_NO, U_NO, SC_TITLE, U_NAME, SC_READCNT,
@@ -30,80 +32,100 @@
 						ORDER BY SC_NO DESC
 						)
 					WHERE ]]>
-						<trim prefix="(" suffix=") AND " prefixOverrides="AND">
-								<include refid="serSearch"></include>
-						</trim>
-						<![CDATA[ SC_DELETED_AT IS NULL AND	ROWNUM <= #{pageNum} * #{amount}
-					) SERVICELIST
-				WHERE RNUM > (#{pageNum}-1) * #{amount}
+				<trim prefix="(" suffix=") AND " prefixOverrides="AND">
+					<include refid="serSearch"></include>
+				</trim>
+					<![CDATA[ SC_DELETED_AT IS NULL AND	ROWNUM <= #{pageNum} * #{amount}
+				) SERVICELIST
+			WHERE RNUM > (#{pageNum}-1) * #{amount}
 			]]>
 	</select>
 	
-	<select id="selectServiceCnt" parameterType="center" resultType="int">
+	<!-- 문의수 -->
+	<select id="selectServiceCnt" parameterType="center"
+		resultType="int">
 		SELECT COUNT(*) FROM TB_USER_SERVICE
-		WHERE SC_DELETED_AT IS NULL
+		WHERE SC_DELETED_AT IS
+		NULL
 	</select>
-	
+
+	<!-- 문의 등록 -->
 	<insert id="insertService" parameterType="center">
-		INSERT INTO TB_USER_SERVICE(SC_NO, U_NO, SC_TITLE, SC_CONTENT, SC_PWD)
+		INSERT INTO
+		TB_USER_SERVICE(SC_NO, U_NO, SC_TITLE, SC_CONTENT, SC_PWD)
 		VALUES(
-			(SELECT NVL(MAX(SC_NO), 0)+1 FROM TB_USER_SERVICE), #{u_no}, #{sc_title},
-			#{sc_content}, #{sc_pwd})
+		(SELECT NVL(MAX(SC_NO), 0)+1 FROM TB_USER_SERVICE), #{u_no},
+		#{sc_title},
+		#{sc_content}, #{sc_pwd})
 	</insert>
-	
-	<select id="selectServiceDetail" parameterType="center" resultType="center">
-		SELECT S.SC_NO, S.U_NO, S.SC_TITLE, S.SC_CONTENT, S.SC_READCNT, TO_CHAR(S.SC_CREATED_AT, 'YYYY-MM-DD') AS SC_CREATED_AT,
-        	U.U_NAME, S.SC_PWD
+
+	<!-- 문의 상세 조회 -->
+	<select id="selectServiceDetail" parameterType="center"
+		resultType="center">
+		SELECT S.SC_NO, S.U_NO, S.SC_TITLE, S.SC_CONTENT,
+		S.SC_READCNT, TO_CHAR(S.SC_CREATED_AT, 'YYYY-MM-DD') AS SC_CREATED_AT,
+		U.U_NAME, S.SC_PWD
 		FROM TB_USER_SERVICE S, TB_USER U
-		WHERE S.U_NO = U.U_NO 
+		WHERE S.U_NO =
+		U.U_NO
 		AND SC_NO = #{sc_no}
 	</select>
-	
-	<select id="selectPwdChk" parameterType="center" resultType="int">
+
+	<!-- 문의 비밀번호 확인 -->
+	<select id="selectPwdChk" parameterType="center"
+		resultType="int">
 		SELECT NVL((SELECT 1 FROM TB_USER_SERVICE
-			WHERE SC_NO = #{sc_no} AND SC_PWD = #{sc_pwd}), 0) AS STATE
+		WHERE SC_NO = #{sc_no} AND SC_PWD = #{sc_pwd}), 0) AS STATE
 		FROM DUAL
 	</select>
-	
+
+	<!--  문의 조회수 -->
 	<update id="updateReadCnt" parameterType="center">
 		UPDATE TB_USER_SERVICE
 		SET SC_READCNT = SC_READCNT + 1
 		WHERE SC_NO = #{sc_no}
 	</update>
 	
+	<!-- 문의 업데이트 -->
 	<update id="updateService" parameterType="center">
 		UPDATE TB_USER_SERVICE
 		SET SC_CONTENT = #{sc_content},
-			SC_UPDATED_AT = SYSDATE
-			<if test='sc_pwd!=""'>
-				, SC_PWD = #{sc_pwd}
-			</if>
+		SC_UPDATED_AT = SYSDATE
+		<if test='sc_pwd!=""'>
+			, SC_PWD = #{sc_pwd}
+		</if>
 		WHERE SC_NO = #{sc_no}
 	</update>
-	
+
+	<!-- 문의 삭제 -->
 	<update id="updateServiceDel" parameterType="center">
-		UPDATE TB_USER_SERVICE
+		UPDATE
+		TB_USER_SERVICE
 		SET SC_DELETED_AT = SYSDATE
 		WHERE SC_NO = #{sc_no}
 	</update>
-	
-	<delete id="deleteService" parameterType="center">
-		DELETE FROM tb_user_service WHERE sc_no = #{sc_no}
-	</delete>
-	
 
-	
-	<select id="selectNoReplyCnt" resultType="int" >
-		SELECT NVL(SUM(CNT),0) AS CNT
-		FROM (SELECT COUNT(*) AS CNT FROM TB_USER_SERVICE U, TB_ADMIN_SERVICE_CENTER A
-				WHERE U.SC_NO = A.SC_NO(+)
-					  AND A.AS_NO IS NULL
-				GROUP BY A.SC_NO
+	<!-- 문의 삭제 -->
+	<delete id="deleteService" parameterType="center">
+		DELETE FROM
+		tb_user_service WHERE sc_no = #{sc_no}
+	</delete>
+
+	<!-- 답변이 없는 문의수 -->
+	<select id="selectNoReplyCnt" resultType="int">
+		SELECT
+		NVL(SUM(CNT),0) AS CNT
+		FROM (SELECT COUNT(*) AS CNT FROM
+		TB_USER_SERVICE U, TB_ADMIN_SERVICE_CENTER A
+		WHERE U.SC_NO = A.SC_NO(+)
+		AND A.AS_NO IS NULL
+		GROUP BY A.SC_NO
 		)
 	</select>
-	
+
 	<!-- 마이페이지 문의내역 조회 -->
-   <select id="selectServiceMyPageList" resultType="center" parameterType="center">
+	<select id="selectServiceMyPageList" resultType="center"
+		parameterType="center">
       <![CDATA[
          SELECT SC_NO, U_NO, SC_TITLE, U_NAME, SC_READCNT,
          TO_CHAR(SC_CREATED_AT, 'YYYY-MM-DD') AS SC_CREATED_AT
@@ -114,12 +136,12 @@
             JOIN TB_USER U
             ON  S.U_NO = U.U_NO
             WHERE SC_DELETED_AT IS NULL AND ]]>
-               <trim prefix="(" suffix=") AND " prefixOverrides="AND">
-                     <include refid="serSearch"></include>
-               </trim>
+		<trim prefix="(" suffix=") AND " prefixOverrides="AND">
+			<include refid="serSearch"></include>
+		</trim>
          <![CDATA[   ROWNUM <= #{pageNum} * #{amount}
             ) SERVICELIST
          WHERE SC_NO > (#{pageNum}-1) * #{amount} and u_no=#{u_no}
       ]]>
-   </select>
+	</select>
 </mapper>

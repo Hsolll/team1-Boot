@@ -1,109 +1,108 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/common.jspf" %>
-<script src="/resources/include/js/common.js"></script>
-	<script>
-	
-	$(function(){
-		let msg = "<c:if test='${empty memberLogin}'>회원만 이용할 수 있습니다.</c:if>";
-		let word="<c:out value='${serviceCenterVO.keyword}' />";
-		let value="";
-		if(word!= ""){
-			$("#keyword").val("<c:out value='${serviceCenterVO.keyword}' />");
-			$("#search").val("<c:out value='${serviceCenterVO.search}' />");
-			
-			if($("#search").val()!='sc_content'){
-				if($("#search").val()=='sc_title') value="#list tr td";
-				else if($("#search").val()=='u_name') value="#list tr td";
-				console.log($(value+":contains('"+word+"')").html());
-				$(value+":contains('"+word+"')").each(function(){
-					let regex = new RegExp(word,'gi');
-					$(this).html($(this).html().replace(regex,"<span>"+word+"</span>"));
+
+		<script src="/resources/include/js/common.js"></script>
+		
+		<link rel="stylesheet" href="/resources/include/css/faqList.css">
+		
+		<script>
+		
+			$(function(){
+				let msg = "<c:if test='${empty memberLogin}'>회원만 이용할 수 있습니다.</c:if>";
+				let word="<c:out value='${serviceCenterVO.keyword}' />";
+				let value="";
+				if(word!= ""){
+					$("#keyword").val("<c:out value='${serviceCenterVO.keyword}' />");
+					$("#search").val("<c:out value='${serviceCenterVO.search}' />");
+					
+					if($("#search").val()!='sc_content'){
+						if($("#search").val()=='sc_title') value="#list tr td";
+						else if($("#search").val()=='u_name') value="#list tr td";
+						console.log($(value+":contains('"+word+"')").html());
+						$(value+":contains('"+word+"')").each(function(){
+							let regex = new RegExp(word,'gi');
+							$(this).html($(this).html().replace(regex,"<span>"+word+"</span>"));
+						});
+					}
+				}
+				
+				$("#keyword").bind("keydown", function(event){
+					if(event.keyCode == 13){
+						event.preventDefault();
+					}
 				});
-			}
-		}
-		
-		$("#keyword").bind("keydown", function(event){
-			if(event.keyCode == 13){
-				event.preventDefault();
-			}
-		});
-		
-		$("#search").change(function(){
-			if($("#search").val()=="all"){
-				$("#keyword").val("전체 데이터 조회합니다.");
-			} else if($("search").val()!="all"){
-				$("#keyword").val("");
-				$("#keyword").focus();
-			}
-		});
-		
-		$("#searchData").click(function(){
-			if($("#search").val()!='all'){
-				if(!chkData("#keyword", "검색어를")) return;
-			}
-			$("#pageNum").val(1);
-			goPage();
-		});
-		
-		$(".paginate_button a").click(function(e){
-			e.preventDefault();
-			$("#f_search").find("input[name='pageNum']").val($(this).attr("href"));
-			goPage();
-		});
-		
-		$(".goDetail").click(function(){
-			let sc_no = $(this).parents("tr").attr("data-no");
-			$("#sc_no").val(sc_no);
-			if(msg!=""){
-				alert("로그인을 진행해주세요.");
-			} else{				
-				$("#detailForm").attr({
-					"method":"get",
-					"action":"/serviceCenter/servicePwdConfirm"
+				
+				$("#search").change(function(){
+					if($("#search").val()=="all"){
+						$("#keyword").val("전체 데이터 조회합니다.");
+					} else if($("search").val()!="all"){
+						$("#keyword").val("");
+						$("#keyword").focus();
+					}
 				});
-				$("#detailForm").submit();
-			}
-		});
-		
-		$(".replyDetail").click(function(){
-			let as_no = $(this).parents("tr").attr("data-num");
-			$("#as_no").val(as_no);
-			
-			$("#replyDetailForm").attr({
-				"method":"get",
-				"action":"/admin/servicePwdConfirm"
+				
+				$("#searchData").click(function(){
+					if($("#search").val()!='all'){
+						if(!chkData("#keyword", "검색어를")) return;
+					}
+					$("#pageNum").val(1);
+					goPage();
+				});
+				
+				$(".paginate_button a").click(function(e){
+					e.preventDefault();
+					$("#f_search").find("input[name='pageNum']").val($(this).attr("href"));
+					goPage();
+				});
+				
+				$(".goDetail").click(function(){
+					let sc_no = $(this).parents("tr").attr("data-no");
+					$("#sc_no").val(sc_no);
+					if(msg!=""){
+						alert("로그인을 진행해주세요.");
+					} else{				
+						$("#detailForm").attr({
+							"method":"get",
+							"action":"/serviceCenter/servicePwdConfirm"
+						});
+						$("#detailForm").submit();
+					}
+				});
+				
+				$(".replyDetail").click(function(){
+					let as_no = $(this).parents("tr").attr("data-num");
+					$("#as_no").val(as_no);
+					
+					$("#replyDetailForm").attr({
+						"method":"get",
+						"action":"/admin/servicePwdConfirm"
+					});
+					$("#replyDetailForm").submit();
+				});
+				
+				
+				$("#writeBtn").click(function(){
+					if(msg!=""){
+						alert("로그인을 진행해주세요.");
+					} else{
+						location.href="/serviceCenter/writeForm"
+					}
+				});
+				
 			});
-			$("#replyDetailForm").submit();
-		});
-		
-		
-		$("#writeBtn").click(function(){
-			if(msg!=""){
-				alert("로그인을 진행해주세요.");
-			} else{
-				location.href="/serviceCenter/writeForm"
+			
+			function goPage(){
+				if($("#search").val()=="all"){
+					$("#keyword").val("");
+				}
+				$("#f_search").attr({
+					"method":"get",
+					"action":"/serviceCenter/serviceList"
+				});
+				$("#f_search").submit();
 			}
-		});
-		
-	});
-	
-	function goPage(){
-		if($("#search").val()=="all"){
-			$("#keyword").val("");
-		}
-		$("#f_search").attr({
-			"method":"get",
-			"action":"/serviceCenter/serviceList"
-		});
-		$("#f_search").submit();
-	}
-	</script>
-	<style>
-		#writeBtn{
-			width:70px;
-		}
-	</style>
+		</script>
 	</head>
 	<body>
 		<div class="contentContainer container">
@@ -131,18 +130,25 @@
 					</div>
 				</form>
 			</div>
-			<div id="serviceList" class="table-height">
-				<table summary="문의 리스트" class="table table-striped" style="margin-top: 30px;">
+			<div id="serviceList" class="community_table mt30">
+				<table summary="문의 리스트">
+					<colgroup>
+	                    <col style="width: 7%">
+	                    <col>
+	                    <col style="width: 13%">
+	                    <col style="width: 13%">
+	                    <col style="width: 7%">
+	                </colgroup>
 					<thead>
-						<tr>
-							<th data-value="sc_no" class="order text-center col-md-1">번호</th>
-							<th class="text-center col-md-4">제목</th>
-							<th data-value="u_name" class="text-center col-md-1">작성자</th>
-							<th data-value="sc_created_at" class="text-center col-md-2">작성일</th>
-							<th data-value="sc_readcnt" class="text-center col-md-1">조회수</th>
+						<tr class="text-center">
+							<th data-value="sc_no" >NO</th>
+							<th >TITLE</th>
+							<th data-value="u_name" scope="col">NAME</th>
+							<th data-value="sc_created_at" scope="col">DATE</th>
+							<th data-value="sc_readcnt" scope="col">HITS</th>
 						</tr>
 					</thead>
-					<tbody id="list" class="table-striped">
+					<tbody id="list">
 						<c:choose>
 							<c:when test="${not empty serviceList }">
 								<c:forEach var="service" items="${serviceList}" varStatus="status">

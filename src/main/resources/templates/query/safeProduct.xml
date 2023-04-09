@@ -201,6 +201,7 @@
 		                WHERE SP_NO = #{sp_no})
 	</update>
 	
+	<!-- 안심거래상품 조회(관리자) -->
 	<select id="selectSproductList" resultType="safeProduct">
 		SELECT 
 		    SP_NO, A.U_NO, U_ID, U_NAME, P_NO, 

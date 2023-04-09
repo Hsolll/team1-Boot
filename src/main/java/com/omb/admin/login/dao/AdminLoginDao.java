@@ -6,5 +6,5 @@ import com.omb.admin.vo.AdminVO;
 
 @Mapper
 public interface AdminLoginDao {
-	public AdminVO selectLoginProcess(AdminVO login);
+	public AdminVO selectLoginProcess(AdminVO login); // 관리자 로그인
 }

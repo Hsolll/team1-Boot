@@ -1,0 +1,29 @@
+html, body {
+	height: 100%;
+}
+
+body {
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-align: center;
+	align-items: center;
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+
+.card-body {
+	height: 300px;
+}
+
+.form-group {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+#loginForm {
+	height: 230px;
+}
+
+#loginBtn {
+	margin-top: 60px;
+}

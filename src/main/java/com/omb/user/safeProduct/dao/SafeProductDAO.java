@@ -12,7 +12,6 @@ import com.omb.user.safeProduct.vo.SafeProductVO;
 public interface SafeProductDAO {
 	
 	public List<SafeProductVO> selectSafeProductList(SafeProductVO spvo);
-	public List<SafeProductVO> selectSproductList(SafeProductVO spvo);
 	
 	public int safeProductListCnt(SafeProductVO spvo);	// 전체 레코드 수
 	
@@ -40,8 +39,8 @@ public interface SafeProductDAO {
 	
 	public int deleteSafeProduct(SafeProductVO spvo);	// 삭제 처리 메서드
 	
-	
 	public int updateProductStatusReturn(SafeProductVO spvo);	// 안심상품 삭제 시 중고상품 판매상태 변경 (거래진행중 -> 판매중)
 	 
+	public List<SafeProductVO> selectSproductList(SafeProductVO spvo); // 거래가 완료된 안심 상품 조회 ( 관리자 사용 )
 
 }
