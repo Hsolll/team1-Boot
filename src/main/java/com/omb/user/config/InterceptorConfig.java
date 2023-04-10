@@ -22,11 +22,9 @@ public class InterceptorConfig implements WebMvcConfigurer {
     
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        /*
+        
         notLoadList.add("/login");
-        notLoadList.add("/admin");
-        notLoadList.add("/admin/main");
-        notLoadList.add("/admin/login");
+        notLoadList.add("/admin/**");
         notLoadList.add("/socialLogin");
         notLoadList.add("/callback");
         notLoadList.add("/kakaoCallback");
