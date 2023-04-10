@@ -1,0 +1,245 @@
+.community_table > table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    table-layout: fixed;
+    word-wrap: break-word;
+    word-break: keep-all;
+    color: #777;
+    font-size: 12px;
+    line-height: 1.25;
+}
+.community_table thead th {
+    font-size: 13px;
+    color: #000;
+    font-weight: normal;
+    font-family: Verdana;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #e9e9e9;
+    text-align: center;
+}
+.community_table thead th, tbody td {
+    padding: 15px 0;
+    font-family: 'Noto Sans';
+    border-bottom: 1px solid #e9e9e9;
+}
+
+.community_table tbody td a {
+    color: #1c1c1c;
+    text-decoration: none;
+    background: none;
+    font-family: 'Noto Sans';
+}
+
+/* 검색 */
+.searchbox {
+    overflow: hidden;
+    margin-top: 35px;
+    padding: 25px 30px 0;
+}
+.searchbox .keywordbox {
+    display: inline-block;
+    height: 34px;
+    line-height: 34px;
+}
+.searchbox .keywordbox .keyword {
+    display: inline-block;
+    width: 400px;
+}
+.keyword label {
+    margin: 0 15px 0 0;
+    font-weight: 600;
+}
+.searchbox_right {
+    float: right;
+    width: 410px;
+    margin: 0;
+}
+.searchbox > .block {
+    display: inline-block;
+    height: 34px;
+    line-height: 34px;
+}
+.searchbox_right input {
+    vertical-align: top;
+    border: 1px solid #6e7683;
+}
+.searchbox_right > .btn_gray {
+    display: inline-block;
+    color: #777;
+    font-weight: 600;
+    border: 1px solid #6e7683;
+    border-radius: 2px;
+    padding: 6px 30px;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.active a {
+	background: #f2f2f2;
+    border-color: #ddd;
+    color: #5f5f5f;
+}
+.pagingArea {
+	position: relative;
+}
+.writeArea {
+	position: relative;
+	top: 15px;
+    right: -490px;
+}
+.writeArea .buttonWhite {
+	position: absolute;
+	width: 108px;
+    height: 38px;
+    font-size: 13px;
+    line-height: 34px;
+}
+/* 상세페이지 */
+
+.buttonList {
+	display: flex;
+    justify-content: space-between;
+	padding: 10px 0;
+    width: 345px;
+}
+
+.buttonList {
+	float: right;
+}
+.buttonWhite {
+    display: inline-block;
+    color: #231f20;
+    text-align: center;
+    border: 1px solid #231f20;
+    background: #fff;
+}
+.buttonWhite:hover {
+	color: #fff;
+    background: #231f20;
+}
+.buttonBlack {
+	display: inline-block;
+    color: #fff;
+    text-align: center;
+    border: 1px solid #231f20;
+    background: #231f20;
+}
+.buttonBlack:hover {
+	color: #231f20;
+    background: #fff;
+}
+
+.buttonList button {
+    width: 108px;
+    height: 38px;
+    font-size: 13px;
+    line-height: 34px;
+}
+
+.detail_table > table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    table-layout: fixed;
+    word-wrap: break-word;
+    word-break: keep-all;
+    color: #777;
+    font-size: 12px;
+    line-height: 1.25;
+}
+
+.detail_table thead th {
+	color: #000;
+    font-size: 15px;
+    font-weight: normal;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #e9e9e9;
+    text-align: center;
+    font-family: 'Noto Sans';
+}
+.detail_table thead th, tbody td {
+    padding: 15px 0;
+    font-family: 'Noto Sans';
+}
+.detail_date {
+	position: relative;
+}
+.detail_date div {
+	padding-top: 5px;
+}
+.detail_date span {
+	margin-right: 15px;	
+    color: #343434;
+}
+.detail_date span em {
+	font-size: 12px;
+    color: #343434;
+    font-weight: bold;
+    font-style: normal;
+}
+
+.detail_content {
+	padding: 20px 0 40px 0;
+    color: #8d8d8d;
+    font-size: 16px;
+}
+
+/* 댓글입력 */
+#replyForm table {
+	width: 100%;
+}
+.replyBox {
+	padding-top: 20px;
+    vertical-align: top;
+}
+
+.replyBox label {
+	padding-left: 12px;
+    font-size: 14px;
+    color: #000;
+}
+.replyBox span {
+    margin: 0 10px;
+    font-size: 14px;
+    color: #828282;
+}
+.replyBox input {
+	margin: 0 10px 0 7px;
+    padding: 0 0 0 5px;
+    width: 212px;
+    height: 27px;
+    line-height: 27px;
+    border: 1px solid #ddd;
+}
+.writeReply {
+    padding-bottom: 15px;
+    font-size: 0;
+    display: flex;
+}
+.writeReply textarea {
+	padding: 1px 0;
+    width: 978px;
+    height: 120px;
+    border: 1px solid #ddd;
+    resize: none;
+    outline: none;
+}
+.replyBtn {
+	display: inline-block;
+    color: #fff;
+    text-align: center;
+    border: 1px solid #231f20;
+    background: #231f20;
+}
+.replyBtn:hover {
+	color: #231f20;
+    background: #fff;
+}
+.writeReply .replyBtn {
+	width: 118px;
+    height: 120px;
+    font-size: 16px;
+    line-height: 120px;
+}
