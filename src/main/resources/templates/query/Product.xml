@@ -20,13 +20,13 @@
      
        <![CDATA[ 
        SELECT  
-               P_NO, U_NO, P_TITLE, P_NAME, P_PRICE, P_STATUS, P_CONTENT, P_LOCAL, TRANS_METHOD, P_CREATED_AT, P_UPDATED_AT, P_DELETED_AT, p_file, p_thumb, P_CATE,PROD_LIKE
+               P_NO, U_NO,U_ID, P_TITLE, P_NAME, P_PRICE, P_STATUS, P_CONTENT, P_LOCAL, TRANS_METHOD, P_CREATED_AT, P_UPDATED_AT, P_DELETED_AT, p_file, p_thumb, P_CATE,PROD_LIKE
        FROM ( 
-               SELECT ROWNUM AS RNUM, P_NO, U_NO, P_TITLE, P_NAME, P_PRICE, P_STATUS, P_CONTENT, 
+               SELECT ROWNUM AS RNUM, P_NO, U_NO,U_ID, P_TITLE, P_NAME, P_PRICE, P_STATUS, P_CONTENT, 
                 P_LOCAL, TRANS_METHOD, P_CREATED_AT, P_UPDATED_AT, P_DELETED_AT, p_file, p_thumb,P_CATE,PROD_LIKE
             FROM( 
                 SELECT /*+ INDEX_DESC(TB_USER_PRODUCT TB_USER_PRODUCT_PK) */ 
-                    p.P_NO,u.U_NO,p.P_TITLE,p.P_NAME,p.P_PRICE,p.P_STATUS,p.P_CONTENT,p.P_LOCAL,p.TRANS_METHOD,
+                    p.P_NO,u.U_NO,U_ID,p.P_TITLE,p.P_NAME,p.P_PRICE,p.P_STATUS,p.P_CONTENT,p.P_LOCAL,p.TRANS_METHOD,
                     p.P_CREATED_AT,p.P_UPDATED_AT,p.P_DELETED_AT,p.p_file,p.p_thumb,p.P_CATE ,p.PROD_LIKE
                 FROM  
                     TB_USER_PRODUCT p 

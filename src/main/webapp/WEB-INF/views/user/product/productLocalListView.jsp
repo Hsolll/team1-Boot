@@ -14,7 +14,7 @@ $(".p_no").click(function(){
 </script>
 </head>
 <body>
-<ul class="prdList">
+<ul class="prdList mt30">
      <c:choose>
        <c:when test="${not empty plist}">
          <c:forEach var="product" items="${plist}">
@@ -39,6 +39,7 @@ $(".p_no").click(function(){
                <div class="txtArea">
                   <ul>
                      <li class="prdName" id="${product.p_no}">${product.p_title}</li>
+                     <li class="sellerName" id="${product.u_id}" class="mt10">${product.u_id}</li>
                      <li class="subName">${product.p_status}</li>
                      <li class="prdPrice">
                         <c:if test="${product.p_price == 0}">무료나눔</c:if>

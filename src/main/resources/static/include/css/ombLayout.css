@@ -33,6 +33,9 @@ table, input, select, textarea, a { font-size: 12px; line-height: 1.25; color: #
 .text24 { font-size: 24px; color: #333333; }
 .text18 { font-size: 18px; color: #333333; }
 .w50 {  width: 50px !important; }
+.w100 {  width: 100px !important; }
+.w125 {  width: 125px !important; }
+.w140 { width: 140px !important; }
 .w200 { width: 200px !important; }
 .w280 { width: 280px !important; }
 .w350 { width: 350px !important; }
