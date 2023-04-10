@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.omb.admin.depositInfo.dao.AdmDepositInfoDAO">
+
+	<insert id="insertDepositInfo" parameterType="orderInfo">
+		INSERT INTO TB_ADMIN_DEPOSIT_INFO(DEP_NO, O_NO, DEP_PRICE)
+		VALUES(TB_ADMIN_DEPOSIT_INFO_SEQ.NEXTVAL, #{o_no}, #{sp_price})
+	</insert>
+	
+	<!-- 입금된 상품 리스트 조회 -->
 	<select id="selectDepositedList" parameterType="depositInfo" resultType="depositInfo">
 		<![CDATA[
 		SELECT RNUM, DEP_NO, O_NO, DEP_PRICE 
@@ -15,6 +22,7 @@
 		]]>
 	</select>
 	
+	<!-- 입금대기 상품 리스트 조회 -->
 	<select id="selectDepositList" parameterType="depositInfo" resultType="depositInfo">
 		<![CDATA[
 		SELECT RNUM, DEP_NO, O_NO, DEP_PRICE 
@@ -28,30 +36,31 @@
 		ORDER BY DEP_NO
 		]]>
 	</select>
-
-	<insert id="insertDepositInfo" parameterType="orderInfo">
-		INSERT INTO TB_ADMIN_DEPOSIT_INFO(DEP_NO, O_NO, DEP_PRICE)
-		VALUES(TB_ADMIN_DEPOSIT_INFO_SEQ.NEXTVAL, #{o_no}, #{sp_price})
-	</insert>
 	
+	<!-- 입금날짜 업데이트 -->
 	<update id="updateDepositDate" parameterType="depositInfo">
 		UPDATE TB_ADMIN_DEPOSIT_INFO
 		SET DEP_DATE = SYSDATE
 		WHERE DEP_NO = #{dep_no}
 	</update>
 	
+	<!-- 입금 취소 업데이트 -->
 	<update id="updateDepositDelDate" parameterType="depositInfo">
 		UPDATE TB_ADMIN_DEPOSIT_INFO
 		SET DEP_DATE = NULL
 		WHERE DEP_NO = #{dep_no}
 	</update>
 	
+	<!-- 입금대기 수 -->
 	<select id="selectDepositCnt" parameterType="depositInfo" resultType="int">
 		SELECT COUNT(*) FROM TB_ADMIN_DEPOSIT_INFO
 		WHERE DEP_DATE IS NULL
 	</select>
+	
+	<!-- 입금완료 수 -->
 	<select id="selectDepositedCnt" parameterType="depositInfo" resultType="int">
 		SELECT COUNT(*) FROM TB_ADMIN_DEPOSIT_INFO
 		WHERE DEP_DATE IS NOT NULL
 	</select>
+	
 </mapper>

@@ -78,7 +78,6 @@
 						valueArr.push(list[i].value);
 					}
 				}
-				console.log(valueArr);
 				if(valueArr.length == 0){
 					alert("선택된 상품이 없습니다.");
 				}else{

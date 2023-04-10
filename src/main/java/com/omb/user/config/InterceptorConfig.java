@@ -22,7 +22,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
     
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        
+
         notLoadList.add("/login");
         notLoadList.add("/admin/**");
         notLoadList.add("/socialLogin");

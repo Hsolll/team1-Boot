@@ -1,0 +1,29 @@
+.btn {
+	margin-right: 10px;
+	width: 135px;
+	height: 35px;
+}
+
+input {
+	height: 30px;
+	margin-left: 10px;
+	border-color: whitesmoke;
+}
+
+.form-container {
+	border-bottom: 1px solid #eee;
+	margin: 40px 0;
+	padding-bottom: 60px;
+}
+
+.detailContainer {
+	display: none;
+}
+
+.btn-group {
+	margin-top: 20px;
+}
+
+.btnArea {
+	margin-bottom: 20px;
+}

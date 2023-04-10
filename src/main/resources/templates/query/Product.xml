@@ -140,17 +140,6 @@
 		    p_cate = #{p_cate} AND P_ADM_PER = 1
 	</select>
 	
-	<select id="selectQueuedCnt" parameterType="product" resultType="int">
-		SELECT COUNT(*)
-		FROM TB_USER_PRODUCT
-		WHERE P_ADM_PER = 0
-	</select>
-	<select id="selectRejectedCnt" parameterType="product" resultType="int">
-		SELECT COUNT(*)
-		FROM TB_USER_PRODUCT
-		WHERE P_ADM_PER = 2
-	</select>
-	
 	<select id="category" parameterType="product" resultType="product">
 		<![CDATA[ 
 		SELECT 
@@ -281,57 +270,7 @@
 			p.P_NO = #{p_no} AND u.U_NO = #{u_no}
 	</select>
 
-	<select id="selectQueuedList" resultType="product" parameterType="product">
-  		<![CDATA[ 
-		SELECT 
-        		RNUM, P_NO, U_NO, P_TITLE, P_NAME, P_PRICE, P_CONTENT, P_CREATED_AT, 
-        		P_UPDATED_AT, P_DELETED_AT, P_FILE, P_THUMB, P_CATE, P_ADM_PER
-		FROM (
-		        SELECT  
-		            rownum as rnum, p.P_NO, u.U_NO, p.P_TITLE, p.P_NAME, p.P_PRICE,
-		            p.P_CONTENT, p.P_LOCAL, p.TRANS_METHOD, p.P_CREATED_AT,
-		            p.P_UPDATED_AT, p.P_DELETED_AT, p.p_file, p.p_thumb, p.P_CATE, p.P_ADM_PER
-		        FROM 
-		            TB_USER_PRODUCT p INNER JOIN TB_USER u ON p.U_NO = u.U_NO 
-		        WHERE 
-		            rownum <= #{pageNum} * #{amount} AND P.P_ADM_PER = 0
-		     ) PRODUCTLIST
-		WHERE 
-		    rnum > (#{pageNum} - 1) * #{amount}
-    	]]>
-	</select>
 	
-	<update id="updateAdmRecognize" parameterType="product">
-		UPDATE TB_USER_PRODUCT
-		SET P_ADM_PER = 1
-		WHERE P_NO = #{p_no}
-	</update>
-	
-	<update id="updateAdmReject" parameterType="product">
-		UPDATE TB_USER_PRODUCT
-		SET P_ADM_PER = 2
-		WHERE P_NO = #{p_no}
-	</update>
-	
-	<select id="selectRejectedList" resultType="product" parameterType="product">
-  		<![CDATA[ 
-		SELECT 
-        		P_NO, U_NO, P_TITLE, P_NAME, P_PRICE, P_CONTENT, P_CREATED_AT, 
-        		P_UPDATED_AT, P_DELETED_AT, P_FILE, P_THUMB, P_CATE, P_ADM_PER
-		FROM (
-		        SELECT  
-		            rownum as rnum, p.P_NO, u.U_NO, p.P_TITLE, p.P_NAME, p.P_PRICE,
-		            p.P_CONTENT, p.P_LOCAL, p.TRANS_METHOD, p.P_CREATED_AT,
-		            p.P_UPDATED_AT, p.P_DELETED_AT, p.p_file, p.p_thumb, p.P_CATE, p.P_ADM_PER
-		        FROM 
-		            TB_USER_PRODUCT p INNER JOIN TB_USER u ON p.U_NO = u.U_NO 
-		        WHERE 
-		            rownum <= #{pageNum} * #{amount} AND P_ADM_PER = 2
-		     ) PRODUCTLIST
-		WHERE 
-		    rnum > (#{pageNum} - 1) * #{amount} 
-    	]]>
-	</select>
 	
 	<!-- 마이페이지 판매내역 조회 -->
    <select id="selectProductSellList" parameterType="member" resultType="product">
@@ -527,6 +466,74 @@
 			order by u_no, p_no
     	</select>
     	
-    	
-    	
+    	<!-- 승인 대기 상품 조회 -->
+    	<select id="selectQueuedList" resultType="product" parameterType="product">
+	  		<![CDATA[ 
+			SELECT 
+	        		RNUM, P_NO, U_NO, P_TITLE, P_NAME, P_PRICE, P_CONTENT, P_CREATED_AT, 
+	        		P_UPDATED_AT, P_DELETED_AT, P_FILE, P_THUMB, P_CATE, P_ADM_PER
+			FROM (
+			        SELECT  
+			            rownum as rnum, p.P_NO, u.U_NO, p.P_TITLE, p.P_NAME, p.P_PRICE,
+			            p.P_CONTENT, p.P_LOCAL, p.TRANS_METHOD, p.P_CREATED_AT,
+			            p.P_UPDATED_AT, p.P_DELETED_AT, p.p_file, p.p_thumb, p.P_CATE, p.P_ADM_PER
+			        FROM 
+			            TB_USER_PRODUCT p INNER JOIN TB_USER u ON p.U_NO = u.U_NO 
+			        WHERE 
+			            rownum <= #{pageNum} * #{amount} AND P.P_ADM_PER = 0
+			     ) PRODUCTLIST
+			WHERE 
+			    rnum > (#{pageNum} - 1) * #{amount}
+	    	]]>
+	</select>
+	
+	<!-- 상품 승인(관리자) -->
+	<update id="updateAdmRecognize" parameterType="product">
+		UPDATE TB_USER_PRODUCT
+		SET P_ADM_PER = 1
+		WHERE P_NO = #{p_no}
+	</update>
+	
+	<!-- 상품 거절(관리자) -->
+	<update id="updateAdmReject" parameterType="product">
+		UPDATE TB_USER_PRODUCT
+		SET P_ADM_PER = 2
+		WHERE P_NO = #{p_no}
+	</update>
+	
+	<!-- 관리자 거절 상품 조회 -->
+	<select id="selectRejectedList" resultType="product" parameterType="product">
+  		<![CDATA[ 
+		SELECT 
+        		P_NO, U_NO, P_TITLE, P_NAME, P_PRICE, P_CONTENT, P_CREATED_AT, 
+        		P_UPDATED_AT, P_DELETED_AT, P_FILE, P_THUMB, P_CATE, P_ADM_PER
+		FROM (
+		        SELECT  
+		            rownum as rnum, p.P_NO, u.U_NO, p.P_TITLE, p.P_NAME, p.P_PRICE,
+		            p.P_CONTENT, p.P_LOCAL, p.TRANS_METHOD, p.P_CREATED_AT,
+		            p.P_UPDATED_AT, p.P_DELETED_AT, p.p_file, p.p_thumb, p.P_CATE, p.P_ADM_PER
+		        FROM 
+		            TB_USER_PRODUCT p INNER JOIN TB_USER u ON p.U_NO = u.U_NO 
+		        WHERE 
+		            rownum <= #{pageNum} * #{amount} AND P_ADM_PER = 2
+		     ) PRODUCTLIST
+		WHERE 
+		    rnum > (#{pageNum} - 1) * #{amount} 
+    	]]>
+	</select>
+    
+    <!-- 승인 대기 상품수 -->
+	<select id="selectQueuedCnt" parameterType="product" resultType="int">
+		SELECT COUNT(*)
+		FROM TB_USER_PRODUCT
+		WHERE P_ADM_PER = 0
+	</select>
+	
+	<!-- 거절 상품수 -->
+	<select id="selectRejectedCnt" parameterType="product" resultType="int">
+		SELECT COUNT(*)
+		FROM TB_USER_PRODUCT
+		WHERE P_ADM_PER = 2
+	</select>
+	
 </mapper>

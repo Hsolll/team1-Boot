@@ -71,6 +71,26 @@ public class DeliveryController {
 		return comment;
 	}
 	
+	@ResponseBody
+	@PostMapping(value="/updateDelivery", consumes = "application/json")
+	public String updateDeliveryInfo(@RequestBody DeliveryVO delivery) {
+		
+		log.info("전달받은 운송장 정보 : " + delivery);
+		
+		int result = 0;
+		String comment = "";
+		
+		result = deliveryService.updateDeliveryInfo(delivery);
+		
+		if(result == 1) {
+			log.info("배송정보 수정 성공");
+			comment = "success";
+		} else {
+			comment = "fail";
+		}
+		return comment;
+	}
+	
 	/* 배송 정보 조회 메서드 */
 	@ResponseBody
 	@GetMapping("/deliveryInfo")
