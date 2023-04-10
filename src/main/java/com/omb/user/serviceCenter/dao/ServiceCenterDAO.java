@@ -36,8 +36,6 @@ public interface ServiceCenterDAO {
 
 	public int selectNoReplyCnt(); // 관리자의 답변이 달리지 않은 문의글의 수
 
-	public List<ServiceCenterVO> selectServiceMyPageList(ServiceCenterVO vo);
-
 	public int deleteService(int scno);
 
 

@@ -32,8 +32,6 @@ public interface ProductDao {
 
 	public int productMyPageSellSale(ProductVO pvo); // 마이페이지 판매중 카운트
 
-	public ProductVO selectProductLikeList(ProductVO pvo); // 마이페이지 좋아요 리스트 조회
-
 	public void productStatus(ProductVO pvo); // 마이페이지 거래상태 변경
 
 	/* 윤기 작업 */

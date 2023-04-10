@@ -271,38 +271,6 @@
 	</select>
 
 	
-
-	<update id="updateAdmRecognize" parameterType="product">
-		UPDATE TB_USER_PRODUCT
-		SET P_ADM_PER = 1
-		WHERE P_NO = #{p_no}
-	</update>
-	
-	<update id="updateAdmReject" parameterType="product">
-		UPDATE TB_USER_PRODUCT
-		SET P_ADM_PER = 2
-		WHERE P_NO = #{p_no}
-	</update>
-	
-	<select id="selectRejectedList" resultType="product" parameterType="product">
-  		<![CDATA[ 
-		SELECT 
-        		P_NO, U_NO, P_TITLE, P_NAME, P_PRICE, P_CONTENT, P_CREATED_AT, 
-        		P_UPDATED_AT, P_DELETED_AT, P_FILE, P_THUMB, P_CATE, P_ADM_PER
-		FROM (
-		        SELECT  
-		            rownum as rnum, p.P_NO, u.U_NO, p.P_TITLE, p.P_NAME, p.P_PRICE,
-		            p.P_CONTENT, p.P_LOCAL, p.TRANS_METHOD, p.P_CREATED_AT,
-		            p.P_UPDATED_AT, p.P_DELETED_AT, p.p_file, p.p_thumb, p.P_CATE, p.P_ADM_PER
-		        FROM 
-		            TB_USER_PRODUCT p INNER JOIN TB_USER u ON p.U_NO = u.U_NO 
-		        WHERE 
-		            rownum <= #{pageNum} * #{amount} AND P_ADM_PER = 2
-		     ) PRODUCTLIST
-		WHERE 
-		    rnum > (#{pageNum} - 1) * #{amount} 
-    	]]>
-	</select>
    
     	<select id="selectProductLike" resultType="product" parameterType="member">
     		<!-- 
@@ -329,8 +297,7 @@
 			order by u_no, p_no
     	</select>
     	
-    <!-- 마이페이지 판매내역 조회 -->
-	<select id="selectProductSellList" parameterType="member" resultType="product">
+    
 
 	
 	<!-- 마이페이지 판매내역 조회 -->
@@ -503,19 +470,19 @@
     	
     	
 
-   </select>
+   
    
 
     	
     	
-    	<select id="selectProductLike" resultType="product" parameterType="member">
-    		<!-- 
+    	<!-- <select id="selectProductLike" resultType="product" parameterType="member">
+    		
     		SELECT 
 			    NVL(
 			        (SELECT PROD_LIKE FROM TB_USER_PRODUCT_LIKE WHERE p_no = #{p_no} AND u_no = #{u_no}),
 			        0
 			    ) AS PROD_LIKE
-			FROM dual  -->
+			FROM dual 
 			SELECT distinct nvl(a.prod_like, b.prod_like) as prod_like, nvl(a.p_no, b.p_no) p_no, nvl(a.u_no, c.u_no) u_no
 			FROM (
 			  SELECT prod_like, p_no, u_no
@@ -531,7 +498,7 @@
 			) c
 			WHERE a.p_no(+) = b.p_no and a.u_no(+) = c.u_no
 			order by u_no, p_no
-    	</select>
+    	</select> -->
     	
     	<!-- 승인 대기 상품 조회 -->
     	<select id="selectQueuedList" resultType="product" parameterType="product">

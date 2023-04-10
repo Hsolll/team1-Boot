@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/common.jspf" %>
 	<link type="text/css" rel="stylesheet" href="/resources/include/css/signUp.css" />
+	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script type="text/javascript">
 		$(function(){
 			   $(".content_wrap .page-header h1").html("카카오 회원가입");	
