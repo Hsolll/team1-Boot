@@ -244,15 +244,17 @@
 								    		success : function(result){
 												console.log(result);
 	
-												let tracking = result.trackingDetails;
-												console.log("---------- 추출 정보 ----------")
-												console.log(tracking);
-												
-												let lastIndex = tracking.length - 1;
-												let kind = tracking[lastIndex].kind
-												console.log("---------- 출력 정보 ----------")
-												console.log(kind);
-												$(".status").text(kind);
+												if(result != "배송정보없음"){
+													let tracking = result.trackingDetails;
+													console.log("---------- 추출 정보 ----------")
+													console.log(tracking);
+													
+													let lastIndex = tracking.length - 1;
+													let kind = tracking[lastIndex].kind
+													console.log("---------- 출력 정보 ----------")
+													console.log(kind);
+													$(".status").text(kind);
+												}
 											},
 											error : function() {
 												alert("실패");
