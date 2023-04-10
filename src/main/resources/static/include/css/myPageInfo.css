@@ -1,0 +1,76 @@
+ .status {
+    height: auto;
+    margin-bottom: 40px;
+    width: 469px;
+}
+
+
+.statusul {
+    background-color: #baac9a;
+    color: rgb(255, 255, 255);
+    border-width: 1px 1px 1px 0px;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-top-color: #baac9a;
+    border-right-color: #baac9a;
+    border-bottom-color: #baac9a;
+    border-image: initial;
+    border-left-style: initial;
+    border-left-color: initial;
+    height: 122px;
+    font-weight: 100;
+    font-style: normal;
+    box-sizing: border-box;
+    font-family: robotoThinNumber, roboto, "Courier New", Tahoma, NanumGothic, MalgunGothic, 돋움, dotum, sans-serif;
+}
+
+.kiFKDs {
+    position: relative;
+    float: left;
+    min-width: 156px;
+    height: 120px;
+    padding: 19px 0px 0px 30px;
+    border-left: 1px solid white;
+    box-sizing: border-box;
+}
+
+.statusstrong {
+    display: block;
+    margin-bottom: 13px;
+    height: 21px;
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    font-weight: bold;
+    text-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px;
+    font-family: AppleSDGothicNeo;
+}
+
+.statusdiv {
+    display: block;
+    margin-top: -5px;
+    text-shadow: rgba(0, 0, 50, 0.15) 0px 1px 1px;
+}
+
+.statusdiv > a {
+    color: rgb(51, 51, 51);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.statusdiv span {
+    color: rgb(255, 255, 255);
+}
+
+.statusdiv .my__stat__num-font {
+    color: rgb(255, 255, 255);
+    font-size: 50px;
+    line-height: 60px;
+    cursor: pointer;
+}
+
+.statusdiv .my__stat__unit {
+    margin-left: 5px;
+    vertical-align: 2px;
+    font-size: 12px;
+}
