@@ -49,11 +49,9 @@ public class LoginController {
 
 	@GetMapping("/login")
 	public String loginForm(Model model, HttpSession session) {
-		log.info("로그인 화면 호출");
 
 		/* 카카오 URL */
 		String kakaoAuthUrl = kakaoLoginBO.getAuthorizationUrl(session);
-		System.out.println("카카오:" + kakaoAuthUrl);
 		model.addAttribute("urlKakao", kakaoAuthUrl);
 
 		/* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
@@ -61,7 +59,6 @@ public class LoginController {
 
 		// https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=sE***************&
 		// redirect_uri=http%3A%2F%2F211.63.89.90%3A8090%2Flogin_project%2Fcallback&state=e68c269c-5ba9-4c31-85da-54c16c658125
-		System.out.println("네이버:" + naverAuthUrl);
 
 		// 네이버
 		model.addAttribute("url", naverAuthUrl);
@@ -71,10 +68,8 @@ public class LoginController {
 
 	@PostMapping("/login")
 	public String login(HttpSession session, MemberVO mvo, RedirectAttributes ras) {
-		log.info("전달받은 로그인정보 : " + mvo);
 		MemberVO memberLogin = memberLoginService.memberLogin(mvo);
 
-		log.info("로그인정보 : " + memberLogin);
 		String url = "";
 		if (memberLogin != null && memberLogin.getU_status().equals("USING")) {
 			if (memberLogin.getU_grade().equals("3")) {
@@ -93,7 +88,6 @@ public class LoginController {
 			} else {
 				ras.addFlashAttribute("errorMsg", "아이디와 비밀번호를 확인해주세요");
 			}
-			log.info("memberLogin :" + memberLogin);
 			url = "/login";
 		}
 		return "redirect:" + url;
@@ -101,18 +95,14 @@ public class LoginController {
 
 	@PostMapping("/socialLogin")
 	public String naverLogin(HttpSession session, MemberVO mvo, RedirectAttributes ras) {
-		log.info("전달받은 로그인정보 : " + mvo);
-		log.info("소셜 로그인 성공");
 		MemberVO memberLogin = memberLoginService.socialLogin(mvo);
 
-		log.info("로그인정보 : " + memberLogin);
 		String url = "";
 		if (memberLogin != null) {
 			session.setAttribute("memberLogin", memberLogin);
 			url = "/";
 		} else {
 			ras.addFlashAttribute("errorMsg", "아이디와 비밀번호를 확인해주세요");
-			log.info("memberLogin :" + memberLogin);
 			url = "/login";
 		}
 		return "redirect:" + url;
@@ -120,7 +110,6 @@ public class LoginController {
 
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
-		log.info("로그아웃 처리");
 		session.invalidate();
 		return "redirect:/";
 	}
@@ -136,7 +125,6 @@ public class LoginController {
 		// 1. 로그인 사용자 정보를 읽어온다.
 		apiResult = naverLoginBO.getUserProfile(oauthToken); // String형식의 json데이터
 
-		System.out.println(apiResult);
 		// 2. String형식인 apiResult를 json형태로 바꿈
 		JSONParser parser = new JSONParser();
 		Object obj = parser.parse(apiResult);
@@ -148,7 +136,6 @@ public class LoginController {
 		// response의 nickname값 파싱
 		String email = (String) response_obj.get("email");
 
-		System.out.println(email);
 
 		// 4.파싱 닉네임 세션으로 저장
 		session.setAttribute("socialLogin", email); // 세션 생성
@@ -162,7 +149,6 @@ public class LoginController {
 	@PostMapping("/socialChk")
 	public String naverChk(MemberVO mvo) {
 		String naverChkResult = memberLoginService.socialChk(mvo);
-		log.info("결과 :" + naverChkResult);
 		return naverChkResult;
 
 	}
@@ -171,7 +157,6 @@ public class LoginController {
 	@RequestMapping(value = "/kakaoCallback", method = { RequestMethod.GET, RequestMethod.POST })
 	public String callbackKakao(Model model, @RequestParam String code, @RequestParam String state, HttpSession session)
 			throws Exception {
-		System.out.println("로그인 성공 callbackKako");
 		OAuth2AccessToken oauthToken;
 		oauthToken = kakaoLoginBO.getAccessToken(session, code, state);
 		// 로그인 사용자 정보를 읽어온다
