@@ -18,6 +18,10 @@ public class SafeProductServiceImpl implements SafeProductService {
 	@Setter(onMethod_ = @Autowired)
 	private SafeProductDAO safeProductDAO;
 
+	
+	/********************************** 안심상품 조회 관련 **********************************/
+	
+	/* 안심상품 리스트 조회 */
 	@Override
 	public List<SafeProductVO> selectSafeProductList(SafeProductVO spvo) {
 		List<SafeProductVO> list = null;
@@ -25,7 +29,15 @@ public class SafeProductServiceImpl implements SafeProductService {
 		
 		return list;
 	}
+	
+	/* 전체 레코드 수 */
+	@Override
+	public int safeProductListCnt(SafeProductVO spvo) {
+		
+		return safeProductDAO.safeProductListCnt(spvo);
+	}
 
+	/* 안심상품 상세 조회 */
 	@Override
 	public SafeProductVO selectSafeProductDetail(SafeProductVO spvo) {
 		
@@ -42,9 +54,51 @@ public class SafeProductServiceImpl implements SafeProductService {
 		return detail;
 	}
 
+
+	/********************************** 안심상품 등록 관련 **********************************/
 	
-	/* 데이터베이스에 저장된 상품 가격 조회
-	 * 결제금액 위변조 검증 시 필요 */
+	/* 안심상품 등록 시 중고 상품목록 조회 메서드 */
+	@Override
+	public List<ProductVO> selectProductList(MemberVO mvo) {
+
+		List<ProductVO> pvoList = safeProductDAO.selectProductList(mvo);
+		
+		return pvoList;
+	}
+
+	/* 안심상품 등록 시 가격 자동입력을 위한 중고상품 금액 조회 */
+	@Override
+	public int selectProductPrice(SafeProductVO spvo) {
+
+		int price = safeProductDAO.selectProductPrice(spvo);
+		
+		return price;
+	}
+
+	/* 안심상품 등록 메서드 */
+	@Override
+	public int insertSafeProduct(SafeProductVO spvo) {
+		int result = 0;
+		
+		result = safeProductDAO.insertSafeProduct(spvo);
+		
+		return result;
+	}
+
+	/* 안심상품 등록 시 중고상품 판매상태 변경 (판매중 -> 거래진행중) */
+	@Override
+	public int updateProductStatus(SafeProductVO spvo) {
+		int result = 0;
+		
+		result = safeProductDAO.updateProductStatus(spvo);
+		
+		return result;
+	}
+	
+	
+	/********************************** 안심상품 결제 관련 **********************************/
+	
+	/* DB 저장된 상품 금액 조회 (결제 검증 시 필요) */
 	@Override
 	public int selectSafeProductPrice(SafeProductVO spvo) {
 
@@ -55,6 +109,7 @@ public class SafeProductServiceImpl implements SafeProductService {
 		return price;
 	}
 
+	/* 결제 완료시 상품 판매상태 변경 (판매중 -> 판매완료) */
 	@Override
 	public int updateSafeProductStatus(SafeProductVO spvo) {
 		
@@ -65,6 +120,7 @@ public class SafeProductServiceImpl implements SafeProductService {
 		return result;
 	}
 	
+	/* 결제 취소 시 상품 판매상태 변경 (판매완료 -> 판매중) */
 	@Override
 	public int updateSafeProductStatusReturn(SafeProductVO spvo) {
 
@@ -75,33 +131,10 @@ public class SafeProductServiceImpl implements SafeProductService {
 		return result;
 	}
 
-	@Override
-	public List<ProductVO> selectProductList(MemberVO mvo) {
-
-		List<ProductVO> pvoList = safeProductDAO.selectProductList(mvo);
-		
-		return pvoList;
-	}
-
-	@Override
-	public int insertSafeProduct(SafeProductVO spvo) {
-		int result = 0;
-		
-		result = safeProductDAO.insertSafeProduct(spvo);
-		
-		return result;
-	}
 	
+	/********************************** 안심상품 수정, 삭제 관련 **********************************/
 	
-	@Override
-	public int updateProductStatus(SafeProductVO spvo) {
-		int result = 0;
-		
-		result = safeProductDAO.updateProductStatus(spvo);
-		
-		return result;
-	}
-
+	/* 안심상품 판매등록 리스트 조회 */
 	@Override
 	public List<SafeProductVO> selectSafeProductListSell(MemberVO mvo) {
 		
@@ -110,6 +143,7 @@ public class SafeProductServiceImpl implements SafeProductService {
 		return sellList;
 	}
 
+	/* 수정 처리 메서드 */
 	@Override
 	public int updateSafeProduct(SafeProductVO spvo) {
 		int result = 0;
@@ -117,6 +151,7 @@ public class SafeProductServiceImpl implements SafeProductService {
 		return result;
 	}
 
+	/* 삭제 처리 메서드 */
 	@Override
 	public int deleteSafeProduct(SafeProductVO spvo) {
 		int result = 0;
@@ -124,6 +159,7 @@ public class SafeProductServiceImpl implements SafeProductService {
 		return result;
 	}
 
+	/* 안심상품 삭제 시 중고상품 판매상태 변경 (거래진행중 -> 판매중) */
 	@Override
 	public int updateProductStatusReturn(SafeProductVO spvo) {
 		int result = 0;
@@ -132,11 +168,4 @@ public class SafeProductServiceImpl implements SafeProductService {
 	}
 
 	
-	// 전체 레코드 수
-	@Override
-	public int safeProductListCnt(SafeProductVO spvo) {
-		
-		return safeProductDAO.safeProductListCnt(spvo);
-	}
-
 }

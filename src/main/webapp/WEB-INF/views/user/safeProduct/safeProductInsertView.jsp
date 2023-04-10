@@ -18,12 +18,35 @@
 			$("#sp_phone2").val(u_phone2);
 			$("#sp_phone3").val(u_phone3);
 			
-			/* option 선택 시 이벤트 */
+			
+			/* 상품 option 선택 시 이벤트 */
 			$("#selectBox").change(function(){
-				console.log($(this).val()); //value값 가져오기
-				console.log($("#selectBox option:selected").text()); //text값 가져오기
+				//console.log($(this).val()); //value값 가져오기
+				//console.log($("#selectBox option:selected").text()); //text값 가져오기
 				let sp_name = $("#selectBox option:selected").text();
 				$("#sp_name").val(sp_name);
+				
+				let p_no = $(this).find("option:selected").data("no");
+				
+				/* 상품 금액 조회하기 */
+				if($(this).find("option:selected").data("no") != null){
+					
+					$.ajax({
+			    		url: "/safe/findPrice?p_no=" + p_no, 
+			    		type: 'get',
+						dataType : "text",
+			    		success : function(result){
+							console.log(result);
+							
+							$("#sp_price").val(result);
+						},
+						error : function() {
+							alert("실패");
+						}
+			    	});
+				}
+				
+				
 			});
 			
 			
@@ -323,8 +346,10 @@
 		                                	<c:when test="${ not empty productList }">
 			                                    <select id="selectBox">
 			                                    	<option>상품을 선택해주세요</option>
-													<c:forEach var="productList" items="${ productList }" varStatus="status">
-														<option data-no="${productList.p_no}" value="${productList.p_name}">${productList.p_name}</option>
+													<c:forEach var="product" items="${ productList }" varStatus="status">
+														<c:if test="${product.p_status ne '거래진행중'}">
+															<option data-no="${product.p_no}" value="${product.p_name}">${product.p_name}</option>
+														</c:if>
 													</c:forEach>
 			                                    </select>
 		                                    </c:when>

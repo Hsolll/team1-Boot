@@ -3,38 +3,8 @@
 
 <mapper namespace="com.omb.user.safeProduct.dao.SafeProductDAO">
 
-	<!-- <select id="selectSafeProductList" resultType="safeProduct">
-		SELECT 
-			SP_NO, SP_TITLE, TO_CHAR(SP_PRICE, 'FM999,999,999,999') AS SP_PRICE, U_NO, TO_CHAR(SP_CREATED_AT, 'YYYY-MM-DD') as SP_CREATED_AT
-		FROM TB_USER_SAFE_PRODUCT
-	</select> -->
-	
-	<!-- 검색기능 추가 쿼리문
-	<select id="selectSafeProductList" parameterType="safeProduct" resultType="safeProduct">
-		SELECT 
-		    SP_NO, A.U_NO, U_ID, U_NAME, P_NO, 
-		    (SELECT P_NAME FROM TB_USER_PRODUCT C WHERE C.P_NO = A.P_NO) AS P_NAME, 
-		    SP_TITLE, SP_NAME, SP_PRICE, 
-		    SP_CONTENT, TO_CHAR(SP_CREATED_AT, 'YYYY-MM-DD') AS SP_CREATED_AT, SP_PWD, SP_STATUS
-		FROM TB_USER_SAFE_PRODUCT A
-		INNER JOIN TB_USER B
-		    ON A.U_NO = B.U_NO
-		<where>
-			<if test="search=='u_id'">
-				<![CDATA[ u_id LIKE '%'|| #{keyword} ||'%' ]]>					
-			</if>
-			<if test="search=='sp_title'">
-				<![CDATA[ sp_title LIKE '%'|| #{keyword} ||'%' ]]>					
-			</if>
-			<if test="search=='sp_name'">
-				<![CDATA[ sp_name LIKE '%'|| #{keyword} ||'%' ]]>					
-			</if>
-		</where>
-		ORDER BY SP_NO DESC
-	</select>
-	 -->
 	 
-	 <!-- 페이징처리 쿼리문 -->
+	 <!-- 안심상품 리스트 조회 (페이징, 검색기능 추가) -->
 	 <select id="selectSafeProductList" parameterType="safeProduct" resultType="safeProduct">
 	 	<![CDATA[
 	 	SELECT 
@@ -94,10 +64,10 @@
 		</trim>
 	</select>
 	 
-	
+	<!-- 안심상품 상세조회 -->
 	<select id="selectSafeProductDetail" parameterType="safeProduct" resultType="safeProduct">
 		SELECT 
-			SP_NO, SP_TITLE, SP_NAME, A.U_NO, U_ID, U_NAME, SP_PRICE, SP_CONTENT, SP_CREATED_AT, SP_STATUS
+			SP_NO, SP_TITLE, SP_NAME, SP_PWD, A.U_NO, U_ID, U_NAME, SP_PRICE, SP_CONTENT, SP_CREATED_AT, SP_STATUS
 		FROM TB_USER_SAFE_PRODUCT A
 		INNER JOIN TB_USER B
 		    ON A.U_NO = B.U_NO
@@ -106,29 +76,20 @@
 	
 	
 	
-	<select id="selectSafeProductPrice" parameterType="safeProduct" resultType="int">
-		SELECT SP_PRICE FROM TB_USER_SAFE_PRODUCT
-		WHERE SP_NO = #{sp_no}
+	<!-- 안심상품 등록 시 판매중인 중고상품 목록 불러오기 -->
+	<select id="selectProductList" parameterType="member" resultType="product">
+		SELECT
+		    P_NO, P_NAME, P_STATUS
+		FROM TB_USER_PRODUCT
+		WHERE U_NO = #{u_no}
 	</select>
 	
-	
-	<!-- 결제 완료시 상품 판매상태 변경 (판매중 -> 판매완료) -->
-	<update id="updateSafeProductStatus" parameterType="safeProduct">
-		UPDATE TB_USER_SAFE_PRODUCT SET SP_STATUS = '판매완료' where SP_NO = #{sp_no}
-	</update>
-	
-	
-	<!-- 결제 취소 시 상품 판매상태 변경 (판매완료 -> 판매중) -->
-	<update id="updateSafeProductStatusReturn" parameterType="safeProduct">
-		UPDATE TB_USER_SAFE_PRODUCT SET SP_STATUS = '판매중' where SP_NO = #{sp_no}
-	</update>
-	
-
-	<select id="selectsafeProductCnt" parameterType="safeProduct" resultType="int">
-		SELECT COUNT(*) 
-		FROM TB_USER_SAFE_PRODUCT
+	<!-- 안심 상품 등록 시 중고상품의 가격 자동입력을 위한 금액 조회 쿼리 -->
+	<select id="selectProductPrice" parameterType="safeProduct" resultType="int">
+		select p_price 
+		from tb_user_product
+		where p_no = #{p_no}
 	</select>
-
 	
 	<!-- 안심상품 등록 쿼리문 -->
 	<insert id="insertSafeProduct" parameterType="safeProduct">
@@ -152,13 +113,26 @@
 	</update>
 	
 	
-	<!-- 안심상품 등록 시 필요한 중고상품 리스트 조회 -->
-	<select id="selectProductList" parameterType="member" resultType="product">
-		SELECT
-		    P_NO, P_NAME
-		FROM TB_USER_PRODUCT
-		WHERE U_NO = #{u_no}
+	
+	<!-- 결제 시 검증을 위해 db에 저장된 안심상품 금액 조회 쿼리 -->
+	<select id="selectSafeProductPrice" parameterType="safeProduct" resultType="int">
+		SELECT SP_PRICE FROM TB_USER_SAFE_PRODUCT
+		WHERE SP_NO = #{sp_no}
 	</select>
+	
+	<!-- 결제 완료시 상품 판매상태 변경 (판매중 -> 판매완료) -->
+	<update id="updateSafeProductStatus" parameterType="safeProduct">
+		UPDATE TB_USER_SAFE_PRODUCT SET SP_STATUS = '판매완료' where SP_NO = #{sp_no}
+	</update>
+	
+	<!-- 결제 취소 시 상품 판매상태 변경 (판매완료 -> 판매중) -->
+	<update id="updateSafeProductStatusReturn" parameterType="safeProduct">
+		UPDATE TB_USER_SAFE_PRODUCT SET SP_STATUS = '판매중' where SP_NO = #{sp_no}
+	</update>
+	
+
+
+	
 	
 	
 	<!-- 회원 판매등록 상품 조회 -->
@@ -201,6 +175,10 @@
 		                WHERE SP_NO = #{sp_no})
 	</update>
 	
+	
+	
+	<!-- 관리자 페이지 사용 쿼리 -->
+	
 	<select id="selectSproductList" resultType="safeProduct">
 		SELECT 
 		    SP_NO, A.U_NO, U_ID, U_NAME, P_NO, 
@@ -212,4 +190,10 @@
 		    ON A.U_NO = B.U_NO
 		ORDER BY SP_NO
 	</select>
+
+	<select id="selectsafeProductCnt" parameterType="safeProduct" resultType="int">
+		SELECT COUNT(*) 
+		FROM TB_USER_SAFE_PRODUCT
+	</select>
+	
 </mapper>
