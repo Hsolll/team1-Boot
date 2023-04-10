@@ -1,181 +1,155 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/common.jspf" %>
-<link type="text/css" rel="stylesheet" href="/resources/include/css/community.css" />
-	<script>
-	
-	$(function(){
-		let msg = "<c:if test='${empty memberLogin}'>회원만 이용할 수 있습니다.</c:if>";
-		let word="<c:out value='${serviceCenterVO.keyword}' />";
-		let value="";
-		if(word!= ""){
-			$("#keyword").val("<c:out value='${serviceCenterVO.keyword}' />");
-			$("#search").val("<c:out value='${serviceCenterVO.search}' />");
-			
-			if($("#search").val()!='all'){
-				if($("#search").val()=='sc_title') value="#list tr td.goDetail";
-				else if($("#search").val()=='sc_no') value="#list tr td.no";
-				console.log($(value+":contains('"+word+"')").html());
-				$(value+":contains('"+word+"')").each(function(){
-					let regex = new RegExp(word,'gi');
-					$(this).html($(this).html().replace(regex,"<span class='required'>"+word+"</span>"));
+
+		<script src="/resources/include/js/common.js"></script>
+		
+		<link rel="stylesheet" href="/resources/include/css/faqList.css">
+		
+		<script>
+		
+			$(function(){
+				let msg = "<c:if test='${empty memberLogin}'>회원만 이용할 수 있습니다.</c:if>";
+				let word="<c:out value='${serviceCenterVO.keyword}' />";
+				let value="";
+				if(word!= ""){
+					$("#keyword").val("<c:out value='${serviceCenterVO.keyword}' />");
+					$("#search").val("<c:out value='${serviceCenterVO.search}' />");
+					
+					if($("#search").val()!='sc_content'){
+						if($("#search").val()=='sc_title') value="#list tr td";
+						else if($("#search").val()=='u_name') value="#list tr td";
+						console.log($(value+":contains('"+word+"')").html());
+						$(value+":contains('"+word+"')").each(function(){
+							let regex = new RegExp(word,'gi');
+							$(this).html($(this).html().replace(regex,"<span>"+word+"</span>"));
+						});
+					}
+				}
+				
+				$("#keyword").bind("keydown", function(event){
+					if(event.keyCode == 13){
+						event.preventDefault();
+					}
 				});
-			}
-		}
-		
-		/* 검색 체크박스 하나만 선택하기 */
-		$("input[type='checkbox']").click(function(){
-			if(this.checked) {
-		        const checkboxes = $("input[type='checkbox']");
-		        for(let ind = 0; ind < checkboxes.length; ind++){
-		            checkboxes[ind].checked = false;
-		        }
-		        this.checked = true;
-		    } else {
-		        this.checked = false;
-		    }
-		});
-		
-		$("#keyword").bind("keydown", function(event){
-			if(event.keyCode == 13){
-				event.preventDefault();
-			}
-		});
-		
-		/* 검색 대상이 변경될 때마다 처리 이벤트 */
-		$("input[type='checkbox']").change(function() {
-			
-			let search = $("input[type='checkbox'][name='key']:checked").val()
-			$("input[name='search']").val(search);
-			
-			if($("input[id='all']").is(":checked")){
-				$("#keyword").val("전체 데이터 조회합니다.");
-			}else if($("#search").val()!="all"){
-				$("#keyword").val("");
-				$("#keyword").focus();
-			}
-		});
-		
-		$("#searchData").click(function(){
-			if($("input[type='checkbox'][name='key']:checked").val()!="all"){ // 제목/내용/작성자 선택시 검색어 유효성 체크
-				if(!chkData("#keyword","검색어를")) return;
-			}
-			$("#pageNum").val(1);
-			goPage();
-		});
-		
-		$(".paginate_button a").click(function(e){
-			e.preventDefault();
-			$("#f_search").find("input[name='pageNum']").val($(this).attr("href"));
-			goPage();
-		});
-		
-		$(".goDetail").click(function(){
-			let sc_no = $(this).parents("tr").attr("data-no");
-			$("#sc_no").val(sc_no);
-			if(msg!=""){
-				alert("로그인을 진행해주세요.");
-			} else{				
-				$("#detailForm").attr({
-					"method":"get",
-					"action":"/serviceCenter/servicePwdConfirm"
+				
+				$("#search").change(function(){
+					if($("#search").val()=="all"){
+						$("#keyword").val("전체 데이터 조회합니다.");
+					} else if($("search").val()!="all"){
+						$("#keyword").val("");
+						$("#keyword").focus();
+					}
 				});
-				$("#detailForm").submit();
-			}
-		});
-		
-		$(".replyDetail").click(function(){
-			let as_no = $(this).parents("tr").attr("data-num");
-			$("#as_no").val(as_no);
-			
-			$("#replyDetailForm").attr({
-				"method":"get",
-				"action":"/admin/servicePwdConfirm"
+				
+				$("#searchData").click(function(){
+					if($("#search").val()!='all'){
+						if(!chkData("#keyword", "검색어를")) return;
+					}
+					$("#pageNum").val(1);
+					goPage();
+				});
+				
+				$(".paginate_button a").click(function(e){
+					e.preventDefault();
+					$("#f_search").find("input[name='pageNum']").val($(this).attr("href"));
+					goPage();
+				});
+				
+				$(".goDetail").click(function(){
+					let sc_no = $(this).parents("tr").attr("data-no");
+					$("#sc_no").val(sc_no);
+					if(msg!=""){
+						alert("로그인을 진행해주세요.");
+					} else{				
+						$("#detailForm").attr({
+							"method":"get",
+							"action":"/serviceCenter/servicePwdConfirm"
+						});
+						$("#detailForm").submit();
+					}
+				});
+				
+				$(".replyDetail").click(function(){
+					let as_no = $(this).parents("tr").attr("data-num");
+					$("#as_no").val(as_no);
+					
+					$("#replyDetailForm").attr({
+						"method":"get",
+						"action":"/admin/servicePwdConfirm"
+					});
+					$("#replyDetailForm").submit();
+				});
+				
+				
+				$("#writeBtn").click(function(){
+					if(msg!=""){
+						alert("로그인을 진행해주세요.");
+					} else{
+						location.href="/serviceCenter/writeForm"
+					}
+				});
+				
 			});
-			$("#replyDetailForm").submit();
-		});
-		
-		
-		$("#writeBtn").click(function(){
-			if(msg!=""){
-				alert("로그인을 진행해주세요.");
-			} else{
-				location.href="/serviceCenter/writeForm"
+			
+			function goPage(){
+				if($("#search").val()=="all"){
+					$("#keyword").val("");
+				}
+				$("#f_search").attr({
+					"method":"get",
+					"action":"/serviceCenter/serviceList"
+				});
+				$("#f_search").submit();
 			}
-		});
-		
-	});
-	
-	function goPage(){
-		if($("#search").val()=="all"){
-			$("#keyword").val("");
-		}
-		$("#f_search").attr({
-			"method":"get",
-			"action":"/serviceCenter/serviceList"
-		});
-		$("#f_search").submit();
-	}
-	</script>
+		</script>
 	</head>
-	
-	
-	
 	<body>
-		<div>
+		<div class="contentContainer container">
+		
 			<form id="detailForm">
 				<input type="hidden" id="sc_no" name="sc_no">
 			</form>
 			<form id="replyDetailForm">
 				<input type="hidden" id="as_no" name="as_no" />
 			</form>
-			<%-- ===================== 검색 기능 시작 ===================== --%>
-			<div class="searchbox">
-				<form id="f_search" name="f_search">
-					<input type="hidden" name="pageNum" value="${pageMaker.cvo.pageNum}">
-            		<input type="hidden" name="amount" value="${pageMaker.cvo.amount}">
-                	<input type="hidden" id="search" name="search" value="all" />
-	                <div class="keywordbox">
-	                    <span class="keyword">
-	                        <input type="checkbox" name="key" id="all" class="m0" value="all" checked />
-	                        <label for="all">통합검색</label>
-	                        <input type="checkbox" name="key" id="sc_no" value="sc_no" class="m0" />
-	                        <label for="sc_no">글번호</label>
-	                        <input type="checkbox" name="key" id="sc_title" value="sc_title" class="m0" />
-	                        <label for="sc_title">제목</label>
-	                    </span>
-	                </div>
-	                <div class="searchbox_right block">
-	                    <span>
-	                        <input type="text" class="w280 pl10" name="keyword" id="keyword" value="검색어를 입력하세요" maxlength="30" />
-	                    </span>
-	                    <a href="#" id="searchData" class="btn_gray fr"><span class="icon"></span>검 색</a>
-	                </div>
-                </form>
-            </div>
-			<%-- ===================== 검색 기능 종료 ===================== --%>
 			
-			
-			<div class="community_table mt30">
-	            <table>
-	                <colgroup>
-	                    <col style="width: 13%">
+			<div id="serviceSearch" class="text-right">
+				<form id="f_search" name="f_search" class="form-inline">
+					<input type="hidden" name="pageNum" id="pageNum" value="${pageMaker.cvo.pageNum }">
+					<input type="hidden" name="amount" id="amount" value="${pageMaker.cvo.amount }">
+					<div class="form-group">
+						<label>검색조건</label>
+						<select id="search" name="search" class="form-control">
+							<option value="all">전체</option>
+							<option value="sc_title">제목</option>
+							<option value="u_name">작성자</option>
+						</select>
+						<input type="text" name="keyword" id="keyword" value="검색어를 입력하세요" class="form-control">
+						<button type='button' id="searchData" class="btn btn_success">검색</button>
+					</div>
+				</form>
+			</div>
+			<div id="serviceList" class="community_table mt30">
+				<table summary="문의 리스트">
+					<colgroup>
+	                    <col style="width: 7%">
 	                    <col>
 	                    <col style="width: 13%">
 	                    <col style="width: 13%">
-	                    <col style="width: 10%">
+	                    <col style="width: 7%">
 	                </colgroup>
-	                <thead>
-	                    <tr class="text-center">
-	                        <th scope="col">NO.</th>
-	                        <th scope="col">TITLE</th>
-	                        <th scope="col">NAME</th>
-	                        <th scope="col">DATE</th>
-	                        <th scope="col">HITS</th>
-	                    </tr>
-	                </thead>
-	                <tbody id="list">
-	                	<c:choose>
+					<thead>
+						<tr class="text-center">
+							<th data-value="sc_no" >NO</th>
+							<th >TITLE</th>
+							<th data-value="u_name" scope="col">NAME</th>
+							<th data-value="sc_created_at" scope="col">DATE</th>
+							<th data-value="sc_readcnt" scope="col">HITS</th>
+						</tr>
+					</thead>
+					<tbody id="list">
+						<c:choose>
 							<c:when test="${not empty serviceList }">
 								<c:forEach var="service" items="${serviceList}" varStatus="status">
 									<tr class="text-center" data-no='${service.sc_no }'>
@@ -207,39 +181,36 @@
 								</c:forEach>
 							</c:when>
 							<c:otherwise>
-								<td colspan="6" class="tac text-center">등록된 게시물이 존재하지 않습니다.</td>
+								<td colspan="5" class="tac text-center">등록된 게시물이 존재하지 않습니다.</td>
 							</c:otherwise>
 						</c:choose>
-	                </tbody>
-	            </table>
-	        </div>
-	        
-	        <!-- 페이징 -->
-	        <div class="text-center pagingArea">
-	        	
-	        	<!-- 글쓰기 버튼 -->
-	        	<div class="writeArea">
-		        	<button type="button" id="writeBtn" class="buttonWhite">WRITE</button>
-		        </div>
-		        
+					</tbody>
+				</table>
+			</div>
+			<div class="text-right">
+				<input type="button" class="btn btn-default" value="WRITE" id="writeBtn">
+			</div>
+			<div class="text-center">
 				<ul class="pagination">
-					<c:if test="${ pageMaker.prev }">
+					<!-- 이전 바로가기 10개 존재 여부를 prev 필드의 값으로 확인 -->
+					<c:if test="${pageMaker.prev }">
 						<li class="paginate_button previous">
-							<a href="${ pageMaker.startPage - 1 }">Previous</a>
+							<a href="${pageMaker.startPage -1 }">Previous</a>
 						</li>
 					</c:if>
+					
 					<!-- 바로가기 번호 출력 -->
-					<c:forEach var="num" begin="${ pageMaker.startPage }"
-										 end="${ pageMaker.endPage }">
-						<li class="paginate_button ${ pageMaker.cvo.pageNum == num ? 'active':'' }">
-							<a href="${num}" style="color: #868686;">${num}</a>
+					<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
+						<li class="paginate_button ${pageMaker.cvo.pageNum == num ? 'active':''}">
+							<a href='${num }'>${num }</a>
 						</li>
 					</c:forEach>
-					<!-- 다음 바로가기 10개 존재 여부를 next 필드의 값으로 확인 -->
-					<c:if test="${ pageMaker.next }">
-							<li class="paginate_button next">
-								<a href="${ pageMaker.endPage + 1 }">Next</a>
-							</li>
+					
+					<!--  다음 바로가기 10개 존재 여부를 next 필드의 값으로 확인 -->
+					<c:if test="${pageMaker.next }">
+						<li class="paginate_button next">
+							<a href="${pageMaker.endPage+1 }">Next</a>
+						</li>
 					</c:if>
 				</ul>
 			</div>

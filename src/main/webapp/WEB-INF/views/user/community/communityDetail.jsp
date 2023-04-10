@@ -43,6 +43,8 @@
 			<form id="form_data">
 				<input type="hidden" name="c_no" id="c_no" value="${ detail.c_no }" />
 				<input type="hidden" name="c_category" id="c_category" value="${ detail.c_category }" />
+				<input type="hidden" name="c_file" value="${detail.c_file}" />
+				<input type="hidden" name="c_thumb" value="${detail.c_thumb}" />
 			</form>
 			
 			<div class="detail_table mt30">
@@ -65,8 +67,6 @@
 					</c:otherwise>
 				</c:choose>
 	            <table class="detailView">
-	                <colgroup>
-	                </colgroup>
 	                <thead>
 	                    <tr class="text-center">
 	                        <th>${detail.c_title}</th>
@@ -91,34 +91,18 @@
 								<div class="detail_content">
 									<p>${ detail.c_content }</p>
 								</div>
+								<c:if test="${not empty detail.c_file}">
+									<div class="detail_image">
+										<img src="/uploadStorage/community/${detail.c_file}" />
+									</div>
+								</c:if>
 							</td>
 						</tr>
 	                </tbody>
 	            </table>
-	            
-	            <form id="replyForm" class="mt30">
-	            	<fieldset>
-	            		<table>
-	            			<tbody>
-	            				<tr>
-	            					<td class="replyBox">
-	            						<div>
-	            							<div class="mt7">
-	            								<label>NAME</label>
-	            								<input type="text" name="u_id" id="u_id" placeholder="이름" />
-	            							</div>
-	            							<div class="mt7 writeReply">
-	            								<textarea placeholder="댓글 내용"></textarea>
-	            								<button type="button" class="replyBtn">댓글쓰기</button>
-	            							</div>
-	            						</div>
-	            					</td>
-	            				</tr>
-	            			</tbody>
-	            		</table>
-	            	</fieldset>
-	            </form>
 	        </div>
+	        <%-- 댓글 입력폼, 리스트 삽입 --%>
+	        <jsp:include page="communityReply.jsp" />
 		</div>
 	</body>
 </html>

@@ -119,7 +119,7 @@ public class UserCommunityController {
 	
 	// 데이터 수정 처리
 	@PostMapping("/updateCommunity")
-	public String updateCommunity(UserCommunityVO community) {
+	public String updateCommunity(UserCommunityVO community) throws Exception {
 		
 		log.info("입력받은 데이터 : " + community);
 		
@@ -141,7 +141,7 @@ public class UserCommunityController {
 	
 	// 데이터 삭제 처리
 	@GetMapping("/deleteCommunity")
-	public String deleteCommunity(UserCommunityVO community) {
+	public String deleteCommunity(UserCommunityVO community) throws Exception {
 		log.info("삭제 전달받은 글번호 : " + community.getC_no());
 		
 		int result = 0;

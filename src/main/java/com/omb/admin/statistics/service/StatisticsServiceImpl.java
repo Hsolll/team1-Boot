@@ -13,15 +13,9 @@ import lombok.Setter;
 
 @Service
 public class StatisticsServiceImpl implements StatisticsService {
-	
-	@Setter(onMethod_=@Autowired)
+
+	@Setter(onMethod_ = @Autowired)
 	private StatisticsDAO statisticsDAO;
-	
-//	@Override
-//	public List<Map<String, Object>> selectCateStatic(StatisticsVO vo) {
-//		vo = statisticsDAO.selectDate(vo);
-//		return statisticsDAO.selectCateStatic(vo);
-//	}
 
 	@Override
 	public List<Map<String, Object>> selectAllCateStatic() {
@@ -30,13 +24,13 @@ public class StatisticsServiceImpl implements StatisticsService {
 
 	@Override
 	public StatisticsVO selectDate(StatisticsVO vo) {
-	
+
 		return statisticsDAO.selectDate(vo);
 	}
 
 	@Override
 	public List<Map<String, Object>> selectCategory() {
-	
+
 		return statisticsDAO.selectCategory();
 	}
 
@@ -74,6 +68,5 @@ public class StatisticsServiceImpl implements StatisticsService {
 		list = statisticsDAO.selectOrder();
 		return list;
 	}
-	
 
 }

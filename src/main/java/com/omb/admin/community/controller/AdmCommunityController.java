@@ -25,7 +25,7 @@ public class AdmCommunityController {
 	private UserCommunityService userCommunityService;
 	
 	@GetMapping("/admCommunityList")
-	public String admCommunityList(UserCommunityVO community, Model model) {
+	public String admCommunityList(UserCommunityVO community, Model model) throws Exception {
 		
 		String path = "";
 		log.info("communityList 메서드 호출");
@@ -76,7 +76,7 @@ public class AdmCommunityController {
 	
 	// 데이터 삭제 처리
 		@PostMapping("/admDeleteCommunity")
-		public String admDeleteCommunity(UserCommunityVO community) {
+		public String admDeleteCommunity(UserCommunityVO community) throws Exception {
 			log.info("삭제 전달받은 글번호 : " + community.getC_no());
 			
 			int result = 0;

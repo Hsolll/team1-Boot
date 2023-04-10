@@ -97,6 +97,14 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 		
 		return orderInfoDAO.sellOrderInfoCnt(ovo);
 	}
+
+	@Override
+	public OrderInfoVO selectOrderInfoDetail(OrderInfoVO ovo) {
+		
+		OrderInfoVO detail = orderInfoDAO.selectOrderInfoDetail(ovo);
+		
+		return detail;
+	}
 	
 	
 	

@@ -119,7 +119,7 @@
 							<![CDATA[ to_char(o_date,'YYYY-MM-DD') between #{start_date} and #{end_date}  ]]>	
 						</if>
 			        </trim>
-		        <![CDATA[ C.U_NO = 1 AND rownum <= #{pageNum} * #{amount}
+		        <![CDATA[ C.U_NO = #{u_no} AND rownum <= #{pageNum} * #{amount}
 		        ORDER BY O_NO DESC
 		        ) SELL
 		WHERE rnum > (#{pageNum} -1) * #{amount}
@@ -150,6 +150,28 @@
 				</if>
 	        </trim>
 	       	C.U_NO = #{u_no}
+	</select>
+	
+	
+	<!-- 구매자 주문상세 내역 -->
+	<select id="selectOrderInfoDetail" parameterType="orderinfo" resultType="orderinfo">
+		select
+		    o_no, o_id, pay_no, sp_no,
+		    (select u_id from tb_user where u_no = (
+	            select u_no from tb_user_safe_product where sp_no = a.sp_no
+	        )) as seller,
+		    (select sp_price from tb_user_safe_product where sp_no = a.sp_no) as sp_price,
+		    (select pay_id from tb_user_payment where pay_no = a.pay_no) as pay_id,
+		    (select pay_date from tb_user_payment where pay_no = a.pay_no) as pay_date,
+		    (select p_name from tb_user_product where p_no = (
+		            select p_no from tb_user_safe_product where sp_no = a.sp_no
+		        )) as p_name,
+		    (select p_file from tb_user_product where p_no = (
+		            select p_no from tb_user_safe_product where sp_no = a.sp_no
+		        )) as p_thumb,
+		    receiver, rec_tel, o_address, o_date, o_status
+		from tb_user_order a
+		where o_no = #{o_no}
 	</select>
 	
 	

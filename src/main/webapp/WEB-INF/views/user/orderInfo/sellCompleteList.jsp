@@ -140,6 +140,18 @@
 				
 			});
 			
+			// 상세페이지 이동
+			$(".godetail").click(function(){
+				let o_no = $(this).parents("tr").attr("data-no");
+				console.log("o_no = " + o_no);
+				$("#o_no").val(o_no);
+				
+				$("#f_data").attr({
+					"method":"get",
+					"action":"/order/sellListDetail"
+				});
+				$("#f_data").submit();
+			});
 
 		});
 		
@@ -162,7 +174,7 @@
 	
 		<!-- Modal -->
 		<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-dialog modal-dialog-centered" role="document" style="position: relative; top: 300px;">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title" id="exampleModalCenterTitle">운송장등록</h5>
@@ -266,9 +278,9 @@
 		                <c:choose>
 							<c:when test="${ not empty sellList }">
 								<c:forEach var="sellList" items="${ sellList }" varStatus="status">
-									<tr class="text-center" data-num="${sellList.o_no }">
+									<tr class="text-center" data-no="${sellList.o_no }">
 										<td>${ sellList.o_id }</td>
-										<td>${ sellList.sp_name }</td>
+										<td class="godetail">${ sellList.sp_name }</td>
 										<td>${ sellList.buyer }</td>
 										<td>
 											<fmt:formatNumber value="${sellList.sp_price}" groupingUsed="true"/>

@@ -52,7 +52,7 @@
 					
 					 <div class="container-fluid">
 					      <div class="row">
-					        <div class="col-sm-3 col-md-2 sidebar" style="padding-top:0;">
+					        <div class="col-sm-3 col-md-2 sidebar" style="padding-top:0; padding-bottom: 0;">
 					         <tiles:insertAttribute name="left" />
         					</div>
 	                <tiles:insertAttribute name="body" />

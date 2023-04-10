@@ -28,7 +28,7 @@
 				$("#testBtn").click(function(){
 					$.ajax({
 			    		url: "/delivery/codeSearch",
-						dataType : "text",
+						dataType : "json",
 			    		success : function(result){
 							console.log(result);
 							
@@ -44,23 +44,38 @@
 				
 				$("#testBtn1").click(function(){
 					$.ajax({
-			    		url: "/delivery/deliveryTracking?o_no=22",
-						dataType : "text",
+			    		url: "/delivery/deliveryTracking?o_no=5",
+						dataType : "json",
 			    		success : function(result){
 							console.log(result);
 
 							let tracking = result.trackingDetails;
 							console.log("---------- 추출 정보 ----------")
 							console.log(tracking);
+							
 							let lastIndex = tracking.length - 1;
-							let kind = tracking[lastIndex]
+							let kind = tracking[lastIndex].kind
 							console.log("---------- 출력 정보 ----------")
 							console.log(kind);
+							$(".status").text(kind);
 						},
 						error : function() {
 							alert("실패");
 						}
 			    	});
+				});
+				
+				
+				$(".godetail").click(function(){
+					let o_no = $(this).parents("tr").attr("data-no");
+					console.log("o_no = " + o_no);
+					$("#o_no").val(o_no);
+					
+					$("#f_data").attr({
+						"method":"get",
+						"action":"/order/buyListDetail"
+					});
+					$("#f_data").submit();
 				});
 				
 				
@@ -199,12 +214,12 @@
 									<tr class="text-center" data-no="${buyList.o_no}" data-sp="${buyList.sp_no}">
 										<td>${ buyList.o_id }</td>
 										<td>${ buyList.o_date }</td>
-										<td>${ buyList.sp_name }</td>
+										<td class="godetail">${ buyList.sp_name }</td>
 										<td>${ buyList.seller }</td>
 										<td>
 											<fmt:formatNumber value="${buyList.sp_price}" groupingUsed="true"/>
 										</td>
-										<td>${ buyList.o_status }</td> 
+										<td class="status">${ buyList.o_status }</td> 
 										<td>
 											<c:choose>
 												<c:when test="${buyList.o_status eq '결제완료'}">
@@ -222,6 +237,28 @@
 											</c:choose>
 										</td> 
 									</tr>
+									<script type="text/javascript">
+										$.ajax({
+								    		url: "/delivery/deliveryTracking?o_no=" + ${buyList.o_no},
+											dataType : "json",
+								    		success : function(result){
+												console.log(result);
+	
+												let tracking = result.trackingDetails;
+												console.log("---------- 추출 정보 ----------")
+												console.log(tracking);
+												
+												let lastIndex = tracking.length - 1;
+												let kind = tracking[lastIndex].kind
+												console.log("---------- 출력 정보 ----------")
+												console.log(kind);
+												$(".status").text(kind);
+											},
+											error : function() {
+												alert("실패");
+											}
+								    	});
+									</script>
 								</c:forEach>
 							</c:when>
 							<c:otherwise>

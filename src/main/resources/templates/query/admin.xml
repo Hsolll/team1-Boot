@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.omb.admin.login.dao.AdminLoginDao">
+	<!-- 관리자 로그인 -->
 	<select id="selectLoginProcess" parameterType="admin" resultType="admin">
 		/* 관리자 로그인 */
 		SELECT A_NO, A_ID, A_NAME, A_EMAIL, A_PHONE

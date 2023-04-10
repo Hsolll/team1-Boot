@@ -9,7 +9,12 @@
 
 	<select id="selectDeliveryInfo" parameterType="delivery" resultType="delivery">
 		SELECT * FROM TB_USER_DELIVERY
-		WHERE O_NO = 22
+		WHERE O_NO = #{o_no}
 	</select>
+	
+	<update id="updateDeliveryInfo" parameterType="delivery">
+		update TB_USER_DELIVERY set t_code = #{t_code}, t_invoice = #{t_invoice}
+		where o_no = #{o_no}
+	</update>
 
 </mapper>

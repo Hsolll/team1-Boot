@@ -152,7 +152,7 @@
 
 .detail_table thead th {
 	color: #000;
-    font-size: 15px;
+    font-size: 17px;
     font-weight: normal;
     border-top: 1px solid #000;
     border-bottom: 1px solid #e9e9e9;
@@ -179,11 +179,25 @@
     font-weight: bold;
     font-style: normal;
 }
+.thumb img {
+	max-width: 70px;
+}
 
 .detail_content {
 	padding: 20px 0 40px 0;
     color: #8d8d8d;
     font-size: 16px;
+    display: inline-block;
+    width: 750px;
+}
+.detail_image {
+    float: right;
+    margin-right: 20px;
+    width: 400px;
+    text-align: center;
+}
+.detail_image img {
+	max-width: 400px;
 }
 
 /* 댓글입력 */
@@ -209,17 +223,16 @@
 	margin: 0 10px 0 7px;
     padding: 0 0 0 5px;
     width: 212px;
-    height: 27px;
+    height: 30px;
     line-height: 27px;
     border: 1px solid #ddd;
 }
 .writeReply {
     padding-bottom: 15px;
-    font-size: 0;
     display: flex;
 }
 .writeReply textarea {
-	padding: 1px 0;
+	padding: 10px;
     width: 978px;
     height: 120px;
     border: 1px solid #ddd;
@@ -230,16 +243,61 @@
 	display: inline-block;
     color: #fff;
     text-align: center;
-    border: 1px solid #231f20;
+    border: 1px solid #ddd;
     background: #231f20;
 }
 .replyBtn:hover {
 	color: #231f20;
     background: #fff;
 }
-.writeReply .replyBtn {
+.replyCancel {
+	display: inline-block;
+    color: #231f20;
+    text-align: center;
+    border: 1px solid #ddd;
+    background: #fff;
+}
+.replyCancel:hover {
+	color: #fff;
+    background: #231f20;
+}
+.writeReply .replyBtn, .replyCancel {
 	width: 118px;
     height: 120px;
     font-size: 16px;
     line-height: 120px;
+}
+
+.replyList {
+	width: 100%;
+}
+.replyList td{
+	padding-top: 20px;
+    border-bottom: 1px dashed #e9e9e9;
+    vertical-align: top;
+}
+.replyList td:first-child {
+	width: 90%;
+}
+.replyList .reply_name {
+	margin-right: 20px;
+    font-weight: bold;
+    color: #000;
+}
+.replyList .reply_date {
+	    font-size: 11px;
+    color: #aeaeae;
+}
+.replyList .reply_content {
+	padding: 10px 20px 0 0;
+    color: #828282;
+    line-height: 20px;
+}
+.reply_small_btn {
+    color: #231f20;
+    text-align: center;
+    border: 1px solid #231f20;
+    background: #fff;
+    padding: 3px 10px;
+    font-size: 10px;
 }

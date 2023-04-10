@@ -61,6 +61,12 @@
                 margin-top: 10px;
                 font-size: 14px;
             }
+            .add_name_default {
+            	position: absolute;
+			    right: 10px;
+			    font-size: 12px;
+			    color: #6d6d6d;
+            }
         </style>
         
         <script type="text/javascript">
@@ -106,6 +112,9 @@
 								<li class="addressInfo" data-no="${address.add_no}">
 									<div class="address_name_box">
 						                <strong>${ address.add_name }</strong>
+						                <c:if test="${address.add_name eq '기본배송지' }">
+							                <span class="add_name_default">기본배송지는 회원수정 메뉴에서 변경할 수 있습니다.</span>
+						                </c:if>
 						                <c:if test="${address.add_name ne '기본배송지' }">
 							                <div class="deleteBtn_area">
 							                    <button class="addDeleteBtn">삭제</button>

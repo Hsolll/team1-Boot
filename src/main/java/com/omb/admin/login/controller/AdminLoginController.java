@@ -15,12 +15,10 @@ import com.omb.admin.login.service.AdminLoginService;
 import com.omb.admin.vo.AdminVO;
 
 import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @SessionAttributes("adminLogin") 
 @RequestMapping(value="/admin/*")
-@Slf4j
 public class AdminLoginController {
 	@Setter(onMethod_= @Autowired)
 	private AdminLoginService adminLoginService;
@@ -33,13 +31,12 @@ public class AdminLoginController {
 	
 	@RequestMapping("/main")
 	public void adminMain() {
-		log.info("관리자 메인 화면 호출...");
 		
 	}
 	
 	@GetMapping("/login")
 	public String loginForm() {
-		log.info("관리자 로그인 화면 호출....");
+		
 		return "admin/adminLogin";
 	}
 	
@@ -60,7 +57,6 @@ public class AdminLoginController {
 	
 	@RequestMapping("/logout")
 	public String logout(SessionStatus sessionStatus) {
-		log.info("관리자 로그아웃 처리");
 		sessionStatus.setComplete();
 		return "redirect:/admin/login";
 	}
