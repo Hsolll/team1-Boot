@@ -10,37 +10,23 @@ import lombok.Setter;
 
 @Service
 public class MemberLoginServiceImpl implements MemberLoginService {
-   @Setter(onMethod_ = @Autowired)
-   private MemberLoginDAO memberLogindao;
+	@Setter(onMethod_ = @Autowired)
+	private MemberLoginDAO memberLogindao;
 
-   @Override
-   public MemberVO memberLogin(MemberVO mvo) {
-      return memberLogindao.memberLogin(mvo);
-   }
+	@Override
+	public MemberVO memberLogin(MemberVO mvo) {
+		return memberLogindao.memberLogin(mvo);
+	}
 
-   
+	@Override
+	public MemberVO socialLogin(MemberVO mvo) {
+		return memberLogindao.socialLogin(mvo);
+	}
 
-
-   @Override
-   public MemberVO socialLogin(MemberVO mvo) {
-      return memberLogindao.socialLogin(mvo);
-   }
-
-
-   @Override
-   public String socialChk(MemberVO mvo) {
-      String socialChkResult = memberLogindao.socialChk(mvo);
-      return socialChkResult;
-   }
-
-
-
-
-   @Override
-   public MemberVO memberLoginCheck(MemberVO mvo) {
-      return memberLogindao.memberLoginCheck(mvo);
-   }
-
-
+	@Override
+	public String socialChk(MemberVO mvo) {
+		String socialChkResult = memberLogindao.socialChk(mvo);
+		return socialChkResult;
+	}
 
 }
