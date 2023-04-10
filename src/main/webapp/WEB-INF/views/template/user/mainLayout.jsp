@@ -33,6 +33,7 @@
         
         <script type="text/javascript" src="/resources/include/js/jquery-3.6.2.min.js"></script>
         <script type="text/javascript" src="/resources/include/js/subList.js"></script>
+        <script type="text/javascript" src="/resources/include/js/mainPageBanner.js"></script>
         
         <script type="text/javascript">
         $(function(){
@@ -54,11 +55,12 @@
             <!-- Begin page content -->
             <section class="contentWrapper">
                 <div class="content_wrap">
-                    <br><br>
-                    <a href="/"><img src="/resources/include/img/banner.png" alt="메인페이지" class="mt30"></a><br><br>
-                    <div class="main_content">
-                        <p>Oh My Baby는</p>
-                        유아용품 중고거래 사이트입니다.
+                    <div>
+	                    <a href="/"><img src="/resources/include/img/banner.png" alt="메인페이지" class="mt30"></a><br><br>
+	                    <div class="main_content">
+	                        <p>Oh My Baby는</p>
+	                        유아용품 중고거래 사이트입니다.
+	                    </div>
                     </div>
                 </div>
                 
