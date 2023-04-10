@@ -14,11 +14,9 @@ import com.omb.common.vo.PageDTO;
 import com.omb.user.serviceCenter.faq.service.FaqService;
 
 import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequestMapping(value = "/faq/*")
-@Slf4j
 public class FaqController {
 	
 	@Setter(onMethod_=@Autowired)
@@ -26,7 +24,6 @@ public class FaqController {
 	
 	@GetMapping(value="/faqList")
 	public String faqList(@ModelAttribute FaqVO vo, Model model) {
-		log.info("faqList 실행");
 		List<FaqVO> faqList = faqService.selectUserFaq(vo);
 		model.addAttribute("faqList", faqList);
 		
@@ -38,7 +35,6 @@ public class FaqController {
 	
 	@GetMapping(value="/faqDetail")
 	public String faqDetail(@ModelAttribute FaqVO vo, Model model) {
-		log.info("faqDetail 실행");
 		FaqVO faq = faqService.selectDetail(vo);
 		model.addAttribute("detail", faq);
 		return "user/serviceCenter/faq/faqDetail";

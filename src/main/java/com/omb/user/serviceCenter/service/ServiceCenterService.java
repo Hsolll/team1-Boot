@@ -24,6 +24,8 @@ public interface ServiceCenterService {
 	public int deleteService(ServiceCenterVO scno) throws Exception;
 
 	public int selectNoReplyCnt() throws Exception;
+  
+  
 		
 	/* 민석 작업 */
 	public List<ServiceCenterVO> selectServiceMyPageList(ServiceCenterVO vo); // 마이페이지 문의내역 조회

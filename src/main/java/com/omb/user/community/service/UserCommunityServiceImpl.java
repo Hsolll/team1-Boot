@@ -17,6 +17,8 @@ public class UserCommunityServiceImpl implements UserCommunityService {
 	@Setter(onMethod_ = @Autowired)
 	private UserCommunityDAO userCommunityDAO;
 
+	
+	/* 커뮤니티 리스트 조회 */
 	@Override
 	public List<UserCommunityVO> communityList(UserCommunityVO community) {
 		List<UserCommunityVO> communityList = null;
@@ -26,12 +28,14 @@ public class UserCommunityServiceImpl implements UserCommunityService {
 		return communityList;
 	}
 
+	/* 게시글 레코드 수 조회 */
 	@Override
 	public int communityListCnt(UserCommunityVO community) {
 		
 		return userCommunityDAO.communityListCnt(community);
 	}
 
+	/* 게시글 상세 조회 */
 	@Override
 	public UserCommunityVO communityDetail(UserCommunityVO community) {
 		
@@ -50,6 +54,7 @@ public class UserCommunityServiceImpl implements UserCommunityService {
 		return detail;
 	}
 
+	/* 조회수 증가 */
 	@Override
 	public int updateCommunityCnt(UserCommunityVO community) {
 		
@@ -59,7 +64,8 @@ public class UserCommunityServiceImpl implements UserCommunityService {
 		
 		return result;
 	}
-
+	
+	/* 게시글 등록 */
 	@Override
 	public int insertCommunity(UserCommunityVO community) throws Exception {
 
@@ -78,6 +84,7 @@ public class UserCommunityServiceImpl implements UserCommunityService {
 		return result;
 	}
 
+	/* 게시글 수정 */
 	@Override
 	public int updateCommunity(UserCommunityVO community) throws Exception {
 
@@ -88,6 +95,7 @@ public class UserCommunityServiceImpl implements UserCommunityService {
 		return result;
 	}
 
+	/* 게시글 삭제 */
 	@Override
 	public int deleteCommunity(UserCommunityVO community) throws Exception {
 

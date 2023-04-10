@@ -80,12 +80,16 @@ public class ServiceCenterServiceImpl implements ServiceCenterService {
 		return result;
 	}
 
+
 	@Override
 	public int selectNoReplyCnt() throws Exception {
 		int result = 0;
 		result = serviceDao.selectNoReplyCnt();
 		return result;
 	}
+
+
+
 
 	/* 민석 작업 */
 	/* 마이페이지 조회 */

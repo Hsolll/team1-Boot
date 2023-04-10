@@ -1,0 +1,218 @@
+/* 목록 조회 아이콘 css */
+.location {
+    height: 34px;
+    line-height: 26px;
+    padding-left: 4px;
+}
+.location span {
+    display: inline-block;
+}
+.location_right {
+    float: right;
+}
+.location_right > a {
+    text-decoration: none;
+}
+.list_btn {
+    display: inline-block;
+    height: 23px;
+    line-height: 22px;
+    font-size: 12px;
+    color: #333333;
+    background: #faf8fb;
+    border: 1px solid #c9ccd3;
+    border-bottom: 1px solid #a8aaa9;
+    border-radius: 1px;
+    padding: 0 12px;
+}
+.list_icon {
+    width: 12px;
+    height: 10px;
+    background: url(/resources/include/img/uni_sprites.png) no-repeat -18px -29px;
+}
+
+.order_detail_content {
+	width: 650px;
+	margin: 0 auto;
+	background: #f3f3f3;
+    padding: 10px 20px;
+}
+
+
+.order_detail_content > .detail_section{
+    position: relative;
+    margin-top: 15px;
+    padding: 0 15px;
+    background-color: #fff;
+}
+.order_detail_content > .order_num {
+    padding: 11px 145px 7px 15px;
+    font-size: 13px;
+    color: #222;
+}
+.order_num p {
+    font-weight: bold;
+}
+.order_num span {
+    display: block;
+    line-height: 16px;
+    color: #959595;
+}
+.order_num > a {
+    position: absolute;
+    top: 17px;
+    right: 17px;
+    font-size: 12px;
+    border: 1px solid #dddde1;
+    background-color: #fff;
+    padding: 3px 10px;
+    color: #333;
+}
+
+.seller_id {
+    display: block;
+    font-size: 18px;
+    color: #222;
+    font-weight: bold;
+    line-height: 21px;
+}
+.seller_info_detail {
+    color: #09aa5c !important;
+}
+.order_info {
+	display: flex;
+}
+.order_list {
+    margin-top: 7px;
+    border-top: 1px solid #959595;
+}
+.order_list_item > img {
+	width: 200px;
+}
+.product_wrap {
+    margin-left: 15px;
+    position: relative;
+    width: 100%;
+}
+.product_info {
+	margin-top: 10px;
+    font-size: 16px;
+}
+.product_wrap > .buttonBox {
+	position: absolute;
+    width: 100%;
+    bottom: 0;
+    display: flex;
+    justify-content: space-around;
+}
+.whiteBtn {
+    display: inline-block;
+    color: #231f20;
+    text-align: center;
+    border: 1px solid #bfbfbf;
+    background: #fff;
+    width: 170px;
+    height: 35px;
+}
+.icon_text {
+    display: inline-block;
+    padding: 0 3px;
+    font-size: 12px;
+    line-height: 15px;
+    white-space: nowrap;
+    letter-spacing: -1px;
+    border: 1px solid #dddde1;
+    background-color: #fff;
+}
+.info_head {
+    position: relative;
+    padding: 15px 0px 11px;
+}
+.info_head > h3 {
+    display: inline-block;
+    color: #222;
+    font-size: 16px;
+    line-height: 20px;
+    white-space: nowrap;
+    font-weight: bold;
+    margin: 0 !important;
+}
+.info_area .info_cont {
+    position: relative;
+    margin-top: 0;
+    padding: 14px 0;
+}
+.info_cont {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid #efefef;
+}
+.person_info li {
+    position: relative;
+    min-height: 19px;
+    padding-left: 100px;
+    line-height: 19px;
+    color: #222;
+}
+.person_info strong {
+    position: absolute;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    width: 100px;
+    margin-left: 0px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #8f8f8f;
+    font-weight: normal;
+}
+.person_info span {
+    display: inline-block;
+    vertical-align: top;
+    color: #252525;
+}
+.payment_info li {
+    font-size: 15px;
+    line-height: 20px;
+    letter-spacing: -0.5px;
+    position: relative;
+    color: #222;
+    margin-bottom: 10px;
+}
+.payment_info > li > strong {
+	font-weight: normal;
+}
+.amount {
+    float: right;
+    font-weight: 500;
+    font-family: Helvetica, "나눔고딕", nanumgothic, sans-serif;
+    white-space: nowrap;
+}
+.amount span {
+    font-weight: 600;
+}
+
+/* 모달창 css */
+#keyword {
+	border-radius: 4px;
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+	height: 34px;
+}
+.close {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+.insert_invoice {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	height: 70px;
+}
+#parcelSelect {
+	display: inline-block;
+	border: 1px solid #C9C9C9;
+	outline: none;
+	height: 30px;
+	margin: 20px 10px;
+}

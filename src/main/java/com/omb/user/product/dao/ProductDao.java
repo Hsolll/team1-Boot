@@ -11,6 +11,7 @@ import com.omb.user.product.vo.ProductVO;
 public interface ProductDao {
 
 	/* 민석 작업 */
+
 	public List<ProductVO> selectProductBuyList(ProductVO pvo); // 마이페이지 구매내역 조회
 
 	public List<ProductVO> selectProductSellList(ProductVO pvo); // 마이페이지 판매내역 조회
@@ -68,22 +69,21 @@ public interface ProductDao {
 
 	public ProductVO sel(ProductVO pvo);
 
-	// 승인 대기 상품 목록 조회 (관리자)
-	public List<ProductVO> selectQueuedList(ProductVO pvo);
 
-	// 상품 승인 (관리자)
-	public int updateAdmRecognize(ProductVO pvo);
+	/* 민지 작업 */
 
-	// 상품 승인 거절 (관리자)
-	public int updateAdmReject(ProductVO pvo);
+	public List<ProductVO> selectQueuedList(ProductVO pvo); // 승인 대기 상품 목록 조회 (관리자)
 
-	// 승인 거절 상품 목록 조회 (관리자)
-	public List<ProductVO> selectRejectedList(ProductVO pvo);
+	public int updateAdmRecognize(ProductVO pvo); // 상품 승인 (관리자)
 
-//	public List<ProductVO> selectProductLike(int p_no, int u_no);
+	public int updateAdmReject(ProductVO pvo); // 상품 승인 거절 (관리자)
+
+	public List<ProductVO> selectRejectedList(ProductVO pvo); 	// 승인 거절 상품 목록 조회 (관리자)
+
 	public List<ProductVO> selectProductLike(MemberVO u_no);
 
-	public int selectQueuedCnt(ProductVO vo);
+	public int selectQueuedCnt(ProductVO vo); // 대기중인 상품수 조회
 
-	public int selectRejectedCnt(ProductVO vo);
+	public int selectRejectedCnt(ProductVO vo); // 거절된 상품 조회
+
 }
