@@ -12,10 +12,10 @@ import lombok.Setter;
 
 @Service
 public class ServiceCenterServiceImpl implements ServiceCenterService {
-	
-	@Setter(onMethod_=@Autowired)
+
+	@Setter(onMethod_ = @Autowired)
 	private ServiceCenterDAO serviceDao;
-	
+
 	@Override
 	public List<ServiceCenterVO> selectServiceList(ServiceCenterVO vo) {
 		List<ServiceCenterVO> serviceList = null;
@@ -24,7 +24,7 @@ public class ServiceCenterServiceImpl implements ServiceCenterService {
 	}
 
 	@Override
-	public int insertService(ServiceCenterVO vo) throws Exception{
+	public int insertService(ServiceCenterVO vo) throws Exception {
 		int result = 0;
 		result = serviceDao.insertService(vo);
 		return result;
@@ -40,7 +40,7 @@ public class ServiceCenterServiceImpl implements ServiceCenterService {
 		ServiceCenterVO detail = null;
 		serviceDao.updateReadCnt(vo);
 		detail = serviceDao.selectServiceDetail(vo);
-		if(detail!=null) {
+		if (detail != null) {
 			detail.setSc_content(detail.getSc_content().toString().replaceAll("\n", "<br>"));
 		}
 		return detail;
@@ -73,13 +73,12 @@ public class ServiceCenterServiceImpl implements ServiceCenterService {
 		return result;
 	}
 
-
 	@Override
 	public int deleteService(ServiceCenterVO scno) throws Exception {
-		int result =0;
+		int result = 0;
 		result = serviceDao.deleteService(scno.getSc_no());
 		return result;
-		}
+	}
 
 	@Override
 	public List<ServiceCenterVO> selectServiceMyPageList(ServiceCenterVO vo) {
@@ -89,12 +88,10 @@ public class ServiceCenterServiceImpl implements ServiceCenterService {
 	}
 
 	@Override
-	public int selectNoReplyCnt() throws Exception{
-		 int result = 0;
-		 result =serviceDao.selectNoReplyCnt(); 
+	public int selectNoReplyCnt() throws Exception {
+		int result = 0;
+		result = serviceDao.selectNoReplyCnt();
 		return result;
 	}
-
-	
 
 }

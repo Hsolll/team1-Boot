@@ -4,23 +4,30 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-
 import com.omb.user.serviceCenter.vo.ServiceCenterVO;
 
 @Mapper
 public interface ServiceCenterDAO {
-	public List<ServiceCenterVO> selectServiceList(ServiceCenterVO vo);
+	public List<ServiceCenterVO> selectServiceList(ServiceCenterVO vo); // 문의 리스트 조회
+
+	public int selectServiceCnt(ServiceCenterVO vo); // 문의수
+
+	public int selectPwdChk(ServiceCenterVO vo); // 문의글 비밀번호 확인
+
+	public int insertService(ServiceCenterVO vo); // 문의글 등록
+
+	public ServiceCenterVO selectServiceDetail(ServiceCenterVO vo); // 문의글 상세 조회
+
+	public int updateService(ServiceCenterVO vo); // 문의글 업데이트
+
+	public int updateServiceDel(ServiceCenterVO vo); // 문의글 삭제
+
+	public int updateReadCnt(ServiceCenterVO vo); // 문의글 조회수
+
+	public int selectNoReplyCnt(); // 관리자의 답변이 달리지 않은 문의글의 수
+
 	public List<ServiceCenterVO> selectServiceMyPageList(ServiceCenterVO vo);
-	
-	public int selectServiceCnt(ServiceCenterVO vo);
-	public int selectPwdChk(ServiceCenterVO vo);
-	public int insertService(ServiceCenterVO vo);
-	public ServiceCenterVO selectServiceDetail(ServiceCenterVO vo);
-	
-	public int updateService(ServiceCenterVO vo);
-	public int updateServiceDel(ServiceCenterVO vo);
-	public int updateReadCnt(ServiceCenterVO vo);
+
 	public int deleteService(int scno);
-	public int selectNoReplyCnt();
-	
+
 }

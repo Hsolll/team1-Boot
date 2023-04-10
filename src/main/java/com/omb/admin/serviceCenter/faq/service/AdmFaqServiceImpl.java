@@ -11,9 +11,9 @@ import com.omb.admin.serviceCenter.faq.vo.FaqVO;
 import lombok.Setter;
 
 @Service
-public class AdmFaqServiceImpl implements AdmFaqService{
-	
-	@Setter(onMethod_=@Autowired)
+public class AdmFaqServiceImpl implements AdmFaqService {
+
+	@Setter(onMethod_ = @Autowired)
 	private FaqDao faqDao;
 
 	@Override
@@ -55,6 +55,5 @@ public class AdmFaqServiceImpl implements AdmFaqService{
 		result = faqDao.updateFaqDel(faq);
 		return result;
 	}
-	
-	
+
 }

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.omb.admin.statistics.dao.StatisticsDAO">
-	
+
+	<!-- 카테고리 전체 리스트 -->
 	<select id="selectAllCategory" resultType="map">
 		<![CDATA[
 			SELECT A.P_CATE AS P_CATE, NVL(SUM(CNT),0) AS CNT
@@ -12,7 +13,8 @@
 			GROUP BY A.P_CATE
 		]]>
 	</select>
-	
+
+	<!-- 월별 카테고리 -->
 	<select id="selectCategory" resultType="map">
 		<![CDATA[
 			SELECT A.P_CATE P_CATE, NVL(SUM("01"),0) AS "1월", NVL(SUM("02"),0) AS "2월", NVL(SUM("03"),0) AS "3월",
@@ -41,7 +43,8 @@
 	        GROUP BY A.P_CATE
 		]]>
 	</select>
-	
+
+	<!-- 월별 결제내역 -->
 	<select id="selectAmount" resultType="map">
 		<![CDATA[
 			SELECT NVL(SUM("01"),0) AS "1월", NVL(SUM("02"),0) AS "2월", NVL(SUM("03"),0) AS "3월",
@@ -68,7 +71,8 @@
 			       GROUP BY SP_PRICE)
 		]]>
 	</select>
-	
+
+	<!-- 월별 상품 -->
 	<select id="selectProduct" resultType="map">
 		<![CDATA[
 			/* 일반상품 */
@@ -120,7 +124,8 @@
 			       GROUP BY SP_CREATED_AT)
 		]]>
 	</select>
-	
+
+	<!-- 월별 지역 -->
 	<select id="selectLocal" resultType="map">
 		<![CDATA[
 			SELECT A.P_LOCAL LOCAL, NVL(SUM("01"),0) AS "1월", NVL(SUM("02"),0) AS "2월", NVL(SUM("03"),0) AS "3월",
@@ -151,21 +156,23 @@
 			ORDER BY LOCAL
 		]]>
 	</select>
-	
+
+	<!-- 월별 사용자수 -->
 	<select id="selectUser" resultType="map">
-	SELECT TO_CHAR(U_CREATED_AT, 'YY-MM') U_CREATED_AT,
-	    COUNT(*) AS CNT
-	FROM TB_USER
-	WHERE U_STATUS = 'USING'
-	GROUP BY TO_CHAR(U_CREATED_AT, 'YY-MM')
-	ORDER BY U_CREATED_AT DESC
+		SELECT TO_CHAR(U_CREATED_AT, 'YY-MM') U_CREATED_AT,
+		COUNT(*) AS CNT
+		FROM TB_USER
+		WHERE U_STATUS = 'USING'
+		GROUP BY TO_CHAR(U_CREATED_AT, 'YY-MM')
+		ORDER BY U_CREATED_AT DESC
 	</select>
-	
+
+	<!-- 월별 주문수 -->
 	<select id="selectOrder" resultType="map">
-	SELECT TO_CHAR(P_CREATED_AT, 'YY-MM') P_CREATED_AT,
-	    COUNT(*) AS CNT
-	FROM TB_USER_PRODUCT
-	GROUP BY TO_CHAR(P_CREATED_AT, 'YY-MM')
-	ORDER BY P_CREATED_AT
+		SELECT TO_CHAR(P_CREATED_AT, 'YY-MM') P_CREATED_AT,
+		COUNT(*) AS CNT
+		FROM TB_USER_PRODUCT
+		GROUP BY TO_CHAR(P_CREATED_AT, 'YY-MM')
+		ORDER BY P_CREATED_AT
 	</select>
 </mapper>

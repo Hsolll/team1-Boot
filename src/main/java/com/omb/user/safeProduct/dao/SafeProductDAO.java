@@ -11,6 +11,7 @@ import com.omb.user.safeProduct.vo.SafeProductVO;
 @Mapper
 public interface SafeProductDAO {
 	
+
 	/********************************** 안심상품 조회 관련 **********************************/
 	
 	public List<SafeProductVO> selectSafeProductList(SafeProductVO spvo);	// 안심상품 리스트 조회
@@ -56,5 +57,6 @@ public interface SafeProductDAO {
 
 	public int selectsafeProductCnt(SafeProductVO spvo);
 	 
+	public List<SafeProductVO> selectSproductList(SafeProductVO spvo); // 거래가 완료된 안심 상품 조회 ( 관리자 사용 )
 
 }
