@@ -40,18 +40,11 @@ public class ProductController {
 	
 	@GetMapping(value="productList")
 	public String productList(@ModelAttribute ProductVO pvo, HttpSession session,RedirectAttributes ras,Model model) {
-	    // 세션 정보 사용
 		
 		 MemberVO member = (MemberVO)session.getAttribute("memberLogin"); 
 	    
-	    // 모델 객체에 데이터 전달
 		 model.addAttribute("member", member); 
 		
-		 
-	    
-	    
-//	    log.info("member :"+member);
-	    
 	    ras.addFlashAttribute("ProductVO", pvo);
 	    
 	    
@@ -61,43 +54,19 @@ public class ProductController {
 
 	@GetMapping(value="productAllList")
 	public String selectProductList( HttpSession session,RedirectAttributes ras, Model model,ProductVO pvo) {
-		 // 세션 정보 사용
 		pvo.setAmount(8);
 		log.info("pgaeAmount :"+pvo.getAmount());
 		MemberVO member = (MemberVO)session.getAttribute("memberLogin");
-//	    log.info("selectProductList() 메서드 실행성공");
 	    
-	    
-//	    ras.addFlashAttribute("ProductVO", pvo);
-	    // 모델 객체에 데이터 전달
 	    model.addAttribute("member", member);
-	    
-//	    log.info("member :"+member);
-//	    log.info("member.getU_no() :"+member.getU_no());
-			
-		int u_no = member.getU_no();
-		
-//		log.info("u_no :"+u_no);
-		
-		
-		
 		List<ProductVO> productList =  productService.selectProductList(pvo);
 		
 		List<ProductVO> like = productService.selectProductLike(member);
 
-//		log.info("like :"+like);
-		
 		for (ProductVO likeItem : like) {
-
-			
 			log.info("likeItem : "+likeItem);
 		    int p_no = likeItem.getP_no();
-		   
-		    
 		    for (ProductVO product : productList) {
-		       
-		    	
-		    	
 		    	if (product.getP_no() == p_no) {
 		            int prod_like = likeItem.getProd_like();
 		            product.setProd_like(prod_like);
@@ -105,54 +74,21 @@ public class ProductController {
 		        }
 		    }
 		}
-
-
-//		log.info(like.size()+", "+productList.size());
-//		model.addAttribute("like",like);
-//		log.info("like :"+like);
-
-//		log.info("productList :"+productList);
-//		log.info("pvo :"+pvo);
-		
-
 		
 		model.addAttribute("productList", productList);
 		model.addAttribute("productVO", pvo);
-//		CommonVO cvo = (CommonVO)pvo;
-//		model.addAttribute("commonVO",cvo);
-		
-//		log.info("model.productList :"+model.getAttribute("productList"));
-		
-//		log.info("keyword : "+pvo.getKeyword() );
-//		log.info("search : "+pvo.getSearch() );
 		int total = productService.productListCnt(pvo);
-//		log.info("total :"+total);
 		
 		model.addAttribute("pageMaker", new PageDTO(pvo, total));
-//		log.info("model.pageMaker :"+model.getAttribute("pageMaker"));
-//		log.info("pageNum :" + pvo.getPageNum());
 		
 		int count = total - (pvo.getPageNum()-1) * pvo.getAmount();
-//		log.info("count :"+count);
 		
 		model.addAttribute("count", count);
-//		log.info("model.count :"+model.getAttribute("count"));
 		
 		
 		return "/user/product/productAllListView";
 	}
-	
-//	@GetMapping(value="heartSel")
-//	public String heartSel(int p_no,int u_no,Model model) {
-//		
-//
-//		int like = productService.selectProductLike(p_no,u_no);
-//		log.info("like :"+like);
-//		model.addAttribute("likes",like);
-//		log.info("model.likes :"+model.getAttribute("likes"));
-//		
-//		return "/user/product/heartPage";
-//	}
+
 	
 	
 	
@@ -163,32 +99,12 @@ public class ProductController {
 		pvo.setAmount(8);
 		
 		MemberVO member = (MemberVO)session.getAttribute("memberLogin");
-//	    log.info("selectProductList() 메서드 실행성공");
 	    
 	    
-	    // 모델 객체에 데이터 전달
 	    model.addAttribute("member", member);
 	    
-//	    log.info("member :"+member);
-//	    log.info("member.getU_no() :"+member.getU_no());
-//			
-		int u_no = member.getU_no();
-		
-//		log.info("u_no :"+u_no);
-		
 		List<ProductVO> clist = productService.category(pvo);
-
-//		log.info("category 서비스 완료, clist :"+clist);
-//		
-
-//		log.info("pvo :"+pvo);
-//		log.info("pvo.p_cate :"+pvo.getP_cate());
-		
-//		log.info("모델에 clist : " + model.getAttribute("clist"));
-		
 		List<ProductVO> like = productService.selectProductLike(member);
-
-
 		
 		for (ProductVO likeItem : like) {
 		    int p_no = likeItem.getP_no();
@@ -201,33 +117,23 @@ public class ProductController {
 		    }
 		}
 		
-		
-		model.addAttribute("clist",clist);
-//		log.info(clist+"  ");
-
 		int total = productService.productCateListCnt(pvo);
-//		log.info("total :"+total);
-		
+		model.addAttribute("clist",clist);
+
 		model.addAttribute("pageMaker", new PageDTO(pvo, total));
-//		log.info("model.pageMaker :"+model.getAttribute("pageMaker"));
-//		log.info("pageNum :" + pvo.getPageNum());
 		
 		int count = total - (pvo.getPageNum()-1) * pvo.getAmount();
-//		log.info("count :"+count);
 		
 		model.addAttribute("count", count);
-//		log.info("model.count :"+model.getAttribute("count"));
 		
 		return "/user/product/productCategoryListView";
 	}
 	
 	@GetMapping(value="/productDetail")
 	public String selectProductDetail(HttpSession session, Model model,int p_no,ProductReplyVO prvo) {
-		 // 세션 정보 사용
 		
 	    MemberVO member = (MemberVO)session.getAttribute("memberLogin");
 	    
-	    // 모델 객체에 데이터 전달
 	    model.addAttribute("member", member);
 	    
 	    log.info("member :"+member);
@@ -255,15 +161,12 @@ public class ProductController {
 	public String insertProductView(HttpSession session, Model model) {
 		
 		log.info("insertPrdouctView() 메서드 실행완료");
-		  // 세션 정보 사용
 	    MemberVO member = (MemberVO)session.getAttribute("memberLogin");
 	    
-	    // 모델 객체에 데이터 전달
 	    model.addAttribute("member", member);
 	    
 	    log.info("member :"+member);
 	    
-	    // 포워드 방식으로 페이지 이동
 		
 		return "user/product/insertProductView";
 	}
@@ -352,21 +255,8 @@ public class ProductController {
 		// 모델 객체에 데이터 전달
 		model.addAttribute("member", member);
 		
-//		log.info("member :"+member);
-//		log.info("member.getU_no() :"+member.getU_no());
-		
-		int u_no = member.getU_no();
-		
-//		log.info("u_no :"+u_no);
-//		
-//		log.info("pvo :"+ pvo);
-//		log.info("pvo.getPageNum :"+ pvo.getPageNum());
-//		log.info("pvo.getAmount :"+ pvo.getAmount());
-
 	    List<ProductVO> plist = productService.selectLocal(pvo);
-//	    log.info("plist :"+plist);
 
-	    
 	    List<ProductVO> like = productService.selectProductLike(member);
 	    
 		for (ProductVO likeItem : like) {
@@ -381,15 +271,9 @@ public class ProductController {
 		}
 	  
 	    model.addAttribute("plist", plist);
-//	    log.info("model.plist :"+model.getAttribute("plist"));
-//		
-//		log.info("서비스 완료, plist :"+plist);
-//		
-//		log.info("pvo :"+pvo);
 		
 
 	    
-		model.addAttribute("plist", plist);
 	    
 	    int total = productService.productLcoalListCnt(pvo);
 	    log.info("total :"+total);

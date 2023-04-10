@@ -146,17 +146,11 @@
 		$("#p_local3").val("");
 		
 		$("#sido_code").click(function(){
-		/*	$("#sido_code").html("");
-			$("#sido_code").html('<option>선택</option>');
-			$("#sigoon_code").html('<option>선택</option>');
-			$("#dong_code").html('<option>선택</option>');
-			$("#p_local").val("");*/
 		});
-		
+		////////////////////////////////////2. 시군////////////////////////////////////////////////////////
 		
 		$("#sido_code").change(function(){
 			
-			/*$("#sido_code").html('<option>선택</option>');*/
 			$("#sigoon_code").html('<option>선택</option>');
 			$("#dong_code").html('<option>선택</option>');
 			$("#p_local").val("");
@@ -181,7 +175,6 @@
 					
 					$("#sigoon_code").append(option);
 					})
-					/*$("#p_local").val("")*/
 					var select = $("#sido_code").find(":selected").text()
 					$("#p_local").val(select)
 					
@@ -189,6 +182,7 @@
 					error: function(xhr, stat, err) {}
 			})
 		})
+		////////////////////////////////////3. 동////////////////////////////////////////////////////////
 		
 		$("#sigoon_code").change(function(){ 
 		
