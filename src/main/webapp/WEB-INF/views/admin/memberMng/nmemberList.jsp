@@ -17,7 +17,7 @@
 					alert("잘못된 접근입니다.");
 					location.href="/admin/login";
 				}
-				$(".dashboard-wrapper .page-header h1").html("회원관리");
+				$(".dashboard-wrapper .page-header h1").html("탈퇴 회원관리");
 				/* 검색 후 검색 대상과 검색 단어 출력 */
 				let msg = "<c:if test='${empty adminLogin}'>관리자만 이용할 수 있습니다.</c:if>";
 				let word="<c:out value='${memberVO.keyword}' />";  // 보여주기 태그
@@ -131,42 +131,14 @@
 				});
 				$("#f_search").submit();
 			}
-			
-			/* 회원 삭제하기 위한 처리 함수*/
-			function deleteValue(){
-				let url = "/admin/memberDelete";
-				let checkBoxArr = [];
-				$("input:checkbox[name='chk']:checked").each(function(i,iVal){
-					checkBoxArr.push($(this).val());
-					console.log(checkBoxArr);
-				})
-				if(checkBoxArr.length == 0){
-					alert("선택된 회원이 없습니다.");
-				}
-				else{
-					let chk = confirm("정말 삭제하시겠습니까?");
-					$.ajax({
-						url : url,
-						type: "POST",
-						traditional :true,
-						data : {
-							checkBoxArr : checkBoxArr
-						},
-						error: function(xhr, textStatus, errorThrown){
-      						alert(textStatus + " (HTTP-" + xhr.status + " / " + errorThrown + ")" );
-      					},
-						success: function(jdata){
-							
-							if(jdata = 1){
-								console.log("jdata: " + jdata)
-								alert("삭제 성공");
-								location.href="/admin/nmemberList";
-							}
-						}
-					});
-				}
-			}
 		</script>
+		<style>
+			#example_filter {display: none;}
+			.pagination {display: none;}
+			.pagination.v2 {display: flex;} 
+			.table-responsive {overflow: hidden;}
+			.dataTables_info {display: none;}
+		</style>
 	</head>
 
 <body>
@@ -199,94 +171,84 @@
 			
 			<%--================== 검색기능 종료 ===================  --%>
 			
-			<%--================== 전체 회원수 시작 ===================  --%>
-			<div class="tableTop">
-				
-			</div>
-			<%--================== 전체 회원수 종료 ===================  --%>
-			
-			<%-- =================== 리스트 시작  ================= --%>
-					<div id="memberList" class="table-responsive">
-						<form id="delete_form" name="delete_form">
-							<input type="hidden" id="u_no1" name="u_no1" />
-							<input type="hidden" id="u_no2" name="u_no2" />
-							<input type="hidden" id="u_no3" name="u_no3" />
-							<input type="hidden" id="u_no4" name="u_no4" />
-							<input type="hidden" id="u_no5" name="u_no5" />
-							<input type="hidden" id="u_no6" name="u_no6" />
-							<input type="hidden" id="u_no7" name="u_no7" />
-							<input type="hidden" id="u_no8" name="u_no8" />
-							<input type="hidden" id="u_no9" name="u_no9" />
-							<input type="hidden" id="u_no10" name="u_no10" />
-						</form>
-							<table summary="탈퇴회원 리스트" class="table table-striped" >
-								<thead>
-									<tr>
-										<th data-value="u_no" class="order text-center col-md-1" >회원번호</th>
-										<th class="text-center col-md-1">아이디</th>
-										<th class="text-center col-md-1">닉네임</th>
-										<th class="text-center col-md-1">이름</th>
-										<th class="text-center col-md-1">핸드폰번호</th>
-										<th data-value="u_created_at" class="order text-center col-md-1">회원가입일</th>
-										<th class="text-center col-md-3">회원등급(일반:1/경고:2/블랙:3)</th>
-										<th class="text-center col-md-2">회원상태(일반:1/탈퇴:2)</th>
-										<th class="text-hide">버튼영역</th>
-									</tr>
-								</thead>
-						 		<tbody id="list" class="table-striped" >
-									<!-- 데이터 출력 -->
-									<c:choose>
-										<c:when test="${not empty nmemberList}" >
-											<c:forEach var="nmember" items="${nmemberList}" varStatus="status">
-												<tr class="text-center" data-num="${nmember.u_no}">
-													<td>${nmember.u_no}</td>
-													<td class="goDetail text-center">
-													${nmember.u_id}
-													</td>
-													<td class="text-center">${nmember.u_nick}</td>
-													<td class="name text-center">${nmember.u_name}</td>
-													<td class="text-center">${nmember.u_phone}</td>
-													<td class="text-center">${nmember.u_created_at}</td>
-													<td class="text-center">${nmember.u_grade}</td>
-													<td class="text-center">${nmember.u_status}</td>
-													<td><button type="button" id="memberDeleteBtn" name="memberDeleteBtn" class="btn btn-dark m-l-10 memberDeleteBtn">회원삭제</button></td>
-												</tr>
-											</c:forEach>
-										</c:when>
-										<c:otherwise>
-											<tr>
-												<td colspan="8" class="tac text-center">등록된 게시글이 존재하지 않습니다.</td>
-											</tr>
-										</c:otherwise>
-									</c:choose>
-								</tbody> 
-							</table>
-				</div>
-				
-				<%-- =================== 페이징 출력 시작 =============== --%>
-			<nav aria-label="Page navigation example">
-			  <ul class="pagination justify-content-center">
-			  	<c:if test="${pageMaker.prev}">
-				    <li class="page-item disabled">
-				    
-				      <a class="page-link" href="${pageMaker.startPage -1}" tabindex="-1">Previous</a>
-				    </li>
-			    </c:if>
-			    
-			    <c:forEach var="num" begin="${pageMaker.startPage}"
-										 end="${pageMaker.endPage}">
-				    <li class="page-item">
-				    	<a class="page-link" href="${num}">${num}</a>
-				    </li>
-			    </c:forEach>
-			    
-			    <c:if test="${pageMaker.next}">
-				    <li class="page-item">
-				      <a class="page-link" href="${pageMaker.endPage + 1}">Next</a>
-				    </li>
-			    </c:if>
-			  </ul>
-			</nav>
+			<!-- ============================================================== -->
+	                    <!-- data table  -->
+	                    <!-- ============================================================== -->
+	                    <div>
+	                        <div class="card">
+	                            <div class="card-body">
+	                                <div class="table-responsive">
+	                                	<div  id="example_wrapper" class="dataTables_wrapper dt-bootstrap4">
+	                                		
+	                                		<table id="example" class="table table-hover table-bordered second text-center" style="width:100%; margin-top: 20px;">
+	                                    	<colgroup>
+	                                    		<col style="width:15%;">
+	                                    		<col style="width:30%;">
+	                                    		<col style="width:15;">
+	                                    		<col style="width:15%;">
+	                                    		<col style="width:;">
+	                                    	</colgroup>
+	                                        <thead>
+	                                            <tr>
+	                                                <th>회원번호</th>
+	                                                <th>아이디</th>
+	                                                <th>이름</th>
+	                                                <th>회원등급</th>
+	                                                <th>회원삭제</th>
+	                                            </tr>
+	                                        </thead>
+	                                        <tbody>
+	                                        	<c:choose>
+													<c:when test="${not empty nmemberList}" >
+														<c:forEach var="nmember" items="${nmemberList}" varStatus="status">
+															<tr data-num="${nmember.u_no}">
+																<td>${nmember.u_no}</td>
+																<td class="goDetail">
+																${nmember.u_id}
+																</td>
+																<td class="name">${nmember.u_name}</td>
+																<td class="grade">${nmember.u_grade}</td>
+																<td><button type="button" class="memberDeleteBtn btn btn-dark m-l-10"  data-toggle="modal" data-target="#exampleModalCenter">회원삭제</button></td>
+															</tr>
+														</c:forEach>
+													</c:when>
+													<c:otherwise>
+														<tr>
+															<td colspan="7" class="tac text-center">등록된 게시글이 존재하지 않습니다.</td>
+														</tr>
+													</c:otherwise>
+												</c:choose>
+	                                        </tbody>
+	                                    </table>
+	                                	</div>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+						<%-- ============== 페이징 ====================  --%>
+						<nav aria-label="Page navigation example">
+						  <ul class="pagination v2 justify-content-center">
+						  	<c:if test="${pageMaker.prev}">
+							    <li class="page-item disabled">
+							    
+							      <a class="page-link" href="${pageMaker.startPage -1}" tabindex="-1">Previous</a>
+							    </li>
+						    </c:if>
+						    
+						    <c:forEach var="num" begin="${pageMaker.startPage}"
+													 end="${pageMaker.endPage}">
+							    <li class="page-item">
+							    	<a class="page-link" href="${num}">${num}</a>
+							    </li>
+						    </c:forEach>
+						    
+						    <c:if test="${pageMaker.next}">
+							    <li class="page-item">
+							      <a class="page-link" href="${pageMaker.endPage + 1}">Next</a>
+							    </li>
+						    </c:if>
+						  </ul>
+						</nav>
 			
 			
 			<!-- E-Mail Modal -->
@@ -321,5 +283,21 @@
 		</div>
 				<%-- =================== 리스트 종료  ================= --%>
 			</c:if>
+			
+			<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+			<script src="/resources/vendor/datatables/js/dataTables.bootstrap4.min.js"></script>
+			<script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+			<script src="/resources/vendor/datatables/js/buttons.bootstrap4.min.js"></script>
+			<script src="/resources/vendor/datatables/js/data-table.js"></script>
+			
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+		    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+		    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+		    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+		    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
+		    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
+		    <script src="https://cdn.datatables.net/rowgroup/1.0.4/js/dataTables.rowGroup.min.js"></script>
+		    <script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
+		    <script src="https://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
 </body>
 </html>

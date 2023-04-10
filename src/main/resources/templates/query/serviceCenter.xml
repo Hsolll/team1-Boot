@@ -2,6 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.omb.user.serviceCenter.dao.ServiceCenterDAO">
 	<sql id="serSearch">
+		<if test="search=='sc_no'">
+			<![CDATA[ SC_NO LIKE '%'|| #{keyword} ||'%' ]]>					
+		</if>
 		<if test="search=='sc_title'">
 			<![CDATA[SC_TITLE LIKE '%'||#{keyword}||'%']]>
 		</if>
