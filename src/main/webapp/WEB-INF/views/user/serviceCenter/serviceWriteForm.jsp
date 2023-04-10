@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/common.jspf" %>
-<script src="/resources/include/js/common.js"></script>
-	
+<link type="text/css" rel="stylesheet" href="/resources/include/css/communityWrite.css" />
 	<script type="text/javascript">
 			$(function(){
 				$("#addBtn").click(function(){

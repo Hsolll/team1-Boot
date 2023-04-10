@@ -14,39 +14,8 @@
 	    <script src="/resources/include/dist/js/main-js.js"></script>
 	    <script src="/resources/vendor/bootstrap/js/bootstrap.bundle.js"></script>
 	    <script type="text/javascript" src="/resources/include/js/common.js"></script>
-
-		<style>
-		    html,
-		    body {
-		        height: 100%;
-		    }
+		<link href="/resources/include/css/adminLogin.css" rel="stylesheet">
 		
-		    body {
-		        display: -ms-flexbox;
-		        display: flex;
-		        -ms-flex-align: center;
-		        align-items: center;
-		        padding-top: 40px;
-		        padding-bottom: 40px;
-		    }
-		    
-		    .card-body{
-		    	height: 300px;
-		    }
-		    .form-group{
-		    	margin-top: 20px;
-		    	margin-bottom: 20px;
-		    }
-		    
-		    #loginForm{
-		    	height: 230px;
-		    }
-		    
-		    #loginBtn{
-		    	margin-top: 60px;
-		    }
-	    </style>
-	    
 	    <script type="text/javascript">
 	    	$(function(){
 	    		let errorMsg = "${errorMsg}";
@@ -81,12 +50,6 @@
 	                    <div class="form-group">
 	                        <input class="form-control form-control-lg" id="a_pwd" name="a_pwd" type="password" placeholder="Password">
 	                    </div>
-	                    <!-- 
-	                    <div class="form-group">
-	                        <label class="custom-control custom-checkbox">
-	                            <input class="custom-control-input" type="checkbox"><span class="custom-control-label">Remember Me</span>
-	                        </label>
-	                    </div> -->
 	                    <button type="button" class="btn btn-primary btn-lg btn-block" id="loginBtn">Sign in</button>
 	                </form>
 	            </div>

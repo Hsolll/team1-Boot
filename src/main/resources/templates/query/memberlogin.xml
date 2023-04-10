@@ -2,47 +2,38 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.omb.user.login.dao.MemberLoginDAO">
 
-   <select id="memberLogin" resultType="member">
-      /* 로그인 처리 쿼리 */
-      <!-- select u_no ,u_id , u_name, u_email , u_phone, u_nick, u_phone , u_grade, u_created_at, u_updated_at
-      from tb_user
-      where u_id =#{u_id} and u_pwd =#{u_pwd}   -->
-      
-      /* 배송주소가 2개 이상인 회원이 로그인 시 주소객체가 여러개이므로 에러 발생
-       * 조건절에 배송지 이름을 추가해서 기본주소정보만 갖도록 설정 */
-      SELECT 
-         A.U_NO, U_ID , U_NAME, U_EMAIL , U_PHONE, U_NICK, 
-         ZIP, ADDRESS, SUB_ADDRESS, U_GRADE, U_STATUS ,U_CREATED_AT, U_UPDATED_AT , U_TYPE
-      FROM TB_USER A
-      INNER JOIN TB_USER_ADDRESS_INFO B
-          ON A.U_NO = B.U_NO
-       WHERE U_ID = #{u_id} AND U_PWD = #{u_pwd} AND ADD_NAME = '기본배송지' AND U_TYPE='U'
-   </select>
-   
-   <select id="socialLogin" resultType="member">
-      /* 로그인 처리 쿼리 */
-      <!-- select u_no ,u_id , u_name, u_email , u_phone, u_nick, u_phone , u_grade, u_created_at, u_updated_at
-      from tb_user
-      where u_id =#{u_id} and u_pwd =#{u_pwd}   -->
-      
-      SELECT 
-         A.U_NO, U_ID , U_NAME, U_EMAIL , U_PHONE, U_NICK, 
-         ZIP, ADDRESS, SUB_ADDRESS, U_GRADE, U_STATUS ,U_CREATED_AT, U_UPDATED_AT , U_TYPE
-      FROM TB_USER A
-      INNER JOIN TB_USER_ADDRESS_INFO B
-          ON A.U_NO = B.U_NO
-       where u_email =#{u_email} and u_status='USING' and add_name = '기본배송지' 
-   </select>
-   
-   
-    <select id="socialChk" parameterType="String" resultType="String">
-   select u_type from tb_user where u_email = #{u_email}
-   </select>
-   
-   <select id="memberLoginCheck" resultType="member">
-   SELECT U_GRADE FROM TB_USER
-   WHERE U_ID = #{u_id} AND U_PWD = #{u_pwd}
-   </select>
-   
-   
+	<select id="memberLogin" resultType="member">
+		/* 로그인 처리 쿼리 */
+		<!-- select u_no ,u_id , u_name, u_email , u_phone, u_nick, u_phone , u_grade, 
+			u_created_at, u_updated_at from tb_user where u_id =#{u_id} and u_pwd =#{u_pwd} -->
+
+		/* 배송주소가 2개 이상인 회원이 로그인 시 주소객체가 여러개이므로 에러 발생
+		* 조건절에 배송지 이름을 추가해서 기본주소정보만 갖도록 설정 */
+		SELECT
+		A.U_NO, U_ID , U_NAME, U_EMAIL , U_PHONE, U_NICK, ZIP, ADDRESS, SUB_ADDRESS, U_GRADE, U_STATUS ,U_CREATED_AT, U_UPDATED_AT , U_TYPE
+		FROM TB_USER A
+		INNER JOIN TB_USER_ADDRESS_INFO B
+		ON A.U_NO = B.U_NO
+		WHERE U_ID = #{u_id} AND U_PWD = #{u_pwd} AND ADD_NAME = '기본배송지' AND U_TYPE='U'
+	</select>
+
+	<select id="socialLogin" resultType="member">
+		/* 로그인 처리 쿼리 */
+		<!-- select u_no ,u_id , u_name, u_email , u_phone, u_nick, u_phone , u_grade, 
+			u_created_at, u_updated_at from tb_user where u_id =#{u_id} and u_pwd =#{u_pwd} -->
+
+		SELECT
+		A.U_NO, U_ID , U_NAME, U_EMAIL , U_PHONE, U_NICK, ZIP, ADDRESS, SUB_ADDRESS, U_GRADE, U_STATUS ,U_CREATED_AT, U_UPDATED_AT , U_TYPE
+		FROM TB_USER A
+		INNER JOIN TB_USER_ADDRESS_INFO B
+		ON A.U_NO = B.U_NO
+		WHERE U_EMAIL =#{u_email} AND U_STATUS='USING' AND ADD_NAME = '기본배송지'
+	</select>
+
+
+	<select id="socialChk" parameterType="String"
+		resultType="String">
+		SELECT U_TYPE FROM TB_USER WHERE U_EMAIL = #{u_email}
+	</select>
+
 </mapper>

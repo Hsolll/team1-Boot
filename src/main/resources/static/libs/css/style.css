@@ -155,6 +155,7 @@
 /* 0.1. Body / Typography
    ========================================================================== */
 
+
 body {
     font-family: 'Circular Std Book';
     font-style: normal;
@@ -1640,7 +1641,7 @@ Left Navigation Sidebar
     position: fixed;
     width: 264px;
     height: 100%;
-    top: 60px;
+    top: 67px;
     overflow: auto;
     background-color: #fff;
     -webkit-box-shadow: 0px 0px 28px 0px rgba(82, 63, 105, 0.13);
@@ -1936,7 +1937,7 @@ Container / Wrapper
 
 .dashboard-main-wrapper {
     min-height: 100%;
-    padding-top: 60px;
+    padding-top: 67px;
     position: relative;
 }
 
@@ -1945,7 +1946,6 @@ Container / Wrapper
     left: 0;
     margin-left: 264px;
     min-height: 870px !important;
-    min-width: 1160px; /* 230402 추가 */
 }
 
 .dashboard-content {

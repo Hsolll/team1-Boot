@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.omb.user.communityreply.dao.CommunityReplyDAO">
+
+	<select id="communityReplyList" parameterType="communityReply" resultType="communityReply">
+		select 
+		    cr_no, c_no, u_nick, cr_content, 
+		    to_char(cr_date, 'YYYY-MM-DD HH24:MI:SS') as cr_date 
+		from tb_user_community_reply
+		where c_no = #{c_no}
+		order by cr_no desc
+	</select>
+	
+	
+	<insert id="communityReplyInsert" parameterType="communityReply">
+		INSERT INTO tb_user_community_reply(cr_no, c_no, u_nick, cr_content)
+		VALUES(tb_user_community_reply_seq.nextval, #{c_no}, #{u_nick}, #{cr_content})
+	</insert>
+	
+	
+	<update id="communityReplyUpdate" parameterType="communityReply">
+		update tb_user_community_reply set cr_content = #{cr_content}, cr_date = sysdate 
+		where cr_no = #{cr_no}
+	</update>
+	
+	
+	<delete id="communityReplyDelete" parameterType="communityReply">
+		delete tb_user_community_reply where cr_no = #{cr_no}
+	</delete>
+
+</mapper>

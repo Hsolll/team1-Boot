@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/common.jspf" %>
+<link type="text/css" rel="stylesheet" href="/resources/include/css/myPageSub.css" />
 <script src="/resources/include/js/common.js"></script>
    <script>
    
    $(function(){
+	  $(".content_wrap .page-header h1").html("문의 내역");
       let msg = "<c:if test='${empty memberLogin}'>회원만 이용할 수 있습니다.</c:if>";
       let word="<c:out value='${serviceCenterVO.keyword}' />";
       let value="";
@@ -175,7 +177,7 @@
                         </c:forEach>
                      </c:when>
                      <c:otherwise>
-                        <td colspan="4" class="tac text-center">등록된 게시물이 존재하지 않습니다.</td>
+                        <td colspan="5" class="tac text-center">등록된 게시물이 존재하지 않습니다.</td>
                      </c:otherwise>
                   </c:choose>
                </tbody>

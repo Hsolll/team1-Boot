@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/common.jspf" %>
-<script src="/resources/include/js/common.js"></script>
+<link type="text/css" rel="stylesheet" href="/resources/include/css/eventList.css" />
 		<script type="text/javascript">
 	$(function(){	
 			/* 검색 후 검색 대상과 검색 단어 출력 */
-			$(".content_wrap .page-header h1").html("공지사항");
+			$(".content_wrap .page-header h1").html("이벤트");
 			
 			let msg = "<c:if test='${empty memberLogin}'>회원만 이용할 수 있습니다.</c:if>";
 			let word="<c:out value='${noticeVO.keyword}' />";  // 보여주기 태그
@@ -54,7 +54,7 @@
 			
 			/* 제목 클릭시 상세 페이지 이동을 위한 처리 이벤트 */		
 			$(".goDetail").click(function(){
-				let an_no =  $(this).parents("tr").attr("data-num");	
+				let an_no =  $(this).parents("li").attr("data-num");	
 				$("#an_no").val(an_no);
 				console.log("글번호 : "+an_no);
 				// 상세 페이지로 이동하기 위해 form 추가 (id : detailForm) 
@@ -90,99 +90,83 @@
 	</head>
 
 <body>
-<%-- ============== container 시작 ====================  --%>
-<div class="contentContainer container"> 
-	<form id="detailForm">
-		<input type="hidden" id="an_no" name="an_no" />
-	</form>
-	
-	<%-- ============== 검색기능 시작 ====================  --%>
-	<div id="noticeSearch" class="text-right">
-		<form id="f_search" name="f_search" class="form-inline">
-			<input type="hidden" name="pageNum" value="${pageMaker.cvo.pageNum}">
-			<input type="hidden" name="amount" value="${pageMaker.cvo.amount}">
-			<div class="form-group ml-auto">
-				<label>검색조건</label>
-				<select id="search" name="search"  class="form-control m-l-10">
-					<option value="all">전체</option>
-					<option value="an_no">글번호</option>
-					<option value="an_title">제목</option>
-				</select>
-				<input type="text" name="keyword" id="keyword" value="검색어를 입력하세요" class="form-control m-l-10" />
-				<button type="button" id="searchData" class="btn">검색</button>
+	<div class="contentContainer container"> 
+		<%-- ============== 검색기능 시작 ====================  --%>
+			<div id="noticeSearch" class="text-right">
+				<form id="f_search" name="f_search" class="form-inline">
+					<input type="hidden" name="pageNum" value="${pageMaker.cvo.pageNum}">
+					<input type="hidden" name="amount" value="${pageMaker.cvo.amount}">
+					<div class="form-group ml-auto">
+						<label>검색조건</label>
+						<select id="search" name="search"  class="form-control m-l-10">
+							<option value="all">전체</option>
+							<option value="an_no">글번호</option>
+							<option value="an_title">제목</option>
+						</select>
+						<input type="text" name="keyword" id="keyword" value="검색어를 입력하세요" class="form-control m-l-10" />
+						<button type="button" id="searchData" class="btn">검색</button>
+					</div>
+				</form>
 			</div>
-		</form>
+		<%--================== 검색기능 종료 ===================  --%>
+			<form id="detailForm">
+				<input type="hidden" id="an_no" name="an_no" />
+			</form>
+			<c:choose>
+				<c:when test="${not empty noticeList}" >
+					<c:forEach var="notice" items="${noticeList}" varStatus="status">
+						<ul class="eventList">
+							<li data-num="${notice.an_no}">
+								<a class="goDetail">
+									<div class="eventImg">
+										<c:if test="${not empty notice.an_thumbnail}">
+											<img src="/uploadStorage/notice/thumbnail/${notice.an_thumbnail}"/>
+										</c:if>
+										<c:if test="${empty notice.an_thumbnail}">
+											<img src="/resources/images/common/icon.png" />
+										</c:if>
+									</div>
+									<strong class="eventTitle">${notice.an_title}</strong>
+									<p>${notice.an_content}</p>
+									<span class="eventDate">${notice.an_created_at}</span>
+									<span class="eventCnt">조회수 ${notice.an_cnt}</span>
+								</a>
+							</li>
+						</ul>
+					</c:forEach>
+				</c:when>
+				<c:otherwise>
+					<tr>
+						<td colspan="6" class="tac text-center">등록된 게시글이 존재하지 않습니다.</td>
+					</tr>
+				</c:otherwise>
+			</c:choose>
+			<%-- =================== 페이징 출력 시작 =============== --%>
+			<div class="text-center">
+				<ul class="pagination">
+				<!-- 이전 바로가기 10개 존재 여부를 prev 필드의 값으로 확인. -->
+					<c:if test="${pageMaker.prev}">
+						<li class="paginate_button previous">
+							<a href="${pageMaker.startPage -1}">Previous</a>
+						</li>
+					</c:if>
+					
+					<!-- 바로가기 번호 추력 -->
+					<c:forEach var="num" begin="${pageMaker.startPage}"
+										 end="${pageMaker.endPage}">
+					 <li class="paginate_button ${pageMaker.cvo.pageNum == num? 'active':''}">
+					 	<a href="${num}">${num}</a>
+					 </li>
+					</c:forEach>
+					
+					<!-- 다음 바로가기 10개 존재 여부를 next 필드의 값으로 확인. -->
+					<c:if test="${pageMaker.next}">
+						<li class="paginate_button next">
+			 				<a href="${pageMaker.endPage + 1}">Next</a>
+						</li>
+					</c:if>
+				</ul>
+			</div>
 	</div>
-<%--================== 검색기능 종료 ===================  --%>
-
-<%-- =================== 리스트 시작  ================= --%>
-	<div id="noticeList" class="table-responsive">
-		<table summary="공지사항 리스트" class="table table-striped m-t-15" style="margin-top: 30px;">
-			<thead>
-				<tr>
-					<th data-value="an_no" class="order text-center col-md-1" >공지글 번호</th>
-					<th class="text-center col-md-1">구분</th>
-					<th class="text-center col-md-4">제목</th>
-					<th class="text-center col-md-1">작성자</th>
-					<th class="text-center col-md-1">등록일</th>
-					<th data-value="an_cnt" class="order text-center col-md-1">조회수</th>
-				</tr>
-			</thead>
-	 		<tbody id="list" class="table-striped" >
-				<!-- 데이터 출력 -->
-				<c:choose>
-					<c:when test="${not empty noticeList}" >
-						<c:forEach var="notice" items="${noticeList}" varStatus="status">
-							<tr class="text-center" data-num="${notice.an_no}">
-								<td class="no text-center">${notice.an_no}</td>
-								<td class="text-center">
-								${notice.an_category}
-								</td>
-								<td class="goDetail text-left" style="cursor:pointer;">${notice.an_title}</td>
-								<td class="text-center">${notice.a_name}</td>
-								<td class="text-center">${notice.an_created_at}</td>
-								<td class="text-center">${notice.an_cnt}</td>
-							</tr>
-						</c:forEach>
-					</c:when>
-					<c:otherwise>
-						<tr>
-							<td colspan="6" class="tac text-center">등록된 게시글이 존재하지 않습니다.</td>
-						</tr>
-					</c:otherwise>
-				</c:choose>
-			</tbody> 
-		</table>
-	</div>
-	<%-- =================== 리스트 종료  ================= --%>
-	
-	<%-- =================== 페이징 출력 시작 =============== --%>
-		<div class="text-center">
-			<ul class="pagination">
-			<!-- 이전 바로가기 10개 존재 여부를 prev 필드의 값으로 확인. -->
-				<c:if test="${pageMaker.prev}">
-					<li class="paginate_button previous">
-						<a href="${pageMaker.startPage -1}">Previous</a>
-					</li>
-				</c:if>
-				
-				<!-- 바로가기 번호 추력 -->
-				<c:forEach var="num" begin="${pageMaker.startPage}"
-									 end="${pageMaker.endPage}">
-				 <li class="paginate_button ${pageMaker.cvo.pageNum == num? 'active':''}">
-				 	<a href="${num}">${num}</a>
-				 </li>
-				</c:forEach>
-				
-				<!-- 다음 바로가기 10개 존재 여부를 next 필드의 값으로 확인. -->
-				<c:if test="${pageMaker.next}">
-					<li class="paginate_button next">
-		 				<a href="${pageMaker.endPage + 1}">Next</a>
-					</li>
-				</c:if>
-			</ul>
-		</div>
-</div>
-<%-- ============== container 종료 ====================  --%>
 </body>
 </html>

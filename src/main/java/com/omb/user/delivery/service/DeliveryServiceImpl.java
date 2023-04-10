@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.omb.user.delivery.dao.DeliveryDAO;
 import com.omb.user.delivery.vo.DeliveryVO;
+import com.omb.user.orderInfo.vo.OrderInfoVO;
 
 import lombok.Setter;
 
@@ -111,6 +112,13 @@ public class DeliveryServiceImpl implements DeliveryService {
 			int result = deliveryDAO.insertDeliveryInfo(delevery);
 			return result;
 		}
+		
+
+		@Override
+		public int updateDeliveryInfo(DeliveryVO delevery) {
+			int result = deliveryDAO.updateDeliveryInfo(delevery);
+			return result;
+		}
 
 
 		@Override
@@ -120,4 +128,14 @@ public class DeliveryServiceImpl implements DeliveryService {
 			return detail;
 		}
 
+
+		@Override
+		public DeliveryVO selectDeliveryInfo(OrderInfoVO ovo) {
+			DeliveryVO detail = deliveryDAO.selectDeliveryInfo(ovo);
+			return detail;
+		}
+
+
+
+		
 }

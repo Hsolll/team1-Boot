@@ -1,22 +1,22 @@
-#layBodyWrap.mytmall_bodywrap {
+#layBodyWrap.omb_bodywrap {
     width: 1240px;
 }
 
-#layBodyWrap.mytmall_bodywrap #layBody {
+#layBodyWrap.omb_bodywrap #layBody {
     width: 1240px;
 }
 
-.mytmall_wrap_v2 {
+.omb_wrap_v2 {
     margin-top: 0px;
     padding-top: 10px;
     *zoom: 1;
 }
 
-#layBodyWrap.mytmall_bodywrap #layBody {
+#layBodyWrap.omb_bodywrap #layBody {
     width: 1240px;
 }
 
-.mytmall_hgroup .my11st {
+.omb_hgroup .my11st {
     float: left;
     width: 185px;
     height: 41px;
@@ -31,7 +31,7 @@
     color: #777;
 } */
 
-.mytmall_subArea_v2 {
+.omb_subArea_v2 {
     float: left;
     position: relative;
     z-index: 100;
@@ -43,25 +43,25 @@
     width: 100%;
 }
 
-.mytmall_menu {
+.omb_menu {
     border: 1px solid #baac9a;
     width: 163px;
     padding-bottom: 20px;
 }
 
-.mytmall_menu dl, .mytmall_menu .mytmall_sub_menu {
+.omb_menu dl, .omb_menu .omb_sub_menu {
     border-top: 1px solid #baac9a;
     padding: 10px 0 4px 20px;
 }
 
-.mytmall_menu dl dt, .mytmall_menu dl h3, .mytmall_menu .mytmall_sub_menu dt, .mytmall_menu .mytmall_sub_menu h3 {
+.omb_menu dl dt, .omb_menu dl h3, .omb_menu .omb_sub_menu dt, .omb_menu .omb_sub_menu h3 {
     padding-bottom: 12px;
 }
 
-.mytmall_menu dl dd, .mytmall_menu dl li, .mytmall_menu .mytmall_sub_menu dd, .mytmall_menu .mytmall_sub_menu li {
+.omb_menu dl dd, .omb_menu dl li, .omb_menu .omb_sub_menu dd, .omb_menu .omb_sub_menu li {
     padding: 0 0 3px 1px;
 }
-.mytmall_menu dl dd a, .mytmall_menu dl li a, .mytmall_menu .mytmall_sub_menu dd a, .mytmall_menu .mytmall_sub_menu li a {
+.omb_menu dl dd a, .omb_menu dl li a, .omb_menu .omb_sub_menu dd a, .omb_menu .omb_sub_menu li a {
     display: inline-block;
     font-size: 14px;
     color: #666;
@@ -70,7 +70,7 @@
 }
 
 
-.mytmall_contArea {
+.omb_contArea {
     position: relative;
     z-index: 110;
     float: right;
@@ -79,40 +79,40 @@
 
 
 
-div.mytmall_title {
+div.omb_title {
     width: 100%;
 }
 
-.mytmall_title {
+.omb_title {
     position: relative;
     *zoom: 1;
     margin-top: 30px;
     /* height: 25px; */
 }
 
-.mytmall_title h3 {
+.omb_title h3 {
     float: left;
     margin-right: 9px;
     width:900px;
 }
 
-.mytmall_title h3.member strong {
+.omb_title h3.member strong {
     *line-height: 1.1;
 }
 
-.mytmall_title strong {
+.omb_title strong {
     float: left;
     font-size: 14px;
     color: #111;
 }
 
-div.mytmall_title:after {
+div.omb_title:after {
     display: block;
     clear: both;
     content: "";
 }
 
-.mytmall_title:after {
+.omb_title:after {
     content: " ";
     display: block;
     clear: both;
@@ -120,11 +120,11 @@ div.mytmall_title:after {
     visibility: hidden;
 }
 
-#mytmall_tbl1_area.mytmall_tbl1 {
+#omb_tbl1_area.omb_tbl1 {
     z-index: 20;
 }
 
-.mytmall_tbl1 {
+.omb_tbl1 {
     position: relative;
     z-index: 20;
     border-top: 1px solid #b9b9b9;
@@ -156,7 +156,7 @@ tr {
     border-color: inherit;
 }
 
-.mytmall_tbl1 table thead th {
+.omb_tbl1 table thead th {
     height: 24px;
     padding-top: 3px;
     text-align: center;
@@ -172,19 +172,19 @@ tr {
     background-image: linear-gradient(to bottom, #f3f3f3, #e4e4e5);
 }
 
-.mytmall_tbl1 table thead th:last-child {
+.omb_tbl1 table thead th:last-child {
     border-right: 1px solid #dadada;
 }
 
-/* .mytmall_tbl1 table tbody tr.first td {
+/* .omb_tbl1 table tbody tr.first td {
     border-top: none;
 }
 
-.mytmall_tbl1 table tbody td.first {
+.omb_tbl1 table tbody td.first {
     border-left: none;
 } */
 
-.mytmall_tbl1 table tbody td {
+.omb_tbl1 table tbody td {
     border-top: 1px solid #ccc;
     border-left: 1px solid #dadada;
     border-right: 1px solid #dadada;
@@ -192,7 +192,7 @@ tr {
     padding: 13px 0 6px 0;
 }
 
-.mytmall_tbl1 table tbody td p {
+.omb_tbl1 table tbody td p {
     text-align: center;
     color: #666;
     margin-bottom: 2px;
@@ -208,32 +208,32 @@ tr {
     zoom: 1;
 }
 
-.mytmall_tbl1 .bt_detailview {
+.omb_tbl1 .bt_detailview {
     display: inline-block;
     cursor: pointer;
 }
 
-.mytmall_tbl1 table tbody td a {
+.omb_tbl1 table tbody td a {
     color: #666;
 }
 
-.mytmall_tbl1 .orderProdInfo_v2 {
+.omb_tbl1 .orderProdInfo_v2 {
     padding-bottom: 3px;
     padding-left: 4px;
 }
 
-.mytmall_tbl1 .orderProdInfo_v2 .chk {
+.omb_tbl1 .orderProdInfo_v2 .chk {
     position: relative;
     float: left;
     width: 5%;
     z-index: 5;
 }
 
-.mytmall_tbl1 table tbody td input {
+.omb_tbl1 table tbody td input {
     vertical-align: middle;
 }
 
-.mytmall_tbl1 .orderProdInfo_v2 .img {
+.omb_tbl1 .orderProdInfo_v2 .img {
     position: relative;
     float: left;
     margin-right: 7px;
@@ -243,7 +243,7 @@ tr {
     text-align: center;
 }
 
-.mytmall_tbl1 .orderProdInfo_v2 .img img {
+.omb_tbl1 .orderProdInfo_v2 .img img {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -254,17 +254,17 @@ tr {
     margin: auto;
 }
 
-.mytmall_tbl1 .orderProdInfo_v2 .cont {
+.omb_tbl1 .orderProdInfo_v2 .cont {
     padding-bottom: 2px;
 }
 
-.mytmall_tbl1 .orderProdInfo_v2 .cont p {
+.omb_tbl1 .orderProdInfo_v2 .cont p {
     overflow: hidden;
     color: #333;
     text-align: left;
 }
 
-.mytmall_tbl1 table tbody td p {
+.omb_tbl1 table tbody td p {
     text-align: center;
     color: #666;
     margin-bottom: 2px;
@@ -274,7 +274,7 @@ tr {
 tbody{
    text-align:center;
 }
-.mytmall_tbl1 .orderProdInfo_v2 .cont p a {
+.omb_tbl1 .orderProdInfo_v2 .cont p a {
     overflow: hidden;
     display: block;
     max-height: 45px;
@@ -283,13 +283,13 @@ tbody{
     color: #333;
 }
 
-.mytmall_tbl1 .orderProdInfo_v2 .cont p.op {
+.omb_tbl1 .orderProdInfo_v2 .cont p.op {
     font-size: 11px;
     color: #4d6ccd;
     padding-left: 5px;
     margin-top: 5px;
     margin-left: 5px;
-    background: url(/img/mytmall_v2/mytmall_dot05.gif) no-repeat 0 5px;
+    background: url(/img/omb_v2/omb_dot05.gif) no-repeat 0 5px;
     line-height: 16px;
 }
 
@@ -302,24 +302,24 @@ tbody{
     *left: 81px;
 }
 
-.mytmall_tbl1 .fnt_1 {
+.omb_tbl1 .fnt_1 {
     color: #333;
     line-height: 15px;
 }
 
-.mytmall_tbl1 table tbody td p {
+.omb_tbl1 table tbody td p {
     text-align: center;
     color: #666;
     margin-bottom: 2px;
     padding: 0 5px;
 }
 
-.mytmall_tbl1 .fnt_2 {
+.omb_tbl1 .fnt_2 {
     color: #4d4d4d;
     font-weight: bold;
 }
 
-.mytmall_tbl1 table tbody td p {
+.omb_tbl1 table tbody td p {
     text-align: center;
     color: #666;
     margin-bottom: 2px;
@@ -369,7 +369,7 @@ div.shopinfo_wrap .shop_box ul li {
     background: url(/img/common/icon/bul_02.gif) no-repeat 0 5px;
 }
 
-.mytmall_tbl1 table td.td-center {
+.omb_tbl1 table td.td-center {
     text-align: center;
 }
 
@@ -377,7 +377,7 @@ div.shopinfo_wrap .shop_box ul li {
     color: #4d6ccd;
 }
 
-.mytmall_bt01 {
+.omb_bt01 {
     display: inline-block;
     height: 19px;
     padding: 1px;
@@ -392,4 +392,9 @@ div.shopinfo_wrap .shop_box ul li {
 
 .required{
    color:red;
+}
+
+a {
+    color: #4d4d4d;
+    text-decoration: none;
 }

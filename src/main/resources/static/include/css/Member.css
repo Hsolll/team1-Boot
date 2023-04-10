@@ -12,8 +12,6 @@
     padding: 0;
 }
 
-
-
 .find_main {
     width: 480px;
     height: 480px;
@@ -169,4 +167,10 @@ img, fieldset, iframe {
 .find_result.find_result_id .btn_box {
     width: 380px;
     margin: 25px auto;
+}
+
+#bannerSec{
+	width: 480px;
+    height: 161px;
+    margin-left: 240px;
 }
