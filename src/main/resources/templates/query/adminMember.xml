@@ -113,7 +113,7 @@
 		from tb_user A
 		join tb_user_address_info B
 			on A.u_no = B.u_no
-    	where A.u_no = #{u_no} AND add_status IS NOT NULL AND add_status = '기본배송지'
+    	where A.u_no = #{u_no} AND add_name IS NOT NULL AND add_name = '기본배송지'
 	</select>
 	
 	<!-- 상세페이지 조회 추가배송지-->
@@ -122,7 +122,7 @@
 		from tb_user A
 		join tb_user_address_info B
 			on A.u_no = B.u_no
-    	where A.u_no = #{u_no} AND add_status IS NOT NULL AND add_status = '추가배송지'
+    	where A.u_no = #{u_no} AND add_name IS NOT NULL AND add_name = '추가배송지'
 	</select>
 	
 	<!-- 상세페이지 계좌 -->

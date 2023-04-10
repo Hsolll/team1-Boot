@@ -1,103 +1,91 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/common.jspf" %>
-<script src="/resources/include/js/common.js"></script>
+<link type="text/css" rel="stylesheet" href="/resources/include/css/community.css" />
 		<script>
 			$(function(){
 				
-				$(".listBtn").click(function(){
+				$("#listBtn").click(function(){
 					location.href="/serviceCenter/serviceList";
 				});
 				
-				$("#updateButton").click(function(){
-					$("#update").attr({
+				$("#updateBtn").click(function(){
+					$("#form_data").attr({
 						"action":"/serviceCenter/serviceUpdateForm"
 					});
-					$("#update").submit();
+					$("#form_data").submit();
 				});
 				
-				$("#delButton").click(function(){
+				$("#deleteBtn").click(function(){
 					if(confirm("해당 문의를 삭제하시겠습니까?")){
-						$("#update").attr({
+						$("#form_data").attr({
 							"method":"get",
 							"action":"/serviceCenter/serviceDelete"
 						});
-						$("#update").submit();						
+						$("#form_data").submit();						
 					}
 				});
 			});
 			
 		</script>
-		<style>
-			.btn{
-				margin-right : 10px;
-				width: 135px;
-				height: 35px;
-			}
-			
-			input{
-				height: 30px;
-				margin-left: 10px;
-				border-color: whitesmoke;
-			}
-			
-			.form-container{
-				border-bottom: 1px solid #eee;
-				margin: 40px 0;
-				padding-bottom: 60px;
-			}
-			
-			.btn-group {
-				margin-top: 20px;
-			}
-			.btnArea {
-				margin-bottom : 20px;
-			}
-			.thBgGray th {text-align: center !important; background: #f1f1f1 !important;}
-		</style>
 	</head>
 	<body>
-		<div class="contentContainer container">
-			<div class="text-center">
-				<div class="form-container">
-					<div class="detailContainer">
-						<form id="update" name="update" >
-							<input type="hidden" id="sc_no" name="sc_no" value=${serviceDetail.sc_no }>
-						</form>
-						<table class="table table-bordered thBgGray">
-							<colgroup>
-								<col style="width: 14%;">
-								<col>
-								<col style="width: 14%;">
-								<col>
-							</colgroup>	
-							<tbody>
-								<tr>
-									<th>작성자</th>
-									<td class="text-left">${serviceDetail.u_name }</td>
-									<th>등록일</th>
-									<td class="text-left">${serviceDetail.sc_created_at }</td>
-								</tr>
-								<tr>
-									<th>제목</th>
-									<td class="text-left">${serviceDetail.sc_title }</td>
-									<th>조회수</th>
-									<td class="text-left">${serviceDetail.sc_readcnt }</td>
-								</tr>
-								<tr class="table-tr-height">
-									<th style="vertical-align: middle;">내용</th>
-									<td colspan="3" class="text-left" style="overflow-x: auto; height: 280px; word-break: break-all;">${serviceDetail.sc_content }</td>
-								</tr>
-							</tbody>
-						</table>
-						<div class="btnArea text-right">
-							<button type="button" id="updateButton" class="btn btn_default">수정하기</button>
-							<button type="button" id="delButton" class="btn btn_default">삭제하기</button>
-							<button type="button" class="btn btn_default listBtn">목록보기</button>
+		<div style="position: relative;">
+			<form id="form_data">
+				<input type="hidden" name="sc_no" id="sc_no" value="${ serviceDetail.sc_no }" />
+			</form>
+			
+			<div class="detail_table mt30">
+				<c:set var="member" value="${memberLogin.u_no}" />
+				<c:set var="service" value="${serviceDetail.u_no}" />
+				<fmt:parseNumber var="member" type="number" value="${member}"/>
+				<fmt:parseNumber var="service" type="number" value="${service}"/>
+				<c:choose>
+					<c:when test="${member eq service }">
+						<div class="buttonList tr">
+							<button type="button" class="buttonWhite" id="updateBtn">EDIT</button>
+							<button type="button" class="buttonWhite" id="deleteBtn">DELETE</button>
+							<button type="button" class="buttonBlack" id="listBtn">LIST</button>
 						</div>
-					</div>
-				</div>
-			</div>
+					</c:when>
+					<c:otherwise>
+						<div class="buttonList tr" style="display: block;">
+							<button type="button" class="buttonBlack" id="listBtn">LIST</button>
+						</div>
+					</c:otherwise>
+				</c:choose>
+	            <table class="detailView">
+	                <colgroup>
+	                </colgroup>
+	                <thead>
+	                    <tr class="text-center">
+	                        <th>${serviceDetail.sc_title}</th>
+	                    </tr>
+	                </thead>
+	                <tbody>
+	                	<tr>
+							<td style="border: 0;">
+								<div class="detail_date">
+									<div>
+										<span><em>Date : </em>${ serviceDetail.sc_created_at }</span>
+									</div>
+									<div>
+										<span><em>Name : </em>${ serviceDetail.u_name }</span>
+										<span><em>Hits : </em>${ serviceDetail.sc_readcnt }</span>
+									</div>
+								</div>
+							</td> 
+						</tr>
+						<tr>
+							<td>
+								<div class="detail_content">
+									<p>${ serviceDetail.sc_content }</p>
+								</div>
+							</td>
+						</tr>
+	                </tbody>
+	            </table>
+	        </div>
 		</div>
 	</body>
 </html>

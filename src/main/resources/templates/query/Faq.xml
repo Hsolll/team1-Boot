@@ -3,6 +3,9 @@
 <mapper namespace="com.omb.admin.serviceCenter.faq.dao.FaqDao">
 	
 	<sql id="listSearch">
+		<if test="search=='f_no'">
+			<![CDATA[ F_NO LIKE '%'|| #{keyword} ||'%' ]]>					
+		</if>
 		<if test="search=='f_title'">
 			<![CDATA[F_TITLE LIKE '%'||#{keyword}||'%']]>
 		</if>

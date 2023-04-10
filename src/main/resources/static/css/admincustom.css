@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /* 테이블 상단 */
-.tableTop {display: flex; align-items: flex-end; margin: 20px 0 15px;}
+.tableTop {display: flex; justify-content: space-between; align-items: flex-end; margin: 20px 0 15px;}
 .tableTop .left .tit {font-size: 15px; color: #666;}
 .tableTop .right {display: flex; margin-left: auto;}
 .tableTop .right > * + * {margin-left: 10px;}
@@ -33,4 +33,4 @@ textarea.form-control {height: 400px !important; resize: none;}
 .m-l-100 {margin-left: 100px;}
 
 body {overflow: hidden !important;}
-.dashboard-wrapper {padding: 30px 40px 60px; height: calc(100vh - 114px); overflow-y: auto;}
+/* .dashboard-wrapper {padding: 30px 40px 60px; height: calc(100vh - 114px); overflow-y: auto;} */

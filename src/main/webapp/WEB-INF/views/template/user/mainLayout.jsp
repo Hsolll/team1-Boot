@@ -34,6 +34,16 @@
         <script type="text/javascript" src="/resources/include/js/jquery-3.6.2.min.js"></script>
         <script type="text/javascript" src="/resources/include/js/subList.js"></script>
         
+        <!-- 스와이퍼 -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
+		<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function () {
+				$(".swiper-slide").not(".active").hide(); //화면 로딩 후 첫번째 div를 제외한 나머지 숨김
+				
+				setInterval(nextSlide, 4000); //4초(4000)마다 다음 슬라이드로 넘어감
+			});
+		</script>
     </head>
 	<body>
 		<!-- header -->
@@ -49,10 +59,28 @@
                         <p>Oh My Baby는</p>
                         유아용품 중고거래 사이트입니다.
                     </div>
+                    
+                    <!-- Swiper -->
+					  <div class="swiper mySwiper">
+					    <div class="swiper-wrapper">
+					      <div class="swiper-slide active"><a>일</a></div>
+					      <div class="swiper-slide">Slide 2</div>
+					      <div class="swiper-slide">Slide 3</div>
+					      <div class="swiper-slide">Slide 4</div>
+					      <div class="swiper-slide">Slide 5</div>
+					      <div class="swiper-slide">Slide 6</div>
+					      <div class="swiper-slide">Slide 7</div>
+					      <div class="swiper-slide">Slide 8</div>
+					      <div class="swiper-slide">Slide 9</div>
+					    </div>
+					    <div class="swiper-button-next"></div>
+		    			<div class="swiper-button-prev"></div>
+					    <div class="swiper-pagination"></div>
+					  </div>
                 </div>
-                
-                
             </section>
+            
+            
             <div id="contentWrap">
                 <a href="" style="display: block;text-align: center; margin: 40px 0;">&nbsp;</a>
             </div>
@@ -63,4 +91,21 @@
             </footer>
         </div>
 	</body>
+	
+	<!-- 스와이퍼 스크립트-->
+	<script>
+    var swiper = new Swiper(".mySwiper", {
+      slidesPerView: 3,
+      spaceBetween: 30,
+      freeMode: true,
+      loop: true,
+      navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+	    pagination: {
+	      el: ".swiper-pagination",
+	    },
+    });
+  </script>
 </html>

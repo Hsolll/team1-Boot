@@ -92,6 +92,7 @@
 					if($("input[type='checkbox'][name='key']:checked").val() != "all"){ // 제목/내용/작성자 선택시 검색어 유효성 체크
 						if(!chkData("#keyword","검색어를")) return;
 					}
+					$("#pageNum").val(1);
 					goPage();
 				});
 				
@@ -118,6 +119,7 @@
 			}
 		</script>
 	</head>
+	
 	<body>
 		<div>
 		

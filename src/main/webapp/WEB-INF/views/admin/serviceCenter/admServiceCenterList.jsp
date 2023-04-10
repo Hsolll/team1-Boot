@@ -141,13 +141,13 @@
 		
 		<%-- =================== 리스트 시작  ================= --%>
 				<div id="serviceList" class="table-responsive">
-				<table summary="문의 리스트" class="table table-striped m-t-15" >
+				<table summary="문의 리스트" class="table table m-t-15" >
 					<thead>
 						<tr>
-							<th data-value="sc_no" class="order text-center col-md-1" >신고글 번호</th>
+							<th data-value="sc_no" class="order text-center col-md-2" >신고글 번호</th>
 							<th class="text-center col-md-5">제목</th>
 							<th data-value="sc_name" class="text-center col-md-2">작성자</th>
-							<th data-value="sc_created_at" class="text-center col-md-3">작성일</th>
+							<th data-value="sc_created_at" class="text-center col-md-2">작성일</th>
 							<th data-value="sc_readcnt" class="text-center col-md-1">조회수</th>
 						</tr>
 					</thead>
