@@ -53,7 +53,6 @@ public interface SafeProductDAO {
 	
 
 	/* 관리자 페이지 사용 메서드 */
-	public List<SafeProductVO> selectSproductList(SafeProductVO spvo);	
 
 	public int selectsafeProductCnt(SafeProductVO spvo);
 	 
