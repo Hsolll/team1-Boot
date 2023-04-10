@@ -43,8 +43,10 @@ public class DeliveryController {
 		
 		log.info("전달받은 주문번호 : " + delivery);
 		String trackingInfo = "";
-		DeliveryVO detail = deliveryService.selectDeliveryInfo(delivery);
+		DeliveryVO detail = null;
+		detail = deliveryService.selectDeliveryInfo(delivery);
 		log.info("주문번호로 조회한 배송 정보 : " + detail);
+		
 		if(detail != null) {
 			trackingInfo = deliveryService.deliveryTracking(detail);
 		} else {

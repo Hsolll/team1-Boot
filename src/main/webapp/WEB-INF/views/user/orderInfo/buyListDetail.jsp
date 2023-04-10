@@ -32,14 +32,22 @@
 						console.log("---------- 추출 정보 ----------")
 						console.log(result.response.amount);
 						console.log(result.response.emb_pg_provider);
-						$("#emb_pg_provider").text(result.response.emb_pg_provider);
+						console.log(result.response.card_name);
+						console.log(result.response.card_number);
+						
+						if(result.response.emb_pg_provider != null){
+							$("#emb_pg_provider").text(result.response.emb_pg_provider);							
+						} else{
+							$("#card_name").text(result.response.card_name);
+							$("#card_number").text(" / " + result.response.card_number);							
+						}
 						
 						$("#amount").text($.number(result.response.amount));
 						
 						$("#receipt_url").prop('href', result.response.receipt_url);
 					},
 					error : function() {
-						alert("실패");
+						console.log("결제정보 조회 실패");
 					}
 		    	});
 				
@@ -91,7 +99,7 @@
 						$(".icon_text").text(kind);
 					},
 					error : function() {
-						alert("실패");
+						console.log("배송정보 없음");
 					}
 		    	});
 				
@@ -190,7 +198,9 @@
 			                
 			                <div class="buttonBox">
 				                <button type="button" class="whiteBtn" id="parcelSearchBtn">배송조회</button>
-				                <button type="button" class="whiteBtn" id="confirmBtn">구매확정</button>
+				                <c:if test="${detail.o_status ne '결제완료'}">
+				                	<button type="button" class="whiteBtn" id="confirmBtn">구매확정</button>
+				                </c:if>
 				            </div>
 		                </div>
 		            </div>
@@ -228,7 +238,8 @@
 			                <div class="info_cont">
 			                    <ul class="payment_info">
 			                        <li>
-			                            <strong id="emb_pg_provider"></strong> 사용
+			                            <strong id="emb_pg_provider"></strong><strong id="card_name"></strong> 사용
+			                            <strong id="card_number"></strong>
 			                            <p class="amount">
 			                                <span id="amount">10,000</span> 원
 			                            </p>
