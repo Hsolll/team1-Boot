@@ -101,8 +101,11 @@
 							<tr>
 								<th class="checkBox col-md-1 text-center"><input type="checkbox" class="allChk" name="allChk"></th>	
 								<th data-value="dep_no" class="order text-center col-md-1">입금번호</th>
-								<th class="text-center col-md-1">주문번호</th>
+								<th class="text-center col-md-2">주문번호</th>
 								<th class="text-center col-md-1">가격</th>
+								<th class="text-center col-md-1">예금주</th>
+								<th class="text-center col-md-1">은행명</th>
+								<th class="text-center col-md-2">계좌번호</th>
 							</tr>
 						</thead>
 						<tbody class="list" class="table-striped">
@@ -112,14 +115,17 @@
 									<c:forEach var="deposit" items="${depositList}" varStatus="status">
 										<tr class="text-center" data-num="${deposit.dep_no }">
 											<td><input type="checkbox" value="${deposit.dep_no }" name="queChk"></td>
-											<td>${deposit.dep_no }</td>
-											<td class="name">${deposit.o_no }</td>
-											<td class="text-center">${deposit.dep_price }</td>	
+											<td class="dep_no">${deposit.dep_no }</td>
+											<td class="name">${deposit.o_id }</td>	
+											<td class="text-center">${deposit.sp_price }</td>	
+											<td class="text-center">${deposit.u_name}</td>	
+											<td class="text-center">${deposit.bank }</td>	
+											<td class="text-center">${deposit.account}</td>	
 										</tr>
 									</c:forEach>
 								</c:when>
 								<c:otherwise>
-									<td colspan="4" class="tac text-center">입금건수가 존재하지 않습니다.</td>
+									<td colspan="7" class="tac text-center">입금건수가 존재하지 않습니다.</td>
 								</c:otherwise>
 							</c:choose>
 						</tbody>

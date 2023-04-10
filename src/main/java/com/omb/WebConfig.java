@@ -18,10 +18,9 @@ public class WebConfig implements WebMvcConfigurer {
 	 */ 
 
 
-	//private String resourcePath = " file:////Users/kim_yunki/Documents/springdeveloper/uploadStorage/"; 
     //private String resourcePath = "file:///C:\\Users\\user\\git\\team1-Boot\\src\\main\\resources\\uploadStorage"; // 한솔 경로
-    //private String resourcePath = "file:////Users/kim_yunki/git/team1-Boot/src/main/resources/uploadStorage/"; 
-	private String resourcePath = " file:///C:\\uploadStorage\\";
+    private String resourcePath = "file:////Users/kim_yunki/git/team1-Boot/src/main/resources/uploadStorage/"; 
+//	private String resourcePath = " file:///C:\\uploadStorage\\";
 
     /*******************************************************
 	 * addResourceHandler : 리소스와 연결될 URL path를 지정. 

@@ -63,12 +63,12 @@
 			       SUM(DECODE(TO_CHAR(SP_CREATED_AT, 'MM'), '09', SP_PRICE, 0)) "09",
 			       SUM(DECODE(TO_CHAR(SP_CREATED_AT, 'MM'), '10', SP_PRICE, 0)) "10",
 			       SUM(DECODE(TO_CHAR(SP_CREATED_AT, 'MM'), '11', SP_PRICE, 0)) "11",
-			       SUM(DECODE(TO_CHAR(SP_CREATED_AT, 'MM'), '12',SP_PRICE, 0)) "12",
+			       SUM(DECODE(TO_CHAR(SP_CREATED_AT, 'MM'), '12', SP_PRICE, 0)) "12",
 			       SUM(SP_PRICE) AS TTL
-			       FROM TB_USER_SAFE_PRODUCT 
-			       WHERE SP_STATUS = '거래완료' AND
+			       FROM TB_USER_SAFE_PRODUCT S, TB_USER_ORDER O
+			       WHERE O_STATUS = '거래완료' AND O.SP_NO = S.SP_NO AND
 			             TO_CHAR(SP_CREATED_AT, 'YYYY') = TO_CHAR(SYSDATE, 'YYYY')
-			       GROUP BY SP_PRICE)
+			       GROUP BY S.SP_PRICE)
 		]]>
 	</select>
 
@@ -119,7 +119,7 @@
 				       COUNT(DECODE(TO_CHAR(SP_CREATED_AT, 'MM'), '12', 1)) "12",
 				       COUNT(*) AS TTL
 			       FROM TB_USER_SAFE_PRODUCT 
-			       WHERE SP_STATUS = '거래완료' AND 
+			       WHERE SP_STATUS = '판매완료' AND 
 			          TO_CHAR(SP_CREATED_AT, 'YYYY') = TO_CHAR(SYSDATE, 'YYYY')
 			       GROUP BY SP_CREATED_AT)
 		]]>
