@@ -48,7 +48,7 @@ $(function() {
 		    		success : function(result){
 						
 						if(result == "배송지 등록 성공"){
-							console.log(reulst);
+							console.log(result);
 							payment();
 						} else{
 							alert(result);
