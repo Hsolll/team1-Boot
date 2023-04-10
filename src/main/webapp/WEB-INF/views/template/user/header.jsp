@@ -45,7 +45,7 @@
 			            </div>
 					</li>
 					<li><a href="/product/productList">중고마켓</a></li>
-					<li><a href="#">나눔마켓</a></li>
+					<li><a href="/product/shareList">나눔마켓</a></li>
 					<li id="ml2">
 						<a href="/safe/productList">안심거래</a>
 						<!-- 하위 메뉴 -->

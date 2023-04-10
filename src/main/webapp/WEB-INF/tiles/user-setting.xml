@@ -45,6 +45,10 @@
       <put-attribute name="body" value="/WEB-INF/views/user/myPage/{1}.jsp" /> 
    </definition>
    
+   <definition name="user/shareProduct/*" extends="content">
+      <put-attribute name="title" value="" />
+      <put-attribute name="body" value="/WEB-INF/views/user/shareProduct/{1}.jsp" /> 
+   </definition>
    <definition name="user/safeProduct/*" extends="content">
       <put-attribute name="title" value="" />
       <put-attribute name="body" value="/WEB-INF/views/user/safeProduct/{1}.jsp" /> 

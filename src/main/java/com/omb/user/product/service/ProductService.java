@@ -63,4 +63,8 @@ public interface ProductService {
 
 	public List<ProductVO> selectProductLike(MemberVO mvo);
 
+	public List<ProductVO> selectShareProductList(ProductVO pvo);	// 나눔상품 리스트 조회
+
+	public int ShareProductListCnt();	// 나눔상품 게시물 수
+
 }

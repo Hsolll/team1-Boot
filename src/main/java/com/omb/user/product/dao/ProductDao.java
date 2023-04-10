@@ -84,4 +84,10 @@ public interface ProductDao {
 
 	public int selectRejectedCnt(ProductVO vo); // 거절된 상품 조회
 
+	
+	/* 나눔 마켓 */
+	public List<ProductVO> selectShareProductList(ProductVO pvo);	// 나눔상품 리스트 조회
+
+	public int ShareProductListCnt();	// 나눔상품 게시물 수
+
 }
