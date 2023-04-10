@@ -17,46 +17,6 @@
 	</sql>
 
 	<select id="selectProductList" resultType="product">
-  		<!-- <![CDATA[ 
- 		SELECT  
-         		P_NO, U_NO, P_TITLE, P_NAME, P_PRICE, P_STATUS, P_CONTENT, P_LOCAL, TRANS_METHOD, P_CREATED_AT, P_UPDATED_AT, P_DELETED_AT, p_file, p_thumb, P_CATE, P_ADM_PER ,PROD_LIKE
- 		FROM ( 
- 		        SELECT /*+ INDEX_DESC(TB_USER_PRODUCT TB_USER_PRODUCT_PK) */ 
- 		            rownum as rnum, p.P_NO,u.U_NO,p.P_TITLE,p.P_NAME,p.P_PRICE,p.P_STATUS,p.P_CONTENT,p.P_LOCAL,p.TRANS_METHOD,p.P_CREATED_AT,p.P_UPDATED_AT,p.P_DELETED_AT,p.p_file,p.p_thumb,p.P_CATE,p.P_ADM_PER ,l.PROD_LIKE
- 		        FROM  
- 		            TB_USER_PRODUCT p 
- 		            			INNER JOIN TB_USER u ON p.U_NO = u.U_NO
- 		             			LEFT JOIN TB_USER_PRODUCT_LIKE l ON p.P_NO = l.P_NO   
- 		        WHERE]]> 
-            	<trim prefix="(" suffix=") AND " prefixOverrides="AND">
-            		<include refid="productSearch"></include>
-            	</trim> 
-            <![CDATA[rownum <= #{pageNum} * #{amount} 
- 		     ) PRODUCTLIST 
-		WHERE  
-		    rnum > (#{pageNum} - 1) * #{amount} AND P_ADM_PER = 1 
-    	]]> -->
-    	
-    	<!-- <![CDATA[ 
- 		SELECT  
-         		P_NO, U_NO, P_TITLE, P_NAME, P_PRICE, P_STATUS, P_CONTENT, P_LOCAL, TRANS_METHOD, P_CREATED_AT, P_UPDATED_AT, P_DELETED_AT, p_file, p_thumb, P_CATE,PROD_LIKE
- 		FROM ( 
- 		        SELECT /*+ INDEX_DESC(TB_USER_PRODUCT TB_USER_PRODUCT_PK) */ 
- 		            rownum as rnum, p.P_NO,u.U_NO,p.P_TITLE,p.P_NAME,p.P_PRICE,p.P_STATUS,p.P_CONTENT,p.P_LOCAL,p.TRANS_METHOD,p.P_CREATED_AT,p.P_UPDATED_AT,p.P_DELETED_AT,p.p_file,p.p_thumb,p.P_CATE,p.P_ADM_PER ,p.PROD_LIKE
- 		        FROM  
- 		            TB_USER_PRODUCT p 
- 		            			INNER JOIN TB_USER u ON p.U_NO = u.U_NO  
- 		        WHERE]]> 
-            	<trim prefix="(" suffix=") AND " prefixOverrides="AND">
-            		<include refid="productSearch"></include>
-            	</trim> 
-            <![CDATA[rownum <= #{pageNum} * #{amount} AND P_ADM_PER = 1 
- 		     ) PRODUCTLIST 
-		WHERE  
-		    rnum > (#{pageNum} - 1) * #{amount} 
-		    ORDER BY P_NO
-		    
-    	]]> -->
     	<![CDATA[ 
  		SELECT  
          		P_NO, U_NO, P_TITLE, P_NAME, P_PRICE, P_STATUS, P_CONTENT, P_LOCAL, TRANS_METHOD, P_CREATED_AT, P_UPDATED_AT, P_DELETED_AT, p_file, p_thumb, P_CATE,PROD_LIKE
@@ -424,6 +384,7 @@
 		U_NO = #{u_no} AND PROD_LIKE =1
    </select>
    
+
    <!-- 마이페이지 카운트 -->
    <select id="productMyPageListCnt" parameterType="member" resultType="int">
          <![CDATA[
@@ -475,14 +436,9 @@
 
     	
     	
-    	<!-- <select id="selectProductLike" resultType="product" parameterType="member">
-    		
-    		SELECT 
-			    NVL(
-			        (SELECT PROD_LIKE FROM TB_USER_PRODUCT_LIKE WHERE p_no = #{p_no} AND u_no = #{u_no}),
-			        0
-			    ) AS PROD_LIKE
-			FROM dual 
+
+    	<select id="selectProductLike" resultType="product" parameterType="member">
+
 			SELECT distinct nvl(a.prod_like, b.prod_like) as prod_like, nvl(a.p_no, b.p_no) p_no, nvl(a.u_no, c.u_no) u_no
 			FROM (
 			  SELECT prod_like, p_no, u_no

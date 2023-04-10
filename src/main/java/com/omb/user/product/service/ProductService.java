@@ -61,7 +61,6 @@ public interface ProductService {
 
 	public int delete(ProductVO pvo) throws Exception;
 
-//	public List<ProductVO> selectProductLike(int p_no, int u_no);
 	public List<ProductVO> selectProductLike(MemberVO mvo);
 
 }

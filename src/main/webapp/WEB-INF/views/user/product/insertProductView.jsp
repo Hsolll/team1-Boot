@@ -26,7 +26,11 @@
 				</colgroup>
 				<tbody>
 					<tr>
+						<td>
+							<input type="hidden"  id="p_status" name="p_status" placeholder="상품 상태">
+						</td>
 						<th scope="row">게시글 제목</th>
+						
 						<td>
 							<input type="text"  id="p_title" class="form-control w300 ht34" name="p_title" placeholder="상품제목을 입력해주세요">
 						</td>
