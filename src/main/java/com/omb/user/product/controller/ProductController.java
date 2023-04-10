@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
-
 import com.omb.common.vo.PageDTO;
 import com.omb.user.member.vo.MemberVO;
 import com.omb.user.product.service.ProductService;
@@ -390,6 +388,27 @@ public class ProductController {
 		}
 		
 		return url;
+	}
+	
+	/* 나눔상품 리스트 조회 */
+	@GetMapping("/shareList")
+	public String selectShareProductList(ProductVO pvo, Model model) {
+		log.info("selectShareProductList 메서드 호출");
+		
+		// 한 페이지에 보여줄 데이터 수 설정
+		pvo.setAmount(12);
+				
+		List<ProductVO> productList =  productService.selectShareProductList(pvo);
+		log.info("productList : " + productList);
+		
+		model.addAttribute("productList", productList);
+		
+		// 전체 레코드 수 구현 
+		int total = productService.ShareProductListCnt(); 
+		//페이징 처리
+		model.addAttribute("pageMaker", new PageDTO(pvo, total));
+		
+		return "user/shareProduct/shareProductList";
 	}
 	
 	
