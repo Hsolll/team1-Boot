@@ -78,10 +78,9 @@ public class ServiceCenterController {
 	}
 
 	@GetMapping(value = "/serviceDetail")
-	public String serviceDetail(@ModelAttribute ServiceCenterVO vo, Model model) {
+	public String serviceDetail(HttpSession session, @ModelAttribute MemberVO user, @ModelAttribute ServiceCenterVO vo, Model model) {
 		ServiceCenterVO detail = serviceCenter.selectServiceDetail(vo);
 		model.addAttribute("serviceDetail", detail);
-
 		return "user/serviceCenter/serviceDetail";
 	}
 

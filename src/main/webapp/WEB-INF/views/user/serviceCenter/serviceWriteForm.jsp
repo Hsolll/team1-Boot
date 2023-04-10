@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/common.jspf" %>
 <script src="/resources/include/js/common.js"></script>
-	
+	<link type="text/css" rel="stylesheet" href="/resources/include/css/communityWrite.css" />
 	<script type="text/javascript">
 			$(function(){
 				$("#addBtn").click(function(){
@@ -35,40 +35,38 @@
 
 	</head>
 	<body>
-		<div class="contentContainer container">
-			 <div class="text-center"><h2>문의 등록</h2></div> 
-			
+		<div class="community_wite">
 			<form name="writeForm" id="writeForm">
-				<table class="table table-striped">
-				<tbody>
-				
-					<tr hidden="true">
-						<td>사용자번호</td>
-						<td class="text-left"><input type="text" id="u_no" name="u_no" value="${memberLogin.u_no }" ></td>
-					</tr>
-					<tr>
-						<td>작성자</td>
-						<td class="text-left"><input type="text" id="u_name" name="u_name" value="${memberLogin.u_name }" readonly="readonly"></td>
-					</tr>
-					<tr>
-						<td>제목</td>
-						<td class="text-left"><input type="text" id="sc_title" name="sc_title" value="[${memberLogin.u_name }]고객님의 문의입니다" readonly="readonly"></td>
-					</tr>
-					<tr>
-						<td>내용</td>
-						<td class="text-left"><textarea id="sc_content" name="sc_content" style="width: 500px; height: 250px; resize: none"></textarea></td>
-					</tr>
-					<tr>
-						<td>문의글 비밀번호</td>
-						<td class="text-left"><input type="password" id="sc_pwd" name="sc_pwd" maxlength="20"></td>
-					</tr>
-					
-				</tbody>
-			</table>
-				<div class="text-left inline">
-					<button id="addBtn" type="button" class="btn btn-success">등록하기</button>
-					<button id="cancelBtn" type="button" class="btn btn-success">다시하기</button>
-					<button id="listBtn" type="button" class="btn btn-success">목록</button>
+				<input type="hidden" id="u_no" name="u_no" value="${memberLogin.u_no }">
+				<table>
+					<colgroup>
+						<col style="width:150px;">
+						<col>
+					</colgroup>
+					<tbody>
+						<tr>
+							<td>작성자</td>
+							<td><input type="text" id="u_name" name="u_name" class="w350" value="${memberLogin.u_name }" readonly="readonly"></td>
+						</tr>
+						<tr>
+							<td>제목</td>
+							<td><input type="text" id="sc_title" name="sc_title" class="w350" value="[${memberLogin.u_name }]고객님의 문의입니다" readonly="readonly"></td>
+						</tr>
+						<tr>
+							<td>내용</td>
+							<td><textarea id="sc_content" name="sc_content" style="width: 500px; height: 250px; resize: none"></textarea></td>
+						</tr>
+						<tr>
+							<td>문의글 비밀번호</td>
+							<td><input type="password" id="sc_pwd" name="sc_pwd" class="w350" maxlength="20"></td>
+						</tr>
+						
+					</tbody>
+				</table>
+				<div class="buttonArea">
+					<button id="addBtn" type="button" class="buttonBlack">등록하기</button>
+					<button id="cancelBtn" type="button" class="buttonWhite">다시하기</button>
+					<button id="listBtn" type="button" class="buttonBlack">목록</button>
 				</div>
 			</form>
 		</div>
