@@ -55,7 +55,7 @@
    </head>
    <body>
       <form id="naverLogin">
-         <input type="hidden" id="u_email" name="u_email" value="${sessionId }"/>
+         <input type="hidden" id="u_email" name="u_email" value="${socialLogin }"/>
       </form>
    </body>
 </html>
