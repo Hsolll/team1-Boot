@@ -2,136 +2,142 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.omb.user.member.dao.MemberDAO">
 
-   <!-- 회원가입 -->
-   <insert id="signUp" parameterType="member">
-   <selectKey keyProperty="u_no" resultType="int" order="BEFORE">
-      select tb_user_seq.nextval from dual
-   </selectKey>
-      insert into tb_user(u_no , u_id , u_nick , u_name , u_pwd , u_email , u_phone , u_grade)
-      values(#{u_no} , #{u_id} , #{u_nick} , #{u_name} , #{u_pwd} ,#{u_email} ,#{u_phone} , '1')
-   </insert>
-   
-   <!-- 네이버 회원가입 -->
-   <insert id="naverSignUp" parameterType="member">
-   <selectKey keyProperty="u_no" resultType="int" order="BEFORE">
-      select tb_user_seq.nextval from dual
-   </selectKey>
-      insert into tb_user(u_no , u_id , u_nick , u_name , u_pwd , u_email , u_phone , u_grade ,u_type)
-      values(#{u_no} , #{u_id} , #{u_nick} , #{u_name} , '1' ,#{u_email} ,#{u_phone} , '1', 'N')
-   </insert>
-   
-   <!-- 카카오 회원가입 -->
-   <insert id="kakaoSignUp" parameterType="member">
-   <selectKey keyProperty="u_no" resultType="int" order="BEFORE">
-      select tb_user_seq.nextval from dual
-   </selectKey>
-      insert into tb_user(u_no , u_id , u_nick , u_name , u_pwd , u_email , u_phone , u_grade ,u_type)
-      values(#{u_no} , #{u_id} , #{u_nick} , #{u_name} , '1' ,#{u_email} ,#{u_phone} , '1', 'K')
-   </insert>
-   
-   <!-- 회원가입 주소-->
-   <insert id="addressInsert" parameterType="member">
-   <selectKey keyProperty="add_no" resultType="int" order="BEFORE">
-      select tb_user_address_info_seq.nextval from dual
-   </selectKey>
-      insert into tb_user_address_info(add_no , u_no , zip , address , sub_address)
-      values(#{add_no} , #{u_no} ,#{zip},#{address} ,  #{sub_address})
-   </insert>
-   
-    
-    <!-- 마이페이지 테스트용 -->
-    <select id="myPage" parameterType="member" resultType="member">
-      select * from tb_user
-      where u_no = #{u_no}
-   </select>
-   
-   <!-- 회원가입 아이디 중복 검사 -->
-   <select id="idChk" resultType="int">
-   select count(*) from tb_user where u_id = #{u_id}
-   </select>
-   
-   <!-- 회원가입 닉네임 중복 검사 -->
-   <select id="nickChk" resultType="int">
-   select count(*) from tb_user where u_nick = #{u_nick}
-   </select>
-   
-   <!-- 회원가입 이메일 중복 검사 -->
-   <select id="emailChk" resultType="int">
-   select count(*) from tb_user where u_email = #{u_email}
-   </select>
-   
-   <!-- 회원가입 휴대폰 중복 검사 -->
-   <select id="phoneChk" resultType="int">
-   select count(*) from tb_user where u_phone = #{u_phone}
-   </select>
-   
-   
-    
-    <!-- 회원수정 -->
-    <update id="memberUpdate" parameterType="member">
-    update tb_user
-     set u_nick =#{u_nick} , u_phone = #{u_phone} ,u_email = #{u_email} ,u_updated_at= sysdate
-     where u_no = #{u_no} 
-    </update>
-    
-    <!-- 회원주소수정 -->
-    <update id="addressUpdate" parameterType="member">
-    update tb_user_address_info
-     set zip = #{zip} , address=#{address} , sub_address = #{sub_address}
-     where u_no = #{u_no} 
-    </update>
-    
-    <!-- 회원정보수정 조회 -->
-    <select id="getMemberInfo" resultType="member">
-      select A.u_no,add_no ,u_id , u_name, u_email , u_phone, u_nick, u_phone  ,zip, address, sub_address, u_grade, u_status ,u_created_at, u_updated_at, u_type, add_name
-      from tb_user A
-      inner join tb_user_address_info B
-       on A.u_no = B.u_no
-       where A.u_no =#{u_no} and add_name='기본배송지'   
-   </select>
-    
-    <!-- 회원수정 비밀번호 수정-->
-    <update id="memberPwdUpdate" parameterType="member">
-    update tb_user
-    set u_pwd = #{u_pwd}
-    where u_no = #{u_no}
-    </update>
-    
-    <!-- 회원탈퇴 -->
-    <update id="memberDelete" parameterType="member">
-    update tb_user
-     set u_status =#{u_status} 
-     where u_no = #{u_no} 
-    </update>
-    
-     <!-- 회원 비밀번호 확인 -->
-    <select id="pwdChk" resultType="int">
-   select count(*) from tb_user where u_pwd = #{u_pwd} and u_no =#{u_no}
-   </select>
-   
-   <!-- 아이디 찾기 -->
-   <select id="findId" resultType="member">
-   select u_id from tb_user
-    where u_name=#{u_name} and u_email=#{u_email}
-   </select>
-   
-   <!-- 비밀번호 찾기 -->
-   <select id="findPw" resultType="member">
-   select u_email ,u_name , u_id from tb_user
-    where u_name=#{u_name} and u_email=#{u_email} and u_id=#{u_id}
-   </select>
-   
-   <!-- 비밀번호 찾기 검사 -->
-   <select id="findPwChk" resultType="int">
-   select count(*) from tb_user where u_id=#{u_id} and u_name =#{u_name} and u_email =#{u_email}
-   </select>
-   
-   <!-- 비밀번호 재설정 -->
-   <update id="findPwUpdate" parameterType="member">
-   update tb_user
-   set u_pwd = #{u_pwd}
-   where u_email = #{u_email}
-   </update>
-   
-   
+	<!-- 회원가입 -->
+	<insert id="signUp" parameterType="member">
+		<selectKey keyProperty="u_no" resultType="int"
+			order="BEFORE">
+			SELECT TB_USER_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO TB_USER(U_NO , U_ID , U_NICK , U_NAME , U_PWD , U_EMAIL ,
+		U_PHONE , U_GRADE)
+		VALUES(#{u_no} , #{u_id} , #{u_nick} , #{u_name} , #{u_pwd} ,#{u_email} ,#{u_phone}, '1')
+	</insert>
+
+	<!-- 네이버 회원가입 -->
+	<insert id="naverSignUp" parameterType="member">
+		<selectKey keyProperty="u_no" resultType="int"
+			order="BEFORE">
+			SELECT TB_USER_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO TB_USER(U_NO , U_ID , U_NICK , U_NAME , U_PWD , U_EMAIL ,
+		U_PHONE , U_GRADE ,U_TYPE)
+		VALUES(#{u_no} , #{u_id} , #{u_nick} , #{u_name} , '1' ,#{u_email} ,#{u_phone} ,'1', 'N')
+	</insert>
+
+	<!-- 카카오 회원가입 -->
+	<insert id="kakaoSignUp" parameterType="member">
+		<selectKey keyProperty="u_no" resultType="int"
+			order="BEFORE">
+			SELECT TB_USER_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO TB_USER(U_NO , U_ID , U_NICK , U_NAME , U_PWD , U_EMAIL ,
+		U_PHONE , U_GRADE ,U_TYPE)
+		VALUES(#{u_no} , #{u_id} , #{u_nick} , #{u_name} , '1' ,#{u_email} ,#{u_phone} , '1', 'K')
+	</insert>
+
+	<!-- 회원가입 주소 -->
+	<insert id="addressInsert" parameterType="member">
+		<selectKey keyProperty="add_no" resultType="int"
+			order="BEFORE">
+			SELECT TB_USER_ADDRESS_INFO_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO TB_USER_ADDRESS_INFO(ADD_NO , U_NO , ZIP , ADDRESS , SUB_ADDRESS)
+		VALUES(#{add_no} , #{u_no} ,#{zip},#{address} , #{sub_address})
+	</insert>
+
+
+	<!-- 마이페이지 테스트용 -->
+	<select id="myPage" parameterType="member" resultType="member">
+		SELECT * FROM TB_USER
+		WHERE U_NO = #{u_no}
+	</select>
+
+	<!-- 회원가입 아이디 중복 검사 -->
+	<select id="idChk" resultType="int">
+		SELECT COUNT(*) FROM TB_USER WHERE U_ID = #{u_id}
+	</select>
+
+	<!-- 회원가입 닉네임 중복 검사 -->
+	<select id="nickChk" resultType="int">
+		SELECT COUNT(*) FROM TB_USER WHERE U_NICK = #{u_nick}
+	</select>
+
+	<!-- 회원가입 이메일 중복 검사 -->
+	<select id="emailChk" resultType="int">
+		SELECT COUNT(*) FROM TB_USER WHERE U_EMAIL = #{u_email}
+	</select>
+
+	<!-- 회원가입 휴대폰 중복 검사 -->
+	<select id="phoneChk" resultType="int">
+		SELECT COUNT(*) FROM TB_USER WHERE U_PHONE = #{u_phone}
+	</select>
+
+	<!-- 회원수정 -->
+	<update id="memberUpdate" parameterType="member">
+		UPDATE TB_USER
+		SET U_NICK =#{u_nick} , U_PHONE = #{u_phone} ,U_EMAIL = #{u_email} ,U_UPDATED_AT= SYSDATE
+		WHERE U_NO = #{u_no}
+	</update>
+
+	<!-- 회원주소수정 -->
+	<update id="addressUpdate" parameterType="member">
+		UPDATE TB_USER_ADDRESS_INFO
+		SET ZIP = #{zip} , ADDRESS=#{address} , SUB_ADDRESS = #{sub_address}
+		WHERE U_NO = #{u_no}
+	</update>
+
+	<!-- 회원정보수정 조회 -->
+	<select id="getMemberInfo" resultType="member">
+		SELECT A.U_NO,ADD_NO ,U_ID , U_NAME, U_EMAIL , U_PHONE, U_NICK, U_PHONE ,ZIP, ADDRESS, SUB_ADDRESS, U_GRADE, U_STATUS ,U_CREATED_AT, U_UPDATED_AT, U_TYPE, ADD_NAME
+		FROM TB_USER A
+		INNER JOIN TB_USER_ADDRESS_INFO B
+		ON A.U_NO = B.U_NO
+		WHERE A.U_NO =#{u_no} AND ADD_NAME='기본배송지'
+	</select>
+
+	<!-- 회원수정 비밀번호 수정 -->
+	<update id="memberPwdUpdate" parameterType="member">
+		UPDATE TB_USER
+		SET U_PWD = #{u_pwd}
+		WHERE U_NO = #{u_no}
+	</update>
+
+	<!-- 회원탈퇴 -->
+	<update id="memberDelete" parameterType="member">
+		UPDATE TB_USER
+		SET U_STATUS =#{u_status}
+		WHERE U_NO = #{u_no}
+	</update>
+
+	<!-- 회원 비밀번호 확인 -->
+	<select id="pwdChk" resultType="int">
+		SELECT COUNT(*) FROM TB_USER WHERE U_PWD = #{u_pwd} AND U_NO =#{u_no}
+	</select>
+
+	<!-- 아이디 찾기 -->
+	<select id="findId" resultType="member">
+		SELECT U_ID FROM TB_USER
+		WHERE U_NAME=#{u_name} AND U_EMAIL=#{u_email} AND U_TYPE='U'
+	</select>
+
+	<!-- 비밀번호 찾기 -->
+	<select id="findPw" resultType="member">
+		SELECT U_EMAIL ,U_NAME , U_ID , U_TYPE FROM TB_USER
+		WHERE U_NAME=#{u_name} AND U_EMAIL=#{u_email} AND U_ID=#{u_id} AND U_TYPE='U'
+	</select>
+
+	<!-- 비밀번호 찾기 검사 -->
+	<select id="findPwChk" resultType="int">
+		SELECT COUNT(*) FROM TB_USER
+		WHERE U_ID=#{u_id} AND U_NAME =#{u_name} AND U_EMAIL =#{u_email} AND U_TYPE='U'
+	</select>
+
+	<!-- 비밀번호 재설정 -->
+	<update id="findPwUpdate" parameterType="member">
+		UPDATE TB_USER
+		SET U_PWD = #{u_pwd}
+		WHERE U_EMAIL = #{u_email}
+	</update>
+
+
 </mapper>

@@ -139,9 +139,20 @@
 		<trim prefix="(" suffix=") AND " prefixOverrides="AND">
 			<include refid="serSearch"></include>
 		</trim>
-         <![CDATA[   ROWNUM <= #{pageNum} * #{amount}
+
+         <![CDATA[   ROWNUM <= #{pageNum} * #{amount} AND S.U_NO=#{u_no}
+
             ) SERVICELIST
-         WHERE SC_NO > (#{pageNum}-1) * #{amount} and u_no=#{u_no}
+         WHERE SC_NO > (#{pageNum}-1) * #{amount}
       ]]>
 	</select>
+
+
+	<!-- 마이페이지 문의내역 카운트 -->
+	<select id="selectMypageServiceCnt" parameterType="center"
+		resultType="int">
+		SELECT COUNT(*) FROM TB_USER_SERVICE
+		WHERE U_NO=#{u_no}
+	</select>
+
 </mapper>

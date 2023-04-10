@@ -23,8 +23,13 @@ public interface ServiceCenterService {
 
 	public int deleteService(ServiceCenterVO scno) throws Exception;
 
-	public List<ServiceCenterVO> selectServiceMyPageList(ServiceCenterVO vo);
-
 	public int selectNoReplyCnt() throws Exception;
+  
+  
+		
+	/* 민석 작업 */
+	public List<ServiceCenterVO> selectServiceMyPageList(ServiceCenterVO vo); // 마이페이지 문의내역 조회
+
+	public int selectMypageServiceCnt(ServiceCenterVO vo); // 마이페이지 문의내역 조회 카운트
 
 }
