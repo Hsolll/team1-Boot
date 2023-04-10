@@ -1,197 +1,163 @@
-@charset "UTF-8";
 
-	 th,td{
-/* 				border:1px solid black; */
-				border-collapse: collapse;	
-				overflow :hidden;			
-			}
- 			/* th,td{ 
- 				width : 100px; 
-			}  */
-			/* td.thumb{
-				width : 300px; 
-			} */
-			#full,#empty{
-				width: 100px;
-				height: 100px;
-			}
-			.heart {
-			  position: absolute;
- 			  width: 50px; 
- 			  height: 50px;
- 			  right: 0; 
-			}
-			
-			#full {
-			  position: absolute;
-			  top: 0;
-			  left: 0;
-			  z-index: 1;
-			  width:50px;
-			  height:50px;
-			}
-			
-			#empty {
-		      width:50px;
-			  height:50px;
-			}
-  			.he{
-  				display:none;
-  			}
-  		
-  			.active a{
-  				font-weight : bold;
-  				color : green;
-  			}
-  			#selCategory input{
-  				display: block;
-  				margin-top : 8px;
-  				background-color : #fff;
-				color : #000;
-				border : none;
-				text-align: left;
-				font-size: 16px;
-  			}
-  			#cont > div{
-  				display:inline-block;
-  			}
-  			
-  			#cont{
-  				width : 900px;
-  			}
-  			#selCategory, #cont {
-			  display: inline-block;
-			  vertical-align: top;
-			  margin: 0;
-			  padding: 0;
-			}
-			input.p_cate,.p_cate_all{
-				width : 150px;
-				height: 60px;
-			}
-			#pForm{
-				height: 0px;
-			}
-			#local > div{
-				display:inline-block;
-			}
-			table{
-				width:1000px;
-			}
-			tr .thumb{
-				width:20%;
-			}
-			.thumb{
-				background-color : rgb(238,238,234);
-			}
-			tr{
-				display:inline-block;
-				margin-left:10px;
-				text-align : center;
-				width:23%;
-				margin-top : 10px;
-			}
-			tbody{
-				text-align : center;
-			}
-			
-			div.p_info{
-				background-color : rgb(121, 131, 146);
-				color : white;
-				font-weight: bold;
-				height : 50px;
-				text-align: center;
-				
-			}
-			/* td:nth-child(5n+1) {
-			  clear: left; 
-		
-			} */
-			div.heart{
-				display : inline-block;
-			}
-			
-			.p_status{
-				background-color : rgb(121, 131, 146);
-				color : white;
-				font-weight: bold;
-				padding : 10px;
-				font-size:15px;
-				
-			}
-			.p_title{
-				padding-top :10px;
-				font-size:15px;
-			}
-			/*input#pConfirm{
-			
-				background-color : rgb(121, 131, 146);
-				color : white;
-				font-weight: bold;
-				font-size:18px;
-				border : none;
-				padding: 10px;
-				margin-bottom: 5px;
-				
-			}
-			 input#insert{
-			
-				background-color : rgb(121, 131, 146);
-				color : white;
-				font-weight: bold;
-				font-size:18px;
-				border : none;
-				padding: 10px;
-				margin-bottom: 5px;
-			}
-			input#write{
-			
-				background-color : rgb(121, 131, 146);
-				color : white;
-				font-weight: bold;
-				font-size:18px;
-				border : none;
-				padding: 10px;
-			}
-			*/
-			#cont{
-				margin-left: 20px;
-				width: calc(100% - 20px);
-				
-			}
-			/* select#sido_code,select#sigoon_code,select#dong_code{
-				background-color : rgb(121, 131, 146);
-				color : white;
-				font-weight: bold;
-				font-size:18px;
-				border : none;
-				padding: 10px;
-				margin-top:5px;
-				height: 45.71px;
-			}
-			*/
-			#menu{
-				width: 100%;
-				text-align: right;
-				
-			}
-			#local{
-				display: inline-block;
-				
-			}
-			#myWrite{
-				display: inline-block;
-			}
-			#NewConfrim{
-				display: inline-block;
-				margin-bottom: 5px;
-			}
-			
-			 .form-control{
-			 	display: inline-block;
-			 	width: 150px;
-			 	vertical-align: middle;
-				/*background-color : rgb(121, 131, 146);
+th, td {
+	/* 				border:1px solid black; */
+	border-collapse: collapse;
+	overflow: hidden;
+}
+
+#full, #empty {
+	width: 100px;
+	height: 100px;
+}
+
+.heart {
+	position: absolute;
+	width: 50px;
+	height: 50px;
+	right: 0;
+}
+
+#full {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	width: 50px;
+	height: 50px;
+}
+
+#empty {
+	width: 50px;
+	height: 50px;
+}
+
+.he {
+	display: none;
+}
+
+.active a {
+	font-weight: bold;
+	color: green;
+}
+
+#selCategory input {
+	display: block;
+	margin-top: 8px;
+	background-color: #fff;
+	color: #000;
+	border: none;
+	text-align: left;
+	font-size: 16px;
+}
+
+#cont>div {
+	display: inline-block;
+}
+
+#cont {
+	width: 900px;
+}
+
+#selCategory, #cont {
+	display: inline-block;
+	vertical-align: top;
+	margin: 0;
+	padding: 0;
+}
+
+input.p_cate, .p_cate_all {
+	width: 150px;
+	height: 60px;
+}
+
+#pForm {
+	height: 0px;
+}
+
+#local {
+	float: left;
+	display: flex;
+}
+
+#local > div:first-child {
+	display: flex;
+    width: 480px;
+    justify-content: space-around;
+	margin-right: 5px;
+}
+
+table {
+	width: 1000px;
+}
+
+tr .thumb {
+	width: 20%;
+}
+
+.thumb {
+	background-color: rgb(238, 238, 234);
+}
+
+tr {
+	display: inline-block;
+	margin-left: 10px;
+	text-align: center;
+	width: 23%;
+	margin-top: 10px;
+}
+
+tbody {
+	text-align: center;
+}
+
+div.p_info {
+	background-color: rgb(121, 131, 146);
+	color: white;
+	font-weight: bold;
+	height: 50px;
+	text-align: center;
+}
+div.heart {
+	display: inline-block;
+}
+
+.p_status {
+	background-color: rgb(121, 131, 146);
+	color: white;
+	font-weight: bold;
+	padding: 10px;
+	font-size: 15px;
+}
+
+.p_title {
+	padding-top: 10px;
+	font-size: 15px;
+}
+
+#cont {
+	margin-left: 20px;
+	width: calc(100% - 20px);
+}
+#menu {
+	width: 100%;
+	text-align: right;
+}
+
+
+#myWrite {
+	display: inline-block;
+}
+
+#NewConfrim {
+	display: inline-block;
+	margin-bottom: 5px;
+}
+
+.form-control {
+	display: inline-block;
+	width: 150px;
+	vertical-align: middle;
+	/*background-color : rgb(121, 131, 146);
 				color : white;
 				font-weight: bold;
 				font-size:18px;
@@ -200,88 +166,100 @@
 				margin-top:5px;
 				height: 45.71px;
 				*/
-			}
-			.ht34 {
-				height: 34px !important;
-			}
-			.ml10 {
-				margin-left: 10px;
-			}
-			.btn{
-				height: 34px;
-				/*
+}
+
+.ht34 {
+	height: 34px !important;
+}
+
+.ml10 {
+	margin-left: 10px;
+}
+
+.btn {
+	height: 34px;
+	/*
 				background-color : rgb(121, 131, 146);
 				color : white;
 				*/
-			}
-			
-			#productSearch{
-			
-				margin-bottom: 10px;
-			}
-			.flexBox {
-				display: flex;
-			}
-			.prdList {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 100px 27px;
-				margin-right: -27px;
-			}
-			.prdList > li {
-				position: relative;
-				width: calc(25% - 27px);
-			}
-			.prdList > li > a {
-				display: block;
-			}
-			.prdList > li > a:hover {
-				text-decoration: none;
-			}
-			.prdList .imgBox {
-				height: 240px;
-				background-color: #f1f1f1;
-			}
-			.prdList .imgBox img {
-				width: 100%;
-				height: 100%; 
-				object-fit: cover;
-			}
-			.prdList .txtArea {
-				margin-top: 20px;
-			}
-			.prdList .txtArea .prdName {
-				font-size: 18px;
-				color: #000;
-			}
-			.prdList .txtArea .subName {
-				margin-top: 16px;
-				font-size: 14px;
-				color: #646464;
-			}
-			.prdList .txtArea .prdPrice {
-				margin-top: 5px;
-				font-size: 20px;
-				color: #000;
-				font-weight: bold;
-			}
-			.prdList .txtArea .prdPrice em {
-				display: inline-block;
-				vertical-align: top;
-				font-style: normal;
-				font-size: 19px;
-				font-weight: 100;
-			}
-			.w150 {
-				width: 150px !important;
-			}
-			.i-block {
-				display: inline-block !important;
-			}
+}
 
-			
+#productSearch {
+	margin-bottom: 50px;
+}
+.flexBox {
+	display: flex;
+}
 
-  			
-  			
-  		
-			
+.prdList {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 100px 27px;
+	margin-right: -27px;
+}
+
+.prdList>li {
+	position: relative;
+	width: calc(25% - 27px);
+}
+
+.prdList>li>a {
+	display: block;
+}
+
+.prdList>li>a:hover {
+	text-decoration: none;
+}
+
+.prdList .imgBox {
+	height: 240px;
+	background-color: #f1f1f1;
+}
+
+.prdList .imgBox img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.prdList .txtArea {
+	margin-top: 20px;
+}
+
+.prdList .txtArea .prdName {
+	font-size: 18px;
+	color: #000;
+}
+
+.prdList .txtArea .subName {
+	margin-top: 16px;
+	font-size: 14px;
+	color: #646464;
+}
+
+.prdList .txtArea .prdPrice {
+	margin-top: 5px;
+	font-size: 20px;
+	color: #000;
+	font-weight: bold;
+}
+
+.prdList .txtArea .prdPrice em {
+	display: inline-block;
+	vertical-align: top;
+	font-style: normal;
+	font-size: 19px;
+	font-weight: 100;
+}
+
+.w150 {
+	width: 150px !important;
+}
+
+.i-block {
+	display: inline-block !important;
+}
+.buttonBox {
+    text-align: center;
+    margin-top: 20px;
+}
