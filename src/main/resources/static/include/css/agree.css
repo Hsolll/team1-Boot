@@ -1,27 +1,3 @@
-body, table, input, textarea, select, button, th, td, input, select, textarea, th, td, p, dl, dt, dd, li, pre {
-    font-family: -apple-system, BlinkMacSystemFont, Apple SD Gothic Neo, Roboto, Noto Sans CJK KR, Tahoma, 'Noto Sans KR', 'Gmarket Sans', sans-serif;
-    color: #676767;
-    font-family: dotum,"돋움",-apple-system,BlinkMacSystemFont,sans-serif;
-}
-
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video, input {
-    margin: 0;
-    padding: 0;
-}
-
-html, body {
-    height: 100%;
-    font-size: 12px;
-}
-input[type="hidden" i] {
-    appearance: none;
-    background-color: initial;
-    cursor: default;
-    display: none !important;
-    padding: initial;
-    border: initial;
-}
-
 #join_container {
     position: relative;
     width: 600px;
@@ -90,11 +66,6 @@ input[type="hidden" i] {
     filter: alpha(opacity=0);
 }
 
-.form input {
-    background-color: #fff;
-    border: none;
-    color: #000;
-}
 
 #join_container #complet2 .tm_all label {
     position: relative;
@@ -117,7 +88,7 @@ input[type="hidden" i] {
 }
 
 .join_content .button__view-agreement::after, .form .list__depth .list-item div.text_label::before, .form .list__depth .list-item div.radio_label::after, .icon_bg, #join_container #complet2 div.tm_required li .chk + label::before, #join_container #complet2 .tm_all .chk_all + label::before {
-    background: url(//pics.gmarket.co.kr/pc/ko/member/join/sprite_common.png) no-repeat -381px 0;
+    background: url(/resources/images/sprite_common.png) no-repeat -381px 0;
 }
 
 #join_container #complet2.individual div.tm_required {
@@ -224,7 +195,7 @@ button.bg_area, span.bg_area {
 }
 
 .btn_bg {
-    background: url(//pics.gmarket.co.kr/pc/ko/member/join/sprite_btn.png) no-repeat right 0;
+    background: url(/resources/images/sprite_common.png) no-repeat right 0;
     min-width: 115px;
     margin-left: 5px;
     padding-right: 15px;
@@ -289,7 +260,7 @@ button.btn_bg.l1 {
 }
 
 .join_bg {
-    background: url(//pics.gmarket.co.kr/pc/ko/member/join/sprite_common.png) no-repeat 0 0;
+    background: url(/resources/images/sprite_common.png) no-repeat 0 0;
 }
 
 #join_container .join_header ol.join_step {
@@ -350,6 +321,7 @@ ul, ol, li, dl, dt, dd {
     left: 0px;
     top: -25px;
     color: #666;
+    margin-left: 50px;
 }
 
 #join_container #complet2 {
@@ -426,7 +398,7 @@ button.bg_area, span.bg_area {
     padding-left: 20px;
 }
 .btn_bg {
-    background: url(//pics.gmarket.co.kr/pc/ko/member/join/sprite_btn.png) no-repeat right 0;
+    background: url(/resources/images/sprite_common.png) no-repeat right 0;
     min-width: 115px;
     margin-left: 5px;
     padding-right: 15px;
@@ -445,7 +417,7 @@ button.btn_bg.l2 span {
 }
 
 button.btn_bg>span {
-    background: url(//pics.gmarket.co.kr/pc/ko/member/join/sprite_btn.png) no-repeat 0 0;
+    background: url(/resources/images/sprite_common.png) no-repeat 0 0;
     padding-left: 15px;
     display: block;
     color: #fff;
@@ -477,7 +449,7 @@ button.btn_bg.l1 span {
 }
 
 button.btn_bg>span {
-    background: url(//pics.gmarket.co.kr/pc/ko/member/join/sprite_btn.png) no-repeat 0 0;
+    background: url(/resources/images/sprite_common.png) no-repeat 0 0;
     padding-left: 15px;
     display: block;
     color: #fff;
