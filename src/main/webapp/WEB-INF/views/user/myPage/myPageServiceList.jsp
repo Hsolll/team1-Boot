@@ -188,10 +188,11 @@
 			</tbody>
 		</table>
 	</div>
+	
+	<div class="text-center">
 	<div class="text-right">
 		<input type="button" class="btn btn-default" value="WRITE" id="writeBtn">
 	</div>
-	<div class="text-center">
 		<ul class="pagination">
 			<!-- 이전 바로가기 10개 존재 여부를 prev 필드의 값으로 확인 -->
 			<c:if test="${pageMaker.prev }">

@@ -24,6 +24,8 @@ import com.omb.admin.serviceCenter.vo.AdmServiceCenterVO;
 import com.omb.common.vo.PageDTO;
 import com.omb.user.address.service.MemberAddressService;
 import com.omb.user.address.vo.MemberAddressVO;
+import com.omb.user.community.service.UserCommunityService;
+import com.omb.user.community.vo.UserCommunityVO;
 import com.omb.user.member.service.MemberService;
 import com.omb.user.member.vo.MemberVO;
 import com.omb.user.product.service.ProductService;
@@ -51,6 +53,9 @@ public class MemberController {
 
 	@Setter(onMethod_ = @Autowired)
 	private AdmServiceCenterService admserviceCenter;
+	
+	@Setter(onMethod_ =@Autowired)
+	private UserCommunityService userCommunityService; 
 
 	@Setter(onMethod_ = @Autowired)
 	private MemberAddressService memberAddressService;
@@ -551,4 +556,39 @@ public class MemberController {
 		return "user/myPage/myPageAddressInfo";
 	}
 	
+	@GetMapping("/myPageCommunityList")
+	public String communityList(HttpSession session ,UserCommunityVO community, Model model) {
+		MemberVO mvo = (MemberVO) session.getAttribute("memberLogin");
+		community.setU_no(mvo.getU_no());
+		
+		String path = "";
+		log.info("communityList 메서드 호출");
+		log.info("전달받은 값 : " + community.getC_category());
+		log.info("1. 현재 페이지 : " + community.getPageNum());
+		log.info("1. 보여줄 데이터 수 : " + community.getAmount());
+		
+		if(community.getC_category().equals("C")) {
+			path = "user/myPage/myPageCommunityList";
+		}
+		else if(community.getC_category().equals("A")) {
+			path = "user/myPage/myPageCommunityListReview";
+		}
+		else if(community.getC_category().equals("B")) {
+			path = "user/myPage/myPageCommunityListRecipe";
+		}
+		
+		log.info("이동할 경로 : " + path);
+		
+		List<UserCommunityVO> myPageCommunityList = userCommunityService.myPageCommunityList(community);
+		
+		model.addAttribute("myPageCommunityList", myPageCommunityList);
+		
+		// 전체 레코드 수 구현 
+		int total = userCommunityService.myPageCommunityListCnt(community);
+		log.info("전체 레코드 수 : " + total);
+		//페이징 처리
+		model.addAttribute("pageMaker", new PageDTO(community, total));
+		
+		return path;
+	}
 }

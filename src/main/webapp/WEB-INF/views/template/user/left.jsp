@@ -12,6 +12,12 @@
             <li><a href="/member/likeList">좋아요(찜) 내역</a></li>
             <li><a href="/member/buyList">구매 내역</a></li>
             <li><a href="/member/sellList">판매 내역</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li class="active"><a>나의 작성글 확인</a></li>
+            <li><a href="/member/myPageCommunityList?c_category=A">유아용품후기</a></li>
+            <li><a href="/member/myPageCommunityList?c_category=B">이유식레시피</a></li>
+            <li><a href="/member/myPageCommunityList?c_category=C">자유게시판</a></li>
             <li><a href="/member/myPageServiceList">문의 내역</a></li>
           </ul>
           <ul class="nav nav-sidebar">
@@ -30,6 +36,12 @@
             <li><a href="/member/likeList">좋아요(찜) 내역</a></li>
             <li><a href="/member/buyList">구매 내역</a></li>
             <li><a href="/member/sellList">판매 내역</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li class="active"><a>나의 작성글 확인</a></li>
+            <li><a href="/member/myPageCommunityList?c_category=A">유아용품후기</a></li>
+            <li><a href="/member/myPageCommunityList?c_category=B">이유식레시피</a></li>
+            <li><a href="/member/myPageCommunityList?c_category=C">자유게시판</a></li>
             <li><a href="/member/myPageServiceList">문의 내역</a></li>
           </ul>
           <ul class="nav nav-sidebar">
@@ -46,6 +58,12 @@
             <li><a href="/member/likeList">좋아요(찜) 내역</a></li>
             <li><a href="/member/buyList">구매 내역</a></li>
             <li><a href="/member/sellList">판매 내역</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li class="active"><a>나의 작성글 확인</a></li>
+            <li><a href="/member/myPageCommunityList?c_category=A">유아용품후기</a></li>
+            <li><a href="/member/myPageCommunityList?c_category=B">이유식레시피</a></li>
+            <li><a href="/member/myPageCommunityList?c_category=C">자유게시판</a></li>
             <li><a href="/member/myPageServiceList">문의 내역</a></li>
           </ul>
           <ul class="nav nav-sidebar">
