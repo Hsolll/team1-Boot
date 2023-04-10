@@ -20,20 +20,24 @@
 			  RNUM > (#{pageNum}-1) * #{amount}
 		ORDER BY DEP_NO
 		]]>
+		
 	</select>
 	
 	<!-- 입금대기 상품 리스트 조회 -->
 	<select id="selectDepositList" parameterType="depositInfo" resultType="depositInfo">
 		<![CDATA[
-		SELECT RNUM, DEP_NO, O_NO, DEP_PRICE 
+		SELECT RNUM, DEP_NO, O_ID, SP_NO, SP_PRICE, U_NAME, BANK, ACCOUNT
 		FROM (
-			SELECT
-				ROWNUM AS RNUM, DEP_NO, O_NO, DEP_PRICE, DEP_DATE
-			FROM TB_ADMIN_DEPOSIT_INFO
-			WHERE ROWNUM <= #{pageNum} * #{amount}) DEPLIST
-		WHERE DEP_DATE IS NULL AND
-			  RNUM > (#{pageNum}-1) * #{amount}
-		ORDER BY DEP_NO
+			SELECT rownum as rnum, D.DEP_NO, O.O_ID, O.SP_NO, S.SP_PRICE, u.U_name, A.BANK, A.ACCOUNT, O.O_STATUS
+			FROM TB_USER_ORDER O, TB_USER_ACCOUNT_INFO A, 
+			TB_USER_SAFE_PRODUCT S, tb_user u, TB_ADMIN_DEPOSIT_INFO D
+			WHERE O.SP_NO=S.SP_NO AND
+			      A.U_NO = u.U_NO AND a.u_no = o.u_no 
+			   	  AND D.O_NO = O.O_NO
+			      and O.O_STATUS = '거래완료' AND D.DEP_DATE IS NULL
+			      AND ROWNUM <= #{pageNum} * #{amount}) deplist
+		WHERE RNUM > (#{pageNum}-1) * #{amount}
+		ORDER BY RNUM
 		]]>
 	</select>
 	

@@ -183,7 +183,7 @@ $(function() {
 							{
 								ticks: {
 									beginAtZero: true,
-									stepSize: 1000
+									stepSize: 5000
 								}
 							}
 						]
