@@ -108,17 +108,6 @@ public class OrderInfoController {
 		
 		model.addAttribute("detail", detail);
 		log.info("구매목록 상세조회 : " + detail);
-		/* ajax로 대체
-		// 결제 내역 조회를 위해 토큰 생성
-		String token = paymentService.getToken();
-		log.info("토큰 : " + token);
-		
-		// 결제 상세내역 조회
-		String paymentDetail = paymentService.paymentDetailInfo(detail.getPay_id(), token);
-	    log.info("결제 상세내역 : " + paymentDetail);
-	    
-		model.addAttribute("paymentDetail", paymentDetail);
-		*/
 		
 		return "user/orderInfo/buyListDetail";
 	}

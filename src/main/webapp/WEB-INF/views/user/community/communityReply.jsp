@@ -6,6 +6,9 @@
 			#replyTemplate {
 				display: none;
 			}
+			.display_no {
+				display: none;
+			}
 		</style>
 		<script type="text/javascript">
 			$(function(){
@@ -191,6 +194,10 @@
 			    $element.find('.reply_content').html(cr_content);
 
 			    $div.append($element); 
+			    console.log(u_nick == "${memberLogin.u_nick}");
+			    if(u_nick == "${memberLogin.u_nick}"){
+			    	$("#replyControllBox").removeClass("display_no");
+			    }
 			}
 			
 			/* 입력 폼 초기화 */
@@ -247,8 +254,10 @@
        						</div>
        					</td>
        					<td>
-       						<button type="button" class="reply_small_btn replyUpdateBtn">UPDATE</button>
-       						<button type="button" class="reply_small_btn replyDeleteBtn">DELETE</button>
+       						<div class="display_no">
+	       						<button type="button" class="reply_small_btn replyUpdateBtn">UPDATE</button>
+	       						<button type="button" class="reply_small_btn replyDeleteBtn">DELETE</button>
+       						</div>
        					</td>
        				</tr>
        			</tbody>

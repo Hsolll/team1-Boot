@@ -128,9 +128,6 @@
                          $("input[name='zip']").val(data.zonecode);
                          $("input[name='address1']").val(fullRoadAddr);
                          
-                         /* document.getElementById('signUpUserPostNo').value = data.zonecode; //5자리 새우편번호 사용
-                         document.getElementById('signUpUserCompanyAddress').value = fullRoadAddr;
-                         document.getElementById('signUpUserCompanyAddressDetail').value = data.jibunAddress; */
                      }
                   }).open();
               }
