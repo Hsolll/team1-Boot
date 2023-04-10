@@ -8,6 +8,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta charset="utf-8">
 		<title>memberList</title>
 		<script src="/resources/include/js/common.js"></script>
 		<script src="/resources/vendor/jquery/jquery-3.3.1.min.js"></script>
@@ -144,196 +145,208 @@
 				$("#f_search").submit();
 			}
 		</script>
+		<style>
+			#example_filter {display: none;}
+			.pagination {display: none;}
+			.pagination.v2 {display: flex;} 
+			.table-responsive {overflow: hidden;}
+			.dataTables_info {display: none;}
+		</style>
 	</head>
 
 <body>
-		<c:if test='${not empty adminLogin }'>
-		<form id="detailForm">
-			<input type="hidden" id="u_no" name="u_no" />
-		</form>
-		<%-- ============== container 시작 ====================  --%>
-		<div> 
-			<%-- ============== 검색기능 시작 ====================  --%>
-			<div id="memberSearch" class="text-right">
-				<form id="f_search" name="f_search" class="form-inline">
-					<input type="hidden" name="pageNum" value="${pageMaker.cvo.pageNum}">
-					<input type="hidden" name="amount" value="${pageMaker.cvo.amount}">
-					<div class="form-group ml-auto">
-						<label>검색조건</label>
-						<select id="search" name="search"  class="form-control m-l-10">
-							<option value="all">전체</option>
-							<option value="u_id">아이디</option>
-							<option value="u_name">이름</option>
-							<option value="u_nick">닉네임</option>
-							<option value="u_grade">회원등급</option>
-						</select>
-						<input type="text" name="keyword" id="keyword" value="검색어를 입력하세요" class="form-control m-l-10" />
-						<button type="button" id="searchData" class="btn">검색</button>
-						<button type="button" style="margin: 0px 50px 0 100px;" id="smsSend" class="btn btn-dark m-l-100" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">메일전송</button>
-					</div>
-				</form>
-			</div>
-		<%--================== 검색기능 종료 ===================  --%>
-		
-		<%--================== 전체 회원수 시작 ===================  --%>
-		<div class="tableTop">
-			<p>총 회원수: ${memberCount}</p>
-		</div>
-		<%--================== 전체 회원수 종료 ===================  --%>
-		
-		<%-- =================== 리스트 시작  ================= --%>
-			<div id="memberList" class="table-responsive">
-				<form id="checkBox" name="checkBox">
-				
-				</form>
-					<table summary="일반회원 리스트" class="table table-striped" >
-						<colgroup>
-		                    <col style="width: 5%">
-		                    <col style="width: 7%">
-		                    <col>
-		                    <col style="width: 10%">
-		                    <col style="width: 10%">
-		                    <col style="width: 12%">
-		                    <col style="width: 13%">
-		                    <col style="width: 10%">
-		                    <col style="width: 10%">
-		                    <col style="width: 12%">
-		                </colgroup>
-						<thead>
-							<tr class="text-center">
-								<th style="line-height: 2.4;"><input type="checkbox" id="cbx_chkAll"></th>
-								<th scope="col" data-value="u_no" class="order" style="line-height: 2.4;">회원번호</th>
-								<th scope="col" style="line-height: 2.4;">아이디</th>
-								<th scope="col" style="line-height: 2.4;">닉네임</th>
-								<th scope="col" style="line-height: 2.4;">이름</th>
-								<th scope="col" style="line-height: 2.4;">핸드폰번호</th>
-								<th scope="col" data-value="u_created_at" class="order" style="line-height: 2.4;">회원가입일</th>
-								<th scope="col">회원등급<br/><span style="font-size: 13px">(일반:1/경고:2/블랙:3)</span></th>
-								<th scope="col">회원상태<br/><span style="font-size: 13px">(일반:1/탈퇴:2)</span></th>
-								<th scope="col" style="line-height: 2.4;">등급수정</th>
-							</tr>
-						</thead>
-				 		<tbody id="list" class="table-striped" >
-							<!-- 데이터 출력 -->
-							<c:choose>
-								<c:when test="${not empty memberList}" >
-									<c:forEach var="member" items="${memberList}" varStatus="status">
-										<tr class="text-center" data-num="${member.u_no}">
-											<td><input type="checkbox" name="chk"></td>
-											<td>${member.u_no}</td>
-											<td class="goDetail text-center">
-											${member.u_id}
-											</td>
-											<td class="nick text-center">${member.u_nick}</td>
-											<td class="name text-center">${member.u_name}</td>
-											<td class="text-center">${member.u_phone}</td>
-											<td class="text-center">${member.u_created_at}</td>
-											<td class="grade text-center">${member.u_grade}</td>
-											<td class="text-center">${member.u_status}</td>
-											<td><button type="button" class="gradeBtn btn btn-dark m-l-10" data-toggle="modal" data-target="#exampleModalCenter">등급수정</button></td>
-										</tr>
-									</c:forEach>
-								</c:when>
-								<c:otherwise>
-									<tr>
-										<td colspan="8" class="tac text-center">등록된 게시글이 존재하지 않습니다.</td>
-									</tr>
-								</c:otherwise>
-							</c:choose>
-						</tbody> 
-					</table>
-			</div>
-			<%-- =================== 리스트 종료  ================= --%>
-			
-				
-				<%-- =================== 페이징 출력 시작 =============== --%>
-			<nav aria-label="Page navigation example">
-			  <ul class="pagination justify-content-center">
-			  	<c:if test="${pageMaker.prev}">
-				    <li class="page-item disabled">
-				    
-				      <a class="page-link" href="${pageMaker.startPage -1}" tabindex="-1">Previous</a>
-				    </li>
-			    </c:if>
-			    
-			    <c:forEach var="num" begin="${pageMaker.startPage}"
-										 end="${pageMaker.endPage}">
-				    <li class="page-item">
-				    	<a class="page-link" href="${num}">${num}</a>
-				    </li>
-			    </c:forEach>
-			    
-			    <c:if test="${pageMaker.next}">
-				    <li class="page-item">
-				      <a class="page-link" href="${pageMaker.endPage + 1}">Next</a>
-				    </li>
-			    </c:if>
-			  </ul>
-			</nav>
-			
-			
-			<!-- E-Mail Modal -->
-			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-					<div class="modal-dialog" role="document">
-					    <div class="modal-content">
-						      <div class="modal-header">
-						        	<h5 class="modal-title" id="exampleModalLabel">Send E-Mail</h5>
-							        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							          <span aria-hidden="true">&times;</span>
-							        </button>
+				<c:if test='${not empty adminLogin }'>
+					<form id="detailForm">
+						<input type="hidden" id="u_no" name="u_no" />
+					</form>
+					<%-- ============== container 시작 ====================  --%>
+					<div> 
+					<%--================== 총 회원수 ===================  --%>		
+							<div class="tableTop">
+								<h4 class="m-b-0">총 회원수: ${memberCount}</h4>
+								
+								<%-- ============== 검색기능 시작 ====================  --%>
+								<div id="memberSearch" class="text-right">
+									<form id="f_search" name="f_search" class="form-inline">
+										<input type="hidden" name="pageNum" value="${pageMaker.cvo.pageNum}">
+										<input type="hidden" name="amount" value="${pageMaker.cvo.amount}">
+										<div class="form-group ml-auto">
+											<label>검색조건</label>
+											<select id="search" name="search"  class="form-control m-l-10">
+												<option value="all">전체</option>
+												<option value="u_id">아이디</option>
+												<option value="u_name">이름</option>
+												<option value="u_nick">닉네임</option>
+												<option value="u_grade">회원등급</option>
+											</select>
+											<input type="text" name="keyword" id="keyword" value="검색어를 입력하세요" class="form-control m-l-10" />
+											<button type="button" id="searchData" class="btn">검색</button>
+											<button type="button" id="smsSend" class="btn btn-dark m-l-25" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">메일전송</button>
+										</div>
+									</form>
+								</div>
+							<%--================== 검색기능 종료 ===================  --%>
+							</div>
+
+	                    <!-- ============================================================== -->
+	                    <!-- data table  -->
+	                    <!-- ============================================================== -->
+	                    <div>
+	                        <div class="card">
+	                            <div class="card-body">
+	                                <div class="table-responsive">
+	                                	<div  id="example_wrapper" class="dataTables_wrapper dt-bootstrap4">
+	                                		
+	                                		<table id="example" class="table table-hover table-bordered second text-center" style="width:100%; margin-top: 20px;">
+	                                    	<colgroup>
+	                                    		<col style="width: 8%;">
+	                                    		<col style="width: 15%;">
+	                                    		<col style="width:;">
+	                                    		<col style="width: 15%;">
+	                                    		<col style="width:;">
+	                                    		<col style="width:;">
+	                                    	</colgroup>
+	                                        <thead>
+	                                            <tr>
+	                                            	<th style="line-height: 2.4;"><input type="checkbox" id="cbx_chkAll"></th>
+	                                                <th>회원번호</th>
+	                                                <th>아이디</th>
+	                                                <th>이름</th>
+	                                                <th>회원등급</th>
+	                                                <th>등급수정</th>
+	                                            </tr>
+	                                        </thead>
+	                                        <tbody>
+	                                        	<c:choose>
+													<c:when test="${not empty memberList}" >
+														<c:forEach var="member" items="${memberList}" varStatus="status">
+															<tr data-num="${member.u_no}">
+																<td><input type="checkbox" name="chk"></td>
+																<td>${member.u_no}</td>
+																<td class="goDetail">
+																${member.u_id}
+																</td>
+																<td class="name">${member.u_name}</td>
+																<td class="grade">${member.u_grade}</td>
+																<td><button type="button" class="gradeBtn btn btn-dark m-l-10" data-toggle="modal" data-target="#exampleModalCenter">등급수정</button></td>
+															</tr>
+														</c:forEach>
+													</c:when>
+													<c:otherwise>
+														<tr>
+															<td colspan="7" class="tac text-center">등록된 게시글이 존재하지 않습니다.</td>
+														</tr>
+													</c:otherwise>
+												</c:choose>
+	                                        </tbody>
+	                                    </table>
+	                                	</div>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+						<%-- ============== 페이징 ====================  --%>
+						<nav aria-label="Page navigation example">
+						  <ul class="pagination v2 justify-content-center">
+						  	<c:if test="${pageMaker.prev}">
+							    <li class="page-item disabled">
+							    
+							      <a class="page-link" href="${pageMaker.startPage -1}" tabindex="-1">Previous</a>
+							    </li>
+						    </c:if>
+						    
+						    <c:forEach var="num" begin="${pageMaker.startPage}"
+													 end="${pageMaker.endPage}">
+							    <li class="page-item">
+							    	<a class="page-link" href="${num}">${num}</a>
+							    </li>
+						    </c:forEach>
+						    
+						    <c:if test="${pageMaker.next}">
+							    <li class="page-item">
+							      <a class="page-link" href="${pageMaker.endPage + 1}">Next</a>
+							    </li>
+						    </c:if>
+						  </ul>
+						</nav>
+						
+						
+						<!-- E-Mail Modal -->
+						<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+								    <div class="modal-content">
+									      <div class="modal-header">
+									        	<h5 class="modal-title" id="exampleModalLabel">Send E-Mail</h5>
+										        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										          <span aria-hidden="true">&times;</span>
+										        </button>
+										  </div>
+									      <div class="modal-body">
+										        <form id="mail_form" name="mail_form">
+										          <div class="form-group">
+										            <label for="recipient-name" class="col-form-label">보낼 이메일 주소:</label>
+										            <input type="text" class="form-control" id="recipient-name">
+										          </div>
+										          <div class="form-group">
+										            <label for="message-text" class="col-form-label">내용:</label>
+										            <textarea class="form-control" id="message-text"></textarea>
+										          </div>
+										        </form>
+									      </div>
+										  <div class="modal-footer">
+										        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+										        <button type="button" class="btn btn-primary">메일 보내기</button>
+								      	  </div>
+								    </div>
 							  </div>
-						      <div class="modal-body">
-							        <form id="mail_form" name="mail_form">
-							          <div class="form-group">
-							            <label for="recipient-name" class="col-form-label">보낼 이메일 주소:</label>
-							            <input type="text" class="form-control" id="recipient-name">
-							          </div>
-							          <div class="form-group">
-							            <label for="message-text" class="col-form-label">내용:</label>
-							            <textarea class="form-control" id="message-text"></textarea>
-							          </div>
-							        </form>
-						      </div>
-							  <div class="modal-footer">
-							        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-							        <button type="button" class="btn btn-primary">메일 보내기</button>
-					      	  </div>
-					    </div>
-				  </div>
-			</div>
+						</div>
+						
+						<!-- 회원 수정 Modal -->
+						<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+						  <div class="modal-dialog modal-dialog-centered" role="document">
+						    <div class="modal-content">
+						    	<form id="grade_form" name="grade_form">
+						    		<input type="hidden" id="u_num" name="u_num" />
+						    		<input type="hidden" id="u_grade" name="u_grade" />
+						    	</form>
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalCenterTitle">회원등급 수정</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								  		<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<input class="grade_select" type="radio" name="u_grade_value" style="display: inline-block;" aria-label="Radio button for following text input" value="1" checked>
+									<label for="1" class="m-r-10 m-b-0">일반회원</label>
+									<input class="grade_select" type="radio" name="u_grade_value" style="display: inline-block;" aria-label="Radio button for following text input" value="2">
+									<label for="2" class="m-r-10 m-b-0">경고회원</label>
+									<input  class="grade_select" type="radio" name="u_grade_value" style="display: inline-block;" aria-label="Radio button for following text input" value="3">
+								  	<label for="3" class="m-b-0">블랙회원</label>
+								</div>
+								<div class="modal-footer">
+								  <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+								  <button id="grade_update" type="button" class="btn btn-primary">저장</button>
+								</div>
+						    	
+						    </div>
+						  </div>
+						</div>
+					</div>
+				</c:if>
+			<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+			<script src="/resources/vendor/datatables/js/dataTables.bootstrap4.min.js"></script>
+			<script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+			<script src="/resources/vendor/datatables/js/buttons.bootstrap4.min.js"></script>
+			<script src="/resources/vendor/datatables/js/data-table.js"></script>
 			
-			<!-- 회원 수정 Modal -->
-			<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-			  <div class="modal-dialog modal-dialog-centered" role="document">
-			    <div class="modal-content">
-			    	<form id="grade_form" name="grade_form">
-			    		<input type="hidden" id="u_num" name="u_num" />
-			    		<input type="hidden" id="u_grade" name="u_grade" />
-			    	</form>
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalCenterTitle">회원등급 수정</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					  		<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<input class="grade_select" type="radio" name="u_grade_value" style="display: inline-block;" aria-label="Radio button for following text input" value="1" checked>
-						<label for="1">일반회원</label>
-						<input class="grade_select" type="radio" name="u_grade_value" style="display: inline-block;" aria-label="Radio button for following text input" value="2">
-						<label for="2">경고회원</label>
-						<input  class="grade_select" type="radio" name="u_grade_value" style="display: inline-block;" aria-label="Radio button for following text input" value="3">
-					  	<label for="3">블랙회원</label>
-					</div>
-					<div class="modal-footer">
-					  <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-					  <button id="grade_update" type="button" class="btn btn-primary">저장</button>
-					</div>
-			    	
-			    </div>
-			  </div>
-			</div>
-		</div>
-		<%-- ============== container 종료 ====================  --%>
-		</c:if>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+		    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+		    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+		    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+		    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
+		    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
+		    <script src="https://cdn.datatables.net/rowgroup/1.0.4/js/dataTables.rowGroup.min.js"></script>
+		    <script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
+		    <script src="https://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
 </body>
 </html>

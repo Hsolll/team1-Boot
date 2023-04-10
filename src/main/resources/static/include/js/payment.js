@@ -10,7 +10,7 @@ $(function() {
     let price = $("#sp_price").text().replace(',', '');
     let email = $("#u_email").text();
     let buyer = $("input[name='receiver']").val();
-    let tel = $("input[name='receiver_tel']").val();
+    let tel = $("input[name='rec_tel']").val();
     
     let address = $("input[name='address1']").val() + ", " + $("input[name='address2']").val();
     console.log("상품명 : " + name);
@@ -78,7 +78,7 @@ function payment(){
       price : $("#sp_price").text().replace(',', ''),
       email : $("#u_email").text(),
       buyer_name : $("input[name='receiver']").val(),
-      tel : $("input[name='receiver_tel']").val(),
+      tel : $("input[name='rec_tel']").val(),
       address : $("input[name='address1']").val() + ", " + $("input[name='address2']").val(),
       zip : $("input[name='zip']").val()
    }
@@ -126,7 +126,7 @@ function requestPay(data) {
 		    		pay_id : rsp.imp_uid,	// 결제번호
 		    		o_id : rsp.merchant_uid,	// 주문번호
 		    		receiver : rsp.buyer_name,	// 수령인 이름
-		    		receiver_tel : rsp.buyer_tel,	// 수령인 연락처
+		    		rec_tel : rsp.buyer_tel,	// 수령인 연락처
 		    		o_address : "(" + rsp.buyer_postcode + ") " + rsp.buyer_addr,	// 배송지 주소
 		    		price : rsp.paid_amount
 		    		//기타 필요한 데이터가 있으면 추가 전달

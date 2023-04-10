@@ -8,6 +8,16 @@ import com.omb.user.serviceCenter.vo.ServiceCenterVO;
 
 @Mapper
 public interface ServiceCenterDAO {
+
+/* 민석 작업 */
+	public List<ServiceCenterVO> selectServiceMyPageList(ServiceCenterVO vo); // 마이페이지 문의내역 조회
+
+	public int selectMypageServiceCnt(ServiceCenterVO vo); // 마이페이지 문의내역 조회 카운트
+  
+  
+  
+  
+  
 	public List<ServiceCenterVO> selectServiceList(ServiceCenterVO vo); // 문의 리스트 조회
 
 	public int selectServiceCnt(ServiceCenterVO vo); // 문의수
@@ -26,8 +36,7 @@ public interface ServiceCenterDAO {
 
 	public int selectNoReplyCnt(); // 관리자의 답변이 달리지 않은 문의글의 수
 
-	public List<ServiceCenterVO> selectServiceMyPageList(ServiceCenterVO vo);
-
 	public int deleteService(int scno);
+
 
 }

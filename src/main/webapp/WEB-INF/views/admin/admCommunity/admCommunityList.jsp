@@ -130,7 +130,7 @@
 
 <%-- =================== 리스트 시작  ================= --%>
 		<div id="noticeList" class="table-responsive">
-		<table summary="자유게시판 리스트" class="table table-striped m-t-15" >
+		<table summary="자유게시판 리스트" class="table table m-t-15" >
 			<thead>
 				<tr>
 					<th data-value="an_no" class="order text-center col-md-1" >글번호</th>

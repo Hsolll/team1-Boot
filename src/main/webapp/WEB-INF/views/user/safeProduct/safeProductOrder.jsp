@@ -19,7 +19,7 @@
                $("#addList").css("display", "none");
                
                $("input[name='receiver']").val("");
-               $("input[name='receiver_tel']").val("");
+               $("input[name='rec_tel']").val("");
                $("input[name='zip']").val("");
                $("input[name='address1']").val("");
                $("input[name='address2']").val("");
@@ -43,27 +43,35 @@
 				
 				let add_no = $(this).val();
 				
-				$.ajax({
-		    		url: "/address/findAddress?add_no=" + add_no, 
-		    		type: 'get',
-					dataType : "text",
-		    		success : function(result){
-						console.log(result);
-						
-						let obj = JSON.parse(result);
-						
-						let zip = obj.zip;
-						let address1 = obj.address;
-						let address2 = obj.sub_address;
-						
-						$("input[name='zip']").val(zip);
-						$("input[name='address1']").val(address1);
-						$("input[name='address2']").val(address2);
-					},
-					error : function(xhr, textStatus, errorThrown) {
-						alert("실패");
-					}
-		    	});
+				if($(this).val() != "배송지를 선택해주세요"){
+					
+					$.ajax({
+			    		url: "/address/findAddress?add_no=" + add_no, 
+			    		type: 'get',
+						dataType : "text",
+			    		success : function(result){
+							console.log(result);
+							
+							let obj = JSON.parse(result);
+							
+							let zip = obj.zip;
+							let address1 = obj.address;
+							let address2 = obj.sub_address;
+							
+							$("input[name='zip']").val(zip);
+							$("input[name='address1']").val(address1);
+							$("input[name='address2']").val(address2);
+						},
+						error : function(xhr, textStatus, errorThrown) {
+							alert("실패");
+						}
+			    	});
+				} else{
+					$("input[name='zip']").val("");
+					$("input[name='address1']").val("");
+					$("input[name='address2']").val("");
+				}
+				
 			});
             
             
@@ -73,7 +81,7 @@
                $("#addList").css("display", "none");
                
                $("input[name='receiver']").val("${memberLogin.u_name}");
-               $("input[name='receiver_tel']").val("${memberLogin.u_phone}");
+               $("input[name='rec_tel']").val("${memberLogin.u_phone}");
                $("input[name='zip']").val("${address.zip}");
                $("input[name='address1']").val("${address.address}");
                $("input[name='address2']").val("${address.sub_address}");
@@ -254,7 +262,7 @@
 						    <tr>
 						        <th>휴대폰</th>
 						        <td>
-						            <input type="text" name="receiver_tel" class="w200" maxlength="12" value="${memberLogin.u_phone}" />
+						            <input type="text" name="rec_tel" class="w200" maxlength="12" value="${memberLogin.u_phone}" />
 						        </td>
 						    </tr>
 						    <tr>

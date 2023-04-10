@@ -67,8 +67,6 @@
 					</c:otherwise>
 				</c:choose>
 	            <table class="detailView">
-	                <colgroup>
-	                </colgroup>
 	                <thead>
 	                    <tr class="text-center">
 	                        <th>${detail.c_title}</th>
@@ -102,30 +100,9 @@
 						</tr>
 	                </tbody>
 	            </table>
-	            
-	            <form id="replyForm" class="mt30">
-	            	<fieldset>
-	            		<table>
-	            			<tbody>
-	            				<tr>
-	            					<td class="replyBox">
-	            						<div>
-	            							<div class="mt7">
-	            								<label>NAME</label>
-	            								<input type="text" name="u_id" id="u_id" placeholder="이름" />
-	            							</div>
-	            							<div class="mt7 writeReply">
-	            								<textarea placeholder="댓글 내용"></textarea>
-	            								<button type="button" class="replyBtn">댓글쓰기</button>
-	            							</div>
-	            						</div>
-	            					</td>
-	            				</tr>
-	            			</tbody>
-	            		</table>
-	            	</fieldset>
-	            </form>
 	        </div>
+	        <%-- 댓글 입력폼, 리스트 삽입 --%>
+	        <jsp:include page="communityReply.jsp" />
 		</div>
 	</body>
 </html>

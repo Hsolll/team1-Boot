@@ -16,7 +16,7 @@
 }
 
 .join_content .button__view-agreement::after, .form .list__depth .list-item div.text_label::before, .form .list__depth .list-item div.radio_label::after, .icon_bg, #join_container #complet2 div.tm_required li .chk + label::before, #join_container #complet2 .tm_all .chk_all + label::before {
-    background: url(//pics.gmarket.co.kr/pc/ko/member/join/sprite_common.png) no-repeat -381px 0;
+    background: url(/resources/images/sprite_common.png) no-repeat -381px 0;
 }
 
 .join_content div.form li {
@@ -24,7 +24,7 @@
 }
 
 .join_bg {
-    background: url(//pics.gmarket.co.kr/pc/ko/member/join/sprite_common.png) no-repeat 0 0;
+    background: url(/resources/images/sprite_common.png) no-repeat 0 0;
 }
 
 #join_container .join_header ol.join_step li.step1 {

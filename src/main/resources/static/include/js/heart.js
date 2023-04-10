@@ -1,33 +1,4 @@
 //-----------------------------// 좋아요 여부 //--------------------------------------------//
-	/*
-	$(".no").each(function(){
-		let pno = $(this).find(".pno").val();
-		let uno = $(this).find(".uno").val();
-		
-		console.log("pno : "+pno);
-		console.log("uno : "+uno);
-			$.ajax({
-			
-			type:"GET",
-			url:"/product/heartSel",
-			data:{p_no:pno,u_no:uno},
-			success:function(data){
-				let result = $(data)[33]
-			console.log(result)
-			
-			
-			$(".heartForm").html(result)
-			}
-		
-		
-			
-		})
-	
-		
-		
-	})*/
-	
-
 
 $(".heart").each(function() {
 	  if($(this).hasClass("0")) {

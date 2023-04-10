@@ -16,6 +16,7 @@ public class FileUploadUtil {
 	
 	//public static String Path = "/Users/kim_yunki/git/team1-Boot/src/main/resources/uploadStorage/";
 	public static String NoticePath = "C://uploadStorage//";
+	//public static String NoticePath = "C://Users//user//git//team1-Boot//src//main//resources//uploadStorage";	// 윈도우에서 프로젝트 내부경로로 설정
 	/********************************************************************************
 	/* 파일 업로드할 폴더 생성
 	 ********************************************************************************/

@@ -80,6 +80,19 @@ public class ServiceCenterServiceImpl implements ServiceCenterService {
 		return result;
 	}
 
+
+	@Override
+	public int selectNoReplyCnt() throws Exception {
+		int result = 0;
+		result = serviceDao.selectNoReplyCnt();
+		return result;
+	}
+
+
+
+
+	/* 민석 작업 */
+	/* 마이페이지 조회 */
 	@Override
 	public List<ServiceCenterVO> selectServiceMyPageList(ServiceCenterVO vo) {
 		List<ServiceCenterVO> serviceMyPageList = null;
@@ -87,11 +100,11 @@ public class ServiceCenterServiceImpl implements ServiceCenterService {
 		return serviceMyPageList;
 	}
 
+	/* 마이페이지 조회 */
 	@Override
-	public int selectNoReplyCnt() throws Exception {
-		int result = 0;
-		result = serviceDao.selectNoReplyCnt();
-		return result;
+	public int selectMypageServiceCnt(ServiceCenterVO vo) {
+		return serviceDao.selectMypageServiceCnt(vo);
+
 	}
 
 }

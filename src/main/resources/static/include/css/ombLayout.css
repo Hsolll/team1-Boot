@@ -41,6 +41,7 @@ table, input, select, textarea, a { font-size: 12px; line-height: 1.25; color: #
 .w700 { width: 700px !important; }
 .tr { text-align: right !important; }
 .tl { text-align: left !important; }
+.tb_left { text-align: left; }
 .fr { float: right !important; }
 
 .db { display: block !important; }
@@ -261,6 +262,9 @@ input[type=checkbox] {
     width: 1200px;
     margin: 40px auto;
 }
+
+/********** 배너 **********/
+
 
 /************************************** footer 부분 **************************************/
 

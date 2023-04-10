@@ -51,9 +51,7 @@
 	</head>
 	<body>
 	<form id="kakaoLogin">
-			<input type="hidden" id="u_email" name="u_email" value="${sessionId }"/>
-	</form>
-		
-            
+			<input type="hidden" id="u_email" name="u_email" value="${socialLogin }"/>
+	</form>         
 	</body>
 </html>

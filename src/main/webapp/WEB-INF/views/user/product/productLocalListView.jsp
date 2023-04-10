@@ -4,7 +4,6 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="/resources/include/js/heart.js"></script>
 <script type="text/javascript" src="/resources/include/js/paging.js"></script>
-<!-- <script type="text/javascript" src="/resources/include/js/productCommon.js"></script> -->
 <script type="text/javascript">
 $(".p_no").click(function(){
 	let p_no = $(this).attr("id")
