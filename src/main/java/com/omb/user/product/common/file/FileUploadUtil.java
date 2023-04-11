@@ -101,7 +101,7 @@ public class FileUploadUtil {
 		log.info("원본 이미지 파일(fileAdd) : " + fileAdd);
 		
 		BufferedImage sourceImg = ImageIO.read(fileAdd); // fileAdd에 해당하는 이미지 파일을 읽어와서 데이터로 저장. 
-		BufferedImage destImg = Scalr.resize(sourceImg, Scalr.Method.AUTOMATIC,Scalr.Mode.FIT_TO_HEIGHT, 133); //크기를 조정하여 이미지 데이터 저장.
+		BufferedImage destImg = Scalr.resize(sourceImg, Scalr.Method.AUTOMATIC,Scalr.Mode.FIT_TO_HEIGHT, 279); //크기를 조정하여 이미지 데이터 저장.
                                     //resize(대상[BufferedImage 타입]=원본이미지, 원본비율(가로세로비율), 높이 또는 너비, 크기)
 		
 		String thumbnailName = "thumbnail_"+ fileName; //thumbnail_board_1658205347977_cat.jpg

@@ -39,6 +39,9 @@ public class AdmServiceCenterServiceImpl implements AdmServiceCenterService {
 	public AdmServiceCenterVO replyServiceDetail(AdmServiceCenterVO svo) {
 		AdmServiceCenterVO detail = null;
 		detail = admserviceDao.replyServiceDetail(svo);
+		if(detail != null) {
+			detail.setAs_content(detail.getAs_content().toString().replace("\n", "<br />"));
+		}
 		return detail;
 	}
 

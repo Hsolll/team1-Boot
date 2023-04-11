@@ -46,6 +46,9 @@
 						<tr>
 							<td>
 								<div class="detail_content">
+									<c:if test="${not empty detail.an_thumbnail}">
+							 			<img src="/uploadStorage/notice/${detail.an_thumbnail}">
+						 			</c:if>
 									<p>${ detail.an_content }</p>
 								</div>
 							</td>

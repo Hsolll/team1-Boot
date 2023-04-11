@@ -26,13 +26,13 @@
                             <!-- ============================================================== -->
                             <!-- card profile -->
                             <!-- ============================================================== -->
-                            <div class="card" style="display: -webkit-inline-box;">
+                            <div class="card" style="flex-direction: row;">
                                 <div class="card-body">
                                     <div class="user-avatar text-center d-block">
                                         <div>회원번호 : ${detail.u_no}</div>
                                     </div>
                                     <div class="text-center">
-                                        <h2 class="font-24 mb-0">${detail.u_name}</h2>
+                                        <h2 class="font-24">${detail.u_name}</h2>
                                         <p>아이디 : ${detail.u_id}</p>
                                         <p>닉네임 : ${detail.u_nick}</p>
                                         <p>회원가입일 : ${detail.u_created_at}</p>
@@ -93,7 +93,7 @@
                         </div>
 					<%-- ============== container 시작 ====================  --%>
 					
-						<div class="btnArea" style="text-align:left;">
+						<div class="btnArea">
 							<button id="listBtn" type="button" class="btn btn-dark">목록으로</button>
 						</div>
 					<%-- ============== container 종료 ====================  --%>
