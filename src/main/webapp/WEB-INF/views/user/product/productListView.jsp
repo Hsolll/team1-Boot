@@ -50,7 +50,7 @@
 								<!-- <option value="b_name">작성자</option> -->
 								</select>
 								<input type="text" name="keyword" id="keyword" value="" class="form-control ht34 w280" placeholder="검색어를 입력하세요"/>
-								<button type="button" id="searchData" class="btn w125">검색</button>
+								<button type="button" id="searchData" class="btn_market w125">검색</button>
 							</div>
 						</form>
 					</div>
@@ -75,7 +75,7 @@
 								<input  type="hidden" id="p_local2" name="p_local" readonly/><br>
 								<input  type="hidden" id="p_local3" name="p_local" readonly/><br>
 							</form>
-							<input type="button" id="pConfirm" class="btn w125" value="지역 선택완료"/>
+							<input type="button" id="pConfirm" class="btn_market w125" value="지역 선택완료"/>
 							<input type="hidden" id="p_localC" value=""/>
 						</div>
 					</div>
@@ -83,12 +83,12 @@
 					<!-- 내가 쓴 글 보기 -->
 					<div id="myWrite">
 						<input type="hidden" id="MyNo" value="${member.u_no}"/>
-						<input type="button" id="write" class="btn ml10 w125" value="내가 쓴 글 보기"/>
+						<input type="button" id="write" class="btn_market ml10 w125" value="내가 쓴 글 보기"/>
 					</div>
 					
 					<!-- 상품 등록하기 -->
 					<div id="NewConfrim"> 
-						<input type="button" id="insert" class="btn ml10 w125" value="등록하기">
+						<input type="button" id="insert" class="btn_market ml10 w125" value="등록하기">
 					</div>
 				</div>
 				
