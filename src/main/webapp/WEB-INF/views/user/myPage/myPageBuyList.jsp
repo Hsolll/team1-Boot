@@ -170,7 +170,7 @@
 	                                                </td>
 	                                                <td rowspan="1">      
 	                                                    <p class="fnt_2"> <c:if test="${productBuyList.p_price == 0}">무료나눔</c:if>
-	                                                        <c:if test="${productBuyList.p_price != 0}">${productBuyList.p_price}</c:if></p>
+	                                                        <c:if test="${productBuyList.p_price != 0}"><fmt:formatNumber value="${productBuyList.p_price}" groupingUsed="true"/></c:if></p>
 	                                                    </td>
 	                                                    <td class="td-center">           
 	                                                        <span class="fc_blue">${productBuyList.p_status}</span>                        

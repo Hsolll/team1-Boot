@@ -160,7 +160,7 @@
         <input type="hidden" name="u_id" value="${update.u_id }" />
         <div class="member_wrap">     
             <header class="member_header"></header>  
-            <div class="find_main" style="height: 630px;">
+            <div class="find_main" style="height: 630px; margin: 0 480px;">
                 <ul class="tab" style="height:70px;">
                     <li class="on"><a id="tab1">회원수정</a></li>
                     <li><a id="tab2">주소관리</a></li>

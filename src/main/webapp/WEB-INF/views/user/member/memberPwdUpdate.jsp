@@ -62,7 +62,7 @@
         <input type="hidden" name="u_no" value="${memberLogin.u_no }" />
         <div class="member_wrap"> 
             <header class="member_header"></header>
-            <div class="find_main" style="height: 420px;">
+            <div class="find_main" style="height: 420px; margin: 0 480px;">
                 <ul class="tab" style="height:100px;">
                     <li><a id="tab1">회원수정</a></li>
                     <li class="on"><a href="/member/pwdChkForm2" id="tab2">비밀번호수정</a></li>

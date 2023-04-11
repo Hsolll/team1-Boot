@@ -181,7 +181,7 @@
 	                                                <td rowspan="1">      
 	                                                    <p class="fnt_2">
 	                                                        <c:if test="${productMyPageLikeList.p_price == 0}">무료나눔</c:if>
-	                                                        <c:if test="${productMyPageLikeList.p_price != 0}">${productMyPageLikeList.p_price}</c:if>
+	                                                        <c:if test="${productMyPageLikeList.p_price != 0}"><fmt:formatNumber value="${productMyPageLikeList.p_price}" groupingUsed="true"/></c:if>
 	                                                    </p>
 	                                                </td>
 	                                                <td class="td-center">           

@@ -4,13 +4,23 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page trimDirectiveWhitespaces="true"%>
 
+<script type="text/javascript">
+    
+    function confirmLogout() {
+        if( confirm("로그아웃 하시겠습니까?") ) {
+            location.href = "<c:url value ='/logout'/>";
+        }
+    }
+    
+</script>
+
 <div class="top_banner">
 	<div class="top_wrap">
 		<ul>
 			<!-- <li><a href="/member/signUp">회원가입</a></li> -->
 			<li><c:if test="${not empty memberLogin }">
           		${memberLogin.u_name }님 반갑습니다
-          		<a href="/logout">로그아웃</a>
+          		<a href="/logout" onclick="confirmLogout();">로그아웃</a>
           		<a href="/member/mypage">마이페이지</a>
           	</c:if>
           	<c:if test="${empty memberLogin }">

@@ -8,15 +8,21 @@
 		$(function(){
 			$(".content_wrap .page-header h1").html("마이페이지");
 		    $(".buyid").click(function(e){
-		        alert("거래완료 되었습니다.");
-		        $("#p_status").attr('value','거래완료');
-		        $("#p_no").attr('value',$(this).data('id'));
-		        $("#p_buyid").attr('value',$(this).prev('#input_buyid').val());
-		        $("#sellList").attr({
-		            "method" :"post",
-		            "action" : "/member/productStatus"
-		        })
-		        $("#sellList").submit();
+		    	var pbuyid = prompt("구매자 아이디를 입력해주세요.");
+	            if(pbuyid==''){
+	            	alert("아이디를 입력해주세요");
+	            }else{
+	            alert("거래완료 되었습니다.");	
+	            $("#p_no").attr('value',$(this).data('buyid'));
+	            $("#p_buyid.pbuyid").attr('value',pbuyid);
+	            $("#p_status").attr('value','거래완료');
+	            console.log(pbuyid,$("#p_buyid"));
+	            $("#sellList").attr({
+	                "method" :"post",
+	                "action" : "/member/productStatus"
+	            })
+	            $("#sellList").submit();
+	            }
 		    })
 		
 		    $(".p_no").click(function(){
@@ -124,7 +130,7 @@
 	                                            <td rowspan="1">      
 	                                                <p class="fnt_2">
 	                                                     <c:if test="${productBuyList.p_price == 0}">무료나눔</c:if>
-	                                                     <c:if test="${productBuyList.p_price != 0}">${productBuyList.p_price}</c:if>
+	                                                     <c:if test="${productBuyList.p_price != 0}"><fmt:formatNumber value="${productBuyList.p_price}" groupingUsed="true"/></c:if>
 	                                                </p>
 	                                            </td>
 	                                            <td class="td-center">           
@@ -203,7 +209,7 @@
 	                                                </td>
 	                                                <td rowspan="1">      
 	                                                    <p class="fnt_2"> <c:if test="${productSellList.p_price == 0}">무료나눔</c:if>
-	                                                        <c:if test="${productSellList.p_price != 0}">${productSellList.p_price}</c:if>
+	                                                        <c:if test="${productSellList.p_price != 0}"><fmt:formatNumber value="${productSellList.p_price}" groupingUsed="true"/></c:if>
 	                                                    </p>
 	                                                </td>
 	                                                <td class="td-center">           
