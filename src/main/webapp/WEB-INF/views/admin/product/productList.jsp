@@ -59,15 +59,14 @@
 						</div>
 					</form>
 				</div>
-			<div id="boardList" class="table-height">
-				<table summary="게시판 리스트" class="table table-striped">
+			<div id="boardList" class="table-responsive">
+				<table summary="게시판 리스트" class="table m-t-15">
 					<thead>
 						<tr>	
 							<th data-value="p_no" class="order text-center col-md-1">상품번호</th>
 							<th class="text-center col-md-2">제목</th>
 							<th class="text-center col-md-2">상품명</th>
 							<th class="text-center col-md-2">가격</th>
-							<th class="text-center col-md-2">상태</th>
 							<th class="text-center col-md-1">사용자</th>
 							<th data-value="b_date" class="order col-md-2">작성일</th>
 						</tr>
@@ -81,7 +80,6 @@
 										<td class="goDetail text-left">${product.p_title }</td>
 										<td class="name">${product.p_name }</td>
 										<td class="text-center">${product.p_price }</td>
-										<td class="text-center">${product.p_status }</td>
 										<td class="text-center">${product.u_no }</td>
 										<td class="text-left">${product.p_created_at }</td>		
 									</tr>
