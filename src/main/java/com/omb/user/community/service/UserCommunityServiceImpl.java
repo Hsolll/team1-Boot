@@ -109,4 +109,19 @@ public class UserCommunityServiceImpl implements UserCommunityService {
 
 	
 	
+	/* 민석작업 */
+	@Override
+	public List<UserCommunityVO> myPageCommunityList(UserCommunityVO community) {
+		List<UserCommunityVO> myPageCommunityList = null;
+
+		myPageCommunityList = userCommunityDAO.myPageCommunityList(community);
+		return myPageCommunityList;
+	}
+
+	/* 민석작업 */
+	@Override
+	public int myPageCommunityListCnt(UserCommunityVO community) {
+		return userCommunityDAO.myPageCommunityListCnt(community);
+	}
+
 }

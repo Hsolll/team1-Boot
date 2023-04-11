@@ -236,4 +236,23 @@ public class ProductServiceImpl implements ProductService {
 		return productDao.productMyPageSellSale(pvo);
 	}
 
+	/* 나눔상품 리스트 조회 */
+	@Override
+	public List<ProductVO> selectShareProductList(ProductVO pvo) {
+
+		List<ProductVO> list = productDao.selectShareProductList(pvo);
+		
+		return list;
+	}
+
+	@Override
+	public int ShareProductListCnt() {
+
+		int count = productDao.ShareProductListCnt();
+
+		return 0;
+	}
+
+	
+	
 }

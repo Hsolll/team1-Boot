@@ -24,6 +24,8 @@ import com.omb.admin.serviceCenter.vo.AdmServiceCenterVO;
 import com.omb.common.vo.PageDTO;
 import com.omb.user.address.service.MemberAddressService;
 import com.omb.user.address.vo.MemberAddressVO;
+import com.omb.user.community.service.UserCommunityService;
+import com.omb.user.community.vo.UserCommunityVO;
 import com.omb.user.member.service.MemberService;
 import com.omb.user.member.vo.MemberVO;
 import com.omb.user.product.service.ProductService;
@@ -51,6 +53,9 @@ public class MemberController {
 
 	@Setter(onMethod_ = @Autowired)
 	private AdmServiceCenterService admserviceCenter;
+	
+	@Setter(onMethod_ =@Autowired)
+	private UserCommunityService userCommunityService; 
 
 	@Setter(onMethod_ = @Autowired)
 	private MemberAddressService memberAddressService;
@@ -65,13 +70,11 @@ public class MemberController {
 
 	@GetMapping("/signUpAgree")
 	public String signUpAgree() {
-		log.info("약관 동의 호출");
 		return "user/login/signUpAgree";
 	}
 
 	@PostMapping("/signUpForm")
 	public String signUpForm() {
-		log.info("회원가입 화면 호출");
 
 		return "user/login/signUpForm";
 	}
@@ -89,7 +92,6 @@ public class MemberController {
 	@PostMapping("/signUp")
 	public String signUp(MemberVO mvo) {
 
-		log.info("회원가입 완료");
 		int nickResult = memberService.nickChk(mvo);
 		int result = memberService.idChk(mvo);
 		int emailResult = memberService.emailChk(mvo);
@@ -107,7 +109,6 @@ public class MemberController {
 	@PostMapping("/naverSignUp")
 	public String naverSignUp(MemberVO mvo) {
 
-		log.info("네이버 회원가입 완료");
 		int nickResult = memberService.nickChk(mvo);
 		int result = memberService.idChk(mvo);
 		int phoneResult = memberService.phoneChk(mvo);
@@ -125,7 +126,6 @@ public class MemberController {
 	@PostMapping("/kakaoSignUp")
 	public String kakaoSignUp(MemberVO mvo) {
 
-		log.info("카카오 회원가입 완료");
 		int nickResult = memberService.nickChk(mvo);
 		int result = memberService.idChk(mvo);
 		int phoneResult = memberService.phoneChk(mvo);
@@ -142,7 +142,6 @@ public class MemberController {
 
 	@PostMapping("/updateForm")
 	public String updateForm(@ModelAttribute MemberVO mvo, Model model) {
-		log.info("회원수정 호출" + mvo.getU_id());
 
 		MemberVO result = memberService.getMemberInfo(mvo);
 		model.addAttribute("update", result);
@@ -152,7 +151,6 @@ public class MemberController {
 
 	@GetMapping("/socialUpdateForm")
 	public String socialUpdateForm(@ModelAttribute MemberVO mvo, Model model) {
-		log.info("소셜회원수정 호출" + mvo.getU_id());
 
 		MemberVO result = memberService.getMemberInfo(mvo);
 		model.addAttribute("update", result);
@@ -163,8 +161,6 @@ public class MemberController {
 	@PostMapping("/memberUpdate")
 	public String memberUpdate(MemberVO mvo) {
 
-		log.info("회원수정");
-
 		memberService.memberUpdate(mvo);
 		memberService.addressUpdate(mvo);
 
@@ -173,14 +169,11 @@ public class MemberController {
 
 	@PostMapping("/deleteForm")
 	public String deleteForm(MemberVO mvo) {
-		log.info("회원탈퇴 호출");
 		return "user/member/memberDeleteForm";
 	}
 
 	@PostMapping("/memberDelete")
 	public String memberDelete(MemberVO mvo) {
-
-		log.info("회원탈퇴");
 
 		memberService.memberDelete(mvo);
 
@@ -217,14 +210,12 @@ public class MemberController {
 
 	@PostMapping("/pwdUpdateForm")
 	public String pwdUpdateForm(MemberVO mvo) {
-		log.info("회원비밀번호수정 호출");
 		return "user/member/memberPwdUpdate";
 	}
 
 	@PostMapping("/memberPwdUpdate")
 	public String memberPwdUpdate(MemberVO mvo) {
 
-		log.info("회원비밀번호수정");
 		memberService.memberPwdUpdate(mvo);
 
 		return "redirect:/logout";
@@ -232,21 +223,18 @@ public class MemberController {
 
 	@GetMapping("/pwdChkForm")
 	public String pwdChkForm(MemberVO mvo) {
-		log.info("회원수정 비밀번호 확인");
 
 		return "user/member/memberConfirmPw";
 	}
 
 	@GetMapping("/pwdChkForm2")
 	public String pwdChkForm2(MemberVO mvo) {
-		log.info("회원비밀번호 수정 비밀번호 확인");
 
 		return "user/member/memberConfirmPw2";
 	}
 
 	@GetMapping("/pwdChkForm3")
 	public String pwdChkForm3(MemberVO mvo) {
-		log.info("회원비밀번호 탈퇴 비밀번호 확인");
 
 		return "user/member/memberConfirmPw3";
 	}
@@ -263,10 +251,6 @@ public class MemberController {
 	@RequestMapping(value = "/mailCheck", method = RequestMethod.GET)
 	@ResponseBody
 	public String mailCheckGET(String email) throws Exception {
-
-		/* 뷰(View)로부터 넘어온 데이터 확인 */
-		log.info("이메일 데이터 전송 확인");
-		log.info("인증번호 : " + email);
 
 		/* 인증번호(난수) 생성 */
 		Random random = new Random();
@@ -301,10 +285,6 @@ public class MemberController {
 	@RequestMapping(value = "/findPwMailCheck", method = RequestMethod.GET)
 	@ResponseBody
 	public String findPwMailCheckGET(String email) throws Exception {
-
-		/* 뷰(View)로부터 넘어온 데이터 확인 */
-		log.info("이메일 데이터 전송 확인");
-		log.info("인증번호 : " + email);
 
 		/* 인증번호(난수) 생성 */
 		Random random = new Random();
@@ -341,10 +321,6 @@ public class MemberController {
 	@ResponseBody
 	public String updateMailCheckGET(String email) throws Exception {
 
-		/* 뷰(View)로부터 넘어온 데이터 확인 */
-		log.info("이메일 데이터 전송 확인");
-		log.info("인증번호 : " + email);
-
 		/* 인증번호(난수) 생성 */
 		Random random = new Random();
 		int checkNum = random.nextInt(888888) + 111111;
@@ -377,7 +353,6 @@ public class MemberController {
 
 	@GetMapping("/findId")
 	public String findIdForm() {
-		log.info("아이디 찾기 호출");
 
 		return "user/findMember/findIdForm";
 	}
@@ -398,7 +373,6 @@ public class MemberController {
 
 	@GetMapping("/findPw")
 	public String findPwForm() {
-		log.info("비밀번호 찾기 호출");
 
 		return "user/findMember/findPwForm";
 	}
@@ -428,7 +402,6 @@ public class MemberController {
 	@PostMapping("/findPwUpdate")
 	public String findPwUpdate(MemberVO mvo) {
 
-		log.info("회원비밀번호재설정");
 		memberService.findPwUpdate(mvo);
 
 		return "redirect:/login";
@@ -437,7 +410,6 @@ public class MemberController {
 	@PostMapping("/findPwUpdateForm")
 	public String findPwUpdateForm(HttpSession session, Model model) {
 		MemberVO memberLogin = (MemberVO) session.getAttribute("memberLogin");
-		log.info("비밀번호찾기 재설정 호출");
 
 		if (memberLogin == null) {
 			return "redirect:/login";
@@ -449,18 +421,15 @@ public class MemberController {
 	@GetMapping("/sellList")
 	public String sellListForm(HttpSession session, Model model, ProductVO pvo) {
 		MemberVO mvo = (MemberVO) session.getAttribute("memberLogin");
-		log.info("마이페이지 판매내역 호출 성공");
 
 		// 모델 객체에 데이터 전달
 		pvo.setU_no(mvo.getU_no());
 		pvo.setAmount(10);
 		List<ProductVO> productSellList = productService.selectProductSellList(pvo);
-		log.info("productSellList : " + productSellList);
 
 		model.addAttribute("productSellList", productSellList);
 
 		int total = productService.productMyPageListCnt(pvo);
-		log.info("total :" + total);
 
 		model.addAttribute("pageMaker", new PageDTO(pvo, total));
 		if (pvo.getSearch() != "") {
@@ -476,19 +445,16 @@ public class MemberController {
 	@GetMapping("/buyList")
 	public String buyListForm(HttpSession session, Model model, ProductVO pvo) {
 		MemberVO mvo = (MemberVO) session.getAttribute("memberLogin");
-		log.info("마이페이지 구매내역 호출 성공");
 
 		// 모델 객체에 데이터 전달
 		pvo.setU_id(mvo.getU_id());
 		pvo.setU_no(mvo.getU_no());
 		pvo.setAmount(10);
 		List<ProductVO> productBuyList = productService.selectProductBuyList(pvo);
-		log.info("productBuyList : " + productBuyList);
 
 		model.addAttribute("productBuyList", productBuyList);
 
 		int total = productService.productMyPageBuyListCnt(pvo);
-		log.info("total :" + total);
 
 		model.addAttribute("pageMaker", new PageDTO(pvo, total));
 
@@ -504,12 +470,10 @@ public class MemberController {
 		pvo.setU_no(mvo.getU_no());
 		pvo.setAmount(10);
 		List<ProductVO> productMyPageLikeList = productService.selectProductMyPageLikeList(pvo);
-		log.info("productMyPageLikeList : " + productMyPageLikeList);
 
 		model.addAttribute("productMyPageLikeList", productMyPageLikeList);
 
 		int total = productService.productMyPageLikeListCnt(pvo);
-		log.info("total :" + total);
 
 		model.addAttribute("pageMaker", new PageDTO(pvo, total));
 
@@ -519,7 +483,6 @@ public class MemberController {
 	@PostMapping("/productStatus")
 	public String productStatus(ProductVO pvo) {
 
-		log.info("판매완료" + pvo);
 
 		productService.productStatus(pvo);
 
@@ -529,7 +492,6 @@ public class MemberController {
 	@GetMapping(value = "/myPageServiceList")
 	public String serviceList(HttpSession session, @ModelAttribute MemberVO user, @ModelAttribute ServiceCenterVO vo,
 			AdmServiceCenterVO svo, Model model) {
-		log.info("serviceList() 실행...");
 
 		user = (MemberVO) session.getAttribute("memberLogin");
 		vo.setU_no(user.getU_no());
@@ -539,7 +501,6 @@ public class MemberController {
 
 		List<AdmServiceCenterVO> admServiceList = admserviceCenter.admReplyList();
 		model.addAttribute("admServiceList", admServiceList);
-		log.info("답글 확인 : " + admServiceList);
 
 		int total = serviceCenter.selectMypageServiceCnt(vo);
 		vo.setAmount(10);
@@ -551,7 +512,6 @@ public class MemberController {
 	@GetMapping("/mypage")
 	public String myPage(HttpSession session, Model model, ProductVO pvo) {
 		MemberVO mvo = (MemberVO) session.getAttribute("memberLogin");
-		log.info("마이페이지 호출 성공");
 
 		pvo.setU_no(mvo.getU_no());
 		int productMyPageSellSoldOut = productService.productMyPageSellSoldOut(pvo);
@@ -571,7 +531,6 @@ public class MemberController {
 		pvo.setU_no(mvo.getU_no());
 		pvo.setAmount(3);
 		List<ProductVO> productBuyList = productService.selectProductBuyList(pvo);
-		log.info("productBuyList : " + productBuyList);
 
 		model.addAttribute("productBuyList", productBuyList);
 
@@ -579,7 +538,6 @@ public class MemberController {
 		pvo.setU_no(mvo.getU_no());
 		pvo.setAmount(3);
 		List<ProductVO> productSellList = productService.selectProductSellList(pvo);
-		log.info("productSellList : " + productSellList);
 
 		model.addAttribute("productSellList", productSellList);
 
@@ -591,15 +549,46 @@ public class MemberController {
 
 		MemberVO mvo = (MemberVO) session.getAttribute("memberLogin");
 
-		log.info("세션에서 꺼내온 정보 : " + mvo);
-
 		List<MemberAddressVO> list = memberAddressService.memberAddressInfoAll(mvo);
-
-		log.info("조회 후 결과 : " + list);
 
 		model.addAttribute("addressList", list);
 
 		return "user/myPage/myPageAddressInfo";
 	}
 	
+	@GetMapping("/myPageCommunityList")
+	public String communityList(HttpSession session ,UserCommunityVO community, Model model) {
+		MemberVO mvo = (MemberVO) session.getAttribute("memberLogin");
+		community.setU_no(mvo.getU_no());
+		
+		String path = "";
+		log.info("communityList 메서드 호출");
+		log.info("전달받은 값 : " + community.getC_category());
+		log.info("1. 현재 페이지 : " + community.getPageNum());
+		log.info("1. 보여줄 데이터 수 : " + community.getAmount());
+		
+		if(community.getC_category().equals("C")) {
+			path = "user/myPage/myPageCommunityList";
+		}
+		else if(community.getC_category().equals("A")) {
+			path = "user/myPage/myPageCommunityListReview";
+		}
+		else if(community.getC_category().equals("B")) {
+			path = "user/myPage/myPageCommunityListRecipe";
+		}
+		
+		log.info("이동할 경로 : " + path);
+		
+		List<UserCommunityVO> myPageCommunityList = userCommunityService.myPageCommunityList(community);
+		
+		model.addAttribute("myPageCommunityList", myPageCommunityList);
+		
+		// 전체 레코드 수 구현 
+		int total = userCommunityService.myPageCommunityListCnt(community);
+		log.info("전체 레코드 수 : " + total);
+		//페이징 처리
+		model.addAttribute("pageMaker", new PageDTO(community, total));
+		
+		return path;
+	}
 }

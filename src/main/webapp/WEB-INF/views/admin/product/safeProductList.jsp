@@ -61,8 +61,8 @@
 				</form>
 			</div>
 			
-			<div id="boardList" class="table-height">
-				<table summary="게시판 리스트" class="table table-striped">
+			<div id="boardList" class="table-responsive">
+				<table summary="게시판 리스트" class="table m-t-15">
 					<thead>
 						<tr>	
 							<th data-value="p_no" class="order text-center col-md-1">상품번호</th>

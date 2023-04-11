@@ -5,24 +5,25 @@
 		<script>
 			$(function(){
 				
-				$("#listBtn").click(function(){
+				$(".listBtn").click(function(){
 					location.href="/serviceCenter/serviceList";
 				});
 				
-				$("#updateBtn").click(function(){
-					$("#form_data").attr({
+				$("#updateButton").click(function(){
+					
+					$("#update").attr({
 						"action":"/serviceCenter/serviceUpdateForm"
 					});
-					$("#form_data").submit();
+					$("#update").submit();
 				});
 				
-				$("#deleteBtn").click(function(){
+				$("#delButton").click(function(){
 					if(confirm("해당 문의를 삭제하시겠습니까?")){
-						$("#form_data").attr({
+						$("#update").attr({
 							"method":"get",
 							"action":"/serviceCenter/serviceDelete"
 						});
-						$("#form_data").submit();						
+						$("#update").submit();						
 					}
 				});
 			});
@@ -30,62 +31,56 @@
 		</script>
 	</head>
 	<body>
-		<div style="position: relative;">
-			<form id="form_data">
-				<input type="hidden" name="sc_no" id="sc_no" value="${ serviceDetail.sc_no }" />
-			</form>
-			
+		<div style="position:relative;">
 			<div class="detail_table mt30">
-				<c:set var="member" value="${memberLogin.u_no}" />
-				<c:set var="service" value="${serviceDetail.u_no}" />
-				<fmt:parseNumber var="member" type="number" value="${member}"/>
-				<fmt:parseNumber var="service" type="number" value="${service}"/>
+				<c:set var="member" value="${memberLogin.u_no }"/>
 				<c:choose>
-					<c:when test="${member eq service }">
+					<c:when test="${memberLogin.u_no eq serviceDetail.u_no }">
 						<div class="buttonList tr">
-							<button type="button" class="buttonWhite" id="updateBtn">EDIT</button>
-							<button type="button" class="buttonWhite" id="deleteBtn">DELETE</button>
-							<button type="button" class="buttonBlack" id="listBtn">LIST</button>
+							<button type="button" id="updateButton" class="buttonWhite">EDIT</button>
+							<button type="button" id="delButton" class="buttonWhite">DELETE</button>
+							<button type="button" class="buttonBlack listBtn">LIST</button>
 						</div>
 					</c:when>
 					<c:otherwise>
-						<div class="buttonList tr" style="display: block;">
-							<button type="button" class="buttonBlack" id="listBtn">LIST</button>
+						<div class="buttonList tr" style="display:block;">
+							<button type="button" class="buttonBlack listBtn">LIST</button>
 						</div>
 					</c:otherwise>
 				</c:choose>
-	            <table class="detailView">
-	                <colgroup>
-	                </colgroup>
-	                <thead>
-	                    <tr class="text-center">
-	                        <th>${serviceDetail.sc_title}</th>
-	                    </tr>
-	                </thead>
-	                <tbody>
-	                	<tr>
-							<td style="border: 0;">
+				<form id="update" name="update" >
+					<input type="hidden" id="sc_no" name="sc_no" value=${serviceDetail.sc_no }>
+				</form>
+				<table class="table table-bordered thBgGray">
+					<colgroup>
+					</colgroup>	
+					<thead>
+						<tr class="text-center">
+							<th>${serviceDetail.sc_title }</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td style="border:0;">
 								<div class="detail_date">
-									<div>
-										<span><em>Date : </em>${ serviceDetail.sc_created_at }</span>
-									</div>
-									<div>
-										<span><em>Name : </em>${ serviceDetail.u_name }</span>
-										<span><em>Hits : </em>${ serviceDetail.sc_readcnt }</span>
-									</div>
+									<span><em>Date : </em>${serviceDetail.sc_created_at }</span>
 								</div>
-							</td> 
+								<div>
+									<span><em>Name : </em>${serviceDetail.u_name }</span>
+									<span><em>Hits : </em>${serviceDetail.sc_readcnt }</span>
+								</div>
+							</td>
 						</tr>
 						<tr>
 							<td>
 								<div class="detail_content">
-									<p>${ serviceDetail.sc_content }</p>
+									<p>${serviceDetail.sc_content }</p>
 								</div>
 							</td>
 						</tr>
-	                </tbody>
-	            </table>
-	        </div>
+					</tbody>
+				</table>	
+			</div>
 		</div>
 	</body>
 </html>

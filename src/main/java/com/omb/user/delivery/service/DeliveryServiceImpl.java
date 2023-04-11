@@ -122,7 +122,7 @@ public class DeliveryServiceImpl implements DeliveryService {
 
 
 		@Override
-		public DeliveryVO selectDeliveryInfo(DeliveryVO delivery) {
+		public DeliveryVO selectDeliveryInfo(DeliveryVO delivery) throws NullPointerException {
 			DeliveryVO detail = deliveryDAO.selectDeliveryInfo(delivery);
 			detail.setT_key(apiKey);
 			return detail;

@@ -25,30 +25,14 @@
 					alert(comment);
 				}
 				
-				$("#testBtn").click(function(){
-					$.ajax({
-			    		url: "/delivery/codeSearch",
-						dataType : "json",
-			    		success : function(result){
-							console.log(result);
-							
-							//let obj = JSON.parse(result);
-							
-						},
-						error : function() {
-							alert("실패");
-						}
-			    	});
-				});
-				
-				
-				$("#testBtn1").click(function(){
-					$.ajax({
-			    		url: "/delivery/deliveryTracking?o_no=5",
-						dataType : "json",
-			    		success : function(result){
-							console.log(result);
+				<%-- 배송정보 조회
+				$.ajax({
+		    		url: "/delivery/deliveryTracking?o_no=" + ${buyList.o_no},
+					dataType : "json",
+		    		success : function(result){
+						console.log(result);
 
+						if(result != "배송정보없음"){
 							let tracking = result.trackingDetails;
 							console.log("---------- 추출 정보 ----------")
 							console.log(tracking);
@@ -58,13 +42,13 @@
 							console.log("---------- 출력 정보 ----------")
 							console.log(kind);
 							$(".status").text(kind);
-						},
-						error : function() {
-							alert("실패");
 						}
-			    	});
-				});
-				
+					},
+					error : function() {
+						alert("실패");
+					}
+		    	});
+				--%>
 				
 				$(".godetail").click(function(){
 					let o_no = $(this).parents("tr").attr("data-no");
@@ -237,28 +221,6 @@
 											</c:choose>
 										</td> 
 									</tr>
-									<script type="text/javascript">
-										$.ajax({
-								    		url: "/delivery/deliveryTracking?o_no=" + ${buyList.o_no},
-											dataType : "json",
-								    		success : function(result){
-												console.log(result);
-	
-												let tracking = result.trackingDetails;
-												console.log("---------- 추출 정보 ----------")
-												console.log(tracking);
-												
-												let lastIndex = tracking.length - 1;
-												let kind = tracking[lastIndex].kind
-												console.log("---------- 출력 정보 ----------")
-												console.log(kind);
-												$(".status").text(kind);
-											},
-											error : function() {
-												alert("실패");
-											}
-								    	});
-									</script>
 								</c:forEach>
 							</c:when>
 							<c:otherwise>

@@ -28,7 +28,7 @@
 	<!-- 배송지 추가 -->
 	<insert id="insertMemberAddress" parameterType="address">
 		INSERT INTO TB_USER_ADDRESS_INFO (ADD_NO, U_NO, ZIP, ADDRESS, SUB_ADDRESS, ADD_NAME)
-		VALUES (TB_USER_ADDRESS_INFO_SEQ.NEXTVAL, #{u_no}, #{zip}, #{address}, #{sub_address}, #{add_NAME})
+		VALUES (TB_USER_ADDRESS_INFO_SEQ.NEXTVAL, #{u_no}, #{zip}, #{address}, #{sub_address}, #{add_name})
 	</insert>
 	
 	<!-- 배송지 삭제 -->

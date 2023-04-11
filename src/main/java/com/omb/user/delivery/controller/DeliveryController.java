@@ -42,11 +42,16 @@ public class DeliveryController {
 	public String deliveryTracking(DeliveryVO delivery) throws IOException{
 		
 		log.info("전달받은 주문번호 : " + delivery);
-		
-		DeliveryVO detail = deliveryService.selectDeliveryInfo(delivery);
+		String trackingInfo = "";
+		DeliveryVO detail = null;
+		detail = deliveryService.selectDeliveryInfo(delivery);
 		log.info("주문번호로 조회한 배송 정보 : " + detail);
 		
-		String trackingInfo = deliveryService.deliveryTracking(detail);
+		if(detail != null) {
+			trackingInfo = deliveryService.deliveryTracking(detail);
+		} else {
+			trackingInfo = "배송정보없음";
+		}
 		
 		return trackingInfo;
 	}

@@ -95,5 +95,59 @@
 	<delete id="deleteCommunity" parameterType="community">
 		DELETE FROM TB_USER_COMMUNITY WHERE C_NO = #{c_no}
 	</delete>
+	
+	
+	
+	<!-- 민석 작업 마이페이지 조회 -->
+	<select id="myPageCommunityList" parameterType="community" resultType="community">
+		<![CDATA[
+		SELECT 
+			    C_NO, U_NO, U_ID, U_NICK, C_TITLE, C_CONTENT, C_FILE, C_THUMB, 
+			    TO_CHAR(C_CREATED_AT, 'YYYY-MM-DD') AS C_CREATED_AT, C_CATEGORY, C_CNT
+		FROM (
+		        SELECT 
+			            ROWNUM AS RNUM, C_NO, U_NO, U_ID, U_NICK, C_TITLE, C_CONTENT, 
+	            		C_FILE, C_THUMB, C_CREATED_AT, C_CATEGORY, C_CNT
+		        FROM (
+		                SELECT 
+			                    ROWNUM AS RNUM, C_NO, A.U_NO, U_ID, U_NICK, C_TITLE, C_CONTENT, 
+			                    C_FILE, C_THUMB, C_CREATED_AT, C_CATEGORY, C_CNT
+		                FROM TB_USER_COMMUNITY A
+		                INNER JOIN TB_USER B
+		                    ON A.U_NO = B.U_NO
+		                ORDER BY C_NO DESC
+		                )
+		        WHERE ]]>
+		        	<trim prefix="(" suffix=") AND " prefixOverrides="AND">
+						<if test="search=='u_id'">
+							<![CDATA[ u_nick LIKE '%'|| #{keyword} ||'%' ]]>					
+						</if>
+						<if test="search=='c_title'">
+							<![CDATA[ c_title LIKE '%'|| #{keyword} ||'%' ]]>					
+						</if>
+			        </trim>
+		        	<![CDATA[ C_CATEGORY = #{c_category} AND ROWNUM <= #{pageNum} * #{amount} AND U_NO = #{u_no}
+		        ) COMMUNITY
+		WHERE RNUM > (#{pageNum} - 1) * #{amount}
+		]]>
+	</select>
+	
+	<!-- 민석 작업 마이페이지 카운트 조회 -->
+	<select id="myPageCommunityListCnt" parameterType="community" resultType="int">
+		SELECT COUNT(*) 
+		FROM TB_USER_COMMUNITY A
+		INNER JOIN TB_USER B
+		    ON A.U_NO = B.U_NO
+		WHERE 
+			<trim prefix="(" suffix=") AND " prefixOverrides="AND">
+				<if test="search=='u_id'">
+					<![CDATA[ u_id LIKE '%'|| #{keyword} ||'%' ]]>					
+				</if>
+				<if test="search=='c_title'">
+					<![CDATA[ c_title LIKE '%'|| #{keyword} ||'%' ]]>					
+				</if>
+	        </trim>
+	        C_CATEGORY = #{c_category} AND A.U_NO = #{u_no}
+	</select>
 
 </mapper>

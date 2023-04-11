@@ -17,6 +17,7 @@
 			
 			<h2 class="text-left">내 물건 팔기</h2>
 			
+			<input type="hidden"  id="p_status" name="p_status" placeholder="상품 상태">
 			<table class="insertTbl">
 				<colgroup>
 					<col style="width: 10%;">

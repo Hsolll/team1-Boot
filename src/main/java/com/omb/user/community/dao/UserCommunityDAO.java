@@ -23,5 +23,11 @@ public interface UserCommunityDAO {
 	
 	public int deleteCommunity(UserCommunityVO community);		// 게시글 삭제
 	
-
+	
+	
+	/* 민석 작업 */
+	
+	public List<UserCommunityVO> myPageCommunityList(UserCommunityVO community);	// 마이페이지 조회
+	
+	public int myPageCommunityListCnt(UserCommunityVO community);	// 마이페이지 총 레코드 수
 }

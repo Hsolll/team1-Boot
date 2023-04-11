@@ -96,8 +96,8 @@
 				<input type="button" value="입금취소" id="upBtn" class="btn btn-default">
 			</div>
 			<div id="div">
-				<div class="boardList" class="table-height">
-					<table summary="게시판 리스트" class="table table-striped">
+				<div class="boardList" class="table-responsive">
+					<table summary="게시판 리스트" class="table m-t-15">
 						<thead>
 							<tr>
 								<th class="checkBox col-md-1 text-center"><input type="checkbox" class="allChk" name="allChk"></th>	

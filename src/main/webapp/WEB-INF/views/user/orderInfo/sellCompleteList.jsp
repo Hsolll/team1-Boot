@@ -50,7 +50,7 @@
 			});
 			
 			$(".sendBtn").click(function(){
-				let o_no = $(this).parents("tr").attr("data-num");
+				let o_no = $(this).parents("tr").attr("data-no");
 				console.log("o_no = " + o_no);
 				
 				/* 발송완료 버튼 클릭 시 주문상태 배송중으로 변경 
@@ -109,7 +109,7 @@
 			
 			/* 배송조회 */
 			$("#parcelSearchBtn").click(function(){
-				let o_no = $(this).parents("tr").attr("data-num");
+				let o_no = $(this).parents("tr").attr("data-no");
 				console.log("o_no = " + o_no);
 				$("#o_no").val(o_no);
 				
