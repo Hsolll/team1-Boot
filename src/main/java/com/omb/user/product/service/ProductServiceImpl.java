@@ -154,12 +154,6 @@ public class ProductServiceImpl implements ProductService {
 		return productLikeList;
 	}
 
-//	@Override
-//	public List<ProductVO> selectProductLike(int p_no, int u_no) {
-//		List<ProductVO> like = productDao.selectProductLike(p_no, u_no);
-//	    return like;
-//
-//	}
 	@Override
 	public List<ProductVO> selectProductLike(MemberVO vo) {
 		List<ProductVO> list = null;
