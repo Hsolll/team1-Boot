@@ -111,7 +111,7 @@ public class LoginController {
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "redirect:/";
+		return "redirect:/login";
 	}
 
 	// 네이버 로그인 성공시 callback호출 메소드

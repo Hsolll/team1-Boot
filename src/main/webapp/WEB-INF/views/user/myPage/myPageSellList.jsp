@@ -9,7 +9,10 @@
 	    	$(".content_wrap .page-header h1").html("판매 목록");
 	        $(".buyid").click(function(){
 	            var pbuyid = prompt("구매자 아이디를 입력해주세요.");
-	            alert("거래완료 되었습니다.");
+	            if(pbuyid==''){
+	            	alert("아이디를 입력해주세요");
+	            }else{
+	            alert("거래완료 되었습니다.");	
 	            $("#p_no").attr('value',$(this).data('buyid'));
 	            $("#p_buyid.pbuyid").attr('value',pbuyid);
 	            $("#p_status").attr('value','거래완료');
@@ -19,6 +22,7 @@
 	                "action" : "/member/productStatus"
 	            })
 	            $("#sellList").submit();
+	            }
 	        })
 	
 	        $(".p_no").click(function(){
@@ -191,7 +195,7 @@
 	                                                    </td>
 	                                                    <td rowspan="1">      
 	                                                        <p class="fnt_2"> <c:if test="${productSellList.p_price == 0}">무료나눔</c:if>
-	                                                            <c:if test="${productSellList.p_price != 0}">${productSellList.p_price}</c:if>
+	                                                            <c:if test="${productSellList.p_price != 0}"><fmt:formatNumber value="${productSellList.p_price}" groupingUsed="true"/></c:if>
 	                                                        </p>
 	                                                    </td>
 	                                                    <td class="td-center">           
