@@ -95,7 +95,7 @@
 					</tr>
 				</tbody>
 			</table>
-			
+			<input type="hidden"  id="p_status" name="p_status" placeholder="상품 상태">
 			<div class="btnArea text-right">
 				<button type="button" class="btn btn-dark" id="pconfirm">등록</button>
 				<button type="button" class="btn btn-dark" id="productListBtn">목록으로</button>
