@@ -192,7 +192,7 @@
 										<td class="thumb"><c:if
 												test="${not empty myPageCommunityList.c_thumb}">
 												<img
-													src="/uploadStorage/community/thumbnail/${myPageCommunityList.c_thumb}" />
+													src="/uploadStorage/community/thumbnail/${myPageCommunityList.c_thumb}"  style="max-width:70px;"/>
 											</c:if> <c:if test="${empty myPageCommunityList.c_thumb}">
 												<img src="/resources/images/common/noimage.png" />
 											</c:if></td>
