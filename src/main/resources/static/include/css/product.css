@@ -259,7 +259,35 @@ div.heart {
 .i-block {
 	display: inline-block !important;
 }
+
+/* 공통 버튼 css */
+.btn_market {
+	display: inline-block;
+    height: 34px;
+    line-height: 22px;
+    font-size: 15px;
+    color: #333333;
+    background: #faf8fb;
+    border: 1px solid #c9ccd3;
+    border-bottom: 1px solid #a8aaa9;
+    border-radius: 4px;
+    padding: 0 12px;
+    
+}
+
 .buttonBox {
     text-align: center;
-    margin-top: 20px;
+    margin: 20px 0;
+}
+.buttonBox > .udForm > input[type=button] {
+	display: inline-block;
+    height: 30px;
+    line-height: 22px;
+    font-size: 13px;
+    color: #333333;
+    background: #faf8fb;
+    border: 1px solid #c9ccd3;
+    border-bottom: 1px solid #a8aaa9;
+    border-radius: 4px;
+    padding: 0 12px;
 }

@@ -49,6 +49,13 @@
 				<c:when test="${not empty wlist}">
 					<c:forEach var="product" items="${wlist}">
 						<li>
+							<div class="buttonBox">
+								<form class="udForm">
+									<input type="hidden" name="p_no" value="${product.p_no}" /> 
+									<input type="button" class="delete btn w100 mr10" value="삭제" /> 
+									<input type="button" class="update btn w100" value="수정" />
+								</form>
+							</div>
 							<div class="heart_con">
 								<form class="heartForm">
 									<input type="text" name="u_no" class="he u" value="${member.u_no}" readonly /> 
@@ -77,13 +84,6 @@
 										</c:if>
 									</li>
 								</ul>
-							</div>
-							<div class="buttonBox">
-								<form class="udForm">
-									<input type="hidden" name="p_no" value="${product.p_no}" /> 
-									<input type="button" class="delete btn w100" value="삭제" /> 
-									<input type="button" class="update btn w100" value="수정" />
-								</form>
 							</div>
 						</li>
 					</c:forEach>
