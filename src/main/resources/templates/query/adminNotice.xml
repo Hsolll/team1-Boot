@@ -146,4 +146,11 @@
 		</trim>
 		AN_CATEGORY = '[공지사항]'
 	</select>
+	
+	
+	<!-- 메인페이지 로딩 시 공지사항 목록 불러오기 -->
+	<select id="selectMainNoticeList" resultType="admnotice">
+		select an_no, an_title, an_created_at, an_updated_at, an_cnt 
+		from tb_admin_notice order by an_no desc
+	</select>
 </mapper>

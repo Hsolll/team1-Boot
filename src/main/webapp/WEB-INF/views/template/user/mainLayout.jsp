@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -34,6 +37,8 @@
         <script type="text/javascript" src="/resources/include/js/jquery-3.6.2.min.js"></script>
         <script type="text/javascript" src="/resources/include/js/subList.js"></script>
         <script type="text/javascript" src="/resources/include/js/mainPageBanner.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+    	<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
         
 
         <script type="text/javascript">
@@ -45,28 +50,75 @@
                    errorMsg ="";
                 }
         	}
+        	
+	       	/* 메인 배너 자동 슬라이드 */
+       	    setInterval(function(){
+       	        $('.swiper-button-next').trigger('click');
+       	    }, 4000);
+       	    
+       	 	/* 제목 클릭 시 상세 페이지 이동을 위한 처리 이벤트 */
+			$(".goDetail").click(function(){
+				let an_no = $(this).parents("li").attr("data-no");
+				$("#an_no").val(an_no);
+				$("#detailForm").attr({
+					"method":"get",
+					"action":"/notice/noticeDetail"
+				});
+				$("#detailForm").submit();
+			});
         })
         </script>
     </head>
 	<body>
 		<!-- header -->
 		<div class="wrapper">
+			<form id="detailForm" name="detailForm">
+				<input type="hidden" name="an_no" id="an_no" />
+			</form>
         	<tiles:insertAttribute name="header" />
             
             <!-- Begin page content -->
-            <section class="contentWrapper">
-                <div class="content_wrap">
-                    <div>
-	                    <a href="/"><img src="/resources/include/img/banner.png" alt="메인페이지" class="mt30"></a><br><br>
-	                    <div class="main_content">
-	                        <p>Oh My Baby는</p>
-	                        유아용품 중고거래 사이트입니다.
-	                    </div>
-                    </div>
-                    
-                    
-                </div>
-            </section>
+            <section class="visual">
+		        <div class="swiper mySwiper">
+		            <div class="swiper-wrapper">
+	              		<div class="swiper-slide"><img src="/resources/include/img/mainbanner1.png" alt=""></div>
+	           			<div class="swiper-slide"><img src="/resources/include/img/mainbanner2.png" alt=""></div>
+	              		<div class="swiper-slide"><img src="/resources/include/img/mainbanner3.png" alt=""></div>
+	            	</div>
+		            <div class="swiper-button-next"></div>
+		            <div class="swiper-button-prev"></div>
+		            <div class="swiper-pagination"></div>
+	          	</div>
+		    </section>
+		    
+		    <div class="section_second">
+			    <div class="middle2">
+		            <ul>
+			            <c:choose>
+							<c:when test="${ not empty noticeList }">
+								<c:forEach var="notice" items="${ noticeList }" begin="1" end="4" step="1" varStatus="status">
+									<li data-no="${ notice.an_no }">
+				                        <div class="block">
+				                            <div class="comment">
+				                                <p class="goDetail">${ notice.an_title }</p>
+				                                <p>
+				                                    <i class="fa-sharp fa-solid fa-clock-nine"></i>${ notice.an_created_at }<span class="line_f">  |  </span>
+				                                    <i class="fa-solid fa-eye"></i> ${ notice.an_cnt }
+				                                </p>
+				                            </div>
+				                        </div>
+					                </li>
+								</c:forEach>
+							</c:when>
+							<c:otherwise>
+								<tr>
+									<td colspan="4" class="tac text-center">등록된 상품 정보가 존재하지 않습니다.</td>
+								</tr>
+							</c:otherwise>
+						</c:choose>
+		            </ul>
+		        </div>
+		    </div>
             
             
             <div id="contentWrap">

@@ -133,10 +133,10 @@
 			<div id="serviceList" class="community_table mt30">
 				<table summary="문의 리스트">
 					<colgroup>
-	                    <col style="width: 7%">
+	                    <col style="width: 13%">
 	                    <col>
-	                    <col style="width: 13%">
-	                    <col style="width: 13%">
+	                    <col style="width: 15%">
+	                    <col style="width: 15%">
 	                    <col style="width: 7%">
 	                </colgroup>
 					<thead>

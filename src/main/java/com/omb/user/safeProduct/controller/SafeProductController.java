@@ -152,15 +152,15 @@ public class SafeProductController {
 		
 		MemberVO mvo = (MemberVO)session.getAttribute("memberLogin");
 		
-		// 중고상품에 등록한 목록 조회
-		List<ProductVO> list = safeProductService.selectProductList(mvo);
-		
-		model.addAttribute("productList", list);
-		
 		// 회원 계좌정보 조회
 		AccountVO account = accountService.selectAccount(mvo);
 		
 		model.addAttribute("account", account);
+		
+		// 중고상품에 등록한 목록 조회
+		List<ProductVO> list = safeProductService.selectProductList(mvo);
+		
+		model.addAttribute("productList", list);
 		
 		return "user/safeProduct/safeProductInsertView";
 	}

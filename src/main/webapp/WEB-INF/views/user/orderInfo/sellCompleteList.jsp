@@ -343,7 +343,7 @@
 			<%-- ===================== 페이징 출력 종료 ===================== --%>
 			
 			<%-- ===================== 배송 조회 폼 ===================== --%>
-			<form id="searchForm" name="searchForm" ><!-- style="display: none;" -->
+			<form id="searchForm" name="searchForm" >
 	            <input type="hidden" id="t_key" name="t_key">
 	            <input type="hidden" name="t_code" id="t_code">
 	            <input type="hidden" name="t_invoice" id="t_invoice">

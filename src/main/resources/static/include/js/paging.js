@@ -81,7 +81,7 @@ $(".paginate_button2").click(function(){
 //-----------------------------// 내가 쓴 글 //-----------------------------------------------//
 
 	$(".paginate_button4").click(function(){
-	let u_no = $(".un").val();
+	let u_no = $(".u").val();
 	let pageNum = $(this).find("a").text();
 	
 	 console.log(u_no);

@@ -21,8 +21,7 @@
 			
 			/* 상품 option 선택 시 이벤트 */
 			$("#selectBox").change(function(){
-				//console.log($(this).val()); //value값 가져오기
-				//console.log($("#selectBox option:selected").text()); //text값 가져오기
+				
 				let sp_name = $("#selectBox option:selected").text();
 				$("#sp_name").val(sp_name);
 				
@@ -45,7 +44,6 @@
 						}
 			    	});
 				}
-				
 				
 			});
 			
@@ -88,6 +86,8 @@
 							$("#u_no").val("");
 							$("#bank").val("");
 							$("#account").val("");
+							
+							location.href="/safe/productInsertView";
 		    			}else{
 		    				alert("계좌정보 등록을 실패했습니다.");
 		    				return;
@@ -143,22 +143,25 @@
 		    	});
 			});
 			
+			// 비밀번호 설정
+			$("input[name='pwdCheck']").change(function(){
+				if($("input[id='no']").is(":checked")){	// 비밀번호 사용안함 선택 시 
+					$("input[name='sp_pwd']").val("");
+					$("#sp_pwd").attr("readonly", true);
+				}
+				
+			});
+			
 			
 			/* 입력버튼 클릭 시 */
 			$("#insertBtn").click(function(){
 				let u_no = $("#u_id").parents("tr").attr("data-no");
-				console.log("u_no = " + u_no);
+
 				let p_no = $("#selectBox option:selected").attr("data-no");
-				console.log("p_no : " + p_no);
+
 				
 				$("#u_no").val(u_no);
 				$("#p_no").val(p_no);
-				console.log("u_no : " + $("#u_no").val());
-				console.log("p_no : " + $("#p_no").val());
-				console.log("sp_title : " + $("#sp_title").val());
-				console.log("sp_name : " + $("#sp_name").val());
-				console.log("sp_price : " + $("#sp_price").val());
-				console.log("sp_content : " + $("#sp_content").val());
 				
 				if($("input:radio[id='yes']").is(":checked")){
 					if(!chkData("#sp_pwd", "비밀번호를")) return;

@@ -183,7 +183,7 @@
 										<td>${ community.c_no }</td>
 										<td class="goDetail tl">${ community.c_title }</td>
 										<td class="name">${ community.u_nick }</td>
-										<td>
+										<td class="thumb">
 											<c:if test="${not empty community.c_thumb}">
 												<img src="/uploadStorage/community/thumbnail/${community.c_thumb}" />
 											</c:if>
