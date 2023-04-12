@@ -90,6 +90,14 @@ public class UserCommunityServiceImpl implements UserCommunityService {
 
 		int result = 0;
 		
+		if(community.getFile().getSize() > 0){ // 업로드할 파일이 존재하면(파일의 크기로)
+			String fileName = FileUploadUtil.fileUpload(community.getFile(), "community"); //board_1658205347977_cat.jpg
+			community.setC_file(fileName); // 업로드 파일명 설정
+			
+			String thumbName = FileUploadUtil.makeThumbnail(fileName); // thumbnail_board_1658205347977_cat.jpg
+			community.setC_thumb(thumbName); // thumbnail 파일명 설정
+		}
+		
 		result = userCommunityDAO.updateCommunity(community);
 		
 		return result;

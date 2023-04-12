@@ -46,7 +46,7 @@
 				<tbody>
 					<tr>
 						<td>작성자</td>
-						<td class="text-left"><input type="text" id="a_no" name="a_no" value="${adminLogin.a_name }"></td>
+						<td class="text-left"><input type="text" id="a_no" name="a_no" value="${adminLogin.a_no }"></td>
 					</tr>
 					<tr>
 						<td>제목</td>

@@ -18,4 +18,5 @@ public interface AdmNoticeDao {
 	public int noticeCntUpdate(AdmNoticeVO nvo); // 조회수
 	public List<AdmNoticeVO> eventList(AdmNoticeVO nvo);
 	public int eventListCnt(AdmNoticeVO nvo);
+	public List<AdmNoticeVO> selectMainNoticeList();	// 메인페이지 실행 시 공지사항 목록 불러오기
 }

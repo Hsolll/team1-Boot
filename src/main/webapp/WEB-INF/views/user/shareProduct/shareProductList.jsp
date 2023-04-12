@@ -7,6 +7,14 @@
 			$(function(){
 				$(".content_wrap .page-header h1").html("나눔상품 목록");
 				
+				
+				//-----------------------------// 상세페이지 이동 //--------------------------------------------//
+				$(".p_no").click(function(){
+					let p_no = $(this).attr("id")
+					console.log(p_no)
+					location.href = "/product/productDetail?p_no="+p_no
+				});
+				
 			});
 		</script>
 	</head>

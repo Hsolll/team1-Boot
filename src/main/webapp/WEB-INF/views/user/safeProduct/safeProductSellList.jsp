@@ -24,12 +24,14 @@
 				let sp_no = $(this).parents("tr").attr("data-num");
 				console.log("sp_no = " + sp_no);
 				
-				$("#sp_no").val(sp_no);
-				$("#f_data").attr({
-					"method":"get",
-					"action":"/safe/productDelete"
-				});
-				$("#f_data").submit();
+				if(confirm("정말 삭제하시겠습니까?")){
+					$("#sp_no").val(sp_no);
+					$("#f_data").attr({
+						"method":"get",
+						"action":"/safe/productDelete"
+					});
+					$("#f_data").submit();
+				}
 			});
 
 		});

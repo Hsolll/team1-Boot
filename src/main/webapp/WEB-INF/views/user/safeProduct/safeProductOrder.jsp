@@ -13,33 +13,46 @@
       <script type="text/javascript">
          $(function(){
             
-            $("input[id='new']").click(function(){
-               console.log("new 클릭");
-               $("#addName").css("display", "table-row");
-               $("#addList").css("display", "none");
-               
-               $("input[name='receiver']").val("");
-               $("input[name='rec_tel']").val("");
-               $("input[name='zip']").val("");
-               $("input[name='address1']").val("");
-               $("input[name='address2']").val("");
-               
-            });
+       	 	function addressReset(){
+        		 $("input[name='receiver']").val("");
+                 $("input[name='rec_tel']").val("");
+                 $("input[name='zip']").val("");
+                 $("input[name='address1']").val("");
+                 $("input[name='address2']").val("");
+       	 	}
+        	 
+       	 	$("input[id='same']").click(function(){
+           		console.log("same 클릭");
+                $("#addName").css("display", "none");
+                $("#addList").css("display", "none");
+                
+                $("input[name='receiver']").val("${memberLogin.u_name}");
+                $("input[name='rec_tel']").val("${memberLogin.u_phone}");
+                $("input[name='zip']").val("${address.zip}");
+                $("input[name='address1']").val("${address.address}");
+                $("input[name='address2']").val("${address.sub_address}");
+                 
+			});
+        	 
+			$("input[id='new']").click(function(){
+            	console.log("new 클릭");
+            	$("#addName").css("display", "table-row");
+            	$("#addList").css("display", "none");
+            
+            	addressReset();  // 입력란 초기화 함수
+            
+         	});
             
             $("input[id='other']").click(function(){
-            	$("#addName").css("display", "none");
+           		$("#addName").css("display", "none");
             	$("#addList").css("display", "table-row");
-            	$("input[name='receiver']").val("");
-                $("input[name='receiver_tel']").val("");
-                $("input[name='zip']").val("");
-                $("input[name='address1']").val("");
-                $("input[name='address2']").val("");
+
+            	addressReset();  // 입력란 초기화 함수
+            	
             });
             
             /* option 선택 시 이벤트 */
 			$("#selectBox").change(function(){
-				console.log($(this).val()); //value값 가져오기
-				console.log("value2 : " + $("#selectBox option:selected").val());
 				
 				let add_no = $(this).val();
 				
@@ -50,7 +63,6 @@
 			    		type: 'get',
 						dataType : "text",
 			    		success : function(result){
-							console.log(result);
 							
 							let obj = JSON.parse(result);
 							
@@ -74,19 +86,6 @@
 				
 			});
             
-            
-            $("input[id='same']").click(function(){
-               console.log("same 클릭");
-               $("#addName").css("display", "none");
-               $("#addList").css("display", "none");
-               
-               $("input[name='receiver']").val("${memberLogin.u_name}");
-               $("input[name='rec_tel']").val("${memberLogin.u_phone}");
-               $("input[name='zip']").val("${address.zip}");
-               $("input[name='address1']").val("${address.address}");
-               $("input[name='address2']").val("${address.sub_address}");
-               
-            });
             
             $("#address_btn").click(function(){
                execPostCode();
@@ -124,7 +123,6 @@
                          console.log(data.zonecode);
                          console.log(fullRoadAddr);
                          
-                         
                          $("input[name='zip']").val(data.zonecode);
                          $("input[name='address1']").val(fullRoadAddr);
                          
@@ -132,8 +130,6 @@
                   }).open();
               }
 
-            
-            
          });
          
       </script>

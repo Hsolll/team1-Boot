@@ -115,5 +115,12 @@ public class AdmNoticeServiceImpl implements AdmNoticeService {
 		return admNoticeDao.eventListCnt(nvo);
 	}
 
+	/* 메인페이지 실행 시 공지사항 목록 불러오기 */
+	@Override
+	public List<AdmNoticeVO> selectMainNoticeList() {
+		List<AdmNoticeVO> list = admNoticeDao.selectMainNoticeList();
+		return list;
+	}
+
 
 }

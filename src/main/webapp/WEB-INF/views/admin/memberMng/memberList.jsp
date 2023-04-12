@@ -212,6 +212,8 @@
 	                                                <th>회원번호</th>
 	                                                <th>아이디</th>
 	                                                <th>이름</th>
+	                                                <th>핸드폰번호</th>
+	                                                <th>이메일</th>
 	                                                <th>회원등급</th>
 	                                                <th>등급수정</th>
 	                                            </tr>
@@ -227,6 +229,8 @@
 																${member.u_id}
 																</td>
 																<td class="name">${member.u_name}</td>
+																<td>${member.u_phone}</td>
+																<td>${member.u_email}</td>
 																<td class="grade">${member.u_grade}</td>
 																<td><button type="button" class="gradeBtn btn btn-dark m-l-10" data-toggle="modal" data-target="#exampleModalCenter">등급수정</button></td>
 															</tr>

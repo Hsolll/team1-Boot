@@ -37,6 +37,10 @@
         <script type="text/javascript" src="/resources/include/js/jquery-3.6.2.min.js"></script>
         <script type="text/javascript" src="/resources/include/js/subList.js"></script>
         
+        <!-- swiper cdn 연결 -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+    	<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+        
     </head> 
 	<body>
 		<!-- header -->

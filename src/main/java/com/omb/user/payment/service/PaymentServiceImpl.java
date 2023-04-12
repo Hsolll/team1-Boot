@@ -53,11 +53,11 @@ public class PaymentServiceImpl implements PaymentService {
       
       HttpsURLConnection conn = null;
       
-      URL url = new URL("https://api.iamport.kr/users/getToken");      // 요청 url
+      URL url = new URL("https://api.iamport.kr/users/getToken");  // 요청 url
        
       conn = (HttpsURLConnection) url.openConnection();
 
-      conn.setRequestMethod("POST");      // 요청 방식 post
+      conn.setRequestMethod("POST");  // 요청 방식 post
       conn.setRequestProperty("Content-type", "application/json");   // 요청할 파라미터 전달 형식 설정
       conn.setRequestProperty("Accept", "application/json");   // 응답받은 데이터의 반환 형식 설정
       conn.setDoOutput(true);
@@ -70,7 +70,7 @@ public class PaymentServiceImpl implements PaymentService {
       BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
       
       bw.write(json.toString());
-      bw.flush();   // api 요청
+      bw.flush();
       bw.close();
 
       // 응답객체 얻어온다.
@@ -157,11 +157,6 @@ public class PaymentServiceImpl implements PaymentService {
 
       int result = 0;
       
-      System.out.println("결제 취소 요청");
-      System.out.println("-------------전달받은 데이터-------------");
-      System.out.println("토큰 : " + access_token);
-      System.out.println("결제번호 : " + imp_uid);
-      
       HttpsURLConnection conn = null;
       URL url = new URL("https://api.iamport.kr/payments/cancel");
  
@@ -180,7 +175,6 @@ public class PaymentServiceImpl implements PaymentService {
       json.addProperty("reason", reason);
       json.addProperty("imp_uid", imp_uid);
       //json.addProperty("amount", amount); 부분 취소 시 취소할 금액을 매개변수로 전달받아 입력
-      //json.addProperty("checksum", amount);
  
       BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
  
@@ -195,9 +189,6 @@ public class PaymentServiceImpl implements PaymentService {
       // 응답 객체 key 값 중 "response"을 찾아 String 타입 response에 담는다.
       String response = gson.fromJson(br.readLine(), Map.class).get("response").toString();
       
-      System.out.println("취소처리 후 응답객체 : " + response);
-      
-      
       if(response != null) 
          result = 1;
             
@@ -208,14 +199,10 @@ public class PaymentServiceImpl implements PaymentService {
    }
    
    
-   // 회원 취소 요청 시API 요청으로 결제취소 처리하기
+   // 회원 취소 요청 시 API 요청으로 결제취소 처리하기
    @Override
    public void paymentCancle(String access_token, String imp_uid) throws IOException {
       
-      System.out.println("결제 취소 요청");
-      System.out.println("-------------전달받은 데이터-------------");
-      System.out.println("토큰 : " + access_token);
-      System.out.println("결제번호 : " + imp_uid);
       
       HttpsURLConnection conn = null;
       URL url = new URL("https://api.iamport.kr/payments/cancel");

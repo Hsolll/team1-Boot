@@ -39,102 +39,93 @@ public class PaymentController {
    @Setter(onMethod_ = @Autowired)
    private OrderInfoService orderInfoService;
 
+   
    @ResponseBody
    @PostMapping(value="/complete", produces = MediaType.TEXT_PLAIN_VALUE)
    public String paymentComplete(HttpSession session, PaymentVO pvo, SafeProductVO spvo, OrderInfoVO ovo)
          throws IOException {
+	   int result = 0;
+	   String resultString = null;
       
-      int result = 0;
-      
-      String resultString = null;
-      
-      // 결제된 금액 조회를 위해 토큰 생성
-      String token = paymentService.getToken();
-      log.info("토큰 : " + token);
-      
-      // ajax로 전달받은 데이터 확인
-      log.info("--------------ajax로 전달받은 데이터 확인--------------");
-      log.info("pvo : " + pvo);
-      log.info("spvo : " + spvo);
-      log.info("ovo : " + ovo);
-      log.info("상품번호 : " + spvo.getSp_no());
-      log.info("o_id : " + ovo.getO_id());
+	   // 결제된 금액 조회를 위해 토큰 생성
+	   String token = paymentService.getToken();
 
-      // 결제 완료된 금액
-      int amount = paymentService.paymentInfo(pvo.getPay_id(), token);
-      log.info("결제 완료된 금액 amount : " + amount);
+	   // 서버에서 실제 결제 완료된 금액
+	   int amount = paymentService.paymentInfo(pvo.getPay_id(), token);
    
-      try {
+	   try {
+		   int price = safeProductService.selectSafeProductPrice(spvo);  // DB에 저장된 상품 금액 가져오기
 
-         // DB에 저장된 상품 금액 가져오기
-         int price = 0;
-         price = safeProductService.selectSafeProductPrice(spvo);
+		   
+		   if (price != amount) {  // 계산 된 금액과 실제 금액이 다를 때 결제 취소처리
+            
+			   int spStatusResult = safeProductService.updateSafeProductStatusReturn(spvo);  // 판매중으로 상태 복귀
+            
+			   if(spStatusResult == 1) {
+            	
+				   result = paymentService.paymentCancle(token, pvo.getPay_id(), "결제 금액 오류");
+            	
+				   if(result == 1) {
+					   return "결제금액 오류로 결제취소 완료";
+				   } else {
+					   return "결제취소 오류 (관리자에게 문의하세요)";
+				   }
+			   } else return "오류가 발생했습니다. 다시 시도해주세요.";
+            
+		   }else {
+			   resultString = "결제 성공";
+            
+			   // 결제 성공 시 안심상품 판매상태 "판매완료"로 변경
+			   int statusResult = 0;
+			   statusResult = safeProductService.updateSafeProductStatus(spvo);
+            
+			   if(statusResult == 1) {   // 변경 성공 시 
+            	
+				   // 결제 정상처리 시 결제내역에 추가
+				   int payInfoInsert = paymentService.insertPaymentInfo(pvo);
+               
+				   if(payInfoInsert == 1) {	
+					   // 결제내역 저장 성공 시 주문내역에 추가
+					   PaymentVO pvoNo = paymentService.selectPaymentNo(pvo);
+					   log.info("결제내역 저장 후 저장된 결제번호 조회 : " + pvoNo.getPay_no());
+                   
+					   ovo.setPay_no(pvoNo.getPay_no());  // 결제내역 번호 저장
+                   
+					   int orderInfoInsert = orderInfoService.insertOrderInfo(ovo);
+                   
+					   if(orderInfoInsert == 1) {  // 주문내역 저장 성공
+						   return resultString;
+					   } else { // 주문내역 저장 실패 시
+						   int spStatusResult = safeProductService.updateSafeProductStatusReturn(spvo);  // 판매중으로 상태 복귀
+						   
+						   if(spStatusResult == 1) {
+							   paymentService.paymentCancle(token, pvo.getPay_id(), "주문내역 저장오류");
+							   return "주문내역 저장오류. 다시 시도해주세요.";
+						   } else return "오류가 발생했습니다. 다시 시도해주세요.";
+					   }
+            	   
+				   } else {  // 결제내역 저장 실패 시
+					   int spStatusResult = safeProductService.updateSafeProductStatusReturn(spvo);  // 판매중으로 상태 복귀
+            	   
+					   if(spStatusResult == 1) {
+						   paymentService.paymentCancle(token, pvo.getPay_id(), "결제내역 저장오류");
+						   return "결제내역 저장오류. 다시 시도해주세요.";
+					   } else return "오류가 발생했습니다. 다시 시도해주세요.";
+				   }
+               
+			   }
+            
+		   }
          
-         log.info("DB에 저장된 금액 price : " + price);
-
-         // 계산 된 금액과 실제 금액이 다를 때 결제 취소처리
-         if (price != amount) {
-            
-            result = paymentService.paymentCancle(token, pvo.getPay_id(), "결제 금액 오류");
-            
-            log.info("취소요청 후 결과 result : " + result);
-            
-            if(result == 1) {
-               return "결제 금액 오류, 결제 취소";
-            } else {
-               return "결제 취소 오류 (관리자에게 문의하세요)";
-            }
-         }else {
-            resultString = "결제 성공";
-            
-            // 결제 성공 시 안심상품 판매상태 "판매완료"로 변경
-            int statusResult = 0;
-            statusResult = safeProductService.updateSafeProductStatus(spvo);
-            
-            if(statusResult == 1) {   // 변경 성공 시 
-               log.info("판매상태 변경 완료");
-            } 
-            
-            // 주문 시 회원이 수령인 주소를 다른 주소로 입력했을 시 주소테이블에 추가
-
-            // 결제 정상처리 시 결제내역에 추가
-            int payInfoInsert = 0;
-            payInfoInsert = paymentService.insertPaymentInfo(pvo);
-            
-            if(payInfoInsert == 1) {
-               log.info("결제내역 저장 성공");
-            } else {
-               log.info("결제내역 저장 실패");
-               paymentService.paymentCancle(token, pvo.getPay_id(), "결제 내역 저장 오류로 결제취소");
-               return "결제 내역 저장 오류로 결제취소";
-            }
-            
-            // 결제 정상 처리 시 주문내역에 추가
-            PaymentVO pvoNo = paymentService.selectPaymentNo(pvo);
-            log.info("결제내역 저장 후 저장된 결제번호 조회 : " + pvoNo.getPay_no());
-            
-            ovo.setPay_no(pvoNo.getPay_no());
-            log.info("결제내역 추가 후 ovo : " + ovo);
-            
-            int orderInfoInsert = 0;
-            orderInfoInsert = orderInfoService.insertOrderInfo(ovo);
-            
-            if(orderInfoInsert == 1) {
-               log.info("주문내역 저장 성공");
-            } else {
-               log.info("주문내역 저장 실패");
-               paymentService.paymentCancle(token, pvo.getPay_id(), "주문 내역 저장 오류로 결제취소");
-               return "주문 내역 저장 오류로 결제취소";
-            }
-            
-         }
-         
-      } catch (Exception e) {
-         result = paymentService.paymentCancle(token, pvo.getPay_id(), "결제 에러");
-         return "결제 에러";
-      }
+	   } catch (Exception e) {
+		   int spStatusResult = safeProductService.updateSafeProductStatusReturn(spvo);  // 판매중으로 상태 복귀
+		   if(spStatusResult == 1) {
+			   result = paymentService.paymentCancle(token, pvo.getPay_id(), "시스템 에러");
+			   return "결제 에러";
+		   } else return "오류가 발생했습니다. 다시 시도해주세요.";
+	   }
       
-      return resultString;
+	   return resultString;
    }
    
    
