@@ -27,20 +27,21 @@
 			u_no, u_id, u_nick, u_name, u_email, u_phone, u_grade, u_status,
 			to_char(u_created_at, 'YYYY-MM-DD') as u_created_at
 		FROM (
-			SELECT
-					rownum as rnum, u_no, u_id, u_nick, u_name, u_email, u_phone,
-					u_grade, u_status, u_created_at
-			FROM (
-					SELECT
-							rownum as rnum, u_no, u_id, u_nick, u_name, u_email, u_phone,
-							u_grade, u_status, u_created_at
-					FROM tb_user
-			WHERE]]>
-			<trim prefix="(" suffix=") AND " prefixOverrides="AND">
-				<include refid = "memberSearch"></include>
-			</trim>
-			<![CDATA[ rownum <= #{pageNum} * #{amount} AND u_status = 'USING'
-			ORDER BY u_no DESC)	) memberlist
+				SELECT
+						rownum as rnum, u_no, u_id, u_nick, u_name, u_email, u_phone,
+						u_grade, u_status, u_created_at
+				FROM (
+						SELECT
+								rownum as rnum, u_no, u_id, u_nick, u_name, u_email, u_phone,
+								u_grade, u_status, u_created_at
+						FROM tb_user
+						WHERE]]>
+						<trim prefix="(" suffix=") AND " prefixOverrides="AND">
+							<include refid = "memberSearch"></include>
+						</trim>
+						<![CDATA[ u_status = 'USING'
+						ORDER BY u_no DESC)
+				WHERE rownum <= #{pageNum} * #{amount} )memberlist
 		WHERE rnum > (#{pageNum}- 1) * #{amount}
 		]]>
 	</select>
@@ -74,26 +75,27 @@
 	</select>
 	
 	<!-- 탈퇴유저 리스트 기본 조회 -->
-	<select id="nmemberList" resultType="admmember">
+	<select id="nmemberList" parameterType="admmember" resultType="admmember">
 		<![CDATA[
 		SELECT
 			u_no, u_id, u_nick, u_name, u_email, u_phone, u_grade, u_status,
 			to_char(u_created_at, 'YYYY-MM-DD') as u_created_at
 		FROM (
-			SELECT
-					rownum as rnum, u_no, u_id, u_nick, u_name, u_email, u_phone,
-					u_grade, u_status, u_created_at
-			FROM (
-					SELECT
-							rownum as rnum, u_no, u_id, u_nick, u_name, u_email, u_phone,
-							u_grade, u_status, u_created_at
-					FROM tb_user
-			WHERE]]>
-			<trim prefix="(" suffix=") AND " prefixOverrides="AND">
-				<include refid = "memberSearch"></include>
-			</trim>
-			<![CDATA[ rownum <= #{pageNum} * #{amount} AND u_status = 'NUSING'
-			ORDER BY u_no DESC)	) memberlist
+				SELECT
+						rownum as rnum, u_no, u_id, u_nick, u_name, u_email, u_phone,
+						u_grade, u_status, u_created_at
+				FROM (
+						SELECT
+								rownum as rnum, u_no, u_id, u_nick, u_name, u_email, u_phone,
+								u_grade, u_status, u_created_at
+						FROM tb_user
+						WHERE]]>
+						<trim prefix="(" suffix=") AND " prefixOverrides="AND">
+							<include refid = "memberSearch"></include>
+						</trim>
+						<![CDATA[ u_status = 'NUSING'
+						ORDER BY u_no DESC)
+				WHERE rownum <= #{pageNum} * #{amount} )memberlist
 		WHERE rnum > (#{pageNum}- 1) * #{amount}
 		]]>
 	</select>

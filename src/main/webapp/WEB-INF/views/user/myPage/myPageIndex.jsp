@@ -7,17 +7,19 @@
     <script type="text/javascript">
 		$(function(){
 			$(".content_wrap .page-header h1").html("마이페이지");
-		    $(".buyid").click(function(e){
-		        alert("거래완료 되었습니다.");
-		        $("#p_status").attr('value','거래완료');
-		        $("#p_no").attr('value',$(this).data('id'));
-		        $("#p_buyid").attr('value',$(this).prev('#input_buyid').val());
-		        $("#sellList").attr({
-		            "method" :"post",
-		            "action" : "/member/productStatus"
-		        })
-		        $("#sellList").submit();
-		    })
+			$(".buyid").click(function(){
+	            var pbuyid = prompt("구매자 아이디를 입력해주세요.");
+	            alert("거래완료 되었습니다.");
+	            $("#p_no").attr('value',$(this).data('buyid'));
+	            $("#p_buyid.pbuyid").attr('value',pbuyid);
+	            $("#p_status").attr('value','거래완료');
+	            console.log(pbuyid,$("#p_buyid"));
+	            $("#sellList").attr({
+	                "method" :"post",
+	                "action" : "/member/productStatus"
+	            })
+	            $("#sellList").submit();
+	        })
 		
 		    $(".p_no").click(function(){
 		        let p_no = $(this).attr("id")
